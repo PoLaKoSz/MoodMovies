@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:MoodMovies.Views"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
-             mc:Ignorable="d" Height="389.091" Width="423.03">
+             mc:Ignorable="d" >
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

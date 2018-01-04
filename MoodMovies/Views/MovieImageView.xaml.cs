@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 namespace MoodMovies.Views
 {
     /// <summary>
-    /// Interaction logic for MainView.xaml
+    /// Interaction logic for MovieImageView.xaml
     /// </summary>
-    public partial class MainView : UserControl
+    public partial class MovieImageView : UserControl
     {
-        public MainView()
+        public MovieImageView()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
     }
 }

@@ -7,8 +7,8 @@ using Caliburn.Micro;
 
 namespace MoodMovies.ViewModels
 {
-    public class MainViewModel : PropertyChangedBase
+    class MovieImageViewModel : PropertyChangedBase
     {
-        MovieImageViewModel MovieImages;
+
     }
 }

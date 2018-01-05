@@ -9,8 +9,12 @@ namespace MoodMovies.ViewModels
 {
     public class MainViewModel : PropertyChangedBase
     {
+        #region Field
         private MovieImageViewModel movieImageBar;
+        private string mainViewMessage;
+        #endregion
 
+        #region Properties
         public MovieImageViewModel MovieImageBar
         {
             get => movieImageBar;
@@ -21,27 +25,31 @@ namespace MoodMovies.ViewModels
             }
         }
 
-        public string Message
+        public string MainViewMessage
         {
             get
             {
-                return message;
+                return mainViewMessage;
             }
             set
             {
-                message = value;
-                NotifyOfPropertyChange(() => Message);
+                mainViewMessage = value;
+                NotifyOfPropertyChange(() => MainViewMessage);
             }
         }
+        #endregion
 
-        private string message;
-
-
-
+        #region Methods
         public MainViewModel()
         {
             MovieImageBar = new MovieImageViewModel();
-            Message = "test message";
+            MainViewMessage = "Initial message";
         }
+
+        public void ChangeMainMessage()
+        {
+            MainViewMessage = "This is a new message you just created";
+        }
+        #endregion
     }
 }

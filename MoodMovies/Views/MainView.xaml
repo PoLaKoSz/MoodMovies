@@ -18,7 +18,12 @@
 
         <!--header-->
         <Grid Grid.Row="0">
-            <TextBlock x:Name="Message" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="{Binding MainViewMessage}" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
+            <Button Grid.Column="1" x:Name="ChangeMainMessage" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Change the text"/>
         </Grid>
         
         <!--body-->

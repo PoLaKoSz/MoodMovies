@@ -25,7 +25,6 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="{Binding MainViewMessage}" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
             <Button Grid.Column="1" x:Name="ChangeMainMessage" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Change the text"/>
-            <Slider Grid.Column="2" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="top" Minimum="0" Maximum="100" Value="50"/>
 
         </Grid>
         

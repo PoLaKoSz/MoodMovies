@@ -36,7 +36,7 @@
             <Image />
         </materialDesign:Card>
         <materialDesign:Card Grid.Column="2" Grid.Row="1" Padding="10" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <TextBlock Text="{Binding Test}" Style="{DynamicResource MaterialDesignTitleTextBlock}" TextAlignment="Center">Test Block</TextBlock>            
+            <TextBlock Text="{Binding Test}" Style="{DynamicResource MaterialDesignTitleTextBlock}" TextAlignment="Center"/>
         </materialDesign:Card>
     </Grid>
 </UserControl>

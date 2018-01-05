@@ -47,12 +47,12 @@ namespace MoodMovies.ViewModels
             events = new EventAggregator();
 
             MovieImageBar = new MovieImageViewModel(events);
-            MainViewMessage = "Initial message";
+            MainViewMessage = "Initial";
         }
 
         public void ChangeMainMessage()
         {
-            MainViewMessage = "This is a new message you just created";
+            MainViewMessage = "New";
             //publish message to be received by other viewmodel subscribers
             events.PublishOnUIThread(new ChangeData(MainViewMessage));
         }

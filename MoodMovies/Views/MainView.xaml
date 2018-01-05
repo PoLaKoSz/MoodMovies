@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MoodMovies.Views.MainView"
+﻿<Window x:Class="MoodMovies.Views.MainView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,8 +8,8 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              xmlns:local="clr-namespace:MoodMovies.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+             d:DesignHeight="300" Height="Auto" MinWidth="900" MinHeight="700">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
             <RowDefinition Height="3*"/>
@@ -19,11 +19,14 @@
         <!--header-->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="{Binding MainViewMessage}" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
             <Button Grid.Column="1" x:Name="ChangeMainMessage" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Change the text"/>
+            <Slider Grid.Column="2" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="top" Minimum="0" Maximum="100" Value="50"/>
+
         </Grid>
         
         <!--body-->
@@ -38,4 +41,4 @@
         </Grid>
         
     </Grid>
-</UserControl>
+</Window>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoodMovies.Messages
 {
-    class ChangeData
+    public class ChangeData
     {
         public String Data
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using MoodMovies.Messages;
 
 namespace MoodMovies.ViewModels
 {
@@ -12,6 +13,7 @@ namespace MoodMovies.ViewModels
         #region Field
         private MovieImageViewModel movieImageBar;
         private string mainViewMessage;
+        IEventAggregator events;
         #endregion
 
         #region Properties
@@ -42,13 +44,17 @@ namespace MoodMovies.ViewModels
         #region Methods
         public MainViewModel()
         {
-            MovieImageBar = new MovieImageViewModel();
+            events = new EventAggregator();
+
+            MovieImageBar = new MovieImageViewModel(events);
             MainViewMessage = "Initial message";
         }
 
         public void ChangeMainMessage()
         {
             MainViewMessage = "This is a new message you just created";
+            //publish message to be received by other viewmodel subscribers
+            events.PublishOnUIThread(new ChangeData(MainViewMessage));
         }
         #endregion
     }

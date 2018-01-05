@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using MoodMovies.Messages;
 
 namespace MoodMovies.ViewModels
 {
-    public class MovieImageViewModel : PropertyChangedBase
+    public class MovieImageViewModel : PropertyChangedBase, IHandle<ChangeData>
     {
         #region Fields
         private string test;
+        private IEventAggregator _events;
 
         #endregion
 
@@ -26,11 +28,22 @@ namespace MoodMovies.ViewModels
         }
         #endregion
 
-        #region methods
-        public MovieImageViewModel()
+        #region Methods
+        public MovieImageViewModel(IEventAggregator events)
         {
+            _events = events;
+            //subscribe this object to the eventaggregator
+            _events.Subscribe(this);
             Test = "This is a test";
         }
+
+        #region IHandle methods
+        public void Handle(ChangeData message)
+        {
+            Test = message.Data;
+        }
+        #endregion
+
 
         #endregion
     }

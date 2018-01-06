@@ -8,36 +8,142 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              xmlns:local="clr-namespace:MoodMovies.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" Height="Auto" MinWidth="900" MinHeight="700" WindowStartupLocation="CenterScreen">
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1.5*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="0.3*"/>
-        </Grid.RowDefinitions>
+             d:DesignHeight="300" Height="Auto" MinWidth="900" MinHeight="600" WindowStartupLocation="CenterScreen">
+    <!--drawer host for top drawer-->
+    <materialDesign:DrawerHost
+            Margin="0"
+	    HorizontalAlignment="Stretch"
+	    VerticalAlignment="Stretch"
+        
+	    BorderBrush="{DynamicResource MaterialDesignDivider}"
+	    BorderThickness="2">
+        <materialDesign:DrawerHost.TopDrawerContent>
+            <StackPanel
+                Height="200"
+			Margin="16"
+			HorizontalAlignment="Center"
+			Orientation="Horizontal">
+                <TextBlock Margin="4" VerticalAlignment="Center">TOP BANANA</TextBlock>
+                <Button
+				Margin="4"
+				VerticalAlignment="Center"
+				Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+				Style="{DynamicResource MaterialDesignFlatButton}">
+                    CLOSE ALL
+                </Button>
+                <Button
+				Margin="4"
+				VerticalAlignment="Center"
+				Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+				CommandParameter="{x:Static Dock.Top}"
+				Style="{DynamicResource MaterialDesignFlatButton}">
+                    CLOSE THIS
+                </Button>
+            </StackPanel>
+        </materialDesign:DrawerHost.TopDrawerContent>
+        <materialDesign:DrawerHost.LeftDrawerContent>
+            <StackPanel  Margin="16" Width="200">
+                <TextBlock Margin="4" HorizontalAlignment="Center">LEFT FIELD</TextBlock>
+                <Button
+				Margin="4"
+				HorizontalAlignment="Center"
+				Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+				CommandParameter="{x:Static Dock.Left}"
+				Style="{DynamicResource MaterialDesignFlatButton}">
+                    CLOSE THIS
+                </Button>
+                <Button
+				Margin="4"
+				HorizontalAlignment="Center"
+				Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+				Style="{DynamicResource MaterialDesignFlatButton}">
+                    CLOSE ALL
+                </Button>
+            </StackPanel>
+        </materialDesign:DrawerHost.LeftDrawerContent>
 
-        <!--header-->
-        <Grid Grid.Row="0">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
-                <ColumnDefinition Width="0.5*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="647*"/>
+                <ColumnDefinition Width="115*"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="0.3*"/>
+            </Grid.RowDefinitions>
+            
+            <!--header-->
+            <materialDesign:ColorZone Grid.Row="0" Grid.ColumnSpan="2" Padding="0" materialDesign:ShadowAssist.ShadowDepth="Depth5"
+                                            Mode="PrimaryDark" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--left side menu button-->
+                    <Button Grid.Column="0" Style="{StaticResource MaterialDesignFloatingActionButton}" 
+                                        x:Name="LeftMenuButton" HorizontalAlignment="Left"
+                                  Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+				        CommandParameter="{x:Static Dock.Left}"
+                            Content="{materialDesign:PackIcon Kind=Menu, Size=25}"/>
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <!--simple search box-->
+                        <TextBox x:Name="SimpleSearchBox" materialDesign:HintAssist.Hint="Search by movie/title/actor" 
+                         HorizontalAlignment="Center" Width="300" FontSize="20"  FontFamily="century gothic"/>
+                        <materialDesign:PackIcon Width="20" Height="20" Kind="Magnify" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <!--advanced search button-->
+                    <Button Grid.Column="3" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Advanced Search" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center" 
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+				        CommandParameter="{x:Static Dock.Top}"/>
+                    
+                    <!--right side popup menu-->
+                    <materialDesign:PopupBox Grid.Column="4" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
+                                         HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <StackPanel>
+                            <Button Content="Help" />
+                            <Button Content="About" />
+                            <Separator/>
+                            <Button Content="{materialDesign:PackIcon Kind=ExitToApp, Size=35}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                </Grid>
+            </materialDesign:ColorZone>
+
+            <!--body-->
+            <Grid Grid.Row="1" Grid.Column="0" Margin="0,5,0,5" Grid.ColumnSpan="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Left side menu-->
+
+
+
+                    <!--Main body-->
+                    <ContentControl Grid.Column="1" x:Name="MovieImageBar" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                </Grid>
+            </Grid>
+
+            <!--footer-->
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0">
+
+
+            </Grid>
+
+        </Grid>
+    </materialDesign:DrawerHost>
+
+            <!-- for testing viewmodel inter coms
             <TextBlock Grid.Column="0" Text="{Binding MainViewMessage}" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
             <Button Grid.Column="1" x:Name="ChangeMainMessage" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Change the text"/>
-
-        </Grid>
-        
-        <!--body-->
-        <Grid Grid.Row="1">
-            <ContentControl x:Name="MovieImageBar" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>          
-        </Grid>
-        
-        <!--footer-->
-        <Grid Grid.Row="2">
-            
-            
-        </Grid>
-        
-    </Grid>
+            -->
 </Window>

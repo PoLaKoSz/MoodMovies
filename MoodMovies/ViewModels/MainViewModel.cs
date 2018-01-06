@@ -11,13 +11,13 @@ namespace MoodMovies.ViewModels
     public class MainViewModel : PropertyChangedBase
     {
         #region Field
-        private MovieImageViewModel movieImageBar;
+        private MovieListViewModel movieImageBar;
         private string mainViewMessage;
         IEventAggregator events;
         #endregion
 
         #region Properties
-        public MovieImageViewModel MovieImageBar
+        public MovieListViewModel MovieImageBar
         {
             get => movieImageBar;
             set
@@ -46,7 +46,7 @@ namespace MoodMovies.ViewModels
         {
             events = new EventAggregator();
 
-            MovieImageBar = new MovieImageViewModel(events);
+            MovieImageBar = new MovieListViewModel(events);
             MainViewMessage = "Initial";
         }
 

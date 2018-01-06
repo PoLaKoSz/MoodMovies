@@ -8,7 +8,7 @@ using MoodMovies.Messages;
 
 namespace MoodMovies.ViewModels
 {
-    public class MovieImageViewModel : PropertyChangedBase, IHandle<ChangeData>
+    public class MovieListViewModel : PropertyChangedBase, IHandle<ChangeData>
     {
         #region Fields
         private string test;
@@ -29,7 +29,7 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Methods
-        public MovieImageViewModel(IEventAggregator events)
+        public MovieListViewModel(IEventAggregator events)
         {
             _events = events;
             //subscribe this object to the eventaggregator

@@ -18,9 +18,9 @@ namespace MoodMovies.Views
     /// <summary>
     /// Interaction logic for MovieImageView.xaml
     /// </summary>
-    public partial class MovieImageView : UserControl
+    public partial class MovieListView : UserControl
     {
-        public MovieImageView()
+        public MovieListView()
         {
             InitializeComponent();
         }

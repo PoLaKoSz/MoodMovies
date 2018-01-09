@@ -8,25 +8,34 @@ using MoodMovies.Messages;
 
 namespace MoodMovies.ViewModels
 {
-    public class MainViewModel : PropertyChangedBase
+    public class MainViewModel : Conductor<Screen>
     {
         #region Field
-        private MovieListViewModel movieImageBar;
+        private MovieListViewModel movieListVM;
+        private AboutViewModel aboutVM;
         private string mainViewMessage;
         IEventAggregator events;
         #endregion
 
         #region Properties
-        public MovieListViewModel MovieImageBar
+        public MovieListViewModel MovieListVM
         {
-            get => movieImageBar;
+            get => movieListVM;
             set
             {
-                movieImageBar = value;
-                NotifyOfPropertyChange(() => MovieImageBar);
+                movieListVM = value;
+                NotifyOfPropertyChange(() => MovieListVM);
             }
         }
-
+        public AboutViewModel AboutVM
+        {
+            get => aboutVM;
+            set
+            {
+                aboutVM = value;
+                NotifyOfPropertyChange(() => AboutVM);
+            }
+        }        
         public string MainViewMessage
         {
             get
@@ -38,7 +47,7 @@ namespace MoodMovies.ViewModels
                 mainViewMessage = value;
                 NotifyOfPropertyChange(() => MainViewMessage);
             }
-        }
+        }                
         #endregion
 
         #region Methods
@@ -46,7 +55,9 @@ namespace MoodMovies.ViewModels
         {
             events = new EventAggregator();
 
-            MovieImageBar = new MovieListViewModel(events);
+            MovieListVM = new MovieListViewModel(events);
+            AboutVM = new AboutViewModel();
+            ActivateItem(MovieListVM);
             MainViewMessage = "Initial";
         }
 
@@ -55,6 +66,18 @@ namespace MoodMovies.ViewModels
             MainViewMessage = "New";
             //publish message to be received by other viewmodel subscribers
             events.PublishOnUIThread(new ChangeData(MainViewMessage));
+        }
+
+        public void DisplayMovieListVM()
+        {
+            ActivateItem(MovieListVM);
+        }
+
+        public void DisplayAboutVM()
+        {
+            System.Diagnostics.Debug.WriteLine("in aboutvm function");
+            ActivateItem(AboutVM);
+            
         }
         #endregion
     }

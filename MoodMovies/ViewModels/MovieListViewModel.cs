@@ -8,7 +8,7 @@ using MoodMovies.Messages;
 
 namespace MoodMovies.ViewModels
 {
-    public class MovieListViewModel : PropertyChangedBase, IHandle<ChangeData>
+    public class MovieListViewModel : Screen, IHandle<ChangeData>
     {
         #region Fields
         private string test;

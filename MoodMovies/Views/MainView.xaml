@@ -101,14 +101,14 @@
                     <Button Grid.Column="3" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Advanced Search" 
                         HorizontalAlignment="Center" VerticalAlignment="Center" 
                         Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-				        CommandParameter="{x:Static Dock.Top}"/>
+				        CommandParameter="{x:Static Dock.Top}" />
                     
                     <!--right side popup menu-->
                     <materialDesign:PopupBox Grid.Column="4" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
                                          HorizontalAlignment="Right" VerticalAlignment="Center">
                         <StackPanel>
                             <Button Content="Help" />
-                            <Button Content="About" />
+                            <Button x:Name="DisplayAboutVM" Content="About" />
                             <Separator/>
                             <Button Content="{materialDesign:PackIcon Kind=ExitToApp, Size=35}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </StackPanel>
@@ -129,7 +129,7 @@
 
 
                     <!--Main body-->
-                    <ContentControl Grid.Column="1" x:Name="MovieImageBar" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    <ContentControl Grid.Column="1" x:Name="ActiveItem" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 </Grid>
             </Grid>
 

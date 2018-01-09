@@ -103,7 +103,11 @@
                         Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
 				        CommandParameter="{x:Static Dock.Top}" />
                     
+
+                            <Button x:Name="DisplayAboutVm" VerticalAlignment="Center" HorizontalAlignment="Right" Content="click me"/>
+
                     <!--right side popup menu-->
+                    <!--
                     <materialDesign:PopupBox Grid.Column="4" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
                                          HorizontalAlignment="Right" VerticalAlignment="Center">
                         <StackPanel>
@@ -113,6 +117,7 @@
                             <Button Content="{materialDesign:PackIcon Kind=ExitToApp, Size=35}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </materialDesign:PopupBox>
+                    -->
                 </Grid>
             </materialDesign:ColorZone>
 

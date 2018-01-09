@@ -76,8 +76,7 @@ namespace MoodMovies.ViewModels
         public void DisplayAboutVM()
         {
             System.Diagnostics.Debug.WriteLine("in aboutvm function");
-            ActivateItem(AboutVM);
-            
+            ActivateItem(AboutVM);            
         }
         #endregion
     }

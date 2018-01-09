@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
              xmlns:local="clr-namespace:MoodMovies.Views"
@@ -103,21 +104,21 @@
                         Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
 				        CommandParameter="{x:Static Dock.Top}" />
                     
-
+<!--
                             <Button x:Name="DisplayAboutVm" VerticalAlignment="Center" HorizontalAlignment="Right" Content="click me"/>
-
+-->
                     <!--right side popup menu-->
-                    <!--
+                    
                     <materialDesign:PopupBox Grid.Column="4" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
                                          HorizontalAlignment="Right" VerticalAlignment="Center">
                         <StackPanel>
                             <Button Content="Help" />
-                            <Button x:Name="DisplayAboutVM" Content="About" />
+                            <Button x:Name="DisplayAboutVM" Content="About" cal:Message.Attach="DisplayAboutVM"/>
                             <Separator/>
                             <Button Content="{materialDesign:PackIcon Kind=ExitToApp, Size=35}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </materialDesign:PopupBox>
-                    -->
+                   
                 </Grid>
             </materialDesign:ColorZone>
 

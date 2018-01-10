@@ -7,11 +7,12 @@ using Caliburn.Micro;
 
 namespace MoodMovies.ViewModels
 {
-    public class AboutViewModel: Screen
+    public class FavouritesViewModel: Screen
     {
         #region Fields
         private string _name;
         #endregion
+
         #region Properties
         public string Name
         {
@@ -22,13 +23,12 @@ namespace MoodMovies.ViewModels
                 NotifyOfPropertyChange(() => Name);
             }
         }
-
         #endregion
 
         #region Methods
-        public AboutViewModel()
+        public FavouritesViewModel()
         {
-            Name = "About";
+            Name = "Favourites";
         }
         #endregion
 

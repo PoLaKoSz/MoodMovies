@@ -82,7 +82,7 @@ namespace MoodMovies.ViewModels
             //publish message to be received by other viewmodel subscribers
             events.PublishOnUIThread(new ChangeData(MainViewMessage));
         }
-
+        #region UserControl Activation Methods
         public void DisplayMovieListVM()
         {
             ActivateItem(MovieListVM);
@@ -90,7 +90,6 @@ namespace MoodMovies.ViewModels
 
         public void DisplayAboutVM()
         {
-            System.Diagnostics.Debug.WriteLine("in aboutvm function");
             ActivateItem(AboutVM);            
         }
 
@@ -98,6 +97,7 @@ namespace MoodMovies.ViewModels
         {
             ActivateItem(FavouriteVM);
         }
+        #endregion
         #endregion
     }
 }

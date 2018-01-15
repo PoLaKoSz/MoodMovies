@@ -6,10 +6,10 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              Background="{DynamicResource MaterialDesignPaper}"
-             FontFamily="{DynamicResource MaterialDesignFont}"
+             FontFamily="century gothic"
              xmlns:local="clr-namespace:MoodMovies.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" Height="Auto" MinWidth="900" MinHeight="600" WindowStartupLocation="CenterScreen">
+             d:DesignHeight="300" Height="Auto" MinWidth="950" MinHeight="600" WindowStartupLocation="CenterScreen">
     <!--drawer host for top drawer-->
     <materialDesign:DrawerHost
             Margin="0"
@@ -63,36 +63,40 @@
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
                            cal:Message.Attach="DisplayFavouriteVM"
-                           Foreground="PaleVioletRed" IconBackground="{StaticResource PrimaryHueMidBrush}" IconForeground="#d50000">
+                           Foreground="White" IconBackground="{StaticResource PrimaryHueMidBrush}" IconForeground="#FF850000">
                     <materialDesign:Chip.Icon>
                         <materialDesign:PackIcon Kind="Heart" materialDesign:ColorZoneAssist.Mode="Accent"/>
                     </materialDesign:Chip.Icon>
                 </materialDesign:Chip>
-
-                <!--Feature List Menu-->
-                <materialDesign:Chip Margin="7" Content="{Binding AboutVM.Name}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                           CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplayAboutVM"
-                           Foreground="White" Icon="A"/>
+                
                 <!--Latest Releases-->
                 <materialDesign:Chip Margin="7" Content="Latest Releases" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
                            cal:Message.Attach="DisplayAboutVM"
                            Foreground="White" Icon="L"/>
+                
+                <!--Favourite Actor-->
+                <materialDesign:Chip Margin="7" Content="{Binding FavActorVM.Name}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                           CommandParameter="{x:Static Dock.Left}"
+                           cal:Message.Attach="DisplayFavActorVM"
+                           Foreground="White" Icon="F"/>
+                
                 <!--This Year-->
                 <materialDesign:Chip Margin="7" Content="Released 2018" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
                            cal:Message.Attach="DisplayAboutVM"
                            Foreground="White" Icon="R"/>
+                
                 <!--Search History-->
                 <materialDesign:Chip Margin="7" Content="Search History" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
                            cal:Message.Attach="DisplayAboutVM"
                            Foreground="White" Icon="H"/>
+                
                 <!--Settings-->
                 <materialDesign:Chip Margin="7" Content="My Settings" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
@@ -102,13 +106,13 @@
             </StackPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
 
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">            
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="0.3*"/>
             </Grid.RowDefinitions>
-            
+
             <!--header-->
             <materialDesign:ColorZone Grid.Row="0" Padding="5,0,0,0" materialDesign:ShadowAssist.ShadowDepth="Depth5"
                                             Mode="PrimaryDark" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
@@ -152,25 +156,27 @@
                         Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
 				        CommandParameter="{x:Static Dock.Top}" materialDesign:ShadowAssist.ShadowDepth="Depth5"
                             Background="{StaticResource PrimaryHueDarkBrush}" BorderBrush="{StaticResource PrimaryHueDarkBrush}"
-                            Foreground="{StaticResource PrimaryHueMidBrush}"/>
+                            Foreground="{StaticResource PrimaryHueMidBrush}" FontSize="17" FontWeight="Normal"/>
 
-                    <!--right side popup menu-->                    
+                    <!--right side popup menu-->
                     <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
                                          HorizontalAlignment="Right" VerticalAlignment="Center">
                         <StackPanel>
                             <Button Content="Help" />
                             <Button x:Name="DisplayAboutVM" Content="About" cal:Message.Attach="DisplayAboutVM"/>
                             <Separator/>
-                            <Button Content="{materialDesign:PackIcon Kind=ExitToApp, Size=35}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button Content="Exit App" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                         </StackPanel>
                     </materialDesign:PopupBox>
-                   
+
                 </Grid>
             </materialDesign:ColorZone>
 
             <!--body-->
-            <Grid Grid.Row="1" Margin="0,5,0,5">
-                <ContentControl x:Name="ActiveItem" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Grid Grid.Row="1" Margin="0,5,0,5">                
+                <ContentControl x:Name="ActiveItem" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+                </ContentControl>
             </Grid>
 
             <!--footer-->
@@ -182,7 +188,7 @@
         </Grid>
     </materialDesign:DrawerHost>
 
-            <!-- for testing viewmodel inter coms
+    <!-- for testing viewmodel inter coms
             <TextBlock Grid.Column="0" Text="{Binding MainViewMessage}" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
             <Button Grid.Column="1" x:Name="ChangeMainMessage" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Change the text"/>
             -->

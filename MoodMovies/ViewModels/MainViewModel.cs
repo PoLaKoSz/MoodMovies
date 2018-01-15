@@ -15,12 +15,12 @@ namespace MoodMovies.ViewModels
         private MovieListViewModel movieListVM;
         private AboutViewModel aboutVM;
         private FavouritesViewModel _favouriteVM;
+        private FavActorViewModel _favActorVM;
         private string mainViewMessage;
         IEventAggregator events;        
         #endregion
-
-        #region Properties
-        #region Child ViewModels
+                
+        #region Child ViewModel Properties
         public MovieListViewModel MovieListVM
         {
             get => movieListVM;
@@ -45,10 +45,22 @@ namespace MoodMovies.ViewModels
             set
             {
                 _favouriteVM = value;
-                NotifyOfPropertyChange(() => _favouriteVM);
+                NotifyOfPropertyChange(() => FavouriteVM);
             }
         }
+        public FavActorViewModel FavActorVM
+        {
+            get => _favActorVM;
+            set
+            {
+                _favActorVM = value;
+                NotifyOfPropertyChange(() => FavActorVM);
+            }
+        }
+
         #endregion
+
+        #region Properties
         public string MainViewMessage
         {
             get
@@ -60,7 +72,10 @@ namespace MoodMovies.ViewModels
                 mainViewMessage = value;
                 NotifyOfPropertyChange(() => MainViewMessage);
             }
-        }                       
+        }
+
+        
+
         #endregion
 
         #region Methods
@@ -77,8 +92,9 @@ namespace MoodMovies.ViewModels
         private void InitialiseVMs()
         {
             MovieListVM = new MovieListViewModel(events);
+            FavActorVM = new FavActorViewModel();
             AboutVM = new AboutViewModel();
-            FavouriteVM = new FavouritesViewModel();
+            FavouriteVM = new FavouritesViewModel();            
         }
 
         public void ChangeMainMessage()
@@ -87,6 +103,8 @@ namespace MoodMovies.ViewModels
             //publish message to be received by other viewmodel subscribers
             events.PublishOnUIThread(new ChangeData(MainViewMessage));
         }
+        #endregion
+
         #region UserControl Activation Methods
         public void DisplayMovieListVM()
         {
@@ -102,7 +120,11 @@ namespace MoodMovies.ViewModels
         {
             ActivateItem(FavouriteVM);
         }
-        #endregion
+        
+        public void DisplayFavActorVM()
+        {
+            ActivateItem(FavActorVM);
+        }
         #endregion
     }
 }

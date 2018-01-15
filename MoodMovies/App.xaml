@@ -15,15 +15,15 @@
                 <!--Custom colors-->
                 <ResourceDictionary>
                     <!-- primary -->
-                    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FF722E15"/>
+                    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#fb8c00"/>
                     <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FFFFFF"/>
-                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#6134D9"/>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#ff3d00"/>
                     <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF"/>
-                    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFAEA201"/>
+                    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#303030"/>
                     <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFF"/>
                     <!-- accent -->
-                    <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#5C5B5E"/>
-                    <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
+                    <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#ffab00"/>
+                    <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#ffa726"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

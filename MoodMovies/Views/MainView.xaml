@@ -44,7 +44,7 @@
         </materialDesign:DrawerHost.TopDrawerContent>
         <materialDesign:DrawerHost.LeftDrawerContent>
             <StackPanel  Margin="16" Width="170">
-                <!--left drawer button-->
+                <!--home button-->
                 <Button
 				Margin="0,0,0,30"
 				HorizontalAlignment="Center"
@@ -52,7 +52,7 @@
 				Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
 				CommandParameter="{x:Static Dock.Left}"
 				Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth5">
+                    materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="{StaticResource PrimaryHueDarkBrush}" BorderBrush="{StaticResource PrimaryHueMidBrush}" Foreground="white" >
                     <materialDesign:PackIcon
                         Width="30"
                         Height="30"
@@ -63,7 +63,7 @@
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
                            cal:Message.Attach="DisplayFavouriteVM"
-                           Foreground="PaleVioletRed">
+                           Foreground="PaleVioletRed" IconBackground="{StaticResource PrimaryHueMidBrush}" IconForeground="#d50000">
                     <materialDesign:Chip.Icon>
                         <materialDesign:PackIcon Kind="Heart" materialDesign:ColorZoneAssist.Mode="Accent"/>
                     </materialDesign:Chip.Icon>
@@ -111,7 +111,8 @@
             
             <!--header-->
             <materialDesign:ColorZone Grid.Row="0" Padding="5,0,0,0" materialDesign:ShadowAssist.ShadowDepth="Depth5"
-                                            Mode="PrimaryDark" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinHeight="48">
+                                            Mode="PrimaryDark" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                      MinHeight="48" Background="#252526">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.7*"/>
@@ -126,29 +127,32 @@
                                         x:Name="LeftMenuButton" HorizontalAlignment="Left"
                                   Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
 				        CommandParameter="{x:Static Dock.Left}"
-                            Content="{materialDesign:PackIcon Kind=Menu, Size=25}" materialDesign:ShadowAssist.ShadowDepth="Depth5"/>
+                            Content="{materialDesign:PackIcon Kind=Menu, Size=25}" materialDesign:ShadowAssist.ShadowDepth="Depth5"
+                            Background="{StaticResource PrimaryHueDarkBrush}" BorderThickness="1"/>
                     <!--mainView home button-->
                     <Button	Grid.Column="1"			   
 				    HorizontalAlignment="Left"
                     cal:Message.Attach="DisplayMovieListVM"
 				    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
 				    CommandParameter="{x:Static Dock.Left}"
-				    Style="{DynamicResource MaterialDesignFloatingActionMiniAccentButton}"
+				    Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth5" ToolTip="Home"
                             Content="{materialDesign:PackIcon                        
                         Kind=Home,
-                        Size=25}" />
+                        Size=25}" Foreground="white" BorderBrush="{StaticResource PrimaryHueMidBrush}" Background="{StaticResource PrimaryHueDarkBrush}"/>
                     <StackPanel Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                         <!--simple search box-->
                         <TextBox x:Name="SimpleSearchBox" materialDesign:HintAssist.Hint="Search by movie/title/actor" 
-                         HorizontalAlignment="Center" Width="300" FontSize="20"  FontFamily="century gothic"/>
+                         HorizontalAlignment="Center" Width="300" FontSize="20"  FontFamily="century gothic" Foreground="{StaticResource SecondaryAccentForegroundBrush}"/>
                         <materialDesign:PackIcon Width="20" Height="20" Kind="Magnify" VerticalAlignment="Center"/>
                     </StackPanel>
                     <!--advanced search button-->
-                    <Button Grid.Column="4" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Advanced Search" 
+                    <Button Grid.Column="4" Style="{StaticResource MaterialDesignRaisedButton}" Content="Advanced Search" 
                         HorizontalAlignment="Center" VerticalAlignment="Center" 
                         Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-				        CommandParameter="{x:Static Dock.Top}" materialDesign:ShadowAssist.ShadowDepth="Depth5"/>
+				        CommandParameter="{x:Static Dock.Top}" materialDesign:ShadowAssist.ShadowDepth="Depth5"
+                            Background="{StaticResource PrimaryHueDarkBrush}" BorderBrush="{StaticResource PrimaryHueDarkBrush}"
+                            Foreground="{StaticResource PrimaryHueMidBrush}"/>
 
                     <!--right side popup menu-->                    
                     <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"

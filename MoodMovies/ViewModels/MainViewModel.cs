@@ -16,7 +16,7 @@ namespace MoodMovies.ViewModels
         private AboutViewModel aboutVM;
         private FavouritesViewModel _favouriteVM;
         private string mainViewMessage;
-        IEventAggregator events;
+        IEventAggregator events;        
         #endregion
 
         #region Properties
@@ -67,13 +67,18 @@ namespace MoodMovies.ViewModels
         public MainViewModel()
         {
             events = new EventAggregator();
-            //initialize Child ViewModels
-            MovieListVM = new MovieListViewModel(events);
-            AboutVM = new AboutViewModel();
-            FavouriteVM = new FavouritesViewModel();
+            InitialiseVMs();
+            
             //on startup we want our main Usercontrol displayed
             ActivateItem(MovieListVM);
             MainViewMessage = "Initial";
+        }
+
+        private void InitialiseVMs()
+        {
+            MovieListVM = new MovieListViewModel(events);
+            AboutVM = new AboutViewModel();
+            FavouriteVM = new FavouritesViewModel();
         }
 
         public void ChangeMainMessage()

@@ -9,7 +9,7 @@
              FontFamily="century gothic"
              xmlns:local="clr-namespace:MoodMovies.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" Height="Auto" MinWidth="950" MinHeight="600" WindowStartupLocation="CenterScreen">
+             d:DesignHeight="300" Height="Auto" MinWidth="950" MinHeight="600" WindowStartupLocation="CenterScreen" Title="MooD MovieS">
     <!--drawer host for top drawer-->
     <materialDesign:DrawerHost
             Margin="0"
@@ -173,7 +173,7 @@
             </materialDesign:ColorZone>
 
             <!--body-->
-            <Grid Grid.Row="1" Margin="0,5,0,5">                
+            <Grid Grid.Row="1" Margin="0,5,0,5">
                 <ContentControl x:Name="ActiveItem" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
                 </ContentControl>

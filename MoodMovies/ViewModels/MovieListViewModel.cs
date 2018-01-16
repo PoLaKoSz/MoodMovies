@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace MoodMovies.ViewModels
         #region Fields
         private string test;
         private IEventAggregator _events;
+        private ObservableCollection<MovieCardViewModel> movies;
 
         #endregion
 
@@ -26,6 +28,8 @@ namespace MoodMovies.ViewModels
                 NotifyOfPropertyChange(() => Test);
             }
         }
+
+        public ObservableCollection<MovieCardViewModel> Movies { get => movies; set { movies = value; NotifyOfPropertyChange(() => Movies); } }
         #endregion
 
         #region Methods
@@ -35,6 +39,14 @@ namespace MoodMovies.ViewModels
             //subscribe this object to the eventaggregator
             _events.Subscribe(this);
             Test = "This is a test";
+
+            Movies = new ObservableCollection<MovieCardViewModel>();
+            //for testing purposes populate the list with set items
+            for(int i = 0; i < 12; i++)
+            {
+                Movies.Add(new MovieCardViewModel());
+            }
+
         }
 
         #region IHandle methods

@@ -14,16 +14,32 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.4*"/>
                     <RowDefinition Height="4*"/>
-                    <RowDefinition Height="0.4*"/>
-                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.5*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Text="Urban Fighter" Style="{DynamicResource MaterialDesignTitleTextBlock}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch" Foreground="{StaticResource SecondaryAccentBrush}"/>
+                <TextBlock Grid.Row="0" Text="Urban Fighter" Style="{StaticResource MaterialDesignTitleTextBlock}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch" Foreground="{StaticResource SecondaryAccentBrush}"/>
                 <Image Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="/MoodMovies;component/Images/testImage.jpg"/>
-                <materialDesign:RatingBar Grid.Row="2" x:Name="MovieRatingBar" Value="3"  Background="{StaticResource SecondaryAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="3" Text="Details Go here or maybe a button" Style="{DynamicResource MaterialDesignTitleTextBlock}" TextAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="{StaticResource SecondaryAccentBrush}"/>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:RatingBar Grid.Column="0" x:Name="MovieRatingBar" Value="3"  Background="{StaticResource SecondaryAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <ToggleButton Grid.Column="1" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="Add to Favourites" Background="#FF424242">
+                        <ToggleButton.Content>
+                            <materialDesign:PackIcon  Kind="Heart"/>
+                        </ToggleButton.Content>
+                        <materialDesign:ToggleButtonAssist.OnContent >
+                            <materialDesign:PackIcon Kind="Heart" Foreground="Red" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                    </ToggleButton>
+                    
+                </Grid>
+                
+                <TextBlock Grid.Row="3" Text="Details Go here or maybe a button or maybe some kind of popup/ dialog" TextAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
             </Grid>            
         </materialDesign:Card>
     </Grid>

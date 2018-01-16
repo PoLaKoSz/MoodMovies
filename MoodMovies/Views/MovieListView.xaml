@@ -9,15 +9,13 @@
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="century gothic"
              mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Grid>
+    <Grid x:Name="MainGrid">
         <ScrollViewer x:Name="MovieScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
-                      VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="{Binding ActualWidth, 
-            BindsDirectlyToSource=True, 
-            ElementName=mlist, Mode=OneWay}">
-            <ItemsControl x:Name="Movies" Margin="0">
+                      VerticalAlignment="Center" HorizontalAlignment="Center" Width="{Binding ElementName=MainGrid, Path=ActualWidth}" >
+            <ItemsControl x:Name="Movies">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Width}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <WrapPanel MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=ActualWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>

@@ -4,9 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MoodMovies.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="century gothic"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <TextBlock HorizontalAlignment="center" VerticalAlignment="center" Text="this is the about page"    />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="0.8*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="0.7*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="9*"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="DisplayName" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="center" 
+                   Foreground="{StaticResource PrimaryHueMidBrush}" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="20,0,0,0"/>
+                
+                <materialDesign:Card  Grid.Row="1" Margin="10" VerticalAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Foreground="{StaticResource SecondaryAccentBrush}">
+                    <DockPanel  HorizontalAlignment="Stretch">
+                        <Expander DockPanel.Dock="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Header=" Credits">
+
+                        </Expander>
+                        <Expander DockPanel.Dock="Top" HorizontalAlignment="Stretch" Header=" Creator">
+
+                        </Expander>
+                        <Expander x:Name="MainCard" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Header=" Software License">
+                            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Height="{Binding ElementName=MainCard, Path=ActualHeight}">
+                                <TextBlock x:Name="License" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" 
+                                   VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" />
+                            </ScrollViewer>
+                        </Expander>
+                    </DockPanel>
+                </materialDesign:Card>
+
+            </Grid>
+            
+        </Grid>
+        
+        <Button x:Name="ClosePage"  Grid.Row="2" HorizontalAlignment="center" VerticalAlignment="center" Content="Close"  Margin="4" />
     </Grid>
 </UserControl>

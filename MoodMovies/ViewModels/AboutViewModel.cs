@@ -4,31 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using System.IO;
+using System.Reflection;
 
 namespace MoodMovies.ViewModels
 {
-    public class AboutViewModel: Screen
+    public sealed class AboutViewModel: Screen
     {
         #region Fields
-        private string _name;
+        private string license;        
         #endregion
-        #region Properties
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                NotifyOfPropertyChange(() => Name);
-            }
-        }
+
+        #region Properties     
+        public string License { get => license; set { license = value; NotifyOfPropertyChange(() => License); } }
 
         #endregion
 
         #region Methods
         public AboutViewModel()
         {
-            Name = "About";
+            DisplayName = "About";
+            LoadLicense();
+        }
+
+        public void LoadLicense()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "MoodMovies.Resources.LGPL License.txt";
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    license = reader.ReadToEnd();
+                }
+            }
+            
         }
         #endregion
 

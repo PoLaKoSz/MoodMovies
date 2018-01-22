@@ -59,4 +59,4 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE Version 3, 29 June
 ## Acknowledgments
 
 * Hat off to Material Xaml Toolkit creaters for developing such an amazing toolkit and making it open source.
-* Hat off to Caliburn Micro for an awesome library thatmakes MVVM a little easier to manage.
+* Hat off to Caliburn Micro for an awesome library that makes MVVM a little easier to manage.

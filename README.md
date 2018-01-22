@@ -38,9 +38,9 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Test1](http:///) - The framework used
+* [Test2](https://) - 
+* [Test3](https://) - 
 
 ## Contributing
 
@@ -48,7 +48,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Authors
 
-* **Tony Karalis** - *Initial work* - [tonykaralis](https://github.com/tonykaralis)
+* **Tony Karalis** - *Design and Implementation* - [tonykaralis](https://github.com/tonykaralis)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 

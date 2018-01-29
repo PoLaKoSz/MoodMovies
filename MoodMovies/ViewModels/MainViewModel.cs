@@ -9,121 +9,73 @@ using System.Collections.ObjectModel;
 
 namespace MoodMovies.ViewModels
 {
-    public class MainViewModel : Conductor<Screen>
+    public class MainViewModel : Conductor<Screen>.Collection.OneActive
     {
-        #region Field
-        private MovieListViewModel movieListVM;
-        private AboutViewModel aboutVM;
-        private FavouritesViewModel _favouriteVM;
-        private FavActorViewModel _favActorVM;
-        private string mainViewMessage;
-        IEventAggregator events;        
-        #endregion
-                
-        #region Child ViewModel Properties
-        public MovieListViewModel MovieListVM
-        {
-            get => movieListVM;
-            set
-            {
-                movieListVM = value;
-                NotifyOfPropertyChange(() => MovieListVM);
-            }
-        }
-        public AboutViewModel AboutVM
-        {
-            get => aboutVM;
-            set
-            {
-                aboutVM = value;
-                NotifyOfPropertyChange(() => AboutVM);
-            }
-        }
-        public FavouritesViewModel FavouriteVM
-        {
-            get => _favouriteVM;
-            set
-            {
-                _favouriteVM = value;
-                NotifyOfPropertyChange(() => FavouriteVM);
-            }
-        }
-        public FavActorViewModel FavActorVM
-        {
-            get => _favActorVM;
-            set
-            {
-                _favActorVM = value;
-                NotifyOfPropertyChange(() => FavActorVM);
-            }
-        }
-
-        #endregion
-
-        #region Properties
-        public string MainViewMessage
-        {
-            get
-            {
-                return mainViewMessage;
-            }
-            set
-            {
-                mainViewMessage = value;
-                NotifyOfPropertyChange(() => MainViewMessage);
-            }
-        }
-
-        
-
-        #endregion
-
-        #region Methods
+        // constructor
         public MainViewModel()
         {
             events = new EventAggregator();
             InitialiseVMs();
-            
-            //on startup we want our main Usercontrol displayed
             ActivateItem(MovieListVM);
-            MainViewMessage = "Initial";
-        }
+        }              
 
-        private void InitialiseVMs()
-        {
-            MovieListVM = new MovieListViewModel(events);
-            FavActorVM = new FavActorViewModel();
-            AboutVM = new AboutViewModel();
-            FavouriteVM = new FavouritesViewModel();            
-        }
-
-        public void ChangeMainMessage()
-        {
-            MainViewMessage = "New";
-            //publish message to be received by other viewmodel subscribers
-            events.PublishOnUIThread(new ChangeData(MainViewMessage));
-        }
+        #region General Properties
+        private string _simpleSearchBox;
+        public string SimpleSearchBox { get => _simpleSearchBox; set { _simpleSearchBox = value; NotifyOfPropertyChange(); } }
+        
         #endregion
 
-        #region UserControl Activation Methods
+        #region Child View Models
+        private MovieListViewModel movieListVM;
+        public MovieListViewModel MovieListVM { get => movieListVM; set { movieListVM = value; NotifyOfPropertyChange(); } }
+        private AboutViewModel aboutVM;
+        public AboutViewModel AboutVM { get => aboutVM; set { aboutVM = value; NotifyOfPropertyChange(); } }
+        private FavouritesViewModel _favouriteVM;
+        public FavouritesViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
+        private FavActorViewModel _favActorVM;
+        public FavActorViewModel FavActorVM { get => _favActorVM; set { _favActorVM = value; NotifyOfPropertyChange(); } }
+        #endregion
+        #region Events
+        IEventAggregator events;
+        #endregion
+
+        #region Public Methods
+
+        #endregion
+
+        #region Private Methods
+        private void InitialiseVMs()
+        {
+            Items.Add( MovieListVM = new MovieListViewModel(events) );
+            Items.Add( FavActorVM = new FavActorViewModel() );
+            Items.Add( AboutVM = new AboutViewModel() );
+            Items.Add( FavouriteVM = new FavouritesViewModel() );
+        }       
+        #endregion
+
+        #region Item Activation Methods
         public void DisplayMovieListVM()
         {
+            DeactivateItem(ActiveItem, true);
             ActivateItem(MovieListVM);
         }
 
-        public void DisplayAboutVM()
+        public void DisplayAboutVM()            
         {
+            DeactivateItem(ActiveItem, true);
             ActivateItem(AboutVM);            
         }
 
         public void DisplayFavouriteVM()
         {
-            ActivateItem(FavouriteVM);
+        DeactivateItem(ActiveItem, true);
+        ActivateItem(FavouriteVM);
         }
         
         public void DisplayFavActorVM()
         {
-            ActivateItem(FavActorVM);
+        DeactivateItem(ActiveItem, true);
+        ActivateItem(FavActorVM);
         }
         #endregion
     }

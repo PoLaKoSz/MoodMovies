@@ -9,7 +9,7 @@
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="century gothic"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" FontSize="18">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"/>
@@ -33,25 +33,30 @@
                 
                 <materialDesign:Card  Grid.Row="1" Margin="10" VerticalAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Foreground="{StaticResource SecondaryAccentBrush}">
                     <DockPanel  HorizontalAlignment="Stretch">
-                        <Expander DockPanel.Dock="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Header=" Credits">
-
+                        <Expander DockPanel.Dock="Top" HorizontalAlignment="Stretch" Header=" Credits" FontSize="20" IsExpanded="{Binding Path=CreditsExpanderIsOpen}" cal:Message.Attach="[Event Expanded] = [Action CloseExpanders]" Background="#FF252526">
+                            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Height="{Binding ElementName=MainCard, Path=ActualHeight}"
+                                          Background="#FF5C5C5C">
+                                <TextBlock Text="This is where text about the open source libraries and tools used are mentioned." Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" 
+                                   VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="19" />
+                            </ScrollViewer>
                         </Expander>
-                        <Expander DockPanel.Dock="Top" HorizontalAlignment="Stretch" Header=" Creator">
-
+                        <Expander DockPanel.Dock="Top" HorizontalAlignment="Stretch" Header=" Creator" FontSize="20" IsExpanded="{Binding Path=CreatorExpanderIsOpen}" cal:Message.Attach="[Event Expanded] = [Action CloseExpanders]" Background="#FF252526">
+                            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Height="{Binding ElementName=MainCard, Path=ActualHeight}"
+                                          Background="#FF5C5C5C">
+                                <TextBlock Text="This is where text about the developer is mentioned and anyone who assisted are mentioned." Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" 
+                                   VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="19" />
+                            </ScrollViewer>
                         </Expander>
-                        <Expander x:Name="MainCard" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Header=" Software License">
-                            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Height="{Binding ElementName=MainCard, Path=ActualHeight}">
+                        <Expander x:Name="MainCard" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Header=" Software License" IsExpanded="{Binding Path=LicenseExpanderIsOpen}" cal:Message.Attach="[Event Expanded] = [Action CloseExpanders]" Background="#FF252526">
+                            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Height="{Binding ElementName=MainCard, Path=ActualHeight}"
+                                          Background="#FF5C5C5C">
                                 <TextBlock x:Name="License" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" 
-                                   VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" />
+                                   VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="19" />
                             </ScrollViewer>
                         </Expander>
                     </DockPanel>
                 </materialDesign:Card>
-
-            </Grid>
-            
-        </Grid>
-        
-        <Button x:Name="ClosePage"  Grid.Row="2" HorizontalAlignment="center" VerticalAlignment="center" Content="Close"  Margin="4" />
+            </Grid>            
+        </Grid>               
     </Grid>
 </UserControl>

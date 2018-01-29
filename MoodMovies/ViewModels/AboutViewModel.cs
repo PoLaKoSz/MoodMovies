@@ -11,22 +11,29 @@ namespace MoodMovies.ViewModels
 {
     public sealed class AboutViewModel: Screen
     {
-        #region Fields
-        private string license;        
-        #endregion
-
-        #region Properties     
-        public string License { get => license; set { license = value; NotifyOfPropertyChange(() => License); } }
-
-        #endregion
-
-        #region Methods
+        // constructor
         public AboutViewModel()
         {
             DisplayName = "About";
             LoadLicense();
         }
 
+        #region Properties Bound to visibility
+        private bool _creditsExpanderIsOpen;
+        public bool CreditsExpanderIsOpen { get => _creditsExpanderIsOpen; set { _creditsExpanderIsOpen = value; NotifyOfPropertyChange(); } }
+        private bool _creatorExpanderIsOpen;
+        public bool CreatorExpanderIsOpen { get => _creatorExpanderIsOpen; set { _creatorExpanderIsOpen = value; NotifyOfPropertyChange(); } }
+        private bool _licenseExpanderIsOpen;
+        public bool LicenseExpanderIsOpen { get => _licenseExpanderIsOpen; set { _licenseExpanderIsOpen = value; NotifyOfPropertyChange(); } }
+        #endregion
+
+        #region General Properties
+        private string license;
+        public string License { get => license; set { license = value; NotifyOfPropertyChange(); } }
+
+        #endregion
+                
+        #region Public Methods
         public void LoadLicense()
         {
             var assembly = Assembly.GetExecutingAssembly();
@@ -38,8 +45,33 @@ namespace MoodMovies.ViewModels
                 {
                     license = reader.ReadToEnd();
                 }
+            }            
+        }
+
+        public void CloseExpanders()
+        {
+            if( CreditsExpanderIsOpen )
+            {
+                if( CreatorExpanderIsOpen || LicenseExpanderIsOpen )
+                {
+                    CreatorExpanderIsOpen = false;
+                    LicenseExpanderIsOpen = false;
+                }
+                
             }
-            
+            else if ( CreatorExpanderIsOpen )
+            {
+                if (CreditsExpanderIsOpen || LicenseExpanderIsOpen)
+                {
+                    CreditsExpanderIsOpen = false;
+                    LicenseExpanderIsOpen = false;
+                }
+            }
+            else if ( LicenseExpanderIsOpen )
+            {                
+                    CreatorExpanderIsOpen = false;
+                    CreditsExpanderIsOpen = false;                
+            }
         }
         #endregion
 

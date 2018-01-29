@@ -183,9 +183,9 @@
                                          HorizontalAlignment="Right" VerticalAlignment="Center">
                         <StackPanel>
                             <Button Content="Help" />
-                            <Button x:Name="DisplayAboutVM" Content="About" cal:Message.Attach="DisplayAboutVM"/>
+                            <Button Content="About" cal:Message.Attach="DisplayAboutVM"/>
                             <Separator/>
-                            <Button Content="Exit App" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                            <Button cal:Message.Attach="CloseApp" Content="Exit App" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                         </StackPanel>
                     </materialDesign:PopupBox>
 

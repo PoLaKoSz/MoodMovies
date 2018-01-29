@@ -167,7 +167,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\testImage.jpg" />

@@ -9,6 +9,10 @@ namespace MoodMovies.ViewModels
 {
     public class ASearchViewModel : Screen
     {
+        // constructor
+        public ASearchViewModel()
+        {
 
+        }
     }
 }

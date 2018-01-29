@@ -79,6 +79,7 @@
     <Compile Include="Messages\ChangeData.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\ASearchViewModel.cs" />
     <Compile Include="ViewModels\FavActorViewModel.cs" />
     <Compile Include="ViewModels\FavouritesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -86,6 +87,9 @@
     <Compile Include="ViewModels\MovieListViewModel.cs" />
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ASearchView.xaml.cs">
+      <DependentUpon>ASearchView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FavActorView.xaml.cs">
       <DependentUpon>FavActorView.xaml</DependentUpon>
@@ -107,6 +111,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ASearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

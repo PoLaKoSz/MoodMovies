@@ -134,8 +134,8 @@
                         <ColumnDefinition Width="0.7*"/>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition Width="1.6*"/>
                         <ColumnDefinition Width="0.5*"/>
                     </Grid.ColumnDefinitions>
                     <!--left side menu button-->
@@ -171,12 +171,12 @@
                         <materialDesign:PackIcon Width="20" Height="20" Kind="Magnify" VerticalAlignment="Center"/>
                     </StackPanel>
                     <!--advanced search button-->
-                    <Button Grid.Column="4" Style="{StaticResource MaterialDesignRaisedButton}" Content="Advanced Search" 
-                        HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    <Button Grid.Column="4" Style="{StaticResource MaterialDesignFlatButton}" Content="Advanced Search" 
+                        HorizontalAlignment="Left" VerticalAlignment="Center" 
                         Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
 				        CommandParameter="{x:Static Dock.Top}" materialDesign:ShadowAssist.ShadowDepth="Depth5"
                             Background="{StaticResource PrimaryHueDarkBrush}" BorderBrush="{StaticResource PrimaryHueDarkBrush}"
-                            Foreground="{StaticResource PrimaryHueMidBrush}" FontSize="17" FontWeight="Normal"/>
+                            Foreground="{StaticResource PrimaryHueMidBrush}" FontSize="19" FontWeight="Normal"/>
 
                     <!--right side popup menu-->
                     <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"

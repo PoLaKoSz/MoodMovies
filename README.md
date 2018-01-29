@@ -1,6 +1,6 @@
 # MoodMovies
 
-Open Source application built for windows using C# and XAML. Search for movies based on your mood as well as a ton of other search and filtering options. It is built to be intuitive with the prupose of saving you from scrolling through never ending lists of movie suggestions. Targetting apecific actors whilst selecting your mood and filtering by year are amongst the many awesome features you will find.
+Open Source application built for windows using C# and XAML. Search for movies based on your mood as well as a ton of other search and filtering options. It is built to be intuitive with the purpose of saving you from scrolling through never ending lists of movie suggestions. Targetting specific actors whilst selecting your mood and filtering by year are amongst the many awesome features you will find.
 
 ## Getting Started
 

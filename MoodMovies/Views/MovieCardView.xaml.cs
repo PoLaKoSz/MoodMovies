@@ -23,6 +23,6 @@ namespace MoodMovies.Views
         public MovieCardView()
         {
             InitializeComponent();
-        }
+        }        
     }
 }

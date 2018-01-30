@@ -22,10 +22,7 @@ namespace MoodMovies.ViewModels
         #region General Properties
         private string _simpleSearchBox;
         public string SimpleSearchBox { get => _simpleSearchBox; set { _simpleSearchBox = value; NotifyOfPropertyChange(); } }
-
         #endregion
-
-        
 
         #region Child View Models
         private MovieListViewModel movieListVM;
@@ -36,10 +33,6 @@ namespace MoodMovies.ViewModels
         public FavouritesViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
         private FavActorViewModel _favActorVM;
         public FavActorViewModel FavActorVM { get => _favActorVM; set { _favActorVM = value; NotifyOfPropertyChange(); } }
-
-        
-
-
         #endregion
         #region Events
         IEventAggregator events;

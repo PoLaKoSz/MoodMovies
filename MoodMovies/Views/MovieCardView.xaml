@@ -9,38 +9,57 @@
              d:DesignHeight="500" d:DesignWidth="300"
              FontFamily="century gothic">
     <Grid Width="300" Height="500">
-        <materialDesign:Card Padding="0" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.4*"/>
-                    <RowDefinition Height="4*"/>
-                    <RowDefinition Height="0.5*"/>
-                    <RowDefinition Height="0.5*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Text="Urban Fighter" Style="{StaticResource MaterialDesignTitleTextBlock}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch" Foreground="{StaticResource SecondaryAccentBrush}"/>
-                <Image Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="/MoodMovies;component/Images/testImage.jpg"/>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="0.5*"/>
-                    </Grid.ColumnDefinitions>
-                    <materialDesign:RatingBar Grid.Column="0" x:Name="MovieRatingBar" Value="3"  Background="{StaticResource SecondaryAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <ToggleButton Grid.Column="1" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="Add to Favourites" Background="#FF424242">
-                        <ToggleButton.Content>
-                            <materialDesign:PackIcon  Kind="Heart"/>
-                        </ToggleButton.Content>
-                        <materialDesign:ToggleButtonAssist.OnContent >
-                            <materialDesign:PackIcon Kind="Heart" Foreground="Red" />
-                        </materialDesign:ToggleButtonAssist.OnContent>
-                    </ToggleButton>
-                    
+        <materialDesign:DrawerHost 
+            Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"    
+	        BorderThickness="0" RightDrawerBackground="#BF303030">
+            <materialDesign:DrawerHost.RightDrawerContent>
+                <Grid  Width="260" Height="500" VerticalAlignment="Bottom" Margin="0,0,0,10">                    
+                    <Button Margin="4" Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+				        CommandParameter="{x:Static Dock.Right}"
+				        Style="{DynamicResource MaterialDesignFlatButton}">
+                        CLOSE THIS
+                    </Button>
                 </Grid>
-                
-                <TextBlock Grid.Row="3" Text="Details Go here or maybe a button or maybe some kind of popup/ dialog" TextAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
-            </Grid>            
-        </materialDesign:Card>
+            </materialDesign:DrawerHost.RightDrawerContent>
+            <materialDesign:Card Padding="0" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.4*"/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding Path=Title}" Style="{StaticResource MaterialDesignTitleTextBlock}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch" Foreground="{StaticResource SecondaryAccentBrush}"/>
+                    <!--<Image Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="/MoodMovies;component/Images/testImage.jpg"   />-->
+                    <TextBlock Grid.Row="1">
+                        <Hyperlink Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+				        CommandParameter="{x:Static Dock.Right}" TextDecorations="{x:Null}">
+                            <Image Source="{Binding Path=ImagePath}" VerticalAlignment="Stretch" Stretch="Fill" />
+                        </Hyperlink>
+                    </TextBlock>
+                    <!--ratings and fav button-->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:RatingBar Grid.Column="0" x:Name="MovieRatingBar" Value="3"  Background="{StaticResource SecondaryAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <ToggleButton Grid.Column="1" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="Add to Favourites" Background="#FF424242">
+                            <ToggleButton.Content>
+                                <materialDesign:PackIcon  Kind="Heart"/>
+                            </ToggleButton.Content>
+                            <materialDesign:ToggleButtonAssist.OnContent >
+                                <materialDesign:PackIcon Kind="Heart" Foreground="Red" />
+                            </materialDesign:ToggleButtonAssist.OnContent>
+                        </ToggleButton>
+
+                    </Grid>
+                    <TextBlock Grid.Row="3" Text="Details Go here or maybe a button or maybe some kind of popup/ dialog" TextAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
+                </Grid>
+            </materialDesign:Card>
+        </materialDesign:DrawerHost>
     </Grid>
 </UserControl>

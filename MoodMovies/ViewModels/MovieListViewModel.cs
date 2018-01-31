@@ -38,7 +38,6 @@ namespace MoodMovies.ViewModels
             _events = events;
             //subscribe this object to the eventaggregator
             _events.Subscribe(this);
-            Test = "This is a test";
 
             Movies = new ObservableCollection<MovieCardViewModel>();
             //for testing purposes populate the list with set items
@@ -46,7 +45,6 @@ namespace MoodMovies.ViewModels
             {
                 Movies.Add(new MovieCardViewModel());
             }
-
         }
 
         #region IHandle methods

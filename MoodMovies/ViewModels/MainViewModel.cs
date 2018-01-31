@@ -33,6 +33,8 @@ namespace MoodMovies.ViewModels
         public FavouritesViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
         private FavActorViewModel _favActorVM;
         public FavActorViewModel FavActorVM { get => _favActorVM; set { _favActorVM = value; NotifyOfPropertyChange(); } }
+        private ASearchViewModel _asearchVM;
+        public ASearchViewModel ASearchVM { get => _asearchVM; set { _asearchVM = value; NotifyOfPropertyChange(); } }
         #endregion
         #region Events
         IEventAggregator events;
@@ -48,10 +50,14 @@ namespace MoodMovies.ViewModels
         #region Private Methods
         private void InitialiseVMs()
         {
+            //pages that will change
             Items.Add( MovieListVM = new MovieListViewModel(events) );
             Items.Add( FavActorVM = new FavActorViewModel() );
             Items.Add( AboutVM = new AboutViewModel() );
             Items.Add( FavouriteVM = new FavouritesViewModel() );
+
+            //static, will not change
+            ASearchVM = new ASearchViewModel();
         }       
         #endregion
 

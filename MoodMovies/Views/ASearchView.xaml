@@ -46,7 +46,7 @@
                 <TextBlock Text="Search &amp; Filter Options" Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
             </materialDesign:ColorZone>
-
+            <!--#region Buttons and checkboxes -->
             <!--quick search checkboxes-->
             <CheckBox x:Name="latestBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center"/>
             <CheckBox x:Name="topBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="3" VerticalAlignment="center"/>
@@ -133,7 +133,7 @@
                 <TextBlock Text="Wonder" Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
             </materialDesign:ColorZone>
             <!--end of mood buttons-->
-
+            <!--#endregion-->
             <!--filter button-->
             <Button Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="2" Content="Search/Filter" Style="{StaticResource MaterialDesignFlatButton}" 
                 Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"

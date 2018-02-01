@@ -201,21 +201,12 @@
             </Grid>
             <!--#endregion-->
 
-
-
-
-
-
-
-
-
-
-
             <!--filter button-->
             <Button Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="2" Content="Search/Filter" Style="{StaticResource MaterialDesignFlatButton}" 
                 Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Filter an existing search" />           
-
+				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Filter an existing search" />
+            <Button Grid.Row="8" Grid.Column="6" Content="Reset All" Style="{StaticResource MaterialDesignFlatButton}" 
+                 Margin="15,0,15,0" ToolTip="Reset all controls" />
         </Grid>
     </materialDesign:ColorZone>
 </UserControl>

@@ -32,7 +32,7 @@
 	    BorderThickness="2" TopDrawerBackground="#FF1E1E1E">
         <materialDesign:DrawerHost.TopDrawerContent>
             <Grid Grid.Row="1" Margin="0,5,0,5">
-                <ContentControl cal:View.Model="{Binding ASearchVM}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="300"/>
+                <ContentControl cal:View.Model="{Binding ASearchVM}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="350"/>
             </Grid>
                 <!--<Button
 				Margin="4"

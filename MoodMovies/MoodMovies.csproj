@@ -80,6 +80,7 @@
     </ApplicationDefinition>
     <Compile Include="AppBootStrapper.cs" />
     <Compile Include="Messages\ChangeData.cs" />
+    <Compile Include="Models\Actors.cs" />
     <Compile Include="Resources\Converters\BoolToColorConverter.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
@@ -170,9 +171,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\testImage.jpg" />
   </ItemGroup>

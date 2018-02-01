@@ -6,12 +6,13 @@
              xmlns:local="clr-namespace:MoodMovies.Views"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:MoodMovies.Resources.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="950" MinHeight="300" MinWidth="950">
     <UserControl.Resources>
         <SolidColorBrush x:Key="MainFlatButtonBackground" Color="#FF2D2D31"/>
         <SolidColorBrush x:Key="ASearchHeadingBackground" Color="#FF1E1E1E"/>
-        
+        <converters:BoolToColorConverter x:Key="IsCheckedConverter"/>
     </UserControl.Resources>
     <materialDesign:ColorZone Background="#FF1E1E1E" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid>
@@ -45,101 +46,98 @@
                 <TextBlock Text="Search &amp; Filter Options" Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
             </materialDesign:ColorZone>
-           
-                        
+
+            <!--quick search checkboxes-->
+            <CheckBox x:Name="latestBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center"/>
+            <CheckBox x:Name="topBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="3" VerticalAlignment="center"/>
+            <CheckBox x:Name="popularBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="4" VerticalAlignment="center"/>
+            <CheckBox x:Name="cinemasBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="5" VerticalAlignment="center"/>
+            <CheckBox x:Name="upcomingBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="6" VerticalAlignment="center"/>
+            <CheckBox x:Name="rel2017Box" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="7" VerticalAlignment="center"/>
+            <CheckBox x:Name="anythingBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="8" VerticalAlignment="center"/>
             <!--Quick search buttons-->
             <materialDesign:ColorZone Grid.Column="8" Grid.Row="1" VerticalAlignment="Stretch" Background="{DynamicResource ASearchHeadingBackground}">
                 <TextBlock Text="Quick Search" Grid.Column="5" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"
                Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
-            </materialDesign:ColorZone>            
-
-            <Button Content="Latest Releases" Grid.Column="8" Margin="1" Grid.Row="2" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            <Button Content="Top Rated" Grid.Column="8" Margin="1" Grid.Row="3" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
-            <Button Content="Popular" Grid.Column="8" Margin="1" Grid.Row="4" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
-            <Button Content="In Cinemas" Grid.Column="8" Margin="1" Grid.Row="5" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
-            <Button Content="Upcoming" Grid.Column="8" Margin="1" Grid.Row="6" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
-            <Button Content="Released 2017" Grid.Column="8" Margin="1" Grid.Row="7" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
-            <Button Content="Anything" Grid.Column="8" Margin="1" Grid.Row="8" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="2" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                      Background="{Binding ElementName=latestBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Latest Releases" Grid.Column="8" Margin="1" Grid.Row="2" Height="Auto" 
+                Background="{StaticResource MainFlatButtonBackground}" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="3" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                      Background="{Binding ElementName=topBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Top Rated"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="4" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                      Background="{Binding ElementName=popularBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Popular"  Height="Auto"  Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone  Grid.Column="8" Margin="1" Grid.Row="5" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                       Background="{Binding ElementName=cinemasBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="In Cinemas" Height="Auto"  Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="6" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                      Background="{Binding ElementName=upcomingBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Upcoming" Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="7" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                      Background="{Binding ElementName=rel2017Box, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Released 2017" Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="8" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                      Background="{Binding ElementName=anythingBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Anything"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>                                
             <!--end of quick search buttons-->
-            
+            <!--mood checkboxes-->
+            <CheckBox x:Name="happyBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center"/>
+            <CheckBox x:Name="inspiredox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="3" VerticalAlignment="center"/>
+            <CheckBox x:Name="thrilledBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="4" VerticalAlignment="center"/>
+            <CheckBox x:Name="scaredBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="5" VerticalAlignment="center"/>
+            <CheckBox x:Name="cryBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="6" VerticalAlignment="center"/>
+            <CheckBox x:Name="learnBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="7" VerticalAlignment="center"/>
+            <CheckBox x:Name="wonderBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="8" VerticalAlignment="center"/>
             <!--mood buttons-->            
             <materialDesign:ColorZone Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Background="{DynamicResource ASearchHeadingBackground}" >
                 <TextBlock Text="Make me..." Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
             </materialDesign:ColorZone>
 
-            <Button Content="Happy" Grid.Column="1" Margin="1" Grid.Row="2" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            <Button Content="Inspired" Grid.Column="1" Margin="1" Grid.Row="3" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
-            <Button Content="Thrilled" Grid.Column="1" Margin="1" Grid.Row="4" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
-            <Button Content="Scared" Grid.Column="1" Margin="1" Grid.Row="5" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
-            <Button Content="Cry" Grid.Column="1" Margin="1" Grid.Row="6" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
-            <Button Content="Learn" Grid.Column="1" Margin="1" Grid.Row="7" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
-            <Button Content="Wonder" Grid.Column="1" Margin="1" Grid.Row="8" Height="Auto" Style="{StaticResource MaterialDesignFlatButton}" 
-                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{StaticResource MainFlatButtonBackground}"
-                Foreground="{StaticResource PrimaryHueLightForegroundBrush}"/>
+            <materialDesign:ColorZone  Grid.Column="1" Margin="1" Grid.Row="2" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                       Background="{Binding ElementName=happyBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}" >
+                <TextBlock Text="Happy" Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="3" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                      Background="{Binding ElementName=inspiredox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Inspired"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="4" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                      Background="{Binding ElementName=thrilledBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Thrilled"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="5" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                      Background="{Binding ElementName=scaredBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Scared"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="6" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                      Background="{Binding ElementName=cryBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Cry"  Height="Auto"  Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="7" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                      Background="{Binding ElementName=learnBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Learn"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
+            <materialDesign:ColorZone  Grid.Column="1" Margin="1" Grid.Row="8" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                       Background="{Binding ElementName=wonderBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                <TextBlock Text="Wonder" Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+            </materialDesign:ColorZone>
             <!--end of mood buttons-->
 
             <!--filter button-->
             <Button Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="2" Content="Search/Filter" Style="{StaticResource MaterialDesignFlatButton}" 
                 Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
 				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Filter an existing search" />           
-            
-            <!--mood checkboxes-->
-            <CheckBox Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="3" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="4" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="5" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="6" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="7" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="8" VerticalAlignment="center"/>
-            <!--quick search checkboxes-->
-            <CheckBox Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="3" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="4" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="5" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="6" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="7" VerticalAlignment="center"/>
-            <CheckBox Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="8" VerticalAlignment="center"/>
 
         </Grid>
     </materialDesign:ColorZone>

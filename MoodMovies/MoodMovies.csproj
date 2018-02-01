@@ -80,6 +80,7 @@
     </ApplicationDefinition>
     <Compile Include="AppBootStrapper.cs" />
     <Compile Include="Messages\ChangeData.cs" />
+    <Compile Include="Resources\Converters\BoolToColorConverter.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\ASearchViewModel.cs" />

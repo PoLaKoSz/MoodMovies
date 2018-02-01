@@ -15,7 +15,7 @@
         <converters:BoolToColorConverter x:Key="IsCheckedConverter"/>
     </UserControl.Resources>
     <materialDesign:ColorZone Background="#FF1E1E1E" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <Grid>
+        <Grid Margin="10,0,-9.6,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="*"/>
@@ -57,7 +57,7 @@
             <CheckBox x:Name="anythingBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="8" VerticalAlignment="center"/>
             <!--Quick search buttons-->
             <materialDesign:ColorZone Grid.Column="8" Grid.Row="1" VerticalAlignment="Stretch" Background="{DynamicResource ASearchHeadingBackground}">
-                <TextBlock Text="Quick Search" Grid.Column="5" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"
+                <TextBlock Text="Choose..." Grid.Column="5" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"
                Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
             </materialDesign:ColorZone>
             <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="2" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
@@ -134,6 +134,56 @@
             </materialDesign:ColorZone>
             <!--end of mood buttons-->
             <!--#endregion-->
+
+            <!--#region Sliders -->
+            <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Funny" Grid.Column="0" Margin="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+               Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                <TextBlock Text="Scary" Grid.Column="0" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+               Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                <TextBlock Text="Romantic" Grid.Column="7" Margin="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+               Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                <TextBlock Text="Action" Grid.Column="7" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+               Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+
+                <Slider Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Minimum="0" Maximum="10" Value="5"
+                        VerticalAlignment="Center" TickFrequency="1" TickPlacement="BottomRight"/>
+                <Slider Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Minimum="0" Maximum="10" Value="5"
+                        TickFrequency="1" TickPlacement="BottomRight"/>
+                <Slider Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Minimum="0" Maximum="10" Value="5"
+                        TickFrequency="1" TickPlacement="TopLeft"/>
+                <Slider Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Minimum="0" Maximum="10" Value="5"
+                        TickFrequency="1" TickPlacement="TopLeft"/>                
+            </Grid>          
+            <!--#endregion-->
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
             <!--filter button-->
             <Button Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="2" Content="Search/Filter" Style="{StaticResource MaterialDesignFlatButton}" 
                 Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"

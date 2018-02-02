@@ -16,7 +16,7 @@
         <converters:BoolToColorConverter x:Key="IsCheckedConverter"/>
     </UserControl.Resources>
     <materialDesign:ColorZone Background="#FF1E1E1E" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <Grid Margin="10,0,-9.6,0">
+        <Grid Margin="10,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="*"/>
@@ -33,16 +33,16 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.1*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.8*"/>
                 <ColumnDefinition Width="0.15*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="0.15*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.8*"/>
                 <ColumnDefinition Width="0.1*"/>
-            </Grid.ColumnDefinitions>            
+            </Grid.ColumnDefinitions>
             <!--search header-->
             <materialDesign:ColorZone Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Background="{DynamicResource ASearchHeadingBackground}" >
                 <TextBlock Text="Search &amp; Filter Options" Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -90,7 +90,7 @@
             <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="8" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                                       Background="{Binding ElementName=anythingBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
                 <TextBlock Text="Anything"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>                                
+            </materialDesign:ColorZone>
             <!--end of quick search buttons-->
             <!--mood checkboxes-->
             <CheckBox x:Name="happyBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center"/>
@@ -100,7 +100,7 @@
             <CheckBox x:Name="cryBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="6" VerticalAlignment="center"/>
             <CheckBox x:Name="learnBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="7" VerticalAlignment="center"/>
             <CheckBox x:Name="wonderBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="8" VerticalAlignment="center"/>
-            <!--mood buttons-->            
+            <!--mood buttons-->
             <materialDesign:ColorZone Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Background="{DynamicResource ASearchHeadingBackground}" >
                 <TextBlock Text="Make me..." Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
@@ -169,12 +169,12 @@
                 <Slider Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Minimum="0" Maximum="10" Value="5"
                         TickFrequency="1" TickPlacement="TopLeft"/>
                 <Slider Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Minimum="0" Maximum="10" Value="5"
-                        TickFrequency="1" TickPlacement="TopLeft"/>                
-            </Grid>          
+                        TickFrequency="1" TickPlacement="TopLeft"/>
+            </Grid>
             <!--#endregion-->
 
-            <!--#region Actors searching & ...-->
-            <Grid Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="5" Margin="0,0,0,5">
+            <!--#region Search options below sliders...-->
+            <Grid Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="4" Grid.RowSpan="5" Margin="0,0,0,5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -182,8 +182,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="9.8*"/>
+                    <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -191,13 +191,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <!--actor searching section-->
+                <!--#region actor searching section-->
                 <Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="4">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.7*"/>
-                        <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="1.5*"/>
-                        <RowDefinition Height="1.5*"/>
+                        <RowDefinition Height="31*"/>
+                        <RowDefinition Height="22.4"/>
+                        <RowDefinition Height="66*"/>
+                        <RowDefinition Height="66*"/>
 
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -207,7 +207,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <TextBlock Text="Actors" Grid.Column="0" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
                         Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
                     <!--male/female filters-->
@@ -219,7 +219,7 @@
                     <ToggleButton Grid.Row="3" Grid.Column="0" ToolTip="Female" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Background="{DynamicResource MainFlatButtonBackground}"
                         Margin="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
                                   Foreground="{StaticResource SecondaryAccentForegroundBrush}" Content="F"/>
-                    
+
                     <!--actor search box-->
                     <Grid Grid.Column="2" Grid.ColumnSpan="3">
                         <Grid.ColumnDefinitions>
@@ -246,8 +246,16 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </Grid>                
+                </Grid>
+                <!--#endregion-->
                 
+                <!--#region Other settings-->
+                <Grid Grid.Column="0" Grid.RowSpan="4" Grid.Row="0">
+                    
+                    
+                    
+                </Grid>
+                <!--#endregion-->
             </Grid>
             <!--#endregion-->
 

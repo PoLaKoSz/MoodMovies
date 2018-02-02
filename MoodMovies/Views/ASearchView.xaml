@@ -7,6 +7,7 @@
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:converters="clr-namespace:MoodMovies.Resources.Converters"
+             xmlns:Resources="clr-namespace:MoodMovies.Resources.Validation"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="950" MinHeight="300" MinWidth="950">
     <UserControl.Resources>
@@ -18,6 +19,7 @@
         <Grid Margin="10,0,-9.6,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -171,8 +173,8 @@
             </Grid>          
             <!--#endregion-->
 
-            <!--#region Popularity and adult -->
-            <Grid Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="4" Grid.RowSpan="4">
+            <!--#region Actors searching & ...-->
+            <Grid Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="5" Margin="0,0,0,5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -189,24 +191,72 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <!--actor searching section-->
+                <Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.7*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="1.5*"/>
+                        <RowDefinition Height="1.5*"/>
 
-                <ListBox Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="3" Grid.RowSpan="4" ItemsSource="{Binding Path=ActorsCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{Binding ActorChecked}" Content="{Binding ActorName}" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>                  
-                </ListBox>
-
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.8*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Text="Actors" Grid.Column="0" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                        Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                    <!--male/female filters-->
+                    <materialDesign:PackIcon Kind="Filter" Grid.Column="0" Grid.Row="1" Width="auto" Height="auto" VerticalAlignment="Center" Margin="5" ToolTip="Filter by..."
+                                             HorizontalAlignment="Center"/>
+                    <ToggleButton Grid.Row="2" Grid.Column="0" ToolTip="Male" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Background="{DynamicResource MainFlatButtonBackground}"
+                        Margin="1" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center"
+                                  Foreground="{StaticResource SecondaryAccentForegroundBrush}" Content="M"/>
+                    <ToggleButton Grid.Row="3" Grid.Column="0" ToolTip="Female" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Background="{DynamicResource MainFlatButtonBackground}"
+                        Margin="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
+                                  Foreground="{StaticResource SecondaryAccentForegroundBrush}" Content="F"/>
+                    
+                    <!--actor search box-->
+                    <Grid Grid.Column="2" Grid.ColumnSpan="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox materialDesign:HintAssist.Hint="search by name" MaxLength="15" Grid.Column="0"
+                         HorizontalAlignment="Stretch" VerticalContentAlignment="Center" FontFamily="century gothic" Foreground="{StaticResource SecondaryAccentForegroundBrush}">
+                            <TextBox.Text>
+                                <Binding Path="ActorSearchBox" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <Resources:SearchBoxValidation/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <materialDesign:PackIcon Width="Auto" Height="Auto" Kind="Magnify" VerticalAlignment="Center" Grid.Column="1"/>
+                    </Grid>
+                    <!--actor listbox-->
+                    <ListBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="4" ItemsSource="{Binding Path=ActorsCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding ActorChecked}" Content="{Binding ActorName}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>                
+                
             </Grid>
             <!--#endregion-->
 
             <!--filter button-->
-            <Button Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="2" Content="Search/Filter" Style="{StaticResource MaterialDesignFlatButton}" 
+            <Button Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="2" Content="Search/Filter" Style="{StaticResource MaterialDesignFlatButton}" 
                 Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
 				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Filter an existing search" />
-            <Button Grid.Row="8" Grid.Column="6" Content="Reset All" Style="{StaticResource MaterialDesignFlatButton}" 
-                 Margin="15,0,15,0" ToolTip="Reset all controls" />
+            <Button Grid.Row="9" Grid.Column="8" Content="Reset All" Style="{StaticResource MaterialDesignFlatButton}" Background="{DynamicResource MainFlatButtonBackground}"
+                 Margin="15,0,15,0" ToolTip="Reset all controls" VerticalAlignment="Bottom" />
         </Grid>
     </materialDesign:ColorZone>
 </UserControl>

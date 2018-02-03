@@ -136,8 +136,25 @@
             </materialDesign:ColorZone>
             <!--end of mood buttons-->
             <!--#endregion-->
+            
+            <!--Save or Load search settings-->
+            <Grid Grid.Row="9" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Style="{StaticResource MaterialDesignFlatButton}" Background="{StaticResource MainFlatButtonBackground}" Margin="5" ToolTip="Save Current Search Profile">
+                    <materialDesign:PackIcon Kind="ContentSave"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="{StaticResource PrimaryHueMidBrush}" Height="auto" Width="auto"/>
+                </Button>
+                <Button Grid.Column="1" Style="{StaticResource MaterialDesignFlatButton}" Background="{StaticResource MainFlatButtonBackground}" Margin="5" ToolTip="Load Saved Search Profile">
+                    <materialDesign:PackIcon Kind="Reload"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="{StaticResource PrimaryHueMidBrush}" Height="auto" Width="auto"/>
+                </Button>
+                
+                
+            </Grid>
+            
 
-            <!--#region Sliders -->
+            <!--#region Sliders & adult/children checkboxes-->
             <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -170,6 +187,9 @@
                         TickFrequency="1" TickPlacement="TopLeft"/>
                 <Slider Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Minimum="0" Maximum="10" Value="5"
                         TickFrequency="1" TickPlacement="TopLeft"/>
+
+                <CheckBox Grid.Column="3" Grid.Row="0" Content="Adult" Foreground="{StaticResource SecondaryAccentBrush}" FontSize="16" HorizontalAlignment="Center"/>
+                <CheckBox Grid.Column="4" Grid.Row="0" Content="Children" Foreground="{StaticResource SecondaryAccentBrush}" FontSize="16" HorizontalAlignment="Left"/>
             </Grid>
             <!--#endregion-->
 
@@ -206,6 +226,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Actors" Grid.Column="0" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
@@ -251,9 +272,26 @@
                 
                 <!--#region Other settings-->
                 <Grid Grid.Column="0" Grid.RowSpan="4" Grid.Row="0">
-                    
-                    
-                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!---ratings bar-->
+                    <TextBlock Text="Ratings" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                        Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                    <materialDesign:RatingBar x:Name="BasicRatingBar" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Value="3" 
+                                              VerticalAlignment="Center"/>
                 </Grid>
                 <!--#endregion-->
             </Grid>

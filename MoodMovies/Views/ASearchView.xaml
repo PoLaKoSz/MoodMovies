@@ -214,7 +214,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <!--#region actor searching section-->
-                <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" Grid.RowSpan="4">
+                <materialDesign:Card Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" Grid.RowSpan="5" Background="{StaticResource ASearchHeadingBackground}" 
+                                     Margin="3" VerticalAlignment="Stretch">
+                <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="31*"/>
                         <RowDefinition Height="22.4"/>
@@ -228,10 +230,10 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Actors" Grid.Column="0" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                    <TextBlock Text="Actors" Grid.Column="0" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                         Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
                     <!--male/female filters-->
                     <materialDesign:PackIcon Kind="Filter" Grid.Column="0" Grid.Row="1" Width="auto" Height="auto" VerticalAlignment="Center" Margin="5" ToolTip="Filter by..."
@@ -270,6 +272,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
+                </materialDesign:Card>
                 <!--#endregion-->
                 
                 <!--#region Other settings-->
@@ -294,24 +297,31 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.6*"/>
                                 <RowDefinition Height="0.8*"/>
-                                <RowDefinition Height="0.4*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="0.6*"/>
+                                <RowDefinition Height="0.8*"/>                                
                             </Grid.RowDefinitions>
                             <!---ratings bar-->
-                            <TextBlock Text="Ratings" Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                            <TextBlock Text="Ratings" Grid.Column="5" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                         Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
                             <materialDesign:RatingBar x:Name="BasicRatingBar" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" Value="3" 
                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <!--add to exiisting search toggle button-->
-                            <Button Grid.Row="3" Background="#FF1E1E1E" Style="{StaticResource MaterialDesignFlatButton}"
-                                    HorizontalAlignment="Stretch" VerticalContentAlignment="Center" VerticalAlignment="Stretch" Foreground="{StaticResource SecondaryAccentBrush}"
-                                    ToolTip="Apply these settings to the existing search." FontSize="15" Height="Auto" HorizontalContentAlignment="Center" Content="Start New Search"/>                            
-                            <Border Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="2" >
-                                <Label x:Name="ExistingSearch" Content="Apply to existing " Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-               Foreground="{StaticResource SecondaryAccentBrush}" ToolTip="Apply these settings to the existing search." FontSize="15"
-                                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                            </Border>
+                            <Grid Grid.Column="5" Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.4*"/>
+                                    <ColumnDefinition Width="0.6*"/>
+                                    <ColumnDefinition Width="0.3*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Popularity" Grid.Column="0"  VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                        Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                                <TextBlock Text="{Binding Path=Value, ElementName=PopCount, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                        Foreground="{StaticResource PrimaryHueMidBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                                <TextBlock Text="%" Grid.Column="2"  VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                        Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                            </Grid>
+
+                            <Slider x:Name="PopCount" Grid.Column="1" Grid.Row="3" Minimum="0" Maximum="100" Value="60"
+                        VerticalAlignment="Center" TickFrequency="1" TickPlacement="BottomRight"/>
+                           
                         </Grid>
                     </materialDesign:Card>
                     
@@ -320,10 +330,13 @@
             </Grid>
             <!--#endregion-->
 
-            <!--filter button-->
-            <Button Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="2" Content="Search/Filter" Style="{StaticResource MaterialDesignFlatButton}" 
+            <!--search buttons-->
+            <Button Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="1" Content="Start New Search" Style="{StaticResource MaterialDesignFlatButton}" 
                 Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Filter an existing search" />
+				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Start a brand new search" />
+            <Button Grid.Row="9" Grid.Column="5" Grid.ColumnSpan="1" Content="Update Existing Search" Style="{StaticResource MaterialDesignFlatButton}" 
+                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Update an existing search" />
             <Button Grid.Row="9" Grid.Column="8" Content="Reset All" Style="{StaticResource MaterialDesignFlatButton}" Background="{DynamicResource MainFlatButtonBackground}"
                  Margin="5,0,5,0" ToolTip="Reset all controls" VerticalAlignment="Bottom" />
         </Grid>

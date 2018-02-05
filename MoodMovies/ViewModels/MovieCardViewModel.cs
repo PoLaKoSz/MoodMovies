@@ -21,12 +21,27 @@ namespace MoodMovies.ViewModels
         {
             TestMethod();
         }
+
         private string title;
-
         public string Title { get => title; set { title = value; NotifyOfPropertyChange(); } }
-        public Uri ImagePath { get => imagepath; set { imagepath = value; NotifyOfPropertyChange(); } }
-
         private Uri imagepath;
+        public Uri ImagePath { get => imagepath; set { imagepath = value; NotifyOfPropertyChange(); } }
+        private string _overview;
+        public string Overview { get => _overview; set { _overview = value; NotifyOfPropertyChange(); } }
+        private string _releaseDate;
+        public string ReleaseDate { get => _releaseDate; set { _releaseDate = value; NotifyOfPropertyChange(); } }
+        private string _voteCount;
+        public string VoteCount { get => _voteCount; set { _voteCount = value; NotifyOfPropertyChange(); } }
+        private double _popularity;
+        public double Popularity { get => _popularity; set { _popularity = value; NotifyOfPropertyChange(); } }
+        private string _language;
+        public string Language { get => _language; set { _language = value; NotifyOfPropertyChange(); } }
+
+        
+        
+        
+        
+        
         private void TestMethod()
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://api.themoviedb.org/3/search/movie/?api_key=6d4b546936310f017557b2fb498b370b&query=007");
@@ -83,7 +98,11 @@ namespace MoodMovies.ViewModels
                 //}
                 Title += $"{model.results[0].title} ";
                 address += model.results[0].poster_path;
-
+                Overview += model.results[0].overview;
+                ReleaseDate += model.results[0].release_date;
+                Popularity += model.results[0].popularity;
+                Language += model.results[0].original_language;
+                VoteCount += model.results[0].vote_count;
                 Console.WriteLine(address);
                 ImagePath = new Uri(address);
             }

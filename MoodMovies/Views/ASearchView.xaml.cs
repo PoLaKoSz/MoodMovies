@@ -24,5 +24,10 @@ namespace MoodMovies.Views
         {
             InitializeComponent();
         }
+
+        private void Button_ManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
+        {
+
+        }
     }
 }

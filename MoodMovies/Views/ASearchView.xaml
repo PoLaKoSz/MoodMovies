@@ -14,6 +14,9 @@
         <SolidColorBrush x:Key="MainFlatButtonBackground" Color="#FF2D2D31"/>
         <SolidColorBrush x:Key="ASearchHeadingBackground" Color="#FF1E1E1E"/>
         <converters:BoolToColorConverter x:Key="IsCheckedConverter"/>
+
+        
+        
     </UserControl.Resources>
     <materialDesign:ColorZone Background="#FF1E1E1E" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid Margin="10,0,0,0">
@@ -119,7 +122,7 @@
                 <TextBlock Text="Thrilled"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
             </materialDesign:ColorZone>
             <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="5" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=scaredBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
+                                      Background="{Binding ElementName=scaredBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}" >
                 <TextBlock Text="Scared"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
             </materialDesign:ColorZone>
             <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="6" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
@@ -188,8 +191,8 @@
                 <Slider Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Minimum="0" Maximum="10" Value="5"
                         TickFrequency="1" TickPlacement="TopLeft"/>
 
-                <CheckBox Grid.Column="3" Grid.Row="0" Content="Adult" Foreground="{StaticResource SecondaryAccentBrush}" FontSize="16" HorizontalAlignment="Center"/>
-                <CheckBox Grid.Column="4" Grid.Row="0" Content="Children" Foreground="{StaticResource SecondaryAccentBrush}" FontSize="16" HorizontalAlignment="Left"/>
+                <CheckBox Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="2" Content="Adult" Foreground="{StaticResource SecondaryAccentBrush}" FontSize="16" HorizontalAlignment="Center"/>
+                <CheckBox Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Content="Children" Foreground="{StaticResource SecondaryAccentBrush}" FontSize="16" HorizontalAlignment="Center"/>
             </Grid>
             <!--#endregion-->
 
@@ -202,8 +205,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="9.8*"/>
-                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="10*"/>                    
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -212,7 +214,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <!--#region actor searching section-->
-                <Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="4">
+                <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" Grid.RowSpan="4">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="31*"/>
                         <RowDefinition Height="22.4"/>
@@ -283,15 +285,36 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="1.5*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <!---ratings bar-->
-                    <TextBlock Text="Ratings" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                    <materialDesign:Card Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Stretch" Margin="2" Background="{DynamicResource ASearchHeadingBackground}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.6*"/>
+                                <RowDefinition Height="0.8*"/>
+                                <RowDefinition Height="0.4*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <!---ratings bar-->
+                            <TextBlock Text="Ratings" Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                         Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
-                    <materialDesign:RatingBar x:Name="BasicRatingBar" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Value="3" 
-                                              VerticalAlignment="Center"/>
+                            <materialDesign:RatingBar x:Name="BasicRatingBar" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" Value="3" 
+                                              VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!--add to exiisting search toggle button-->
+                            <Button Grid.Row="3" Background="#FF1E1E1E" Style="{StaticResource MaterialDesignFlatButton}"
+                                    HorizontalAlignment="Stretch" VerticalContentAlignment="Center" VerticalAlignment="Stretch" Foreground="{StaticResource SecondaryAccentBrush}"
+                                    ToolTip="Apply these settings to the existing search." FontSize="15" Height="Auto" HorizontalContentAlignment="Center" Content="Start New Search"/>                            
+                            <Border Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="2" >
+                                <Label x:Name="ExistingSearch" Content="Apply to existing " Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+               Foreground="{StaticResource SecondaryAccentBrush}" ToolTip="Apply these settings to the existing search." FontSize="15"
+                                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </materialDesign:Card>
+                    
                 </Grid>
                 <!--#endregion-->
             </Grid>
@@ -302,7 +325,7 @@
                 Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
 				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Filter an existing search" />
             <Button Grid.Row="9" Grid.Column="8" Content="Reset All" Style="{StaticResource MaterialDesignFlatButton}" Background="{DynamicResource MainFlatButtonBackground}"
-                 Margin="15,0,15,0" ToolTip="Reset all controls" VerticalAlignment="Bottom" />
+                 Margin="5,0,5,0" ToolTip="Reset all controls" VerticalAlignment="Bottom" />
         </Grid>
     </materialDesign:ColorZone>
 </UserControl>

@@ -51,20 +51,7 @@ namespace MoodMovies.Resources.Converters
         {
             double d = (double)value;
             int temp = System.Convert.ToInt32(Math.Round(d));
-            return temp.ToString();
-            string result = value.ToString();
-            if( result.Length > 2 )
-            {
-                if( result.Substring(0,3) == "100" )
-                {
-                    result = result.Substring(0, 3);
-                }
-                else
-                {
-                    result = result.Substring(0, 2);
-                }
-            }                
-            return result;
+            return temp.ToString();           
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

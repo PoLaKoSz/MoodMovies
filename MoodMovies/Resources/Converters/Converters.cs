@@ -9,6 +9,9 @@ using System.Windows.Media;
 
 namespace MoodMovies.Resources.Converters
 {
+    /// <summary>
+    /// converts boolean value to a specific color
+    /// </summary>
     public class BoolToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

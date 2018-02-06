@@ -14,9 +14,29 @@
         <SolidColorBrush x:Key="MainFlatButtonBackground" Color="#FF2D2D31"/>
         <SolidColorBrush x:Key="ASearchHeadingBackground" Color="#FF1E1E1E"/>
         <converters:BoolToColorConverter x:Key="IsCheckedConverter"/>
-
-        
-        
+        <converters:BoolToCheckedConverter x:Key="BoolToChecked"/>
+        <converters:DecimalToIntConverter x:Key="DecimalToInt"/>
+        <Style TargetType="{x:Type ToggleButton}" x:Key="FlatToggleButton">
+            <Setter Property="Background" Value="#FF303030"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0" Opacity="255">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="100"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#FF222222"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <materialDesign:ColorZone Background="#FF1E1E1E" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid Margin="10,0,0,0">
@@ -52,93 +72,76 @@
                Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
             </materialDesign:ColorZone>
             <!--#region Buttons and checkboxes -->
-            <!--quick search checkboxes-->
-            <CheckBox x:Name="latestBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center"/>
-            <CheckBox x:Name="topBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="3" VerticalAlignment="center"/>
-            <CheckBox x:Name="popularBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="4" VerticalAlignment="center"/>
-            <CheckBox x:Name="cinemasBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="5" VerticalAlignment="center"/>
-            <CheckBox x:Name="upcomingBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="6" VerticalAlignment="center"/>
-            <CheckBox x:Name="rel2017Box" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="7" VerticalAlignment="center"/>
-            <CheckBox x:Name="anythingBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="8" VerticalAlignment="center"/>
-            <!--Quick search buttons-->
-            <materialDesign:ColorZone Grid.Column="8" Grid.Row="1" VerticalAlignment="Stretch" Background="{DynamicResource ASearchHeadingBackground}">
-                <TextBlock Text="Choose..." Grid.Column="5" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"
+            <materialDesign:ColorZone Grid.Column="8" Grid.Row="1" VerticalAlignment="Stretch" Background="{DynamicResource ASearchHeadingBackground}" >
+                <TextBlock Text="Groups..." Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
             </materialDesign:ColorZone>
-            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="2" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=latestBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="Latest Releases" Grid.Column="8" Margin="1" Grid.Row="2" Height="Auto" 
-                Background="{StaticResource MainFlatButtonBackground}" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="3" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=topBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="Top Rated"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="4" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=popularBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="Popular"  Height="Auto"  Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone  Grid.Column="8" Margin="1" Grid.Row="5" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                       Background="{Binding ElementName=cinemasBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="In Cinemas" Height="Auto"  Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="6" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=upcomingBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="Upcoming" Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="7" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=rel2017Box, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="Released 2017" Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone Grid.Column="8" Margin="1" Grid.Row="8" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=anythingBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="Anything"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
+            <!--quick search checkboxes-->
+            <CheckBox x:Name="latestBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center" 
+                      IsChecked="{Binding IsChecked, ElementName=Latest,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="topBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="3" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Top,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="popularBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="4" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Popular,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="cinemasBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="5" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Cinemas,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="upcomingBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="6" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Upcoming,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="rel2017Box" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="7" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Rel2017,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="anythingBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="8" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Anything,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <!--Quick search buttons-->
+            <ToggleButton x:Name="Latest" Grid.Column="8" Grid.Row="2" Foreground="White" Content="Happy" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=latestBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Top" Grid.Column="8" Grid.Row="3" Foreground="White" Content="Inspired" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=topBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Popular" Grid.Column="8" Grid.Row="4" Foreground="White" Content="Thrilled" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=popularBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Cinemas" Grid.Column="8" Grid.Row="5" Foreground="White" Content="Scared" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=cinemasBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Upcoming" Grid.Column="8" Grid.Row="6" Foreground="White" Content="Cry" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=upcomingBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Rel2017" Grid.Column="8" Grid.Row="7" Foreground="White" Content="Learn" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=rel2017Box, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Anything" Grid.Column="8" Grid.Row="8" Foreground="White" Content="Wonder" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=anythingBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
             <!--end of quick search buttons-->
-            <!--mood checkboxes-->
-            <CheckBox x:Name="happyBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center"/>
-            <CheckBox x:Name="inspiredox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="3" VerticalAlignment="center"/>
-            <CheckBox x:Name="thrilledBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="4" VerticalAlignment="center"/>
-            <CheckBox x:Name="scaredBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="5" VerticalAlignment="center"/>
-            <CheckBox x:Name="cryBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="6" VerticalAlignment="center"/>
-            <CheckBox x:Name="learnBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="7" VerticalAlignment="center"/>
-            <CheckBox x:Name="wonderBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="8" VerticalAlignment="center"/>
-            <!--mood buttons-->
+
             <materialDesign:ColorZone Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Background="{DynamicResource ASearchHeadingBackground}" >
                 <TextBlock Text="Make me..." Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
             </materialDesign:ColorZone>
-
-            <materialDesign:ColorZone  Grid.Column="1" Margin="1" Grid.Row="2" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                       Background="{Binding ElementName=happyBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}" >
-                <TextBlock Text="Happy" Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="3" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=inspiredox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="Inspired"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="4" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=thrilledBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="Thrilled"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="5" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=scaredBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}" >
-                <TextBlock Text="Scared"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="6" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=cryBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="Cry"  Height="Auto"  Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone Grid.Column="1" Margin="1" Grid.Row="7" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                      Background="{Binding ElementName=learnBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="Learn"  Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone  Grid.Column="1" Margin="1" Grid.Row="8" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                       Background="{Binding ElementName=wonderBox, Path=IsChecked, Converter={StaticResource IsCheckedConverter}}">
-                <TextBlock Text="Wonder" Height="Auto" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
-            </materialDesign:ColorZone>
-            <!--end of mood buttons-->
-            <!--#endregion-->
+            <!--mood checkboxes-->
+            <CheckBox x:Name="happyBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center" 
+                      IsChecked="{Binding IsChecked, ElementName=Happy,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="inspiredBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="3" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Inspired,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="thrilledBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="4" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Thrilled,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="scaredBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="5" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Scared,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="cryBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="6" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Cry,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="learnBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="7" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Learn,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <CheckBox x:Name="wonderBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="8" VerticalAlignment="center"
+                      IsChecked="{Binding IsChecked, ElementName=Wonder,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <!--mood buttons-->         
+            <ToggleButton x:Name="Happy" Grid.Column="1" Grid.Row="2" Foreground="White" Content="Happy" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=happyBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Inspired" Grid.Column="1" Grid.Row="3" Foreground="White" Content="Inspired" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=inspiredBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Thrilled" Grid.Column="1" Grid.Row="4" Foreground="White" Content="Thrilled" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=thrilledBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Scared" Grid.Column="1" Grid.Row="5" Foreground="White" Content="Scared" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=scaredBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Cry" Grid.Column="1" Grid.Row="6" Foreground="White" Content="Cry" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=cryBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Learn" Grid.Column="1" Grid.Row="7" Foreground="White" Content="Learn" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=learnBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
+            <ToggleButton x:Name="Wonder" Grid.Column="1" Grid.Row="8" Foreground="White" Content="Wonder" Margin="1" Style="{StaticResource FlatToggleButton }"
+                          IsChecked="{Binding IsChecked, ElementName=wonderBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
             
             <!--Save or Load search settings-->
             <Grid Grid.Row="9" Grid.Column="1">
@@ -151,12 +154,9 @@
                 </Button>
                 <Button Grid.Column="1" Style="{StaticResource MaterialDesignFlatButton}" Background="{StaticResource MainFlatButtonBackground}" Margin="5" ToolTip="Load Saved Search Profile">
                     <materialDesign:PackIcon Kind="Reload"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="{StaticResource PrimaryHueMidBrush}" Height="auto" Width="auto"/>
-                </Button>
-                
-                
+                </Button>                              
             </Grid>
             
-
             <!--#region Sliders & adult/children checkboxes-->
             <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="4">
                 <Grid.ColumnDefinitions>
@@ -215,7 +215,7 @@
                 </Grid.ColumnDefinitions>
                 <!--#region actor searching section-->
                 <materialDesign:Card Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" Grid.RowSpan="5" Background="{StaticResource ASearchHeadingBackground}" 
-                                     Margin="3" VerticalAlignment="Stretch">
+                                     Margin="2" VerticalAlignment="Stretch">
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="31*"/>
@@ -313,14 +313,14 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Popularity" Grid.Column="0"  VerticalAlignment="Bottom" HorizontalAlignment="Center"
                         Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
-                                <TextBlock Text="{Binding Path=Value, ElementName=PopCount, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                <TextBlock Text="{Binding Path=Value, ElementName=PopCount, Converter={StaticResource DecimalToInt}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                         Foreground="{StaticResource PrimaryHueMidBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
                                 <TextBlock Text="%" Grid.Column="2"  VerticalAlignment="Bottom" HorizontalAlignment="Center"
                         Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
                             </Grid>
 
                             <Slider x:Name="PopCount" Grid.Column="1" Grid.Row="3" Minimum="0" Maximum="100" Value="60"
-                        VerticalAlignment="Center" TickFrequency="1" TickPlacement="BottomRight"/>
+                        VerticalAlignment="Center" TickFrequency="1" TickPlacement="BottomRight" Margin="5,0,5,0"/>
                            
                         </Grid>
                     </materialDesign:Card>
@@ -333,12 +333,12 @@
             <!--search buttons-->
             <Button Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="1" Content="Start New Search" Style="{StaticResource MaterialDesignFlatButton}" 
                 Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Start a brand new search" />
+				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Start a brand new search" Foreground="{StaticResource PrimaryHueMidBrush}" />
             <Button Grid.Row="9" Grid.Column="5" Grid.ColumnSpan="1" Content="Update Existing Search" Style="{StaticResource MaterialDesignFlatButton}" 
                 Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Update an existing search" />
+				CommandParameter="{x:Static Dock.Top}" Background="{DynamicResource MainFlatButtonBackground}" Margin="2,0,2,0" ToolTip="Update an existing search" Foreground="{StaticResource PrimaryHueMidBrush}" />
             <Button Grid.Row="9" Grid.Column="8" Content="Reset All" Style="{StaticResource MaterialDesignFlatButton}" Background="{DynamicResource MainFlatButtonBackground}"
-                 Margin="5,0,5,0" ToolTip="Reset all controls" VerticalAlignment="Bottom" />
+                 Margin="5,0,5,0" ToolTip="Reset all controls" VerticalAlignment="Bottom" Foreground="{StaticResource PrimaryHueMidBrush}" />
         </Grid>
     </materialDesign:ColorZone>
 </UserControl>

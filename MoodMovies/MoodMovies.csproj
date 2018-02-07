@@ -79,8 +79,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootStrapper.cs" />
-    <Compile Include="Messages\ChangeData.cs" />
+    <Compile Include="Messages\MovieListMessage.cs" />
     <Compile Include="Models\Actors.cs" />
+    <Compile Include="Models\MovieSearchResult.cs" />
+    <Compile Include="Resources\CommandImp.cs" />
     <Compile Include="Resources\Converters\Converters.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />

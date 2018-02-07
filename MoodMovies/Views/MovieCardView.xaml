@@ -13,8 +13,11 @@
         <materialDesign:DrawerHost 
             Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"    
 	        BorderThickness="0" RightDrawerBackground="#D8303030">            
-            <materialDesign:DrawerHost.RightDrawerContent>                                  
-                <Grid  Width="260" Height="500" VerticalAlignment="Stretch" Margin="5,5,8,5" HorizontalAlignment="Stretch">                    
+            <materialDesign:DrawerHost.RightDrawerContent>
+                <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" Margin="5,5,8,5"
+				        CommandParameter="{x:Static Dock.Right}" Style="{DynamicResource MaterialDesignFlatButton}" 
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="260" Height="500" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <Grid VerticalAlignment="Stretch"  HorizontalAlignment="Stretch">                    
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="4*"/>
@@ -74,6 +77,8 @@
 				        CommandParameter="{x:Static Dock.Right}"
 				        Style="{DynamicResource MaterialDesignFlatButton}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="Auto" Content="Close"/>
                 </Grid>
+             </Button>
+
             </materialDesign:DrawerHost.RightDrawerContent>
             <materialDesign:Card Padding="0" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 

@@ -4,57 +4,45 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Caliburn.Micro;
 using MoodMovies.Messages;
+using MoodMovies.Resources;
 
 namespace MoodMovies.ViewModels
 {
-    public class MovieListViewModel : Screen, IHandle<ChangeData>
+    public class MovieListViewModel : Screen, IHandle<MovieListMessage>
     {
-        #region Fields
-        private string test;
+        // constructor
+        public MovieListViewModel(IEventAggregator events)
+        {
+            _events = events;           
+            _events.Subscribe(this);
+        }
+        #region Events
         private IEventAggregator _events;
-        private ObservableCollection<MovieCardViewModel> movies;
-
         #endregion
 
         #region Properties
-        public string Test
-        {
-            get => test;
-            set
-            {
-                test = value;
-                NotifyOfPropertyChange(() => Test);
-            }
-        }
-
-        public ObservableCollection<MovieCardViewModel> Movies { get => movies; set { movies = value; NotifyOfPropertyChange(() => Movies); } }
+        private ObservableCollection<MovieCardViewModel> movies = new ObservableCollection<MovieCardViewModel>();
+        public ObservableCollection<MovieCardViewModel> Movies { get => movies; set { movies = value; NotifyOfPropertyChange(); } }
         #endregion
 
-        #region Methods
-        public MovieListViewModel(IEventAggregator events)
-        {
-            _events = events;
-            //subscribe this object to the eventaggregator
-            _events.Subscribe(this);
+        #region Public Methods
 
-            Movies = new ObservableCollection<MovieCardViewModel>();
-            //for testing purposes populate the list with set items
-            for(int i = 0; i < 12; i++)
-            {
-                Movies.Add(new MovieCardViewModel());
-            }
-        }
-
+        #endregion
         #region IHandle methods
-        public void Handle(ChangeData message)
-        {
-            Test = message.Data;
+        public void Handle(MovieListMessage message)
+        {            
+            foreach( var movie in message.Movielist)
+            {
+                Movies.Add(new MovieCardViewModel(movie.Title, new Uri(movie.Poster_path), movie.Overview, 
+                    movie.Release_date, movie.Vote_count.ToString(), movie.Popularity, movie.Original_language));
+            }
         }
         #endregion
 
 
-        #endregion
+
     }
 }

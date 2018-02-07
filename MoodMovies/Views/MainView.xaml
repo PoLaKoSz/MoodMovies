@@ -150,6 +150,9 @@
                         <!--simple search box-->
                         <TextBox materialDesign:HintAssist.Hint="Search by title/actor" MaxLength="51"
                          HorizontalAlignment="Center" Width="300" FontSize="20"  FontFamily="century gothic" Foreground="{StaticResource SecondaryAccentForegroundBrush}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Command="{Binding Path=SimpleSearchCommand}" Key="Return" CommandParameter="{Binding SimpleSearchBox}" />
+                            </TextBox.InputBindings>
                             <TextBox.Text>
                                 <Binding Path="SimpleSearchBox" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -157,6 +160,7 @@
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
+                            
                         </TextBox>
                         <materialDesign:PackIcon Width="20" Height="20" Kind="Magnify" VerticalAlignment="Center"/>
                     </StackPanel>

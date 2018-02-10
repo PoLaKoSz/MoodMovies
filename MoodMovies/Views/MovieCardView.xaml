@@ -12,11 +12,12 @@
     <Grid Width="300" Height="500">
         <materialDesign:DrawerHost 
             Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"    
-	        BorderThickness="0" RightDrawerBackground="#D8303030">            
+	        BorderThickness="0" RightDrawerBackground="#F2303030">            
             <materialDesign:DrawerHost.RightDrawerContent>
                 <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" Margin="5,5,8,5"
 				        CommandParameter="{x:Static Dock.Right}" Style="{DynamicResource MaterialDesignFlatButton}" 
                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="260" Height="500" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    
                     <Grid VerticalAlignment="Stretch"  HorizontalAlignment="Stretch">                    
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>

@@ -9,87 +9,83 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="300"
              FontFamily="century gothic">
-    <Grid Width="300" Height="500">
-        <materialDesign:DrawerHost 
-            Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"    
-	        BorderThickness="0" RightDrawerBackground="#F2303030">            
-            <materialDesign:DrawerHost.RightDrawerContent>
-                <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" Margin="5,5,8,5"
+    <Grid Width="300" Height="450">
+            <materialDesign:Card Padding="0" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <materialDesign:DrawerHost 
+                Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"    
+	            BorderThickness="0" RightDrawerBackground="#D8303030">
+                <materialDesign:DrawerHost.RightDrawerContent>
+                    <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" Margin="5,5,8,5"
 				        CommandParameter="{x:Static Dock.Right}" Style="{DynamicResource MaterialDesignFlatButton}" 
                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="260" Height="500" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                    
-                    <Grid VerticalAlignment="Stretch"  HorizontalAlignment="Stretch">                    
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="4*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="{Binding Path=Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
+                        <Grid VerticalAlignment="Stretch"  HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="4*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding Path=Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
                                Margin="0,5,0,0" FontSize="20" TextOptions.TextFormattingMode="Display" TextAlignment="Right"/>
-                    <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="1" Text="{Binding Path=Overview}" HorizontalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
+                            <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="1" Text="{Binding Path=Overview}" HorizontalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="5,0,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Right">
-                    </TextBlock>
-                    <Grid Grid.Row="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Released: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
+                            </TextBlock>
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Released: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
-                        <TextBlock Grid.Column="1" Text="{Binding Path=ReleaseDate}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
+                                <TextBlock Grid.Column="1" Text="{Binding Path=ReleaseDate}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
-                    </Grid>
-                    <Grid Grid.Row="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Language: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
+                            </Grid>
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Language: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
-                        <TextBlock Grid.Column="1" Text="{Binding Path=Language}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
+                                <TextBlock Grid.Column="1" Text="{Binding Path=Language}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
-                    </Grid>
-                    <Grid Grid.Row="4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="No. of Votes: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
+                            </Grid>
+                            <Grid Grid.Row="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="No. of Votes: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
-                        <TextBlock Grid.Column="1" Text="{Binding Path=VoteCount}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
+                                <TextBlock Grid.Column="1" Text="{Binding Path=VoteCount}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
-                    </Grid>
-                    <Grid Grid.Row="5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Popularity: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
+                            </Grid>
+                            <Grid Grid.Row="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Popularity: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
-                        <ProgressBar  Grid.Column="1" Value="{Binding Path=Popularity}" HorizontalAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                <ProgressBar  Grid.Column="1" Value="{Binding Path=Popularity}" HorizontalAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Center"
                                       MinHeight="15" Foreground="{StaticResource PrimaryHueMidBrush}" Background="{StaticResource PrimaryHueDarkBrush}" 
                                Margin="0,6,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" Minimum="0" Maximum="100" FlowDirection="RightToLeft"/>
-                    </Grid>
-                    <Button Grid.Row="6" Margin="2" Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            </Grid>
+                            <Button Grid.Row="6" Margin="2" Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
 				        CommandParameter="{x:Static Dock.Right}"
 				        Style="{DynamicResource MaterialDesignFlatButton}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="Auto" Content="Close"/>
-                </Grid>
-             </Button>
+                        </Grid>
+                    </Button>
 
-            </materialDesign:DrawerHost.RightDrawerContent>
-            <materialDesign:Card Padding="0" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                
-                <Grid>                    
-                    <Grid.RowDefinitions>                       
+                </materialDesign:DrawerHost.RightDrawerContent>
+                <Grid>
+                    <Grid.RowDefinitions>
                         <RowDefinition Height="4*"/>
                         <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="0.5*"/>
-                    </Grid.RowDefinitions>                 
-                    
+                    </Grid.RowDefinitions>
                     <!--<Image Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="/MoodMovies;component/Images/testImage.jpg"   />-->
                     <TextBlock Grid.Row="0" Focusable="True">                        
                         <Hyperlink Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
@@ -122,13 +118,9 @@
                                 <materialDesign:PackIcon Kind="Heart" Foreground="Red" />
                             </materialDesign:ToggleButtonAssist.OnContent>
                         </ToggleButton>
-
                     </Grid>
-                    <TextBox Style="{x:Null}" Grid.Row="2" Text="{Binding Overview}" MaxLength="70" TextAlignment="Center" VerticalAlignment="Stretch" 
-                             HorizontalAlignment="Stretch" TextWrapping="Wrap" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" ScrollViewer.CanContentScroll="False"
-                             Background="#FF424242" IsReadOnly="True" FontSize="16" BorderThickness="0" VerticalScrollBarVisibility="Disabled"/>
                 </Grid>
+            </materialDesign:DrawerHost>            
             </materialDesign:Card>
-        </materialDesign:DrawerHost>
     </Grid>
 </UserControl>

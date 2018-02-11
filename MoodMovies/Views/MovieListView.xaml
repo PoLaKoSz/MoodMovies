@@ -6,6 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MoodMovies.Views"
+             xmlns:wpf="clr-namespace:DotNetBrowser.WPF;assembly=DotNetBrowser"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="century gothic"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -18,7 +19,8 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <MediaElement Grid.Row="0" Source="http://www.youtube.com/embed/RqlbDhd2IJs" MinWidth="400" MinHeight="300" Stretch="None" />
+                    <wpf:WPFBrowserView Name="Browser" URL="google.com" BrowserType="LIGHTWEIGHT"/>
+                    <!--<MediaElement Grid.Row="0" Source="http://www.youtube.com/embed/RqlbDhd2IJs" MinWidth="400" MinHeight="300" Stretch="None" />-->
                     <Button Grid.Row="2" Content="Close" Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
                 </Grid>
             </materialDesign:DialogHost.DialogContent>

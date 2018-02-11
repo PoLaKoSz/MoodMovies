@@ -17,8 +17,7 @@ namespace MoodMovies.ViewModels
         public MovieListViewModel(EventAggregator events)
         {
             _events = events;           
-            _events.Subscribe(this);
-            //_selectedTrailer = "https://www.youtube.com/watch?v=RqlbDhd2IJs";
+            _events.Subscribe(this);           
         }
         #region Events
         private EventAggregator _events;
@@ -34,7 +33,10 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Public Methods       
-
+        public void RemoveSelectedTrailer()
+        {
+            SelectedTrailer = "";
+        }
         #endregion
         #region IHandle methods
         public void Handle(MovieListMessage message)

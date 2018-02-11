@@ -269,7 +269,7 @@ namespace MoodMovies.ViewModels
             {
                 var model = JsonConvert.DeserializeObject<RootTrailer>(content);
                 var key = model.Results.Select(x => x.Key).First();
-                string address = "http://www.youtube.com/watch?v=" + key;
+                string address = "http://www.youtube.com/embed/" + key;
 
                 events.BeginPublishOnUIThread(new TrailerMessage(address));
 

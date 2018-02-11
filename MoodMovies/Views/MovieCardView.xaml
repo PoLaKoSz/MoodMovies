@@ -5,20 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MoodMovies.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="300"
+             d:DesignHeight="450" d:DesignWidth="300"
              FontFamily="century gothic">
-    <Grid Width="300" Height="450">
+    <Grid Width="300" Height="450" Focusable="True" cal:Message.Attach="[Event MouseEnter] = [Action SetSelectedItem]">
             <materialDesign:Card Padding="0" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <materialDesign:DrawerHost 
-                Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"    
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"    
 	            BorderThickness="0" RightDrawerBackground="#D8303030">
-                <materialDesign:DrawerHost.RightDrawerContent>
+                <materialDesign:DrawerHost.RightDrawerContent>                    
                     <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" Margin="5,5,8,5"
 				        CommandParameter="{x:Static Dock.Right}" Style="{DynamicResource MaterialDesignFlatButton}" 
-                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="260" Height="500" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                        <Grid VerticalAlignment="Stretch"  HorizontalAlignment="Stretch">
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="260" Height="400" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Right}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Grid VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Focusable="True">                            
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="4*"/>
@@ -29,9 +35,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="{Binding Path=Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
-                               Margin="0,5,0,0" FontSize="20" TextOptions.TextFormattingMode="Display" TextAlignment="Right"/>
+                               Margin="0,5,5,0" FontSize="20" TextOptions.TextFormattingMode="Display" TextAlignment="Right"/>
                             <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="1" Text="{Binding Path=Overview}" HorizontalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
-                               Margin="5,0,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Right">
+                               Margin="5,0,5,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Right">
                             </TextBlock>
                             <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
@@ -41,7 +47,7 @@
                                 <TextBlock Grid.Column="0" Text="Released: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="{Binding Path=ReleaseDate}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
-                               Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
+                               Margin="0,5,5,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Row="3">
                                 <Grid.ColumnDefinitions>
@@ -51,7 +57,7 @@
                                 <TextBlock Grid.Column="0" Text="Language: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="{Binding Path=Language}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
-                               Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
+                               Margin="0,5,5,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Row="4">
                                 <Grid.ColumnDefinitions>
@@ -61,7 +67,7 @@
                                 <TextBlock Grid.Column="0" Text="No. of Votes: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="{Binding Path=VoteCount}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
-                               Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
+                               Margin="0,5,5,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Row="5">
                                 <Grid.ColumnDefinitions>
@@ -72,16 +78,15 @@
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
                                 <ProgressBar  Grid.Column="1" Value="{Binding Path=Popularity}" HorizontalAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Center"
                                       MinHeight="15" Foreground="{StaticResource PrimaryHueMidBrush}" Background="{StaticResource PrimaryHueDarkBrush}" 
-                               Margin="0,6,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" Minimum="0" Maximum="100" FlowDirection="RightToLeft"/>
+                               Margin="0,6,5,0" FontSize="17" TextOptions.TextFormattingMode="Display" Minimum="0" Maximum="100" FlowDirection="RightToLeft"/>
                             </Grid>
-                            <Button Grid.Row="6" Margin="2" Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				        CommandParameter="{x:Static Dock.Right}"
-				        Style="{DynamicResource MaterialDesignFlatButton}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="Auto" Content="Close"/>
+                            <Button cal:Message.Attach="[Event Click] = [Action RequestTrailer]" Grid.Row="6" Margin="2" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 				        
+				        Style="{DynamicResource MaterialDesignFlatButton}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="Auto" Content="View Trailer"/>
                         </Grid>
                     </Button>
 
                 </materialDesign:DrawerHost.RightDrawerContent>
-                <Grid>
+                <Grid>                    
                     <Grid.RowDefinitions>
                         <RowDefinition Height="4*"/>
                         <RowDefinition Height="0.5*"/>
@@ -89,7 +94,7 @@
                     <!--<Image Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="/MoodMovies;component/Images/testImage.jpg"   />-->
                     <TextBlock Grid.Row="0" Focusable="True">                        
                         <Hyperlink Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-				        CommandParameter="{x:Static Dock.Right}" TextDecorations="{x:Null}">                             
+				        CommandParameter="{x:Static Dock.Right}" TextDecorations="{x:Null}">                          
                             <Image Source="{Binding Path=ImagePath}" VerticalAlignment="Stretch" Stretch="Fill">                                
                             </Image>
                         </Hyperlink>

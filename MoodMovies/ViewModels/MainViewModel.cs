@@ -15,12 +15,13 @@ using MoodMovies.Models;
 
 namespace MoodMovies.ViewModels
 {
-    public class MainViewModel : Conductor<Screen>.Collection.OneActive
+    public class MainViewModel : Conductor<Screen>.Collection.OneActive, IHandle<string>
     {
         // constructor
         public MainViewModel()
         {
             events = new EventAggregator();
+            events.Subscribe(this);
             InitialiseVMs();
             ActivateItem(MovieListVM);
             
@@ -74,7 +75,7 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Events
-        IEventAggregator events;
+        EventAggregator events;
         #endregion
 
         #region Public Methods
@@ -214,5 +215,70 @@ namespace MoodMovies.ViewModels
         ActivateItem(FavActorVM);
         }
         #endregion
+
+        #region IHandle Interface
+        /// <summary>
+        /// Handles ID received from MovieCard
+        /// </summary>
+        /// <param name="message"></param>
+        public void Handle(string message)
+        {
+            // outsource the logic containg the call to the api
+            string queryCode = "https://api.themoviedb.org/3/movie/" + message.Trim() + "/videos?api_key=6d4b546936310f017557b2fb498b370b";            
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(queryCode);
+
+            request.Method = "GET";
+            //request.UserAgent = "Mozilla / 5.0(Windows NT 10.0; Win64; x64; rv: 57.0) Gecko / 20100101 Firefox / 57.0";
+            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+
+            HttpWebResponse response;
+            try
+            {
+                response = (HttpWebResponse)request.GetResponse();
+            }
+            catch (Exception)
+            {
+                response = null;
+            }
+
+            string content = string.Empty;
+            try
+            {
+                using (Stream stream = response.GetResponseStream())
+                {
+                    try
+                    {
+                        using (StreamReader sr = new StreamReader(stream))
+                        {
+                            content = sr.ReadToEnd();
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+            try
+            {
+                var model = JsonConvert.DeserializeObject<RootTrailer>(content);
+                var key = model.Results.Select(x => x.Key).First();
+                string address = "http://www.youtube.com/watch?v=" + key;
+
+                events.BeginPublishOnUIThread(new TrailerMessage(address));
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+        #endregion
+
     }
 }

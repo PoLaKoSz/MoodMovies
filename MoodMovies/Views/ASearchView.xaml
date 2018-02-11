@@ -253,13 +253,13 @@
                         </Grid.ColumnDefinitions>
                         <TextBox materialDesign:HintAssist.Hint="search by name" MaxLength="15" Grid.Column="0"
                          HorizontalAlignment="Stretch" VerticalContentAlignment="Center" FontFamily="century gothic" Foreground="{StaticResource SecondaryAccentForegroundBrush}">
-                            <TextBox.Text>
+                            <!--<TextBox.Text>
                                 <Binding Path="ActorSearchBox" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
                                         <Resources:SearchBoxValidation/>
                                     </Binding.ValidationRules>
                                 </Binding>
-                            </TextBox.Text>
+                            </TextBox.Text>-->
                         </TextBox>
                         <materialDesign:PackIcon Width="Auto" Height="Auto" Kind="Magnify" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>

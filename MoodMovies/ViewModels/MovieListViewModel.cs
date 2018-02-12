@@ -30,14 +30,21 @@ namespace MoodMovies.ViewModels
         public MovieCardViewModel SelectedItem { get => _selectedItem; set { _selectedItem = value; NotifyOfPropertyChange(); } }
         private string _selectedTrailer;
         public string SelectedTrailer { get => _selectedTrailer; set { _selectedTrailer = value; NotifyOfPropertyChange(); } }
+        private bool _isTrailerPlaying = true;
+        public bool IsTrailerPlaying { get => _isTrailerPlaying; set { _isTrailerPlaying = value; NotifyOfPropertyChange(); } } 
         #endregion
 
         #region Public Methods       
         public void RemoveSelectedTrailer()
         {
-            SelectedTrailer = "";
+            //hacky fix. needs to be sorted out at a later stage
+            //without assigning this dummy value, cef does not stop playing the video when the dialoghost is closed
+            SelectedTrailer = "http://gitub.com/tonykaralis/MoodMovies/README.md";
+            IsTrailerPlaying = false;
+            IsTrailerPlaying = true;
         }
         #endregion
+
         #region IHandle methods
         public void Handle(MovieListMessage message)
         {
@@ -58,8 +65,6 @@ namespace MoodMovies.ViewModels
             NotifyOfPropertyChange(() => SelectedTrailer);        
         }
         #endregion
-
-
-
+        
     }
 }

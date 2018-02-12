@@ -205,7 +205,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>                    
+                    <ColumnDefinition Width="8*"/>                    
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -291,7 +291,19 @@
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="1.5*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.2*"/>
                     </Grid.ColumnDefinitions>
+                    <!--genres-->
+                    <TextBlock Text="Genres" Grid.Column="1" Grid.ColumnSpan="3" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                        Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                    <ListBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" ItemsSource="{Binding Path=GenreCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding GenreChecked}" Content="{Binding GenreName}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
                     <materialDesign:Card Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Stretch" Margin="2" Background="{DynamicResource ASearchHeadingBackground}">
                         <Grid>
                             <Grid.RowDefinitions>

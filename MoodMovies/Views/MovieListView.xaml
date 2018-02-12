@@ -6,7 +6,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MoodMovies.Views"
-             xmlns:wpf="clr-namespace:DotNetBrowser.WPF;assembly=DotNetBrowser"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="century gothic"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

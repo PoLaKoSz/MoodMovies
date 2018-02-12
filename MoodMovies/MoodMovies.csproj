@@ -108,9 +108,10 @@
     <Compile Include="AppBootStrapper.cs" />
     <Compile Include="Messages\MovieListMessage.cs" />
     <Compile Include="Messages\TrailerMessage.cs" />
-    <Compile Include="Models\Actors.cs" />
+    <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MovieSearchResult.cs" />
+    <Compile Include="Models\SearchItem.cs" />
     <Compile Include="Models\TrailerResult.cs" />
     <Compile Include="Resources\CommandImp.cs" />
     <Compile Include="Resources\Converters\Converters.cs" />

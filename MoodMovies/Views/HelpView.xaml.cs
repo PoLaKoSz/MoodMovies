@@ -18,9 +18,9 @@ namespace MoodMovies.Views
     /// <summary>
     /// Interaction logic for FavActorView.xaml
     /// </summary>
-    public partial class FavActorView : UserControl
+    public partial class HelpView : UserControl
     {
-        public FavActorView()
+        public HelpView()
         {
             InitializeComponent();
         }

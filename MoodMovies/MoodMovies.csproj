@@ -117,7 +117,9 @@
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\ASearchViewModel.cs" />
-    <Compile Include="ViewModels\FavActorViewModel.cs" />
+    <Compile Include="ViewModels\HistoryViewModel.cs" />
+    <Compile Include="ViewModels\HelpViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\FavouritesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MovieCardViewModel.cs" />
@@ -128,8 +130,14 @@
     <Compile Include="Views\ASearchView.xaml.cs">
       <DependentUpon>ASearchView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FavActorView.xaml.cs">
-      <DependentUpon>FavActorView.xaml</DependentUpon>
+    <Compile Include="Views\HelpView.xaml.cs">
+      <DependentUpon>HelpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HistoryView.xaml.cs">
+      <DependentUpon>HistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FavouritesView.xaml.cs">
       <DependentUpon>FavouritesView.xaml</DependentUpon>
@@ -155,7 +163,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FavActorView.xaml">
+    <Page Include="Views\HelpView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\HistoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

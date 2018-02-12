@@ -52,7 +52,7 @@
                         Kind="Home"/>
                 </Button>
                 <!--Favourites button-->
-                <materialDesign:Chip Margin="5" Content="{Binding FavouriteVM.Name}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                <materialDesign:Chip Margin="5" Content="Favourites" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
                            cal:Message.Attach="DisplayFavouriteVM"
@@ -66,36 +66,36 @@
                 <materialDesign:Chip Margin="7" Content="WatchList" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplayAboutVM"
+                           cal:Message.Attach="DisplayWatchListVM"
                            Foreground="White" Icon="W"/>                
                 
                 <!--Offline Movies-->
                 <materialDesign:Chip Margin="7" Content="Offline Movies" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplayFavActorVM"
+                           cal:Message.Attach="DisplayAboutVM"
                            Foreground="White" Icon="O"/>                               
                 
                 <!--Search History-->
                 <materialDesign:Chip Margin="7" Content="Search History" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplayAboutVM"
+                           cal:Message.Attach="DisplayHistoryVM"
                            Foreground="White" Icon="H"/>
                 
                 <!--Settings-->
                 <materialDesign:Chip Margin="7" Content="My Settings" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplayAboutVM"
+                           cal:Message.Attach="DisplaySettingsVM"
                            Foreground="White" Icon="S"/>
 
                 <!--Help-->
                 <materialDesign:Chip Margin="7" Content="Help" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplayAboutVM"
-                           Foreground="White" Icon="A"/>
+                           cal:Message.Attach="DisplayHelpVM"
+                           Foreground="White" Icon="H"/>
 
                 <!--About-->
                 <materialDesign:Chip Margin="7" Content="About" HorizontalAlignment="Left" VerticalAlignment="Center"

@@ -66,10 +66,16 @@ namespace MoodMovies.ViewModels
         public MovieListViewModel MovieListVM { get => movieListVM; set { movieListVM = value; NotifyOfPropertyChange(); } }
         private AboutViewModel aboutVM;
         public AboutViewModel AboutVM { get => aboutVM; set { aboutVM = value; NotifyOfPropertyChange(); } }
-        private FavouritesViewModel _favouriteVM;
-        public FavouritesViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
-        private FavActorViewModel _favActorVM;
-        public FavActorViewModel FavActorVM { get => _favActorVM; set { _favActorVM = value; NotifyOfPropertyChange(); } }
+        private MovieListViewModel _favouriteVM;
+        public MovieListViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
+        private MovieListViewModel _watchlistVM;
+        public MovieListViewModel WatchListVM { get => _watchlistVM; set { _watchlistVM = value; NotifyOfPropertyChange(); } }
+        private SettingsViewModel _settingsVM;
+        public SettingsViewModel SettingsVM { get => _settingsVM; set { _settingsVM = value; NotifyOfPropertyChange(); } }
+        private HistoryViewModel _historyVM;
+        public HistoryViewModel HistoryVM { get => _historyVM; set { _historyVM = value; NotifyOfPropertyChange(); } }
+        private HelpViewModel _helpVM;
+        public HelpViewModel HelpVM { get => _helpVM; set { _helpVM = value; NotifyOfPropertyChange(); } }
         private ASearchViewModel _asearchVM;
         public ASearchViewModel ASearchVM { get => _asearchVM; set { _asearchVM = value; NotifyOfPropertyChange(); } }
         #endregion
@@ -179,9 +185,12 @@ namespace MoodMovies.ViewModels
         {
             //pages that will change
             Items.Add( MovieListVM = new MovieListViewModel(events) );
-            Items.Add( FavActorVM = new FavActorViewModel() );
+            Items.Add( WatchListVM = new MovieListViewModel(events) );
             Items.Add( AboutVM = new AboutViewModel() );
-            Items.Add( FavouriteVM = new FavouritesViewModel() );
+            Items.Add( HistoryVM = new HistoryViewModel() );
+            Items.Add( HelpVM = new HelpViewModel() );
+            Items.Add( SettingsVM = new SettingsViewModel() );
+            Items.Add( FavouriteVM = new MovieListViewModel(events) );
 
             events.Subscribe(MovieListVM);
 
@@ -209,10 +218,28 @@ namespace MoodMovies.ViewModels
         ActivateItem(FavouriteVM);
         }
         
-        public void DisplayFavActorVM()
+        public void DisplayWatchListVM()
         {
         DeactivateItem(ActiveItem, true);
-        ActivateItem(FavActorVM);
+        ActivateItem(WatchListVM);
+        }
+
+        public void DisplaySettingsVM()
+        {
+            DeactivateItem(ActiveItem, true);
+            ActivateItem(SettingsVM);
+        }
+
+        public void DisplayHistoryVM()
+        {
+            DeactivateItem(ActiveItem, true);
+            ActivateItem(HistoryVM);
+        }
+
+        public void DisplayHelpVM()
+        {
+            DeactivateItem(ActiveItem, true);
+            ActivateItem(HelpVM);
         }
         #endregion
 

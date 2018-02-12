@@ -7,7 +7,7 @@ using Caliburn.Micro;
 
 namespace MoodMovies.ViewModels
 {
-    public class FavActorViewModel: Screen
+    public class HelpViewModel: Screen
     {
         #region Fields
         private string _name;
@@ -26,9 +26,9 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Methods
-        public FavActorViewModel()
+        public HelpViewModel()
         {
-            Name = "Favourite Actor";
+            Name = "Help";
         }
         #endregion
     }

@@ -17,7 +17,7 @@ namespace MoodMovies.ViewModels
         public MovieListViewModel(EventAggregator events)
         {
             _events = events;           
-            _events.Subscribe(this);           
+            _events.Subscribe(this);               
         }
         #region Events
         private EventAggregator _events;

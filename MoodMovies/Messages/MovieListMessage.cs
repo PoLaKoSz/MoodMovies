@@ -12,12 +12,14 @@ namespace MoodMovies.Messages
         public List<MovieSearchResult> Movielist { get; private set; }
         public bool IsAdult { get; set; }
         public string SearchString { get; set; }
+        public DateTime DateOfSearch { get; private set; }
 
         public MovieListMessage(List<MovieSearchResult> results, bool isadult, string text)
         {
             Movielist = results;
             IsAdult = isadult;
             SearchString = text;
+            DateOfSearch = DateTime.Now;
         }
     }
 }

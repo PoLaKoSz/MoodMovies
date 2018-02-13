@@ -9,17 +9,20 @@ using System.Threading.Tasks;
 
 namespace MoodMovies.Models
 {
-    public  class SearchMonths : PropertyChangedBase
+    public  class SearchMonth : PropertyChangedBase
     {
         // constructor
-        public SearchMonths()
+        public SearchMonth(string monthname)
         {
-
+            SearchList = new ObservableCollection<MovieSearchResultViewModel>();
+            MonthName = monthname;
         }
 
         #region General properties
-        private ObservableCollection<MovieSearchResultViewModel> _movieList;
-        public ObservableCollection<MovieSearchResultViewModel> MovieList { get => _movieList; set { _movieList = value; NotifyOfPropertyChange(); } }
+        private string _monthName;
+        public string MonthName { get => _monthName; private set => _monthName = value; }
+        private ObservableCollection<MovieSearchResultViewModel> _searchList;
+        public ObservableCollection<MovieSearchResultViewModel> SearchList { get => _searchList; private set { _searchList = value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Public Methods
@@ -31,8 +34,13 @@ namespace MoodMovies.Models
         {
             if( item != null )
             {
-                MovieList.Add(item);
+                SearchList.Add(item);
             }
+        }
+
+        public override string ToString()
+        {
+            return MonthName;
         }
         #endregion
     }

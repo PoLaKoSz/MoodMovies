@@ -15,12 +15,12 @@ namespace MoodMovies.ViewModels
     public class MovieSearchResultViewModel: Screen
     {
         // constructor
-        public MovieSearchResultViewModel(List<MovieSearchResult> movies, string isAdult, string text)
+        public MovieSearchResultViewModel(List<MovieSearchResult> movies, string isAdult, string text, DateTime date)
         {
             Movies = movies;
             SearchText = text;
             IsAdult = isAdult;
-            Date = DateTime.Now.ToString();
+            Date = date.ToString();
         }
 
         #region General Properties
@@ -31,7 +31,9 @@ namespace MoodMovies.ViewModels
         private string _date;
         public string Date { get => _date; set => _date = value; }
         private string _isAdult;
-        public string IsAdult { get => _isAdult; set => _isAdult = value; }        
+        public string IsAdult { get => _isAdult; set => _isAdult = value; }
+        private string _month;
+        public string Month { get => _month; private set => _month = value; }
         #endregion
 
     }

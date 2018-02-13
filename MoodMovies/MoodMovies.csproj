@@ -121,7 +121,7 @@
     <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\HelpViewModel.cs" />
     <Compile Include="ViewModels\MovieSearchResultViewModel.cs" />
-    <Compile Include="Models\SearchMonths.cs" />
+    <Compile Include="Models\SearchMonth.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\FavouritesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

@@ -28,23 +28,12 @@
                 <Label Grid.Column="2" Content="Adult Content" VerticalContentAlignment="Center" FontSize="16" Foreground="{StaticResource PrimaryHueMidBrush}"/>
                 <Label Grid.Column="3" Content="Search Again" VerticalContentAlignment="Center" FontSize="16" Foreground="{StaticResource PrimaryHueMidBrush}"/>                
             </Grid>
-            <ListBox Grid.Row="1" ItemsSource="{Binding Path=SearchItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="700" Background="#FF373737" VerticalAlignment="Center">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid MinWidth="700" VerticalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.5*"/>
-                                <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition Width="1.5*"/>
-                                <ColumnDefinition Width="1.5*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Content="{Binding Path=Date}" FontSize="14" Foreground="{StaticResource SecondaryAccentBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Label>
-                            <Label Grid.Column="1" Content="{Binding Path=Name}" FontSize="14" Foreground="{StaticResource SecondaryAccentBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Label>
-                            <Label Grid.Column="2" Content="{Binding Path=Adult}" FontSize="14" Foreground="{StaticResource SecondaryAccentBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Label>
-                            <Button Grid.Column="3"  Content="Search Again" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{StaticResource SecondaryAccentBrush}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Button>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+            <ListBox Grid.Row="1" x:Name="MovieSearches" MinWidth="700" Background="#FF373737" VerticalAlignment="Center">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
         </Grid>        
     </materialDesign:ColorZone>

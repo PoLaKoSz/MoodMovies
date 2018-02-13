@@ -10,10 +10,14 @@ namespace MoodMovies.Messages
     public class MovieListMessage
     {
         public List<MovieSearchResult> Movielist { get; private set; }
+        public bool IsAdult { get; set; }
+        public string SearchString { get; set; }
 
-        public MovieListMessage(List<MovieSearchResult> results)
+        public MovieListMessage(List<MovieSearchResult> results, bool isadult, string text)
         {
             Movielist = results;
+            IsAdult = isadult;
+            SearchString = text;
         }
     }
 }

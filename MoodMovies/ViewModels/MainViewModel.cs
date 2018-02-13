@@ -170,7 +170,7 @@ namespace MoodMovies.ViewModels
                         });                    
                 }
 
-                events.BeginPublishOnUIThread(new MovieListMessage(movieSet));
+                events.BeginPublishOnUIThread(new MovieListMessage(movieSet, true, searchText));
                 //ImagePath = new Uri(address);
             }
             catch (Exception)
@@ -187,12 +187,13 @@ namespace MoodMovies.ViewModels
             Items.Add( MovieListVM = new MovieListViewModel(events) );
             Items.Add( WatchListVM = new MovieListViewModel(events) );
             Items.Add( AboutVM = new AboutViewModel() );
-            Items.Add( HistoryVM = new HistoryViewModel() );
+            Items.Add( HistoryVM = new HistoryViewModel(events) );
             Items.Add( HelpVM = new HelpViewModel() );
             Items.Add( SettingsVM = new SettingsViewModel() );
             Items.Add( FavouriteVM = new MovieListViewModel(events) );
 
             events.Subscribe(MovieListVM);
+            events.Subscribe(HistoryVM);
 
             //static, will not change
             ASearchVM = new ASearchViewModel();

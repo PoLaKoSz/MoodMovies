@@ -55,10 +55,12 @@ namespace MoodMovies.ViewModels
                     movie.Release_date, movie.Vote_count.ToString(), movie.Popularity, movie.Original_language, _events));
             }
         }
+
         public void Handle(MovieCardViewModel message)
         {
             SelectedItem = message;
         }
+
         public void Handle(TrailerMessage message)
         {
             SelectedTrailer = message.TrailerUrl;

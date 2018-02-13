@@ -9,22 +9,25 @@
              mc:Ignorable="d" 
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="century gothic"
-             d:DesignHeight="50" d:DesignWidth="750" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+             d:DesignHeight="50" d:DesignWidth="500" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <materialDesign:ColorZone Background="#FF3C3B3B">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="1.5*"/>
-                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="1.3*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="{Binding Path=Date}" FontSize="14" Foreground="{StaticResource SecondaryAccentBrush}" 
                HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Label>
-            <Label Grid.Column="1" Content="{Binding Path=Name}" FontSize="14" Foreground="{StaticResource SecondaryAccentBrush}" 
+            <Label Grid.Column="1" Content="{Binding Path=SearchText}" FontSize="14" Foreground="{StaticResource SecondaryAccentBrush}" 
                HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Label>
             <Label Grid.Column="2" Content="{Binding Path=IsAdult}" FontSize="14" Foreground="{StaticResource SecondaryAccentBrush}" 
                HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Label>
-            <Button Grid.Column="3"  Content="Search Again" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{StaticResource SecondaryAccentBrush}" 
+            <Button Grid.Column="3"  Content="Search Online" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{StaticResource SecondaryAccentBrush}" 
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+            <Button Grid.Column="4"  Content="View Offline" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{StaticResource SecondaryAccentBrush}" 
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
         </Grid>
     </materialDesign:ColorZone>

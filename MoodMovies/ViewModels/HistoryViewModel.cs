@@ -24,9 +24,11 @@ namespace MoodMovies.ViewModels
 
         #region General Properties
         private string _name;
-        public string Name { get => _name; set { _name = value; NotifyOfPropertyChange(() => Name); } }       
-        private ObservableCollection<MovieSearchResultViewModel> _movieSearches = new ObservableCollection<MovieSearchResultViewModel>();
-        public ObservableCollection<MovieSearchResultViewModel> MovieSearches { get => _movieSearches; set { _movieSearches = value; NotifyOfPropertyChange(); } }
+        public string Name { get => _name; set { _name = value; NotifyOfPropertyChange(() => Name); } }      
+        private ObservableCollection<SearchMonths>;
+
+        private ObservableCollection<MovieSearchResultViewModel> _SelectedMovieSearches = new ObservableCollection<MovieSearchResultViewModel>();
+        public ObservableCollection<MovieSearchResultViewModel> SelectedMovieSearches { get => _SelectedMovieSearches; set { _SelectedMovieSearches = value; NotifyOfPropertyChange(); } }
 
         #endregion
 
@@ -37,7 +39,7 @@ namespace MoodMovies.ViewModels
         #region Ihandle Interface
         public void Handle(MovieListMessage message)
         {
-            MovieSearches.Add(new MovieSearchResultViewModel(message.Movielist, message.IsAdult.ToString(), message.SearchString));
+            SelectedMovieSearches.Add(new MovieSearchResultViewModel(message.Movielist, message.IsAdult.ToString(), message.SearchString));
         }
         #endregion
     }

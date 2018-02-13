@@ -10,7 +10,7 @@
              FontFamily="century gothic"
              xmlns:local="clr-namespace:MoodMovies.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" Height="Auto" MinWidth="950" MinHeight="600" WindowStartupLocation="CenterScreen" Title="MooD MovieS">
+             d:DesignHeight="300" Height="Auto" MinWidth="1150" MinHeight="600" WindowStartupLocation="CenterScreen" Title="MooD MovieS">
     <Window.Resources>
         <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
             <Style.Triggers>

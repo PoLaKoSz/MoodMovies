@@ -24,7 +24,7 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Properties
-        private ObservableCollection<MovieCardViewModel> movies;
+        private ObservableCollection<MovieCardViewModel> movies = new ObservableCollection<MovieCardViewModel>();
         public ObservableCollection<MovieCardViewModel> Movies { get => movies; set { movies = value; NotifyOfPropertyChange(); } }
         private MovieCardViewModel _selectedItem;
         public MovieCardViewModel SelectedItem { get => _selectedItem; set { _selectedItem = value; NotifyOfPropertyChange(); } }
@@ -48,7 +48,7 @@ namespace MoodMovies.ViewModels
         #region IHandle methods
         public void Handle(MovieListMessage message)
         {
-            Movies = new ObservableCollection<MovieCardViewModel>();
+            Movies.Clear();
             foreach ( var movie in message.Movielist)
             {
                 Movies.Add(new MovieCardViewModel(movie.Id.ToString(), movie.Title, new Uri(movie.Poster_path), movie.Overview, 

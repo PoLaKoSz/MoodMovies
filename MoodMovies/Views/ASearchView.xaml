@@ -92,19 +92,19 @@
             <CheckBox x:Name="anythingBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="8" VerticalAlignment="center"
                       IsChecked="{Binding IsChecked, ElementName=Anything,Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
             <!--Quick search buttons-->
-            <ToggleButton x:Name="Latest" Grid.Column="8" Grid.Row="2" Foreground="White" Content="Happy" Margin="1" Style="{StaticResource FlatToggleButton }"
+            <ToggleButton x:Name="Latest" Grid.Column="8" Grid.Row="2" Foreground="White" Content="Latest" Margin="1" Style="{StaticResource FlatToggleButton }"
                           IsChecked="{Binding IsChecked, ElementName=latestBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
-            <ToggleButton x:Name="Top" Grid.Column="8" Grid.Row="3" Foreground="White" Content="Inspired" Margin="1" Style="{StaticResource FlatToggleButton }"
+            <ToggleButton x:Name="Top" Grid.Column="8" Grid.Row="3" Foreground="White" Content="Top" Margin="1" Style="{StaticResource FlatToggleButton }"
                           IsChecked="{Binding IsChecked, ElementName=topBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
-            <ToggleButton x:Name="Popular" Grid.Column="8" Grid.Row="4" Foreground="White" Content="Thrilled" Margin="1" Style="{StaticResource FlatToggleButton }"
+            <ToggleButton x:Name="Popular" Grid.Column="8" Grid.Row="4" Foreground="White" Content="Popular" Margin="1" Style="{StaticResource FlatToggleButton }"
                           IsChecked="{Binding IsChecked, ElementName=popularBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
-            <ToggleButton x:Name="Cinemas" Grid.Column="8" Grid.Row="5" Foreground="White" Content="Scared" Margin="1" Style="{StaticResource FlatToggleButton }"
+            <ToggleButton x:Name="Cinemas" Grid.Column="8" Grid.Row="5" Foreground="White" Content="In Cinemas" Margin="1" Style="{StaticResource FlatToggleButton }"
                           IsChecked="{Binding IsChecked, ElementName=cinemasBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
-            <ToggleButton x:Name="Upcoming" Grid.Column="8" Grid.Row="6" Foreground="White" Content="Cry" Margin="1" Style="{StaticResource FlatToggleButton }"
+            <ToggleButton x:Name="Upcoming" Grid.Column="8" Grid.Row="6" Foreground="White" Content="Upcoming" Margin="1" Style="{StaticResource FlatToggleButton }"
                           IsChecked="{Binding IsChecked, ElementName=upcomingBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
-            <ToggleButton x:Name="Rel2017" Grid.Column="8" Grid.Row="7" Foreground="White" Content="Learn" Margin="1" Style="{StaticResource FlatToggleButton }"
+            <ToggleButton x:Name="Rel2017" Grid.Column="8" Grid.Row="7" Foreground="White" Content="Released 2017" Margin="1" Style="{StaticResource FlatToggleButton }"
                           IsChecked="{Binding IsChecked, ElementName=rel2017Box, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
-            <ToggleButton x:Name="Anything" Grid.Column="8" Grid.Row="8" Foreground="White" Content="Wonder" Margin="1" Style="{StaticResource FlatToggleButton }"
+            <ToggleButton x:Name="Anything" Grid.Column="8" Grid.Row="8" Foreground="White" Content="Anythin" Margin="1" Style="{StaticResource FlatToggleButton }"
                           IsChecked="{Binding IsChecked, ElementName=anythingBox, Converter={StaticResource BoolToChecked}, Mode=OneWay}"/>
             <!--end of quick search buttons-->
 

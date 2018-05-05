@@ -25,11 +25,13 @@
         <!--drawer host for left drawer-->
         <materialDesign:DrawerHost BorderThickness="2" LeftDrawerBackground="#FF1E1E1E" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <DockPanel MinWidth="212">
-                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
-                                    DockPanel.Dock="Top"
+                <DockPanel MinWidth="150" Background="White">
+                    <materialDesign:ColorZone Background="{StaticResource SecondaryAccentMidBrush}" Height="60" DockPanel.Dock="Top">
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                    DockPanel.Dock="Top" Foreground="Black"
                                     HorizontalAlignment="Right" Margin="16"
                                     IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
+                    </materialDesign:ColorZone>                    
                     <StackPanel>
                         <!--Search-->
                     <materialDesign:Chip Margin="7" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -74,6 +76,7 @@
                 </DockPanel>               
             </materialDesign:DrawerHost.LeftDrawerContent>
             <DockPanel>
+                <materialDesign:ColorZone Height="20" Mode="PrimaryDark" DockPanel.Dock="Top"/>
                 <materialDesign:ColorZone DockPanel.Dock="Top" Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid">
                     <DockPanel>
@@ -83,8 +86,7 @@
                         <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
                                          HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right">
                             <StackPanel>
-                                <Button Content="Help" />
-                                <Button Content="About" cal:Message.Attach="DisplayAboutVM"/>
+                                <Button Content="Help" />                               
                                 <Separator/>
                                 <Button cal:Message.Attach="CloseApp" Content="Exit App" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                             </StackPanel>
@@ -92,7 +94,7 @@
                         <Label Content="Mood Movies" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </DockPanel>                    
                 </materialDesign:ColorZone>
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource PrimaryHueLightBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.5*"/>
                         <RowDefinition Height="4*"/>
@@ -112,11 +114,11 @@
                     </Grid>
                     <!--body-->
                     <Grid Grid.Row="1" Margin="0,5,0,5">
-                        <ContentControl x:Name="ActiveItem" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        </ContentControl>
+                        <materialDesign:TransitioningContent x:Name="ActiveItem" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        </materialDesign:TransitioningContent>
                     </Grid>
                     <!--footer-->
-                    <Grid Grid.Row="2" Margin="0">
+                    <Grid Grid.Row="2" Margin="0" Background="White">
 
 
                     </Grid>

@@ -9,10 +9,15 @@ namespace MoodMovies.ViewModels
 {
     public class FavouritesViewModel: Screen
     {
-        public FavouritesViewModel()
+        public FavouritesViewModel(IEventAggregator _event)
         {
             DisplayName = "Favourites";
+            eventAgg = _event;
         }
+
+        #region Events
+        public IEventAggregator eventAgg;
+        #endregion
 
         #region Fields
 

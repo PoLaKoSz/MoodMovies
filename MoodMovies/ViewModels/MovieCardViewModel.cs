@@ -11,7 +11,7 @@ namespace MoodMovies.ViewModels
 {
     public class MovieCardViewModel: Screen
     {
-        public MovieCardViewModel(string id, string title, Uri imagepath, string overview, string releasedate, string votecount, double popularity, string language, EventAggregator _event)
+        public MovieCardViewModel(string id, string title, Uri imagepath, string overview, string releasedate, string votecount, double popularity, string language, IEventAggregator _event)
         {
             ID = id;
             Title = title;
@@ -25,7 +25,7 @@ namespace MoodMovies.ViewModels
         }
 
         #region Events
-        public EventAggregator myEvent;
+        public IEventAggregator myEvent;
         #endregion
 
         #region Movie Properties
@@ -62,8 +62,6 @@ namespace MoodMovies.ViewModels
             myEvent.PublishOnUIThread(ID);
         }
         #endregion
-
-        
 
     }
 }

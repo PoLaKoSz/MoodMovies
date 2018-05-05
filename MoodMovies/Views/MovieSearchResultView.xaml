@@ -4,30 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MoodMovies.Views"
+             xmlns:Resources="clr-namespace:MoodMovies.Resources.Validation"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              FontFamily="century gothic"
              d:DesignHeight="50" d:DesignWidth="500" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <UserControl.Resources>
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+        Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <materialDesign:ColorZone Background="#FF3C3B3B">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.7*"/>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="0.7*"/>
-                <ColumnDefinition Width="1.3*"/>
-                <ColumnDefinition Width="1.3*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="{Binding Path=Date}" FontSize="14" Foreground="{StaticResource SecondaryAccentBrush}" 
-               HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Label>
-            <Label Grid.Column="1" Content="{Binding Path=SearchText}" FontSize="14" Foreground="{StaticResource SecondaryAccentBrush}" 
-               HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Label>
-            <Label Grid.Column="2" Content="{Binding Path=IsAdult}" FontSize="14" Foreground="{StaticResource SecondaryAccentBrush}" 
-               HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Label>
-            <Button Grid.Column="3"  Content="Search" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{StaticResource SecondaryAccentBrush}" 
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
-            <Button Grid.Column="4"  Content="View" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{StaticResource SecondaryAccentBrush}" 
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
-        </Grid>
+        <StackPanel Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <!--simple search box-->
+            <TextBox materialDesign:HintAssist.Hint="Search by title/actor" MaxLength="51"
+                         HorizontalAlignment="Center" Width="300" FontSize="20"  FontFamily="century gothic" Foreground="{StaticResource SecondaryAccentForegroundBrush}">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding Path=SimpleSearchCommand}" Key="Return" CommandParameter="{Binding SimpleSearchBox}" />
+                </TextBox.InputBindings>
+                <TextBox.Text>
+                    <Binding Path="SimpleSearchBox" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <Resources:SearchBoxValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+            </TextBox>
+            <materialDesign:PackIcon Width="20" Height="20" Kind="Magnify" VerticalAlignment="Center"/>
+        </StackPanel>
     </materialDesign:ColorZone>
 </UserControl>

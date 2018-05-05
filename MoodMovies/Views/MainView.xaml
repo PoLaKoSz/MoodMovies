@@ -21,185 +21,107 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <!--drawer host for top drawer-->
-    <materialDesign:DrawerHost
-            Margin="0"
-	    HorizontalAlignment="Stretch"
-	    VerticalAlignment="Stretch"
-        
-	    BorderBrush="{StaticResource MaterialDesignDivider}"
-	    BorderThickness="2" TopDrawerBackground="#FF1E1E1E">
-        <materialDesign:DrawerHost.TopDrawerContent>
-            <Grid Grid.Row="1" Margin="0,5,0,5">
-                <ContentControl cal:View.Model="{Binding ASearchVM}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="350"/>
-            </Grid>            
-        </materialDesign:DrawerHost.TopDrawerContent>
-        <materialDesign:DrawerHost.LeftDrawerContent>
-            <StackPanel  Margin="16" Width="170">
-                <!--home button-->
-                <Button
-				Margin="0,0,0,30"
-				HorizontalAlignment="Center"
-                cal:Message.Attach="DisplayMovieListVM"
-				Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				CommandParameter="{x:Static Dock.Left}"
-				Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="{StaticResource PrimaryHueDarkBrush}" BorderBrush="{StaticResource PrimaryHueMidBrush}" Foreground="white" >
-                    <materialDesign:PackIcon
-                        Width="30"
-                        Height="30"
-                        Kind="Home"/>
-                </Button>
-                <!--Favourites button-->
-                <materialDesign:Chip Margin="5" Content="Favourites" HorizontalAlignment="Left" VerticalAlignment="Center"
+    <materialDesign:DialogHost>
+        <!--drawer host for left drawer-->
+        <materialDesign:DrawerHost BorderThickness="2" LeftDrawerBackground="#FF1E1E1E" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="212">
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                    DockPanel.Dock="Top"
+                                    HorizontalAlignment="Right" Margin="16"
+                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
+                    <StackPanel>
+                        <!--Search-->
+                    <materialDesign:Chip Margin="7" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Center"
+                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                           CommandParameter="{x:Static Dock.Left}"
+                           cal:Message.Attach="DisplaySearchVM"
+                           Foreground="White" >
+                        <materialDesign:Chip.Icon>
+                            <materialDesign:PackIcon Kind="Magnify" materialDesign:ColorZoneAssist.Mode="Accent"/>
+                        </materialDesign:Chip.Icon>
+                    </materialDesign:Chip>
+                    <!--results-->
+                    <materialDesign:Chip Margin="7" Content="Results" HorizontalAlignment="Left" VerticalAlignment="Center"
+                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                           CommandParameter="{x:Static Dock.Left}"
+                           cal:Message.Attach="DisplayMovieListVM"
+                           Foreground="White">
+                        <materialDesign:Chip.Icon>
+                            <materialDesign:PackIcon Kind="Movie" materialDesign:ColorZoneAssist.Mode="Accent"/>
+                        </materialDesign:Chip.Icon>
+                    </materialDesign:Chip>
+                    <!--Favourites button-->
+                    <materialDesign:Chip Margin="5" Content="Favourites" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
                            cal:Message.Attach="DisplayFavouriteVM"
                            Foreground="White" IconBackground="{StaticResource PrimaryHueMidBrush}" IconForeground="#FF850000">
-                    <materialDesign:Chip.Icon>
-                        <materialDesign:PackIcon Kind="Heart" materialDesign:ColorZoneAssist.Mode="Accent"/>
-                    </materialDesign:Chip.Icon>
-                </materialDesign:Chip>
-
-                <!--WatchList-->
-                <materialDesign:Chip Margin="7" Content="WatchList" HorizontalAlignment="Left" VerticalAlignment="Center"
+                        <materialDesign:Chip.Icon>
+                            <materialDesign:PackIcon Kind="Heart" materialDesign:ColorZoneAssist.Mode="Accent"/>
+                        </materialDesign:Chip.Icon>
+                    </materialDesign:Chip>
+                    <!--WatchList-->
+                    <materialDesign:Chip Margin="7" Content="WatchList" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplayWatchListVM"
-                           Foreground="White" Icon="W"/>                
-                
-                <!--Offline Movies-->
-                <materialDesign:Chip Margin="7" Content="Offline Movies" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                           CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplayAboutVM"
-                           Foreground="White" Icon="O"/>                               
-                
-                <!--Search History-->
-                <materialDesign:Chip Margin="7" Content="Search History" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                           CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplayHistoryVM"
-                           Foreground="White" Icon="H"/>
-                
-                <!--Settings-->
-                <materialDesign:Chip Margin="7" Content="My Settings" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                           CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplaySettingsVM"
-                           Foreground="White" Icon="S"/>
-
-                <!--Help-->
-                <materialDesign:Chip Margin="7" Content="Help" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                           CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplayHelpVM"
-                           Foreground="White" Icon="H"/>
-
-                <!--About-->
-                <materialDesign:Chip Margin="7" Content="About" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                           CommandParameter="{x:Static Dock.Left}"
-                           cal:Message.Attach="DisplayAboutVM"
-                           Foreground="White" Icon="A"/>
-            </StackPanel>
-        </materialDesign:DrawerHost.LeftDrawerContent>
-
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="0.3*"/>
-            </Grid.RowDefinitions>
-
-            <!--header-->
-            <materialDesign:ColorZone Grid.Row="0" Padding="5,0,0,0" materialDesign:ShadowAssist.ShadowDepth="Depth5"
-                                            Mode="PrimaryDark" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                                      MinHeight="48" Background="#252526">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.7*"/>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="3.5*"/>
-                        <ColumnDefinition Width="1.6*"/>
-                        <ColumnDefinition Width="0.5*"/>
-                    </Grid.ColumnDefinitions>
-                    <!--left side menu button-->
-                    <Button Grid.Column="0" Style="{StaticResource MaterialDesignFloatingActionButton}" 
-                                        x:Name="LeftMenuButton" HorizontalAlignment="Left"
-                                  Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-				        CommandParameter="{x:Static Dock.Left}"
-                            Content="{materialDesign:PackIcon Kind=Menu, Size=25}" materialDesign:ShadowAssist.ShadowDepth="Depth5"
-                            Background="{StaticResource PrimaryHueDarkBrush}" BorderThickness="1"/>
-                    <!--mainView home button-->
-                    <Button	Grid.Column="1"			   
-				    HorizontalAlignment="Left"
-                    cal:Message.Attach="DisplayMovieListVM"
-				    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-				    CommandParameter="{x:Static Dock.Left}"
-				    Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth5" ToolTip="Home"
-                            Content="{materialDesign:PackIcon                        
-                        Kind=Home,
-                        Size=25}" Foreground="white" BorderBrush="{StaticResource PrimaryHueMidBrush}" Background="{StaticResource PrimaryHueDarkBrush}"/>
-                    <StackPanel Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                        <!--simple search box-->
-                        <TextBox materialDesign:HintAssist.Hint="Search by title/actor" MaxLength="51"
-                         HorizontalAlignment="Center" Width="300" FontSize="20"  FontFamily="century gothic" Foreground="{StaticResource SecondaryAccentForegroundBrush}">
-                            <TextBox.InputBindings>
-                                <KeyBinding Command="{Binding Path=SimpleSearchCommand}" Key="Return" CommandParameter="{Binding SimpleSearchBox}" />
-                            </TextBox.InputBindings>
-                            <TextBox.Text>
-                                <Binding Path="SimpleSearchBox" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <Resources:SearchBoxValidation/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
-                            
-                        </TextBox>
-                        <materialDesign:PackIcon Width="20" Height="20" Kind="Magnify" VerticalAlignment="Center"/>
+                           Foreground="White">
+                        <materialDesign:Chip.Icon>
+                            <materialDesign:PackIcon Kind="Watch" materialDesign:ColorZoneAssist.Mode="Accent"/>
+                        </materialDesign:Chip.Icon>
+                    </materialDesign:Chip>
                     </StackPanel>
-                    <!--advanced search button-->
-                    <Button Grid.Column="4" Style="{StaticResource MaterialDesignFlatButton}" Content="Advanced Features" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center" 
-                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-				        CommandParameter="{x:Static Dock.Top}" materialDesign:ShadowAssist.ShadowDepth="Depth5"
-                            Background="{StaticResource PrimaryHueDarkBrush}" BorderBrush="{StaticResource PrimaryHueDarkBrush}"
-                            Foreground="{StaticResource PrimaryHueMidBrush}" FontSize="19" FontWeight="Normal"/>
+                </DockPanel>               
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <DockPanel>
+                <materialDesign:ColorZone DockPanel.Dock="Top" Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="PrimaryMid">
+                    <DockPanel>
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                        x:Name="MenuToggleButton" DockPanel.Dock="Left"/>                       
+                        <!--right side popup menu-->
+                        <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
+                                         HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right">
+                            <StackPanel>
+                                <Button Content="Help" />
+                                <Button Content="About" cal:Message.Attach="DisplayAboutVM"/>
+                                <Separator/>
+                                <Button cal:Message.Attach="CloseApp" Content="Exit App" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                        <Label Content="Mood Movies" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </DockPanel>                    
+                </materialDesign:ColorZone>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="0.3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.7*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="3.5*"/>
+                            <ColumnDefinition Width="1.6*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>                       
 
-                    <!--right side popup menu-->
-                    <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
-                                         HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <StackPanel>
-                            <Button Content="Help" />
-                            <Button Content="About" cal:Message.Attach="DisplayAboutVM"/>
-                            <Separator/>
-                            <Button cal:Message.Attach="CloseApp" Content="Exit App" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                        </StackPanel>
-                    </materialDesign:PopupBox>
+                       
+                    </Grid>
+                    <!--body-->
+                    <Grid Grid.Row="1" Margin="0,5,0,5">
+                        <ContentControl x:Name="ActiveItem" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        </ContentControl>
+                    </Grid>
+                    <!--footer-->
+                    <Grid Grid.Row="2" Margin="0">
 
+
+                    </Grid>
                 </Grid>
-            </materialDesign:ColorZone>
-
-            <!--body-->
-            <Grid Grid.Row="1" Margin="0,5,0,5">
-                <ContentControl x:Name="ActiveItem" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                </ContentControl>
-            </Grid>
-
-            <!--footer-->
-            <Grid Grid.Row="2" Margin="0">
-
-
-            </Grid>
-
-        </Grid>
-    </materialDesign:DrawerHost>
-
-    <!-- for testing viewmodel inter coms
-            <TextBlock Grid.Column="0" Text="{Binding MainViewMessage}" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
-            <Button Grid.Column="1" x:Name="ChangeMainMessage" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Change the text"/>
-            -->
+            </DockPanel>           
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
 </Window>

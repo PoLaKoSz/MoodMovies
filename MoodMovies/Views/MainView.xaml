@@ -6,21 +6,13 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:Resources="clr-namespace:MoodMovies.Resources.Validation"
-             FontFamily="century gothic"
+             FontFamily="Yu Gothic UI Semilight"
              xmlns:local="clr-namespace:MoodMovies.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" Width="800" MinWidth="800" Height="600" MinHeight="600" WindowStartupLocation="CenterScreen" Title="Moods &amp; Movies">
-    <Window.Resources>
-        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip"
-        Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                        Path=(Validation.Errors)[0].ErrorContent}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" FontSize="17"
+             d:DesignHeight="300" Width="800" MinWidth="800" Height="600" MinHeight="600" 
+        WindowStartupLocation="CenterScreen" Title="Moods &amp; Movies" 
+        Icon="/MoodMovies;component/Resources/Images/moodmoviesorange.ico">   
     <materialDesign:DialogHost>
         <!--drawer host for left drawer-->
         <materialDesign:DrawerHost BorderThickness="2" LeftDrawerBackground="#FF1E1E1E" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
@@ -84,40 +76,39 @@
                         <!--right side popup menu-->
                         <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
                                          HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right">
-                            <StackPanel>
+                            <StackPanel >
                                 <Button Content="Help" />                               
                                 <Separator/>
                                 <Button cal:Message.Attach="CloseApp" Content="Exit App" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                             </StackPanel>
                         </materialDesign:PopupBox>
-                        <Label Content="Mood Movies" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label Content="Moods &amp; Movies" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <iconPacks:PackIconModern Kind="MovieClapper" Width="30" Height="30" Foreground="{StaticResource SecondaryAccentMidBrush}" RenderTransformOrigin="0.5,0.5">
+                                <iconPacks:PackIconModern.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="-25"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </iconPacks:PackIconModern.RenderTransform>
+                            </iconPacks:PackIconModern>
+                        </DockPanel>
+                        
                     </DockPanel>                    
                 </materialDesign:ColorZone>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource PrimaryHueLightBrush}">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.5*"/>
                         <RowDefinition Height="4*"/>
                         <RowDefinition Height="0.3*"/>
-                    </Grid.RowDefinitions>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.7*"/>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="3.5*"/>
-                            <ColumnDefinition Width="1.6*"/>
-                            <ColumnDefinition Width="0.5*"/>
-                        </Grid.ColumnDefinitions>                       
-
-                       
-                    </Grid>
+                    </Grid.RowDefinitions>                    
                     <!--body-->
-                    <Grid Grid.Row="1" Margin="0,5,0,5">
-                        <materialDesign:TransitioningContent x:Name="ActiveItem" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        </materialDesign:TransitioningContent>
+                    <Grid Grid.Row="0" Margin="0,5,0,5">
+                        <materialDesign:TransitioningContent x:Name="ActiveItem" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                     </Grid>
                     <!--footer-->
-                    <Grid Grid.Row="2" Margin="0" Background="White">
+                    <Grid Grid.Row="1" Margin="0" Background="White">
 
 
                     </Grid>

@@ -214,12 +214,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\moodmovies.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\testImage.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\LGPL License.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\moodmoviesorange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\moodmoviesorange.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

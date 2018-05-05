@@ -4,9 +4,61 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MoodMovies.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
+             FontFamily="Yu Gothic UI Semilight" FontSize="17"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="*"/>           
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">          
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="35" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
+            </Border>
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="35" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
+            </Border>
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="35" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
+            </Border>
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="35" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
+            </Border>
+        </StackPanel>
     </Grid>
 </UserControl>

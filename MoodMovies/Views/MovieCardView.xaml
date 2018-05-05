@@ -9,7 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300"
-             FontFamily="century gothic">
+             FontFamily="Yu Gothic UI Semilight">
     <Grid Width="300" Height="450" Focusable="True" cal:Message.Attach="[Event MouseEnter] = [Action SetSelectedItem]">
             <materialDesign:Card Padding="0" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <materialDesign:DrawerHost 

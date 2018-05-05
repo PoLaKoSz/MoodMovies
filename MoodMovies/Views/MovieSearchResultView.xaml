@@ -8,7 +8,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
-             FontFamily="century gothic"
+             FontFamily="Yu Gothic UI Semilight"
              d:DesignHeight="50" d:DesignWidth="500" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <UserControl.Resources>
         <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">

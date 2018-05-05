@@ -24,7 +24,7 @@ namespace MoodMovies.ViewModels
             events.Subscribe(this);
             InitialiseVMs();
             ActivateItem(MovieListVM);
-            
+
             //Assign Commands
             SimpleSearchCommand = new RelayCommand(SimpleSearch, CanExecuteSimpleSearch);
         }
@@ -68,20 +68,10 @@ namespace MoodMovies.ViewModels
         #region Child View Models
         private MovieListViewModel movieListVM;
         public MovieListViewModel MovieListVM { get => movieListVM; set { movieListVM = value; NotifyOfPropertyChange(); } }
-        private AboutViewModel aboutVM;
-        public AboutViewModel AboutVM { get => aboutVM; set { aboutVM = value; NotifyOfPropertyChange(); } }
         private MovieListViewModel _favouriteVM;
         public MovieListViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
         private MovieListViewModel _watchlistVM;
         public MovieListViewModel WatchListVM { get => _watchlistVM; set { _watchlistVM = value; NotifyOfPropertyChange(); } }
-        private SettingsViewModel _settingsVM;
-        public SettingsViewModel SettingsVM { get => _settingsVM; set { _settingsVM = value; NotifyOfPropertyChange(); } }
-        private HistoryViewModel _historyVM;
-        public HistoryViewModel HistoryVM { get => _historyVM; set { _historyVM = value; NotifyOfPropertyChange(); } }
-        private HelpViewModel _helpVM;
-        public HelpViewModel HelpVM { get => _helpVM; set { _helpVM = value; NotifyOfPropertyChange(); } }
-        private ASearchViewModel _asearchVM;
-        public ASearchViewModel ASearchVM { get => _asearchVM; set { _asearchVM = value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Events
@@ -92,11 +82,11 @@ namespace MoodMovies.ViewModels
         public void CloseApp()
         {
             TryClose();
-        }        
+        }
 
         public void SimpleSearch(object obj)
         {
-            if( MovieSet != null )
+            if (MovieSet != null)
             {
                 MovieSet.Clear();
                 Pages.Clear();
@@ -111,14 +101,13 @@ namespace MoodMovies.ViewModels
 
         private string CreateQueryCode(string command)
         {
-            string queryCode = "https://api.themoviedb.org/3/search/movie/?api_key=6d4b546936310f017557b2fb498b370b&" + command;            
+            string queryCode = "https://api.themoviedb.org/3/search/movie/?api_key=6d4b546936310f017557b2fb498b370b&" + command;
             return queryCode;
         }
 
         private void CallApi(string queryCode)
         {
             // Temp code to be moved to external class  
-           
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(queryCode);
             request.Method = "GET";
@@ -136,27 +125,14 @@ namespace MoodMovies.ViewModels
             }
 
             searchContent = string.Empty;
-            try
-            {
-                using (Stream stream = response.GetResponseStream())
-                {
-                    try
-                    {
-                        using (StreamReader sr = new StreamReader(stream))
-                        {
-                            searchContent = sr.ReadToEnd();
-                        }
-                    }
-                    catch (Exception )
-                    {
 
-                    }
+            using (Stream stream = response.GetResponseStream())
+            {
+                using (StreamReader sr = new StreamReader(stream))
+                {
+                    searchContent = sr.ReadToEnd();
                 }
             }
-            catch (Exception )
-            {
-
-            }                      
         }
 
         private void GetAllPages()
@@ -165,27 +141,27 @@ namespace MoodMovies.ViewModels
             {
                 var model = JsonConvert.DeserializeObject<RootObject>(searchContent);
                 Pages.Add(model);
-                if( model.Total_pages > 1 )
+                if (model.Total_pages > 1)
                 {
-                    for(int i = 2; i <= model.Total_pages; i++)
+                    for (int i = 2; i <= model.Total_pages; i++)
                     {
                         CallApi(CreateQueryCode(searchText + $"&page={i}"));
                         var mod = JsonConvert.DeserializeObject<RootObject>(searchContent);
                         Pages.Add(mod);
-                    }                  
+                    }
                 }
             }
             catch
             {
 
-            }               
+            }
         }
 
         private void PublishResults()
         {
             string address = "https://image.tmdb.org/t/p/w500/";
 
-            foreach(var page in Pages)
+            foreach (var page in Pages)
             {
                 //loop through the results
                 foreach (var result in page.Results)
@@ -218,20 +194,12 @@ namespace MoodMovies.ViewModels
         private void InitialiseVMs()
         {
             //pages that will change
-            Items.Add( MovieListVM = new MovieListViewModel(events) );
-            Items.Add( WatchListVM = new MovieListViewModel(events) );
-            Items.Add( AboutVM = new AboutViewModel() );
-            Items.Add( HistoryVM = new HistoryViewModel(events) );
-            Items.Add( HelpVM = new HelpViewModel() );
-            Items.Add( SettingsVM = new SettingsViewModel() );
-            Items.Add( FavouriteVM = new MovieListViewModel(events) );
+            Items.Add(MovieListVM = new MovieListViewModel(events));
+            Items.Add(WatchListVM = new MovieListViewModel(events));
+            Items.Add(FavouriteVM = new MovieListViewModel(events));
 
             events.Subscribe(MovieListVM);
-            events.Subscribe(HistoryVM);
-
-            //static, will not change
-            ASearchVM = new ASearchViewModel();
-        }       
+        }
         #endregion
 
         #region Item Activation Methods
@@ -241,40 +209,16 @@ namespace MoodMovies.ViewModels
             ActivateItem(MovieListVM);
         }
 
-        public void DisplayAboutVM()            
-        {
-            DeactivateItem(ActiveItem, true);
-            ActivateItem(AboutVM);            
-        }
-
         public void DisplayFavouriteVM()
         {
-        DeactivateItem(ActiveItem, true);
-        ActivateItem(FavouriteVM);
+            DeactivateItem(ActiveItem, true);
+            ActivateItem(FavouriteVM);
         }
-        
+
         public void DisplayWatchListVM()
         {
-        DeactivateItem(ActiveItem, true);
-        ActivateItem(WatchListVM);
-        }
-
-        public void DisplaySettingsVM()
-        {
             DeactivateItem(ActiveItem, true);
-            ActivateItem(SettingsVM);
-        }
-
-        public void DisplayHistoryVM()
-        {
-            DeactivateItem(ActiveItem, true);
-            ActivateItem(HistoryVM);
-        }
-
-        public void DisplayHelpVM()
-        {
-            DeactivateItem(ActiveItem, true);
-            ActivateItem(HelpVM);
+            ActivateItem(WatchListVM);
         }
         #endregion
 
@@ -286,7 +230,7 @@ namespace MoodMovies.ViewModels
         public void Handle(string message)
         {
             // outsource the logic containg the call to the api
-            string queryCode = "https://api.themoviedb.org/3/movie/" + message.Trim() + "/videos?api_key=6d4b546936310f017557b2fb498b370b";            
+            string queryCode = "https://api.themoviedb.org/3/movie/" + message.Trim() + "/videos?api_key=6d4b546936310f017557b2fb498b370b";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(queryCode);
 
             request.Method = "GET";
@@ -304,41 +248,18 @@ namespace MoodMovies.ViewModels
             }
 
             string content = string.Empty;
-            try
+
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader sr = new StreamReader(stream))
             {
-                using (Stream stream = response.GetResponseStream())
-                {
-                    try
-                    {
-                        using (StreamReader sr = new StreamReader(stream))
-                        {
-                            content = sr.ReadToEnd();
-                        }
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }
-            }
-            catch (Exception)
-            {
-
+                content = sr.ReadToEnd();
             }
 
-            try
-            {
-                var model = JsonConvert.DeserializeObject<RootTrailer>(content);
+            var model = JsonConvert.DeserializeObject<RootTrailer>(content);
                 var key = model.Results.Select(x => x.Key).First();
                 string address = "http://www.youtube.com/embed/" + key;
 
                 events.BeginPublishOnUIThread(new TrailerMessage(address));
-
-            }
-            catch (Exception)
-            {
-            }
         }
         #endregion
 

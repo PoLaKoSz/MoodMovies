@@ -7,7 +7,6 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
-             Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="century gothic"
              d:DesignHeight="50" d:DesignWidth="500" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <materialDesign:ColorZone Background="#FF3C3B3B">

@@ -6,7 +6,6 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:Resources="clr-namespace:MoodMovies.Resources.Validation"
-             Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="century gothic"
              xmlns:local="clr-namespace:MoodMovies.Views"
              mc:Ignorable="d" 

@@ -9,10 +9,10 @@ namespace MoodMovies.Messages
 {
     public class MovieListMessage
     {
-        public List<MovieSearchResult> Movielist { get; private set; }
+        public List<MovieSearchResult> Movielist { get; }
         public bool IsAdult { get; set; }
         public string SearchString { get; set; }
-        public DateTime DateOfSearch { get; private set; }
+        public DateTime DateOfSearch { get; }
 
         public MovieListMessage(List<MovieSearchResult> results, bool isadult, string text)
         {

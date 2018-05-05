@@ -9,9 +9,8 @@ namespace MoodMovies.Resources
 {
     public class RelayCommand : ICommand
     {
-
-        Action<object> _executeMethod;
-        Func<object, bool> _canExecuteMethod;
+        private readonly Action<object> _executeMethod;
+        private readonly Func<object, bool> _canExecuteMethod;
 
         public RelayCommand(Action<object> ExecuteMethod, Func<object, bool> CanExecuteMethod)
         {

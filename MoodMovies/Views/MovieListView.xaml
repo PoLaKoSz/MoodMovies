@@ -8,7 +8,6 @@
              xmlns:local="clr-namespace:MoodMovies.Views"
              xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
              xmlns:cal="http://www.caliburnproject.org"
-             Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="century gothic"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid x:Name="MainGrid" Focusable="True">

@@ -9,27 +9,21 @@ namespace MoodMovies.ViewModels
 {
     public class FavouritesViewModel: Screen
     {
+        public FavouritesViewModel()
+        {
+            DisplayName = "Favourites";
+        }
+
         #region Fields
-        private string _name;
+
         #endregion
 
         #region Properties
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                NotifyOfPropertyChange(() => Name);
-            }
-        }
+
         #endregion
 
         #region Methods
-        public FavouritesViewModel()
-        {
-            Name = "Favourites";
-        }
+
         #endregion
 
     }

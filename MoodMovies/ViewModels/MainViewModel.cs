@@ -15,7 +15,7 @@ using MoodMovies.Models;
 
 namespace MoodMovies.ViewModels
 {
-    public class MainViewModel : Conductor<Screen>.Collection.OneActive, IHandle<string>
+    internal class MainViewModel : Conductor<Screen>.Collection.OneActive, IHandle<string>
     {
         // constructor
         public MainViewModel()
@@ -61,15 +61,17 @@ namespace MoodMovies.ViewModels
         public string SimpleSearchBox { get => _simpleSearchBox; set { _simpleSearchBox = value; NotifyOfPropertyChange(); } }
         private string searchContent;
         private string searchText;
-        private List<MovieSearchResult> MovieSet = new List<MovieSearchResult>();
-        private List<RootObject> Pages = new List<RootObject>();
+        private readonly List<MovieSearchResult> MovieSet = new List<MovieSearchResult>();
+        private readonly List<RootObject> Pages = new List<RootObject>();
         #endregion
 
         #region Child View Models
+        private SearchViewModel _searchVM;
+        public SearchViewModel SearchVM { get => _searchVM; set { _searchVM = value; NotifyOfPropertyChange(); } }
         private MovieListViewModel movieListVM;
         public MovieListViewModel MovieListVM { get => movieListVM; set { movieListVM = value; NotifyOfPropertyChange(); } }
-        private MovieListViewModel _favouriteVM;
-        public MovieListViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
+        private FavouritesViewModel _favouriteVM;
+        public FavouritesViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
         private MovieListViewModel _watchlistVM;
         public MovieListViewModel WatchListVM { get => _watchlistVM; set { _watchlistVM = value; NotifyOfPropertyChange(); } }
         #endregion
@@ -196,13 +198,19 @@ namespace MoodMovies.ViewModels
             //pages that will change
             Items.Add(MovieListVM = new MovieListViewModel(events));
             Items.Add(WatchListVM = new MovieListViewModel(events));
-            Items.Add(FavouriteVM = new MovieListViewModel(events));
+            Items.Add(FavouriteVM = new FavouritesViewModel(events));
 
             events.Subscribe(MovieListVM);
         }
         #endregion
 
         #region Item Activation Methods
+        public void DisplaSearchVM()
+        {
+            DeactivateItem(ActiveItem, true);
+            ActivateItem(SearchVM);
+        }
+
         public void DisplayMovieListVM()
         {
             DeactivateItem(ActiveItem, true);

@@ -27,7 +27,7 @@
 	    HorizontalAlignment="Stretch"
 	    VerticalAlignment="Stretch"
         
-	    BorderBrush="{DynamicResource MaterialDesignDivider}"
+	    BorderBrush="{StaticResource MaterialDesignDivider}"
 	    BorderThickness="2" TopDrawerBackground="#FF1E1E1E">
         <materialDesign:DrawerHost.TopDrawerContent>
             <Grid Grid.Row="1" Margin="0,5,0,5">

@@ -6,7 +6,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MoodMovies.Views"
-             xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
              xmlns:cal="http://www.caliburnproject.org"
              FontFamily="century gothic"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -14,14 +13,7 @@
         <materialDesign:DialogHost>
             <materialDesign:DialogHost.DialogContent>
                 <Grid Width="800" Height="400" Background="{StaticResource PrimaryHueDarkBrush}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="6*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>                    
-                    <wpf:ChromiumWebBrowser Grid.Row="0" Address="{Binding Path=SelectedTrailer, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding Path=IsTrailerPlaying, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <!--<MediaElement Grid.Row="0" Source="http://www.youtube.com/embed/RqlbDhd2IJs" MinWidth="400" MinHeight="300" Stretch="None" />-->
-                    <Button Grid.Row="1" Content="Close" Style="{StaticResource MaterialDesignFlatButton}" cal:Message.Attach="RemoveSelectedTrailer"
-                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" MinHeight="50" Foreground="{StaticResource PrimaryHueMidBrush}" />
+                    
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
         <ScrollViewer x:Name="MovieScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"

@@ -52,8 +52,10 @@ namespace MoodMovies.ViewModels
         #region Properties
         private string _simpleSearchBox;
         public string SimpleSearchBox { get => _simpleSearchBox; set { _simpleSearchBox = value; NotifyOfPropertyChange(); } }
+        private string _searchText;
+        public string SearchText { get => _searchText; set { _searchText = value; NotifyOfPropertyChange(); } }
+
         private string SearchContent;
-        private string searchText;
 
         private readonly List<MovieSearchResult> MovieSet = new List<MovieSearchResult>();
         private readonly List<RootObject> Pages = new List<RootObject>();
@@ -66,10 +68,10 @@ namespace MoodMovies.ViewModels
                 MovieSet.Clear();
                 Pages.Clear();
             }
-            searchText = obj as string;
-            searchText.Trim();
-            searchText = "query=" + searchText;
-            CallApi(CreateQueryCode(searchText));
+            SearchText = obj as string;
+            SearchText.Trim();
+            SearchText = "query=" + SearchText;
+            CallApi(CreateQueryCode(SearchText));
             GetAllPages();
             PublishResults();
         }
@@ -119,7 +121,7 @@ namespace MoodMovies.ViewModels
                 {
                     for (int i = 2; i <= model.Total_pages; i++)
                     {
-                        CallApi(CreateQueryCode(searchText + $"&page={i}"));
+                        CallApi(CreateQueryCode(SearchText + $"&page={i}"));
                         var mod = JsonConvert.DeserializeObject<RootObject>(SearchContent);
                         Pages.Add(mod);
                     }
@@ -160,7 +162,7 @@ namespace MoodMovies.ViewModels
                 }
             }
 
-            eventAgg.BeginPublishOnUIThread(new MovieListMessage(MovieSet, true, searchText));
+            eventAgg.BeginPublishOnUIThread(new MovieListMessage(MovieSet, true, SearchText));
         }
     }
 }

@@ -69,12 +69,12 @@
             <!--search header-->
             <materialDesign:ColorZone Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Background="{DynamicResource ASearchHeadingBackground}" >
                 <TextBlock Text="Search &amp; Filter Options" Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-               Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+               Foreground="{StaticResource SecondaryAccentBrush}" />
             </materialDesign:ColorZone>
             <!--#region Buttons and checkboxes -->
             <materialDesign:ColorZone Grid.Column="8" Grid.Row="1" VerticalAlignment="Stretch" Background="{DynamicResource ASearchHeadingBackground}" >
                 <TextBlock Text="Groups..." Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-               Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+               Foreground="{StaticResource SecondaryAccentBrush}" />
             </materialDesign:ColorZone>
             <!--quick search checkboxes-->
             <CheckBox x:Name="latestBox" Grid.Column="7" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center" 
@@ -110,7 +110,7 @@
 
             <materialDesign:ColorZone Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Background="{DynamicResource ASearchHeadingBackground}" >
                 <TextBlock Text="Make me..." Grid.Column="1" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-               Foreground="{StaticResource SecondaryAccentBrush}" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+               Foreground="{StaticResource SecondaryAccentBrush}"/>
             </materialDesign:ColorZone>
             <!--mood checkboxes-->
             <CheckBox x:Name="happyBox" Grid.Column="2" HorizontalAlignment="Center" Margin="1" Grid.Row="2" VerticalAlignment="center" 
@@ -149,10 +149,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Style="{StaticResource MaterialDesignFlatButton}" Background="{StaticResource MainFlatButtonBackground}" Margin="5" ToolTip="Save Current Search Profile">
+                <Button Grid.Column="0" Background="{StaticResource MainFlatButtonBackground}" Margin="5" ToolTip="Save Current Search Profile">
                     <materialDesign:PackIcon Kind="ContentSave"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="{StaticResource PrimaryHueMidBrush}" Height="auto" Width="auto"/>
                 </Button>
-                <Button Grid.Column="1" Style="{StaticResource MaterialDesignFlatButton}" Background="{StaticResource MainFlatButtonBackground}" Margin="5" ToolTip="Load Saved Search Profile">
+                <Button Grid.Column="1" Background="{StaticResource MainFlatButtonBackground}" Margin="5" ToolTip="Load Saved Search Profile">
                     <materialDesign:PackIcon Kind="Reload"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="{StaticResource PrimaryHueMidBrush}" Height="auto" Width="auto"/>
                 </Button>                              
             </Grid>

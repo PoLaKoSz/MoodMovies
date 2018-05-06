@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:MoodMovies.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              mc:Ignorable="d" 
              FontFamily="Yu Gothic UI Semilight" FontSize="17"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -38,31 +40,44 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="300"/>
+            <RowDefinition Height="350"/>
             <RowDefinition Height="*"/>           
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Grid.Column="1">          
-            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="35" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                          materialDesign:HintAssist.Hint="Title/Actor" materialDesign:HintAssist.HintOpacity="0.5"
-                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17" Text="{Binding SearchText}"/>
             </Border>
-            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="35" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          materialDesign:HintAssist.Hint="Your mood" materialDesign:HintAssist.HintOpacity="0.5"
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
             </Border>
-            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="35" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          materialDesign:HintAssist.Hint="Genre" materialDesign:HintAssist.HintOpacity="0.5"
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
             </Border>
-            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="35" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          materialDesign:HintAssist.Hint="Language" materialDesign:HintAssist.HintOpacity="0.5"
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
             </Border>
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                <ComboBox BorderBrush="Transparent" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="160"
+                         materialDesign:HintAssist.Hint="Source" materialDesign:HintAssist.HintOpacity="0.5" Margin="0,0,-15,0"
+                         VerticalContentAlignment="Center" FontSize="17" IsEditable="False"
+                          HorizontalContentAlignment="Center">
+                    <ComboBoxItem Content="Online Database" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <ComboBoxItem Content="Local Database" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                </ComboBox>
+            </Border>            
+            <Button Height="60" HorizontalAlignment="Center" Width="60" Style="{StaticResource MaterialDesignFlatButton}" Margin="20"
+                    x:Name="">
+                <materialDesign:PackIcon Kind="DatabaseSearch" Width="30" Height="30" Foreground="{StaticResource SecondaryAccentMidBrush}"/>                
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>

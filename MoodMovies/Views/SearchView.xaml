@@ -47,12 +47,12 @@
         <StackPanel Grid.Row="1" Grid.Column="1">          
             <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                         materialDesign:HintAssist.Hint="Title/Actor" materialDesign:HintAssist.HintOpacity="0.5"
+                         materialDesign:HintAssist.Hint="Title" materialDesign:HintAssist.HintOpacity="0.5"
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17" Text="{Binding SearchText}"/>
             </Border>
             <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                         materialDesign:HintAssist.Hint="Your mood" materialDesign:HintAssist.HintOpacity="0.5"
+                         materialDesign:HintAssist.Hint="Actor" materialDesign:HintAssist.HintOpacity="0.5"
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
             </Border>
             <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
@@ -75,7 +75,7 @@
                 </ComboBox>
             </Border>            
             <Button Height="60" HorizontalAlignment="Center" Width="60" Style="{StaticResource MaterialDesignFlatButton}" Margin="20"
-                    x:Name="">
+                    x:Name="BeginSearch">
                 <materialDesign:PackIcon Kind="DatabaseSearch" Width="30" Height="30" Foreground="{StaticResource SecondaryAccentMidBrush}"/>                
             </Button>
         </StackPanel>

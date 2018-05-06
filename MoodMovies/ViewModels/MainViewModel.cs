@@ -15,7 +15,7 @@ using MoodMovies.Models;
 
 namespace MoodMovies.ViewModels
 {
-    internal class MainViewModel : Conductor<Screen>.Collection.OneActive
+    internal class MainViewModel : Conductor<Screen>.Collection.OneActive, IHandle<ResultsReadyMessage> 
     {
         // constructor
         public MainViewModel()
@@ -82,6 +82,12 @@ namespace MoodMovies.ViewModels
         {
             DeactivateItem(ActiveItem, true);
             ActivateItem(FavouriteVM);
+        }
+
+        public void Handle(ResultsReadyMessage message)
+        {
+            DeactivateItem(ActiveItem, true);
+            ActivateItem(MovieListVM);
         }
         #endregion
 

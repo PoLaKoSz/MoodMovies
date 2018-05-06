@@ -19,34 +19,10 @@ namespace MoodMovies.ViewModels
         public SearchViewModel(IEventAggregator _event)
         {
             eventAgg = _event;
-
-            //Assign Commands
-            SimpleSearchCommand = new RelayCommand(SimpleSearch, CanExecuteSimpleSearch);
         }
 
         #region Events
         public IEventAggregator eventAgg;
-        #endregion
-
-        #region Command Related Stuff
-        public ICommand SimpleSearchCommand { get; set; }
-
-        /// <summary>
-        /// Check to see if we can execute our Method
-        /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
-        private bool CanExecuteSimpleSearch(object parameter)
-        {
-            if (string.IsNullOrEmpty(SimpleSearchBox))
-            {
-                return false;
-            }
-            else
-            {
-                return SimpleSearchBox != "";
-            }
-        }
         #endregion
 
         #region Properties
@@ -61,21 +37,34 @@ namespace MoodMovies.ViewModels
         private readonly List<RootObject> Pages = new List<RootObject>();
         #endregion
 
-        public void SimpleSearch(object obj)
+        #region Public methods
+        public void BeginSearch()
+        {
+            if (string.IsNullOrEmpty(SearchText))
+            {
+                //publish message
+            }
+            else
+            {
+                StartSimpleSearch(SearchText);
+            }
+        }
+
+        public void StartSimpleSearch(string text)
         {
             if (MovieSet != null)
             {
                 MovieSet.Clear();
                 Pages.Clear();
             }
-            SearchText = obj as string;
-            SearchText.Trim();
-            SearchText = "query=" + SearchText;
-            CallApi(CreateQueryCode(SearchText));
+            text.Trim();            
+            CallApi(CreateQueryCode($"query={SearchText}"));
             GetAllPages();
             PublishResults();
         }
+        #endregion
 
+        #region Private Methods
         private string CreateQueryCode(string command)
         {
             return "https://api.themoviedb.org/3/search/movie/?api_key=6d4b546936310f017557b2fb498b370b&" + command;
@@ -117,15 +106,15 @@ namespace MoodMovies.ViewModels
             {
                 var model = JsonConvert.DeserializeObject<RootObject>(SearchContent);
                 Pages.Add(model);
-                if (model.Total_pages > 1)
-                {
-                    for (int i = 2; i <= model.Total_pages; i++)
-                    {
-                        CallApi(CreateQueryCode(SearchText + $"&page={i}"));
-                        var mod = JsonConvert.DeserializeObject<RootObject>(SearchContent);
-                        Pages.Add(mod);
-                    }
-                }
+                //if (model.Total_pages > 1)
+                //{
+                //    for (int i = 2; i <= model.Total_pages; i++)
+                //    {
+                //        CallApi(CreateQueryCode(SearchText + $"&page={i}"));
+                //        var mod = JsonConvert.DeserializeObject<RootObject>(SearchContent);
+                //        Pages.Add(mod);
+                //    }
+                //}
             }
             catch
             {
@@ -142,27 +131,32 @@ namespace MoodMovies.ViewModels
                 //loop through the results
                 foreach (var result in page.Results)
                 {
-                    MovieSet.Add(new MovieSearchResult
+                    // do not add movies with no poster
+                    if (!string.IsNullOrEmpty(result.Poster_path))
                     {
-                        Vote_count = result.Vote_count,
-                        Id = result.Id,
-                        Video = result.Video,
-                        Vote_average = result.Vote_average,
-                        Title = result.Title,
-                        Popularity = result.Popularity,
-                        Poster_path = address + result.Poster_path,
-                        Original_language = result.Original_language,
-                        Original_title = result.Original_title,
-                        Genre_ids = result.Genre_ids,
-                        Backdrop_path = result.Backdrop_path,
-                        Adult = result.Adult,
-                        Overview = result.Overview,
-                        Release_date = result.Release_date
-                    });
+                        MovieSet.Add(new MovieSearchResult
+                        {
+                            Vote_count = result.Vote_count,
+                            Id = result.Id,
+                            Video = result.Video,
+                            Vote_average = result.Vote_average,
+                            Title = result.Title,
+                            Popularity = result.Popularity,
+                            Poster_path = address + result.Poster_path,
+                            Original_language = result.Original_language,
+                            Original_title = result.Original_title,
+                            Genre_ids = result.Genre_ids,
+                            Backdrop_path = result.Backdrop_path,
+                            Adult = result.Adult,
+                            Overview = result.Overview,
+                            Release_date = result.Release_date
+                        });
+                    }
                 }
             }
 
             eventAgg.BeginPublishOnUIThread(new MovieListMessage(MovieSet, true, SearchText));
         }
+        #endregion
     }
 }

@@ -133,9 +133,6 @@
     <Compile Include="ViewModels\MovieCardViewModel.cs" />
     <Compile Include="ViewModels\MovieListViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
-    <Compile Include="Views\ASearchView.xaml.cs">
-      <DependentUpon>ASearchView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\FavouritesView.xaml.cs">
       <DependentUpon>FavouritesView.xaml</DependentUpon>
     </Compile>
@@ -155,10 +152,6 @@
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\ASearchView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\FavouritesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

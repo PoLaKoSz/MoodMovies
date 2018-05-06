@@ -136,9 +136,6 @@
     <Compile Include="Views\ASearchView.xaml.cs">
       <DependentUpon>ASearchView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MovieSearchResultView.xaml.cs">
-      <DependentUpon>MovieSearchResultView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\FavouritesView.xaml.cs">
       <DependentUpon>FavouritesView.xaml</DependentUpon>
     </Compile>
@@ -159,10 +156,6 @@
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ASearchView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MovieSearchResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

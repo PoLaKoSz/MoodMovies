@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Caliburn.Micro;
+using MoodMovies.Logic;
 using MoodMovies.Messages;
 using MoodMovies.Resources;
 
@@ -34,8 +35,14 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region IHandle methods
-        public void Handle(MovieListMessage message)
+        public async void Handle(MovieListMessage message)
         {
+            var on = new OnlineServiceProvider(eventAgg);   
+            //move this to search viewmodel
+            //add support for all the api objects(movie full details etc)
+            // remove all the rest of the clucky http stuff in searchviewmodel
+            var dt = await on.CallTmdbAsync();
+
             Movies.Clear();
             foreach (var movie in message.Movielist)
             {

@@ -25,6 +25,13 @@ namespace MoodMovies.ViewModels
         public IEventAggregator eventAgg;
         #endregion
 
+        #region General Properties
+        private string _loadingMessage;
+        public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
+        private bool _isLoading;
+        public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
+        #endregion
+
         #region Properties
         private string _simpleSearchBox;
         public string SimpleSearchBox { get => _simpleSearchBox; set { _simpleSearchBox = value; NotifyOfPropertyChange(); } }
@@ -50,17 +57,20 @@ namespace MoodMovies.ViewModels
             }
         }
 
-        public void StartSimpleSearch(string text)
+        public async void StartSimpleSearch(string text)
         {
+            //IsLoading = true;
+            eventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
             if (MovieSet != null)
             {
                 MovieSet.Clear();
                 Pages.Clear();
             }
             text.Trim();            
-            CallApi(CreateQueryCode($"query={SearchText}"));
+            await CallApi(CreateQueryCode($"query={SearchText}"));
             GetAllPages();
             PublishResults();
+            IsLoading = false;
         }
         #endregion
 
@@ -70,7 +80,7 @@ namespace MoodMovies.ViewModels
             return "https://api.themoviedb.org/3/search/movie/?api_key=6d4b546936310f017557b2fb498b370b&" + command;
         }
 
-        private void CallApi(string queryCode)
+        private async Task CallApi(string queryCode)
         {
             // Temp code to be moved to external class  
 
@@ -82,13 +92,13 @@ namespace MoodMovies.ViewModels
             HttpWebResponse response;
             try
             {
-                response = (HttpWebResponse)request.GetResponse();
+                response = await request.GetResponseAsync() as HttpWebResponse;
             }
             catch (Exception)
             {
                 response = null;
             }
-
+            await Task.Delay(5000);
             SearchContent = string.Empty;
 
             using (Stream stream = response.GetResponseStream())

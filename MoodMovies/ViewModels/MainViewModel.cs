@@ -15,7 +15,7 @@ using MoodMovies.Models;
 
 namespace MoodMovies.ViewModels
 {
-    internal class MainViewModel : Conductor<Screen>.Collection.OneActive, IHandle<ResultsReadyMessage> 
+    internal class MainViewModel : Conductor<Screen>.Collection.OneActive, IHandle<ResultsReadyMessage>, IHandle<StartLoadingMessage>
     {
         // constructor
         public MainViewModel()
@@ -29,7 +29,10 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region General Properties
-
+        private string _loadingMessage;
+        public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
+        private bool _isLoading;
+        public bool IsLoading { get => _isLoading; set { _isLoading= value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Child View Models
@@ -46,7 +49,10 @@ namespace MoodMovies.ViewModels
         {
             TryClose();
         }
-
+        public void RunShit()
+        {
+            IsLoading = true;
+        }
         #endregion
 
         #region Private Methods
@@ -88,6 +94,13 @@ namespace MoodMovies.ViewModels
         {
             DeactivateItem(ActiveItem, true);
             ActivateItem(MovieListVM);
+            IsLoading = false;
+        }
+
+        public void Handle(StartLoadingMessage message)
+        {
+            IsLoading = true;
+            LoadingMessage = message.Text;
         }
         #endregion
 

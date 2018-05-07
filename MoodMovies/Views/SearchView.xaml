@@ -41,10 +41,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="350"/>
-            <RowDefinition Height="*"/>           
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" Grid.Column="1">          
+        <StackPanel Grid.Row="1" Grid.Column="1">
             <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                          materialDesign:HintAssist.Hint="Title" materialDesign:HintAssist.HintOpacity="0.5"
@@ -73,10 +73,10 @@
                     <ComboBoxItem Content="Online Database" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     <ComboBoxItem Content="Local Database" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                 </ComboBox>
-            </Border>            
+            </Border>
             <Button Height="60" HorizontalAlignment="Center" Width="60" Style="{StaticResource MaterialDesignFlatButton}" Margin="20"
                     x:Name="BeginSearch">
-                <materialDesign:PackIcon Kind="DatabaseSearch" Width="30" Height="30" Foreground="{StaticResource SecondaryAccentMidBrush}"/>                
+                <materialDesign:PackIcon Kind="DatabaseSearch" Width="30" Height="30" Foreground="{StaticResource SecondaryAccentMidBrush}"/>
             </Button>
         </StackPanel>
     </Grid>

@@ -12,8 +12,17 @@
              mc:Ignorable="d" FontSize="17"
              d:DesignHeight="300" Width="1215" MinWidth="1215" Height="600" MinHeight="600" 
         WindowStartupLocation="CenterScreen" Title="Moods &amp; Movies" 
-        Icon="/MoodMovies;component/Resources/Images/moodmoviesorange.ico">   
-    <materialDesign:DialogHost>
+        Icon="/MoodMovies;component/Resources/Images/moodmoviesorange.ico">
+    <materialDesign:DialogHost IsOpen="{Binding Path=IsLoading}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <materialDesign:DialogHost.DialogContent>
+            <Grid>
+                <StackPanel Margin="16">
+                    <ProgressBar Margin="16" HorizontalAlignment="Center" IsIndeterminate="true" Style="{DynamicResource MaterialDesignCircularProgressBar}"
+                                 Value="0"/>
+                    <TextBlock Text="{Binding Path=LoadingMessage}"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:DialogHost.DialogContent>
         <!--drawer host for left drawer-->
         <materialDesign:DrawerHost BorderThickness="2" LeftDrawerBackground="#FF1E1E1E" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
@@ -94,8 +103,7 @@
                                     </TransformGroup>
                                 </iconPacks:PackIconModern.RenderTransform>
                             </iconPacks:PackIconModern>
-                        </DockPanel>
-                        
+                        </DockPanel>                      
                     </DockPanel>                    
                 </materialDesign:ColorZone>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource PrimaryHueLightBrush}">

@@ -30,24 +30,23 @@ namespace MoodMovies.ViewModels
         public MovieCardViewModel SelectedItem { get => _selectedItem; set { _selectedItem = value; NotifyOfPropertyChange(); } }
         #endregion
 
+        const string address = "https://image.tmdb.org/t/p/w500/";
+
         #region Public Methods       
 
         #endregion
 
         #region IHandle methods
-        public async void Handle(MovieListMessage message)
-        {
-            var on = new OnlineServiceProvider(eventAgg);   
-            //move this to search viewmodel
-            //add support for all the api objects(movie full details etc)
-            // remove all the rest of the clucky http stuff in searchviewmodel
-            var dt = await on.CallTmdbAsync();
-
+        public void Handle(MovieListMessage message)
+        {         
             Movies.Clear();
-            foreach (var movie in message.Movielist)
+            foreach (var movie in message.Movielist.Results)
             {
-                Movies.Add(new MovieCardViewModel(movie.Id.ToString(), movie.Title, new Uri(movie.Poster_path), movie.Overview,
+                if (!string.IsNullOrEmpty(movie.Poster_path))
+                {
+                    Movies.Add(new MovieCardViewModel(movie.Id.ToString(), movie.Title, new Uri(address + movie.Poster_path), movie.Overview,
                     movie.Release_date, movie.Vote_count.ToString(), movie.Popularity, movie.Original_language, eventAgg));
+                }                    
             }
 
             eventAgg.PublishOnUIThread(new ResultsReadyMessage());

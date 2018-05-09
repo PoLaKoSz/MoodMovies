@@ -29,8 +29,11 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Movie Properties
+        public int Vote_count { get; set; }
         private string _id;
         public string ID { get => _id; set { _id = value; NotifyOfPropertyChange(); } }
+        public bool Video { get; set; }
+        public double Vote_average { get; set; }
         private string _title;
         public string Title { get => _title; set { _title = value; NotifyOfPropertyChange(); } }
         private Uri imagepath;

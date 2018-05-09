@@ -10,24 +10,23 @@ using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.Logic
 {
-    internal class OnlineServiceProvider
+    internal static class OnlineServiceProvider
     {
-        public OnlineServiceProvider(IEventAggregator _event)
-        {
-            eventAgg = _event;
-            TmdbClient = new EasyClient("6d4b546936310f017557b2fb498b370b");
+        public static void SetupKey(string key)
+        {           
+            DbClient = new EasyClient(key);
         }
 
-        #region Events
-        public IEventAggregator eventAgg;
+        #region Properties
+        public static EasyClient DbClient;
+        private static IMovieApi MovieClient;
         #endregion
 
-        private readonly EasyClient TmdbClient;
 
-        public Task<MovieFullDetails> CallTmdbAsync()
+        public static async Task<MovieList> SearchByTitleAsync(string title)
         {
-            var movieApi = TmdbClient.GetApi<IMovieApi>().Value;
-            return movieApi.GetDetailsAsync(500);
+            MovieClient = DbClient.GetApi<IMovieApi>().Value;
+            return await MovieClient.SearchMoviesAsync(title);
         }
     }
 }

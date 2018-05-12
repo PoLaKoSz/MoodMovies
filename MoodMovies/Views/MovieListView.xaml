@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MoodMovies.Views"
              xmlns:cal="http://www.caliburnproject.org"
@@ -22,9 +23,9 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="80"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" x:Name="PreviousPage" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent">
-                    <materialDesign:PackIcon Kind="ChevronLeft" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                             Foreground="{StaticResource SecondaryAccentBrush}"/>
+                <Button Grid.Column="0" x:Name="PreviousPage" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent"
+                        Width="60" Height="60" HorizontalContentAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}">
+                    <iconPacks:MaterialLight Kind="ChevronLeft" Width="30" Height="30"/>
                 </Button>
                 <ScrollViewer x:Name="MovieScrollViewer" Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
                       VerticalAlignment="Center" HorizontalAlignment="Center" Width="{Binding ElementName=MainGrid, Path=ActualWidth}" >
@@ -37,9 +38,9 @@
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </ScrollViewer>
-                <Button Grid.Column="2" x:Name="NextPage" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent">
-                    <materialDesign:PackIcon Kind="ChevronRight" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                             Foreground="{StaticResource SecondaryAccentBrush}"/>
+                <Button Grid.Column="2" x:Name="NextPage" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent"
+                        Width="60" Height="60" HorizontalContentAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}">
+                    <iconPacks:MaterialLight Kind="ChevronRight" Width="30" Height="30"/>                   
                 </Button>
             </Grid>
         

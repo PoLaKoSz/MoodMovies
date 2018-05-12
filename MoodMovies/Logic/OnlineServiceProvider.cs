@@ -13,7 +13,7 @@ namespace MoodMovies.Logic
     internal static class OnlineServiceProvider
     {
         public static void SetupKey(string key)
-        {           
+        {
             DbClient = new EasyClient(key);
         }
 
@@ -23,10 +23,16 @@ namespace MoodMovies.Logic
         #endregion
 
 
-        public static async Task<MovieList> SearchByTitleAsync(string title)
+        public static Task<MovieList> SearchByTitleAsync(string title)
         {
             MovieClient = DbClient.GetApi<IMovieApi>().Value;
-            return await MovieClient.SearchMoviesAsync(title);
+            return MovieClient.SearchMoviesAsync(title);
+        }
+
+        public static Task<MovieList> SearchByActorAsync(string title)
+        {
+            MovieClient = DbClient.GetApi<IMovieApi>().Value;
+            return MovieClient.SearchMoviesAsync(title);
         }
     }
 }

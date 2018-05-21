@@ -8,16 +8,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-All you need is Visual Studio. The project does have a few dependencies which have been sourced through Nuget. They should all be included in the solution when you clone the repo. If not just hit restore Nuget packages and you are ready to go with one exception.
-CefSharp may show some errors regarding CPU targets and output folder paths. If you do have any issues follow this tutorial 
-[How to use CefSharp](https://www.youtube.com/watch?v=fOzBVy-sDbM) and you will be up and running in no time.
+All you need is Visual Studio. The project does have a few dependencies which have been sourced through Nuget. They should all be included in the solution when you clone the repo. If not just hit restore Nuget packages and you are ready to go.
  
 List of Dependencies
 ```
 -Caliburn Micro
 -Material Xaml Toolkit
 -NewtonSoft
--CefSharp
+-TMdbEasy Light-weight package I wrote to get data from TMdb Api v3
 ```
 
 ## Deployment
@@ -26,9 +24,7 @@ Deployment details still to come.
 
 ## Contributing
 
-Currently I am not accepting pull requests, however First-Time contributors are welcome to tackle an issue. Feel free to fork the repo if you wish to go off on your own.
-
-Exception
+I am Currently accepting pull requests, however I urge First-Time contributors to tackle an issue. Feel free to fork the repo if you wish to go off on your own or start contributing.
 
 ## Authors
 

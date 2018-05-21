@@ -49,6 +49,7 @@ namespace MoodMovies.ViewModels
         {
             TryClose();
         }
+
         public void RunShit()
         {
             IsLoading = true;

@@ -44,9 +44,6 @@ namespace MoodMovies.ViewModels
             GenreCollection.Add(new Genre("Romance", false));
             GenreCollection.Add(new Genre("Thriller", false));
             GenreCollection.Add(new Genre("Horror", false));
-
         }
     }
-
-    
 }

@@ -50,22 +50,6 @@
     <Reference Include="Caliburn.Micro.Platform.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CefSharp">
-      <HintPath>..\packages\CefSharp.Common.63.0.0\CefSharp\x86\CefSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CefSharp.BrowserSubprocess.Core">
-      <HintPath>..\packages\CefSharp.Common.63.0.0\CefSharp\x86\CefSharp.BrowserSubprocess.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CefSharp.Core">
-      <HintPath>..\packages\CefSharp.Common.63.0.0\CefSharp\x86\CefSharp.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CefSharp.Wpf">
-      <HintPath>..\packages\CefSharp.Wpf.63.0.0\CefSharp\x64\CefSharp.Wpf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
     </Reference>
@@ -123,6 +107,7 @@
     <Compile Include="Models\TrailerResult.cs" />
     <Compile Include="Resources\CommandImp.cs" />
     <Compile Include="Resources\Converters\Converters.cs" />
+    <Compile Include="Resources\PropertyCopier.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
     <Compile Include="ViewModels\ASearchViewModel.cs" />
     <Compile Include="ViewModels\FavouritesViewModel.cs" />

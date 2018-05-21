@@ -47,7 +47,7 @@ namespace MoodMovies.ViewModels
         public void BeginSearch()
         {
             //thisis where we need to check what options have been selected and what is the best search option for the user
-            
+
             if (string.IsNullOrEmpty(SearchText))
             {
                 //publish message
@@ -60,8 +60,8 @@ namespace MoodMovies.ViewModels
 
         public async void GetMovies(string text)
         {
-            eventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));           
-           
+            eventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
+
             //add support for all the api objects(movie full details etc)
             // remove all the rest of the clucky http stuff in searchviewmodel
             MovieList = await OnlineServiceProvider.SearchByTitleAsync(text);
@@ -74,13 +74,13 @@ namespace MoodMovies.ViewModels
             {
                 // return no search results via a message window
             }
-            
+
             IsLoading = false;
         }
         #endregion
 
         #region Private Methods     
-        
+
         #endregion
     }
 }

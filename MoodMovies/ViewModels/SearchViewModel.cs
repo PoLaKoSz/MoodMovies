@@ -6,6 +6,7 @@ using MoodMovies.Resources;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -21,6 +22,9 @@ namespace MoodMovies.ViewModels
         public SearchViewModel(IEventAggregator _event)
         {
             eventAgg = _event;
+
+            //need to write implementation to get user to input this one time and save to db or
+            //create a guest session
             OnlineServiceProvider.SetupKey("6d4b546936310f017557b2fb498b370b");
         }
 
@@ -40,6 +44,17 @@ namespace MoodMovies.ViewModels
         public string SimpleSearchBox { get => _simpleSearchBox; set { _simpleSearchBox = value; NotifyOfPropertyChange(); } }
         private string _searchText;
         public string SearchText { get => _searchText; set { _searchText = value; NotifyOfPropertyChange(); } }
+
+        private ObservableCollection<string> _batches = new ObservableCollection<string>();
+        public ObservableCollection<string> Batches { get => _batches; set { _batches = value; NotifyOfPropertyChange(); } }
+        private string _selectedBatch;
+        public string SelectedBatch { get => _selectedBatch; set { _selectedBatch = value; NotifyOfPropertyChange(); } }
+
+        private ObservableCollection<string> _moods = new ObservableCollection<string>();
+        public ObservableCollection<string> Moods { get => _moods; set { _moods = value; NotifyOfPropertyChange(); } }
+        private string _selectedMood;
+        public string SelectedMood { get => _selectedMood; set { _selectedMood = value; NotifyOfPropertyChange(); } }
+
         private MovieList MovieList = new MovieList();
         #endregion
 
@@ -80,7 +95,7 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Private Methods     
-
+       
         #endregion
     }
 }

@@ -46,7 +46,7 @@ namespace MoodMovies.ViewModels
         #region Public methods
         public void BeginSearch()
         {
-            //thisis where we need to check what options have been selected and what is the best search option for the user
+            //this is where we need to check what options have been selected and what is the best search option for the user
 
             if (string.IsNullOrEmpty(SearchText))
             {

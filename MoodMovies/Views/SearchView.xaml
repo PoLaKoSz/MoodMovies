@@ -67,11 +67,13 @@
             </Border>
             <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <ComboBox BorderBrush="Transparent" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="160"
-                         materialDesign:HintAssist.Hint="Source" materialDesign:HintAssist.HintOpacity="0.5" Margin="0,0,-15,0"
+                         materialDesign:HintAssist.Hint="Batch" materialDesign:HintAssist.HintOpacity="0.5" Margin="0,0,-15,0"
                          VerticalContentAlignment="Center" FontSize="17" IsEditable="False"
                           HorizontalContentAlignment="Center">
-                    <ComboBoxItem Content="Online Database" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
-                    <ComboBoxItem Content="Local Database" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <ComboBoxItem Content="Top Rated" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <ComboBoxItem Content="Upcoming" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <ComboBoxItem Content="Popular" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <ComboBoxItem Content="Now Playing" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                 </ComboBox>
             </Border>
             <Button Height="60" HorizontalAlignment="Center" Width="60" Style="{StaticResource MaterialDesignFlatButton}" Margin="20"

@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataModel.Data
+namespace DataModel.DataModel
 {
     public partial class User
     {
-        public string FullName
-        {
-            get { return string.Format("{0} Surname", User_Name); }
-        }
+        
     }
 }

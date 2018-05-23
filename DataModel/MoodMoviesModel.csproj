@@ -61,38 +61,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Data\EntityAddons.cs" />
-    <Compile Include="Data\MoodMoviesModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MoodMoviesModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\MoodMoviesModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MoodMoviesModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\MoodMoviesModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MoodMoviesModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Data\User.cs">
-      <DependentUpon>MoodMoviesModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="DataModel\DatabaseContext.cs" />
+    <Compile Include="DataModel\EntityAddons.cs" />
+    <Compile Include="DataModel\SQLiteConfiguration.cs" />
     <Compile Include="Logic\UserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
-    </None>
-    <EntityDeploy Include="Data\MoodMoviesModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MoodMoviesModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Data\MoodMoviesModel.edmx.diagram">
-      <DependentUpon>MoodMoviesModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -103,18 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\MoodMoviesModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MoodMoviesModel.edmx</DependentUpon>
-      <LastGenOutput>MoodMoviesModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Data\MoodMoviesModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MoodMoviesModel.edmx</DependentUpon>
-      <LastGenOutput>MoodMoviesModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

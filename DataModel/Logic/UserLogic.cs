@@ -9,27 +9,27 @@ namespace DataModel.Logic
 {
     public class UserLogic
     {
-        private MoodMoviesEntities db;
+        //private MoodMoviesEntities db;
 
         #region Get Procedures
-        public Task<User> GetUserDetails(int id, string username)
-        {
-            try
-            {
-                db = new MoodMoviesEntities();
-                User u = null;
-                u = db.Users.Where(x => x.User_ID == id && x.User_Name == username).FirstOrDefault();
-                if(u == null)
-                {
-                    throw new UserException("User does not Exist");
-                }
-                return Task.FromResult(u);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
+        //public Task<User> GetUserDetails(int id, string username)
+        //{
+            //try
+            //{
+            //    db = new MoodMoviesEntities();
+            //    User u = null;
+            //    u = db.Users.Where(x => x.User_ID == id && x.User_Name == username).FirstOrDefault();
+            //    if(u == null)
+            //    {
+            //        throw new UserException("User does not Exist");
+            //    }
+            //    return Task.FromResult(u);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw;
+            //}
+        //}
         #endregion
 
         #region Set Procedures

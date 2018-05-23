@@ -17,9 +17,9 @@ namespace MoodMovies.Logic
             userLogic = new UserLogic();
         }
 
-        public async Task<User> GetUserDetails(int id, string username)
-        {
-            return await userLogic.GetUserDetails(id,username);
-        }
+        //public async Task<User> GetUserDetails(int id, string username)
+        //{
+        //    return await userLogic.GetUserDetails(id,username);
+        //}
     }
 }

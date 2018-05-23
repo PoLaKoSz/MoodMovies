@@ -62,7 +62,7 @@ namespace MoodMovies.ViewModels
         public void BeginSearch()
         {
             UserControl u = new UserControl();
-            var user = u.GetUserDetails(1, "Tony");
+            //var user = u.GetUserDetails(1, "Tony");
             //this is where we need to check what options have been selected and what is the best search option for the user
 
             if (string.IsNullOrEmpty(SearchText))

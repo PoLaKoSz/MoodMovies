@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodMovies", "MoodMovies\MoodMovies.csproj", "{2B25B1E0-2EE9-4F21-8714-FAAC42D5F76C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{2DAA3B51-0AE2-4DFC-9C54-62065E105206}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodMoviesModel", "DataModel\MoodMoviesModel.csproj", "{2DAA3B51-0AE2-4DFC-9C54-62065E105206}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

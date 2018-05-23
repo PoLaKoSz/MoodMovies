@@ -29,7 +29,7 @@
           <Property Name="User_Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="User_Key" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="mainEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MoodMoviesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
         </EntityContainer>
       </Schema>
@@ -37,7 +37,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MainModelStoreContainer" CdmEntityContainer="mainEntities">
+        <EntityContainerMapping StorageEntityContainer="MainModelStoreContainer" CdmEntityContainer="MoodMoviesEntities">
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="MainModel.User">
               <MappingFragment StoreEntitySet="Users">

@@ -15,35 +15,35 @@ namespace MoodMovies.Logic
     {
         public static void SetupKey(string key)
         {
-            DbClient = new EasyClient(key);
+            OnlineClient = new EasyClient(key);
         }
 
         #region Properties
-        public static EasyClient DbClient;
+        public static EasyClient OnlineClient;
         private static IMovieApi MovieClient;
         #endregion
 
         public static Task<MovieList> SearchByTitleAsync(string title)
         {
-            MovieClient = DbClient.GetApi<IMovieApi>().Value;
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
             return MovieClient.SearchMoviesAsync(title);
         }
 
         public static Task<MovieList> SearchByActorAsync(string title)
         {
-            MovieClient = DbClient.GetApi<IMovieApi>().Value;
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
             return MovieClient.SearchMoviesAsync(title);
         }
 
         public static Task<MovieList> SearchTopRatedAsync(string language = "en")
         {
-            MovieClient = DbClient.GetApi<IMovieApi>().Value;
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
             return MovieClient.GetTopRatedAsync(language);
         }
 
         public static Task<MovieList> GetNowPlayingAsync(string language = "en")
         {
-            MovieClient = DbClient.GetApi<IMovieApi>().Value;
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
 
             var datedMovieList = MovieClient.GetNowPlayingAsync(language).Result;
 
@@ -52,7 +52,7 @@ namespace MoodMovies.Logic
 
         public static Task<MovieList> SearchUpcomingAsync(string language = "en")
         {
-            MovieClient = DbClient.GetApi<IMovieApi>().Value;
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
 
             var datedMovieList = MovieClient.GetUpcomingAsync(language).Result;
 
@@ -61,7 +61,7 @@ namespace MoodMovies.Logic
 
         public static Task<MovieList> SearchPopularAsync(string language = "en")
         {
-            MovieClient = DbClient.GetApi<IMovieApi>().Value;
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
 
             return MovieClient.GetPopularAsync(language);
         }

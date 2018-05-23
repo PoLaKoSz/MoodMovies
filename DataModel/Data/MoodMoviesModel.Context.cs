@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataModel
+namespace DataModel.Data
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class mainEntities : DbContext
+    public partial class MoodMoviesEntities : DbContext
     {
-        public mainEntities()
-            : base("name=mainEntities")
+        public MoodMoviesEntities()
+            : base("name=MoodMoviesEntities")
         {
         }
     

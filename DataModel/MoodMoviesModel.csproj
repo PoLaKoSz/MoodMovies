@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.108.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
@@ -62,7 +63,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DataModel\DatabaseContext.cs" />
-    <Compile Include="DataModel\EntityAddons.cs" />
+    <Compile Include="DataModel\Entities\User.cs" />
     <Compile Include="DataModel\SQLiteConfiguration.cs" />
     <Compile Include="Logic\UserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

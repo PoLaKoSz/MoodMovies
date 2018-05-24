@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace MoodMovies.Logic
 {
-    public class UserControl
+    public class OfflineServiceProvider
     {
-        //private readonly UserLogic userLogic;
-
-        public UserControl()
+        public OfflineServiceProvider()
         {
-           
-        }        
+
+        }
+
+        public void SetupDatabase()
+        {
+            UserLogic.DumpDatabase();
+        }
     }
 }

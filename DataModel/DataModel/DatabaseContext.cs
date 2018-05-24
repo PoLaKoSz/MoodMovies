@@ -37,7 +37,7 @@ namespace DataModel.DataModel
             base.OnModelCreating(modelBuilder);
         }
 
-        //List of the all the tables we will be using
+        //List of the all the tables we will be using. Any more tables would need to be added here as well as the entities directory
         public DbSet<Users> Users { get; set; }
     }
     

@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using MoodMovies.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +11,66 @@ using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.Logic
 {
-    internal static class OnlineServiceProvider
+    internal class OnlineServiceProvider
     {
-        public static void SetupKey(string key)
+        public void SetupKey(string key)
         {
-            DbClient = new EasyClient(key);
+            OnlineClient = new EasyClient(key);
         }
 
         #region Properties
-        public static EasyClient DbClient;
+        public static EasyClient OnlineClient;
         private static IMovieApi MovieClient;
         #endregion
 
-
-        public static Task<MovieList> SearchByTitleAsync(string title)
+        public static async Task<MovieList> SearchByTitleAsync(string title)
         {
-            MovieClient = DbClient.GetApi<IMovieApi>().Value;
-            return MovieClient.SearchMoviesAsync(title);
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
+            return await MovieClient.SearchMoviesAsync(title);
         }
 
-        public static Task<MovieList> SearchByActorAsync(string title)
+        public static async Task<MovieList> SearchByActorAsync(string title)
         {
-            MovieClient = DbClient.GetApi<IMovieApi>().Value;
-            return MovieClient.SearchMoviesAsync(title);
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
+            return await MovieClient.SearchMoviesAsync(title);
+        }
+
+        public static async Task<MovieList> SearchTopRatedAsync(string language = "en")
+        {
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
+            return await MovieClient.GetTopRatedAsync(language);
+        }
+
+        public static async Task<MovieList> GetNowPlayingAsync(string language = "en")
+        {
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
+
+            var datedMovieList = MovieClient.GetNowPlayingAsync(language).Result;
+
+            return await Task.Run(()=> MapDatedMovieList(datedMovieList));
+        }
+
+        public static async Task<MovieList> SearchUpcomingAsync(string language = "en")
+        {
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
+
+            var datedMovieList = MovieClient.GetUpcomingAsync(language).Result;
+
+            return await Task.Run(() => MapDatedMovieList(datedMovieList));
+        }
+
+        public static async Task<MovieList> SearchPopularAsync(string language = "en")
+        {
+            MovieClient = OnlineClient.GetApi<IMovieApi>().Value;
+
+            return await MovieClient.GetPopularAsync(language);
+        }
+
+        private static MovieList MapDatedMovieList(DatedMovieList dMovieList)
+        {
+            var movieList = new MovieList();
+            PropertyCopier<DatedMovieList,MovieList>.Copy(dMovieList, movieList);
+            return movieList;
         }
     }
 }

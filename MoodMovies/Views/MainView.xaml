@@ -79,19 +79,17 @@
                 <materialDesign:ColorZone Height="20" Mode="PrimaryDark" DockPanel.Dock="Top"/>
                 <materialDesign:ColorZone DockPanel.Dock="Top" Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid">
-                    <DockPanel>
-                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
-                                        x:Name="MenuToggleButton" DockPanel.Dock="Left"/>                       
-                        <!--right side popup menu-->
-                        <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
-                                         HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right">
-                            <StackPanel >
-                                <Button Content="Help" />                               
-                                <Separator/>
-                                <Button cal:Message.Attach="CloseApp" Content="Exit App" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                            </StackPanel>
-                        </materialDesign:PopupBox>
-                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!--Hamburger Menu-->
+                        <ToggleButton Grid.Column="0" Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                        x:Name="MenuToggleButton" HorizontalAlignment="Left" Width="50"/>
+                        <!--Title-->
+                        <DockPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Label Content="Moods &amp; Movies" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <iconPacks:PackIconModern Kind="MovieClapper" Width="30" Height="30" Foreground="{StaticResource SecondaryAccentMidBrush}" RenderTransformOrigin="0.5,0.5">
                                 <iconPacks:PackIconModern.RenderTransform>
@@ -103,8 +101,29 @@
                                     </TransformGroup>
                                 </iconPacks:PackIconModern.RenderTransform>
                             </iconPacks:PackIconModern>
-                        </DockPanel>                      
-                    </DockPanel>                    
+                        </DockPanel>
+                        <!--Language and popubox-->
+                        <!--right side popup menu-->
+                        <DockPanel Grid.Column="2" Width="120" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <ComboBox ItemsSource="{Binding Path=SupportedLanguages}" DisplayMemberPath="Value" 
+                                      DockPanel.Dock="Left" SelectedItem="{Binding Path=SelectedLanguage}">
+                            </ComboBox>
+                            <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
+                                         HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right">
+                                <StackPanel >
+                                    <Button Content="Help"/>
+                                    <Separator/>
+                                    <Button cal:Message.Attach="CloseApp" Content="Exit App" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </DockPanel>
+
+                    </Grid>
+
+                    
+                   
+                                           
+                       
                 </materialDesign:ColorZone>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource PrimaryHueLightBrush}">
                     <Grid.RowDefinitions>

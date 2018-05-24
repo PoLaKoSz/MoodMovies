@@ -88,12 +88,7 @@
                     <ComboBoxItem Content="Favourites" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     <ComboBoxItem Content="Watchlist" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>                   
                 </ComboBox>
-            </Border>
-            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
-                <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                         materialDesign:HintAssist.Hint="Language" materialDesign:HintAssist.HintOpacity="0.5"
-                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
-            </Border>
+            </Border>            
             <Button Height="60" HorizontalAlignment="Center" Width="60" Style="{DynamicResource MaterialDesignFlatButton}" Margin="20"
                     x:Name="BeginSearch">
                 <materialDesign:PackIcon Kind="DatabaseSearch" Width="30" Height="30" Foreground="{StaticResource SecondaryAccentMidBrush}"/>

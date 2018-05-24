@@ -57,28 +57,37 @@ namespace MoodMovies.ViewModels
         private string _selectedMood;
         public string SelectedMood { get => _selectedMood; set { _selectedMood = value; NotifyOfPropertyChange(); } }
 
+        private string _selectedSource;
+        public string SelectedSource { get => _selectedSource; set { _selectedSource = value; NotifyOfPropertyChange(); } }
+
         private MovieList MovieList = new MovieList();
         #endregion
 
         #region Public methods
         public async void BeginSearch()
         {
-            
-            OfflineServiceProvider offDb = new OfflineServiceProvider();
-            await offDb.CreateUser(new Users(){ User_Name = "test name1", User_Surname = "surname 2", User_ApiKey="liuhliuh"});
-            //this is where we need to check what options have been selected and what is the best search option for the user
+            CheckInputs();
 
-            if (string.IsNullOrEmpty(SearchText))
+            if(SelectedSource == "Online" || String.IsNullOrEmpty(SelectedSource))
             {
-                //publish message
+                if (string.IsNullOrEmpty(SearchText))
+                {
+                    //publish message
+                }
+                else
+                {
+                    await GetMoviesByTitle(SearchText);
+                }                
             }
-            else
+            else if( SelectedSource == "Favourites" || SelectedSource == "Watchlist")
             {
-                await GetMovies(SearchText);
+                OfflineServiceProvider offDb = new OfflineServiceProvider();
+                
+                //await offDb.CreateUser(new Users() { User_Name = "test name1", User_Surname = "surname 2", User_ApiKey = "liuhliuh" });
             }
         }
 
-        public async Task GetMovies(string text)
+        public async Task GetMoviesByTitle(string text)
         {
             eventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
 
@@ -100,7 +109,13 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Private Methods     
-       
+        /// <summary>
+        /// Checks what inputs are provided in order to perform the relevant searches
+        /// </summary>
+        private void CheckInputs()
+        {
+
+        }
         #endregion
     }
 }

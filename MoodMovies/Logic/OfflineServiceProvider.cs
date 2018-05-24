@@ -1,6 +1,5 @@
 ﻿using DataModel.DataModel;
 using DataModel.DataModel.Entities;
-using DataModel.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;

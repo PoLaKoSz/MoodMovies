@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using TMdbEasy.TmdbObjects.Movies;
 
@@ -57,8 +58,8 @@ namespace MoodMovies.ViewModels
         private string _selectedMood;
         public string SelectedMood { get => _selectedMood; set { _selectedMood = value; NotifyOfPropertyChange(); } }
 
-        private string _selectedSource;
-        public string SelectedSource { get => _selectedSource; set { _selectedSource = value; NotifyOfPropertyChange(); } }
+        private object _selectedSource;
+        public object SelectedSource { get => _selectedSource; set { _selectedSource = value; NotifyOfPropertyChange(); } }
 
         private MovieList MovieList = new MovieList();
         #endregion
@@ -67,23 +68,27 @@ namespace MoodMovies.ViewModels
         public async void BeginSearch()
         {
             CheckInputs();
+            if (SelectedSource is ComboBoxItem obj)
+            {
+                var value = Convert.ToString(obj.Content);
 
-            if(SelectedSource == "Online" || String.IsNullOrEmpty(SelectedSource))
-            {
-                if (string.IsNullOrEmpty(SearchText))
+                if (value == "Online" || String.IsNullOrEmpty(value))
                 {
-                    //publish message
+                    if (string.IsNullOrEmpty(SearchText))
+                    {
+                        //publish message
+                    }
+                    else
+                    {
+                        await GetMoviesByTitle(SearchText);
+                    }
                 }
-                else
+                else if (value == "Favourites" || value == "Watchlist")
                 {
-                    await GetMoviesByTitle(SearchText);
-                }                
-            }
-            else if( SelectedSource == "Favourites" || SelectedSource == "Watchlist")
-            {
-                OfflineServiceProvider offDb = new OfflineServiceProvider();
-                
-                //await offDb.CreateUser(new Users() { User_Name = "test name1", User_Surname = "surname 2", User_ApiKey = "liuhliuh" });
+                    OfflineServiceProvider offDb = new OfflineServiceProvider();
+
+                    //await offDb.CreateUser(new Users() { User_Name = "test name1", User_Surname = "surname 2", User_ApiKey = "liuhliuh" });
+                }
             }
         }
 

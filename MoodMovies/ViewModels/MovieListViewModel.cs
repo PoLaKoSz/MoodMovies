@@ -39,14 +39,15 @@ namespace MoodMovies.ViewModels
         #region IHandle methods
         public async void Handle(MovieListMessage message)
         {
+            Movies.Clear();
             await Task.Run(() =>
-            {
-                Movies.Clear();
+            {                
                 foreach (var movie in message.Movielist.Results)
                 {
                     if (!string.IsNullOrEmpty(movie.Poster_path))
                     {
-                        Movies.Add(new MovieCardViewModel(movie.Id.ToString(), movie.Title, new Uri(posterAddress + movie.Poster_path), movie.Overview,
+                        //force updating the list from a different thread using custom cross thread extension method
+                        Movies.AddOnUIThread(new MovieCardViewModel(movie.Id.ToString(), movie.Title, new Uri(posterAddress + movie.Poster_path), movie.Overview,
                         movie.Release_date, movie.Vote_count.ToString(), movie.Popularity, movie.Original_language, eventAgg));
                     }
                 }

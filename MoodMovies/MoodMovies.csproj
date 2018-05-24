@@ -127,6 +127,7 @@
     <Compile Include="Resources\CommandImp.cs" />
     <Compile Include="Resources\Converters\Converters.cs" />
     <Compile Include="Resources\Enums.cs" />
+    <Compile Include="Resources\Extensions.cs" />
     <Compile Include="Resources\PropertyCopier.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
     <Compile Include="ViewModels\ASearchViewModel.cs" />

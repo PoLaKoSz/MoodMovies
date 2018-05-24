@@ -44,14 +44,10 @@ namespace MoodMovies.ViewModels
         public string SimpleSearchBox { get => _simpleSearchBox; set { _simpleSearchBox = value; NotifyOfPropertyChange(); } }
         private string _searchText;
         public string SearchText { get => _searchText; set { _searchText = value; NotifyOfPropertyChange(); } }
-
-        private ObservableCollection<string> _batches = new ObservableCollection<string>();
-        public ObservableCollection<string> Batches { get => _batches; set { _batches = value; NotifyOfPropertyChange(); } }
+                
         private string _selectedBatch;
         public string SelectedBatch { get => _selectedBatch; set { _selectedBatch = value; NotifyOfPropertyChange(); } }
 
-        private ObservableCollection<string> _moods = new ObservableCollection<string>();
-        public ObservableCollection<string> Moods { get => _moods; set { _moods = value; NotifyOfPropertyChange(); } }
         private string _selectedMood;
         public string SelectedMood { get => _selectedMood; set { _selectedMood = value; NotifyOfPropertyChange(); } }
 
@@ -61,7 +57,7 @@ namespace MoodMovies.ViewModels
         #region Public methods
         public void BeginSearch()
         {
-            UserControl u = new UserControl();
+            
             OfflineServiceProvider offDb = new OfflineServiceProvider();
             offDb.SetupDatabase();
             //this is where we need to check what options have been selected and what is the best search option for the user

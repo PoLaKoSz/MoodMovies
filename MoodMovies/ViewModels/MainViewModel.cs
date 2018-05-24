@@ -22,6 +22,9 @@ namespace MoodMovies.ViewModels
         {
             eventAgg.Subscribe(this);
             InitialiseVMs();
+
+            //to be replaced
+            SelectedLanguage = SupportedLanguages.First();
         }
 
         #region Events
@@ -33,6 +36,12 @@ namespace MoodMovies.ViewModels
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
         private bool _isLoading;
         public bool IsLoading { get => _isLoading; set { _isLoading= value; NotifyOfPropertyChange(); } }
+
+        //this is just for testing. **To be replaced with Toms language localization code
+        private ObservableCollection<string> _supportedLanguages = new ObservableCollection<string>() { "English", "Hungarian", "Greek" };
+        public ObservableCollection<string> SupportedLanguages { get => _supportedLanguages; set { _supportedLanguages = value; NotifyOfPropertyChange(); } }
+        private string _selectedLanguage;
+        public string SelectedLanguage { get => _selectedLanguage; set { _selectedLanguage = value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Child View Models

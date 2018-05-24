@@ -11,10 +11,10 @@ namespace MoodMovies.Logic
 {
     public class OfflineServiceProvider : IServiceProvider
     {      
-        public void CreateUser(Users user)
+        public async Task CreateUser(Users user)
         {
             //check to see if a user already exists
-            Db.context.Users.Add(user);
+            await Task.Run(() => Db.context.Users.Add(user));
             Db.context.SaveChanges();
         }        
     }

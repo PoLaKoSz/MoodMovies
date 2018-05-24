@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using DataModel.DataModel.Entities;
 using MoodMovies.Logic;
 using MoodMovies.Messages;
 using MoodMovies.Models;
@@ -60,11 +61,11 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Public methods
-        public void BeginSearch()
+        public async void BeginSearch()
         {
             
             OfflineServiceProvider offDb = new OfflineServiceProvider();
-            offDb.SetupConnection();
+            await offDb.CreateUser(new Users(){ User_Name = "test name1", User_Surname = "surname 2", User_ApiKey="liuhliuh"});
             //this is where we need to check what options have been selected and what is the best search option for the user
 
             if (string.IsNullOrEmpty(SearchText))
@@ -73,11 +74,11 @@ namespace MoodMovies.ViewModels
             }
             else
             {
-                GetMovies(SearchText);
+                await GetMovies(SearchText);
             }
         }
 
-        public async void GetMovies(string text)
+        public async Task GetMovies(string text)
         {
             eventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
 
@@ -87,7 +88,7 @@ namespace MoodMovies.ViewModels
 
             if (MovieList.Results != null || MovieList.Results.Count != 0)
             {
-                eventAgg.BeginPublishOnUIThread(new MovieListMessage(MovieList, true, SearchText));
+                eventAgg.PublishOnUIThread(new MovieListMessage(MovieList, true, SearchText));
             }
             else
             {

@@ -13,24 +13,24 @@ using System.ComponentModel.DataAnnotations;
 namespace DataModel.DataModel.Entities
 {
     [Table(Name = "Users")]
-    public class User
+    public class Users
     {        
-        public User()
+        public Users()
         {
 
         }
 
         [Column(Name = "User_Id", IsDbGenerated = true, IsPrimaryKey = true, DbType = "INTEGER")]
         [Key]
-        public string User_Name { get; set; }
+        public int User_Id { get; set; }
 
         [Column(Name = "User_Name", DbType = "STRING")]
-        public string EmpName { get; set; }
+        public string User_Name { get; set; }
 
         [Column(Name = "User_Surname", DbType = "STRING")]
-        public double Salary { get; set; }
+        public String User_Surname { get; set; }
 
         [Column(Name = "User_ApiKey", DbType = "STRING")]
-        public string Designation { get; set; }
+        public string User_ApiKey { get; set; }
     }
 }

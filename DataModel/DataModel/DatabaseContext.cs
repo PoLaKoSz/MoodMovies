@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataModel.DataModel.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -28,6 +29,8 @@ namespace DataModel.DataModel
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<Users> Users { get; set; }
     }
     
 }

@@ -105,7 +105,8 @@
                         <!--Language and popubox-->
                         <!--right side popup menu-->
                         <DockPanel Grid.Column="2" Width="120" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                            <ComboBox ItemsSource="{Binding Path=SupportedLanguages}" DockPanel.Dock="Left" SelectedItem="{Binding Path=SelectedLanguage}">
+                            <ComboBox ItemsSource="{Binding Path=SupportedLanguages}" DisplayMemberPath="Value" 
+                                      DockPanel.Dock="Left" SelectedItem="{Binding Path=SelectedLanguage}">
                             </ComboBox>
                             <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
                                          HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right">

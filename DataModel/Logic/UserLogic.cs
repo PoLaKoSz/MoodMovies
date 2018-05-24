@@ -12,39 +12,7 @@ namespace DataModel.Logic
 {
     public static class UserLogic
     {        
-        private static DatabaseContext context;
-
-        public static void DumpDatabase()
-        {
-            var fullDbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies\\MoodMoviesDB.db");
-            if(!File.Exists(fullDbPath))
-            {
-                //grab the resource
-                var assembly = Assembly.GetExecutingAssembly();
-                var stream = assembly.GetManifestResourceStream("DataModel.Resources.MoodMoviesDB.db");
-
-                //create directory in AppData
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies"));
-
-                var fileStream = File.Create(fullDbPath);
-                stream.Seek(0, SeekOrigin.Begin);
-                stream.CopyTo(fileStream);
-                fileStream.Close();
-                //File.WriteAllBytes(fullDbPath, Properties.Resources.MoodMoviesDb.db);                
-            }
-
-            //set the connection string
-            context = new DatabaseContext(fullDbPath);
-
-            context.Users.Add(new Users()
-            {                
-                User_Name = "Ela",
-                User_Surname = "Maciejewska",
-                User_ApiKey="liygfi6wegkvh"
-            });
-
-            context.SaveChanges();
-        }
+        
         #region Get Procedures
         //public Task<User> GetUserDetails(int id, string username)
         //{

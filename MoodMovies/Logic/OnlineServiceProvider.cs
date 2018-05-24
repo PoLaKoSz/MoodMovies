@@ -11,9 +11,9 @@ using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.Logic
 {
-    internal static class OnlineServiceProvider
+    internal class OnlineServiceProvider
     {
-        public static void SetupKey(string key)
+        public void SetupKey(string key)
         {
             OnlineClient = new EasyClient(key);
         }

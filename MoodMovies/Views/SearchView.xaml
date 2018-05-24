@@ -66,12 +66,7 @@
                     <ComboBoxItem Content="Scared" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     <ComboBoxItem Content="Loved" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                 </ComboBox>
-            </Border>
-            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
-                <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                         materialDesign:HintAssist.Hint="Language" materialDesign:HintAssist.HintOpacity="0.5"
-                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
-            </Border>
+            </Border>           
             <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <ComboBox BorderBrush="Transparent" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="160"
                          materialDesign:HintAssist.Hint="I pick.." materialDesign:HintAssist.HintOpacity="0.5" Margin="0,0,-15,0"
@@ -83,6 +78,21 @@
                     <ComboBoxItem Content="Upcoming" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     <ComboBoxItem Content="Now Playing" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                 </ComboBox>
+            </Border>
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                <ComboBox BorderBrush="Transparent" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="160"
+                         materialDesign:HintAssist.Hint="Source.." materialDesign:HintAssist.HintOpacity="0.5" Margin="0,0,-15,0"
+                         VerticalContentAlignment="Center" FontSize="17" IsEditable="False" SelectedValue="{Binding Path=SelectedSource}"
+                          HorizontalContentAlignment="Center">
+                    <ComboBoxItem Content="Online" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <ComboBoxItem Content="Favourites" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <ComboBoxItem Content="Watchlist" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>                   
+                </ComboBox>
+            </Border>
+            <Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="White" Height="36" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                <TextBox Margin="15,0,15,0" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                         materialDesign:HintAssist.Hint="Language" materialDesign:HintAssist.HintOpacity="0.5"
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="17"/>
             </Border>
             <Button Height="60" HorizontalAlignment="Center" Width="60" Style="{DynamicResource MaterialDesignFlatButton}" Margin="20"
                     x:Name="BeginSearch">

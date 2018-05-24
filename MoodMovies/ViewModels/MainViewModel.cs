@@ -12,6 +12,8 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json;
 using MoodMovies.Models;
+using DataModel.DataModel;
+using DataModel.DataModel.Entities;
 
 namespace MoodMovies.ViewModels
 {
@@ -25,6 +27,9 @@ namespace MoodMovies.ViewModels
 
             //to be replaced
             SelectedLanguage = SupportedLanguages.First();
+
+            //initial setup of the database
+            Db.DumpDatabase();            
         }
 
         #region Events

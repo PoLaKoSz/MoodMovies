@@ -25,11 +25,16 @@ namespace MoodMovies.ViewModels
 
             //need to write implementation to get user to input this one time and save to db or
             //create a guest session
-            OnlineServiceProvider.SetupKey("6d4b546936310f017557b2fb498b370b");
+            onlineDb.SetupKey("6d4b546936310f017557b2fb498b370b");
         }
 
         #region Events
         public IEventAggregator eventAgg;
+        #endregion
+
+        #region providers
+        OfflineServiceProvider offDb = new OfflineServiceProvider();
+        OnlineServiceProvider onlineDb = new OnlineServiceProvider();
         #endregion
 
         #region General Properties
@@ -59,7 +64,7 @@ namespace MoodMovies.ViewModels
         {
             
             OfflineServiceProvider offDb = new OfflineServiceProvider();
-            offDb.SetupDatabase();
+            offDb.SetupConnection();
             //this is where we need to check what options have been selected and what is the best search option for the user
 
             if (string.IsNullOrEmpty(SearchText))

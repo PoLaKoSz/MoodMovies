@@ -12,6 +12,9 @@ namespace DataModel.DataModel
 {
     public class SQLiteConfiguration : DbConfiguration
     {
+        ///<summary>
+        ///Manually configure SQLite providers, outside of .config. Avoid some runtime issues
+        ///</summary>        
         public SQLiteConfiguration()
         {
             SetProviderFactory("System.Data.SQLite", SQLiteFactory.Instance);

@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SearchView_TextBox_Title" xml:space="preserve">
+    <value>Filmcím</value>
+  </data>
+  <data name="SearchView_TextBox_Actor" xml:space="preserve">
+    <value>Színész(nő)</value>
+  </data>
+  <data name="SearchView_Genre_ComboBox_Hint" xml:space="preserve">
+    <value>Jó lenne ...</value>
+  </data>
+  <data name="SearchView_Genre_ComboBoxItem_Happy" xml:space="preserve">
+    <value>egy kis vidámság</value>
+  </data>
+  <data name="SearchView_Genre_ComboBoxItem_Everything" xml:space="preserve">
+    <value>bármi</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_Hint" xml:space="preserve">
+    <value>További szűrők ...</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_Popular" xml:space="preserve">
+    <value>Híres</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_Upcoming" xml:space="preserve">
+    <value>Közelgő</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_NowPlaying" xml:space="preserve">
+    <value>Jelenleg játszák</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_Everything" xml:space="preserve">
+    <value>KIkapcsolva</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_TopRated" xml:space="preserve">
+    <value>Jegjobbra értékelve</value>
+  </data>
+  <data name="SearchView_Source_ComboBox_Hint" xml:space="preserve">
+    <value>Keresés helye ...</value>
+  </data>
+  <data name="SearchView_Source_ComboBox_Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="SearchView_Source_ComboBox_Favourites" xml:space="preserve">
+    <value>Kedvencekből</value>
+  </data>
+  <data name="SearchView_Source_ComboBox_WatchList" xml:space="preserve">
+    <value>Megnézendőkből</value>
+  </data>
+  <data name="MainView_Button_Help" xml:space="preserve">
+    <value>Segítség</value>
+  </data>
+  <data name="MainView_Button_Exit" xml:space="preserve">
+    <value>Alkalmazás bezárása</value>
+  </data>
+  <data name="MainView_Menubar_Button_Search" xml:space="preserve">
+    <value>Keresés</value>
+  </data>
+  <data name="MainView_Menubar_Button_WatchList" xml:space="preserve">
+    <value>Megnézendők</value>
+  </data>
+  <data name="MainView_Menubar_Button_Favourites" xml:space="preserve">
+    <value>Kedvencek</value>
+  </data>
+  <data name="MainView_Menubar_Button_Results" xml:space="preserve">
+    <value>Keresési találatok</value>
+  </data>
+  <data name="MovieCardView_Button_ViewTrailer" xml:space="preserve">
+    <value>Előzetes megtekintése</value>
+  </data>
+  <data name="MovieCardView_Button_Released" xml:space="preserve">
+    <value>Kiadva:</value>
+  </data>
+  <data name="MovieCardView_Button_Language" xml:space="preserve">
+    <value>Nyelv:</value>
+  </data>
+  <data name="MovieCardView_Button_VotesCount" xml:space="preserve">
+    <value>Szavazatok száma:</value>
+  </data>
+  <data name="MovieCardView_Button_Popularity" xml:space="preserve">
+    <value>Híres</value>
+  </data>
+  <data name="MovieCardView_ToggleButton_AddToWatchList" xml:space="preserve">
+    <value>Megnézendőkhöz adás</value>
+  </data>
+  <data name="MovieCardView_ToggleButton_AddToFavourites" xml:space="preserve">
+    <value>Kedvencekhez adás</value>
+  </data>
+  <data name="SearchView_Genre_ComboBoxItem_Thrilled" xml:space="preserve">
+    <value>egy kis akció</value>
+  </data>
+  <data name="SearchView_Genre_ComboBoxItem_Scared" xml:space="preserve">
+    <value>egy kis félelem</value>
+  </data>
+  <data name="SearchView_Genre_ComboBoxItem_Loved" xml:space="preserve">
+    <value>egy kis szerelem</value>
+  </data>
+</root>

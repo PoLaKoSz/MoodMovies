@@ -15,6 +15,8 @@ using MoodMovies.Models;
 using DataModel.DataModel;
 using DataModel.DataModel.Entities;
 using System.Collections;
+using WPFLocalizeExtension.Engine;
+using System.Globalization;
 
 namespace MoodMovies.ViewModels
 {
@@ -25,11 +27,8 @@ namespace MoodMovies.ViewModels
         {
             eventAgg.Subscribe(this);
             InitialiseVMs();
-            //setup languages
-            SetupLanguages();
             
-            //to be replaced
-            SelectedLanguage = SupportedLanguages.First();
+            LocalizeDictionary.Instance.Culture = new CultureInfo("en");
 
             //initial setup of the database
             Db.DumpDatabase();            
@@ -44,12 +43,6 @@ namespace MoodMovies.ViewModels
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
         private bool _isLoading;
         public bool IsLoading { get => _isLoading; set { _isLoading= value; NotifyOfPropertyChange(); } }
-
-        //this is just for testing. **To be replaced with Toms language localization code
-        private Dictionary<string, string> _supportedLanguages = new Dictionary<string, string>();
-        public Dictionary<string, string> SupportedLanguages { get => _supportedLanguages; set { _supportedLanguages = value; NotifyOfPropertyChange(); } }
-        private KeyValuePair<string,string> _selectedLanguage;
-        public KeyValuePair<string, string> SelectedLanguage { get => _selectedLanguage; set { _selectedLanguage = value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Child View Models
@@ -86,13 +79,6 @@ namespace MoodMovies.ViewModels
             eventAgg.Subscribe(FavouriteVM);
 
             ActivateItem(SearchVM);
-        }
-
-        private void SetupLanguages()
-        {
-            SupportedLanguages.Add("en-US", "English");
-            SupportedLanguages.Add("hu-HU", "Hungarian");
-            SupportedLanguages.Add("gr-GR", "Greek");
         }
         #endregion
 

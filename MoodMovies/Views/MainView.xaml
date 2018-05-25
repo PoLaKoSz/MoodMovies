@@ -11,8 +11,12 @@
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" FontSize="17"
              d:DesignHeight="300" Width="1190" MinWidth="1190" Height="600" MinHeight="600" 
-        WindowStartupLocation="CenterScreen" Title="Moods &amp; Movies" 
-        Icon="/MoodMovies;component/Resources/Images/moodmoviesorange.ico">
+        WindowStartupLocation="CenterScreen" Title="Moods &amp; Movies"
+        Icon="/MoodMovies;component/Resources/Images/moodmoviesorange.ico"        
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="MoodMovies"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings">
     <materialDesign:DialogHost IsOpen="{Binding Path=IsLoading}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <materialDesign:DialogHost.DialogContent>
             <Grid>
@@ -34,7 +38,7 @@
                     </Grid>
                     <StackPanel Margin="0,20,0,0">
                         <!--Search-->
-                    <materialDesign:Chip Margin="7" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Center"
+                    <materialDesign:Chip Margin="7" Content="{lex:Loc MainView_Menubar_Button_Search}" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}" Background="{StaticResource PrimaryHueLightBrush}"
                            cal:Message.Attach="DisplaySearchVM" IconForeground="LawnGreen"
@@ -43,8 +47,8 @@
                             <materialDesign:PackIcon Kind="Magnify"/>
                         </materialDesign:Chip.Icon>
                     </materialDesign:Chip>
-                    <!--results-->
-                    <materialDesign:Chip Margin="7" Content="Results" HorizontalAlignment="Left" VerticalAlignment="Center"
+                    <!--Results-->
+                    <materialDesign:Chip Margin="7" Content="{lex:Loc MainView_Menubar_Button_Results}" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}" Background="{StaticResource PrimaryHueLightBrush}"
                            cal:Message.Attach="DisplayMovieListVM" FontSize="17"
@@ -54,7 +58,7 @@
                             </materialDesign:Chip.Icon>
                     </materialDesign:Chip>
                     <!--Favourites button-->
-                    <materialDesign:Chip Margin="7" Content="Favourites" HorizontalAlignment="Left" VerticalAlignment="Center"
+                    <materialDesign:Chip Margin="7" Content="{lex:Loc MainView_Menubar_Button_Favourites}" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}" Background="{StaticResource PrimaryHueLightBrush}"
                            cal:Message.Attach="DisplayFavouriteVM" FontSize="17"
@@ -64,7 +68,7 @@
                         </materialDesign:Chip.Icon>
                     </materialDesign:Chip>
                     <!--WatchList-->
-                    <materialDesign:Chip Margin="7" Content="WatchList" HorizontalAlignment="Left" VerticalAlignment="Center"
+                    <materialDesign:Chip Margin="7" Content="{lex:Loc MainView_Menubar_Button_WatchList}" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}" Background="{StaticResource PrimaryHueLightBrush}"
                            Foreground="black" FontSize="17" IconForeground="#FFC229C2">
@@ -105,25 +109,20 @@
                         <!--Language and popubox-->
                         <!--right side popup menu-->
                         <DockPanel Grid.Column="2" Width="120" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                            <ComboBox ItemsSource="{Binding Path=SupportedLanguages}" DisplayMemberPath="Value" 
-                                      DockPanel.Dock="Left" SelectedItem="{Binding Path=SelectedLanguage}">
-                            </ComboBox>
+                            <ComboBox ItemsSource="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=MergedAvailableCultures}"
+                                      SelectedItem="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture}"
+                                      DisplayMemberPath="NativeName"
+                                      DockPanel.Dock="Left" />
                             <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
                                          HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right">
-                                <StackPanel >
-                                    <Button Content="Help"/>
+                                <StackPanel>
+                                    <Button Content="{lex:Loc MainView_Button_Help}"/>
                                     <Separator/>
-                                    <Button cal:Message.Attach="CloseApp" Content="Exit App" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                                    <Button cal:Message.Attach="CloseApp" Content="{lex:Loc MainView_Button_Exit}" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                                 </StackPanel>
                             </materialDesign:PopupBox>
                         </DockPanel>
-
                     </Grid>
-
-                    
-                   
-                                           
-                       
                 </materialDesign:ColorZone>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource PrimaryHueLightBrush}">
                     <Grid.RowDefinitions>

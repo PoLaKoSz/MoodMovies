@@ -9,7 +9,11 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300"
-             FontFamily="Yu Gothic UI Semilight">
+             FontFamily="Yu Gothic UI Semilight"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:LocalizeDictionary.DesignCulture="en"
+             lex:ResxLocalizationProvider.DefaultAssembly="MoodMovies"
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings">
     <Grid Width="300" Height="450" Focusable="True" cal:Message.Attach="[Event MouseEnter] = [Action SetSelectedItem]">
             <materialDesign:Card Padding="0" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <materialDesign:DrawerHost 
@@ -42,7 +46,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Released: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
+                                <TextBlock Grid.Column="0" Text="{lex:Loc MovieCardView_Button_Released}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="{Binding Path=ReleaseDate}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
                                Margin="0,5,5,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
@@ -52,7 +56,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Language: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
+                                <TextBlock Grid.Column="0" Text="{lex:Loc MovieCardView_Button_Language}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="{Binding Path=Language}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
                                Margin="0,5,5,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
@@ -62,7 +66,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="No. of Votes: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
+                                <TextBlock Grid.Column="0" Text="{lex:Loc MovieCardView_Button_VotesCount}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="{Binding Path=VoteCount}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}" 
                                Margin="0,5,5,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
@@ -72,14 +76,14 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Popularity: " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
+                                <TextBlock Grid.Column="0" Text="{lex:Loc MovieCardView_Button_Popularity}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}" 
                                Margin="0,5,0,0" FontSize="17" TextOptions.TextFormattingMode="Display" TextAlignment="Center"/>
                                 <ProgressBar  Grid.Column="1" Value="{Binding Path=Popularity}" HorizontalAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Center"
                                       MinHeight="15" Foreground="{StaticResource PrimaryHueMidBrush}" Background="{StaticResource PrimaryHueDarkBrush}" 
                                Margin="0,6,5,0" FontSize="17" TextOptions.TextFormattingMode="Display" Minimum="0" Maximum="100" FlowDirection="RightToLeft"/>
                             </Grid>
                             <Button cal:Message.Attach="[Event Click] = [Action RequestTrailer]" Grid.Row="6" Margin="2" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 				        
-				        Style="{DynamicResource MaterialDesignFlatButton}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="Auto" Content="View Trailer"/>
+				        Style="{DynamicResource MaterialDesignFlatButton}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="Auto" Content="{lex:Loc MovieCardView_Button_ViewTrailer}"/>
                         </Grid>
                     </Button>
 
@@ -105,7 +109,7 @@
                             <ColumnDefinition Width="0.5*"/>
                         </Grid.ColumnDefinitions>
                         <materialDesign:RatingBar Grid.Column="0" x:Name="MovieRatingBar" Value="3"  Background="{StaticResource SecondaryAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <ToggleButton Grid.Column="1" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="Add to WatchList" Background="#FF424242">
+                        <ToggleButton Grid.Column="1" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToWatchList}" Background="#FF424242">
                             <ToggleButton.Content>
                                 <materialDesign:PackIcon  Kind="Bookmark"/>
                             </ToggleButton.Content>
@@ -113,7 +117,7 @@
                                 <materialDesign:PackIcon Kind="Bookmark" Foreground="Green" />
                             </materialDesign:ToggleButtonAssist.OnContent>
                         </ToggleButton>
-                        <ToggleButton Grid.Column="2" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="Add to Favourites" Background="#FF424242">
+                        <ToggleButton Grid.Column="2" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToFavourites}" Background="#FF424242">
                             <ToggleButton.Content>
                                 <materialDesign:PackIcon  Kind="Heart"/>
                             </ToggleButton.Content>

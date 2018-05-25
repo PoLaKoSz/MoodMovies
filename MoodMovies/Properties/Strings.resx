@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SearchView_TextBox_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="SearchView_TextBox_Actor" xml:space="preserve">
+    <value>Actor</value>
+  </data>
+  <data name="SearchView_Genre_ComboBox_Hint" xml:space="preserve">
+    <value>I feel ...</value>
+  </data>
+  <data name="SearchView_Genre_ComboBoxItem_Happy" xml:space="preserve">
+    <value>Happy</value>
+  </data>
+  <data name="SearchView_Genre_ComboBoxItem_Thrilled" xml:space="preserve">
+    <value>Thrilled</value>
+  </data>
+  <data name="SearchView_Genre_ComboBoxItem_Scared" xml:space="preserve">
+    <value>Scared</value>
+  </data>
+  <data name="SearchView_Genre_ComboBoxItem_Loved" xml:space="preserve">
+    <value>Loved</value>
+  </data>
+  <data name="SearchView_Genre_ComboBoxItem_Everything" xml:space="preserve">
+    <value>Everything</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_Hint" xml:space="preserve">
+    <value>I pick ...</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_TopRated" xml:space="preserve">
+    <value>Top Rated</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_Popular" xml:space="preserve">
+    <value>Popular</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_Upcoming" xml:space="preserve">
+    <value>Upcoming</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_NowPlaying" xml:space="preserve">
+    <value>Now Playing</value>
+  </data>
+  <data name="SearchView_Filter_ComboBox_Everything" xml:space="preserve">
+    <value>Everything</value>
+  </data>
+  <data name="SearchView_Source_ComboBox_Hint" xml:space="preserve">
+    <value>Source ...</value>
+  </data>
+  <data name="SearchView_Source_ComboBox_Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="SearchView_Source_ComboBox_Favourites" xml:space="preserve">
+    <value>Favourites</value>
+  </data>
+  <data name="SearchView_Source_ComboBox_WatchList" xml:space="preserve">
+    <value>WatchList</value>
+  </data>
+  <data name="MainView_Button_Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="MainView_Button_Exit" xml:space="preserve">
+    <value>Exit App</value>
+  </data>
+  <data name="MainView_Menubar_Button_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="MainView_Menubar_Button_Results" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="MainView_Menubar_Button_Favourites" xml:space="preserve">
+    <value>Favourites</value>
+  </data>
+  <data name="MainView_Menubar_Button_WatchList" xml:space="preserve">
+    <value>WatchList</value>
+  </data>
+  <data name="MovieCardView_Button_ViewTrailer" xml:space="preserve">
+    <value>View Trailer</value>
+  </data>
+  <data name="MovieCardView_Button_Released" xml:space="preserve">
+    <value>Released:</value>
+  </data>
+  <data name="MovieCardView_Button_Language" xml:space="preserve">
+    <value>Language:</value>
+  </data>
+  <data name="MovieCardView_Button_VotesCount" xml:space="preserve">
+    <value>No. of Votes:</value>
+  </data>
+  <data name="MovieCardView_Button_Popularity" xml:space="preserve">
+    <value>Popularity</value>
+  </data>
+  <data name="MovieCardView_ToggleButton_AddToWatchList" xml:space="preserve">
+    <value>Add to WatchList</value>
+  </data>
+  <data name="MovieCardView_ToggleButton_AddToFavourites" xml:space="preserve">
+    <value>Add to Favourites</value>
+  </data>
+</root>

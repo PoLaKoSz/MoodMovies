@@ -24,13 +24,13 @@ namespace DataModel.DataModel.Entities
         [Key]
         public int User_Id { get; set; }
 
-        [Column(Name = "User_Name", DbType = "STRING")]
+        [Column(Name = "User_Name", DbType = "STRING", CanBeNull = false)]
         public string User_Name { get; set; }
 
-        [Column(Name = "User_Surname", DbType = "STRING")]
+        [Column(Name = "User_Surname", DbType = "STRING", CanBeNull = false)]
         public String User_Surname { get; set; }
 
-        [Column(Name = "User_ApiKey", DbType = "STRING")]
+        [Column(Name = "User_ApiKey", DbType = "STRING", CanBeNull = false)]
         public string User_ApiKey { get; set; }
     }
 }

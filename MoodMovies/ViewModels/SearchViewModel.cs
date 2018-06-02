@@ -89,6 +89,11 @@ namespace MoodMovies.ViewModels
 
                     await offDb.CreateUser(new Users() { User_Name = "test name1", User_Surname = "surname 2", User_ApiKey = "liuhliuh" });
                     await offDb.CreateMovie(new Movies() { Movie_Id = 12345, Vote_count = 12, Video =true, Vote_average = 12, Title = "TestMovie", Popularity = 560, Adult = true });
+                    var user = await offDb.GetFirstUser();
+                    var movie = await offDb.GetFirstMovie();
+                    await offDb.AddToWatchList(user, movie);
+                    
+                    //await
                 }
             }
         }

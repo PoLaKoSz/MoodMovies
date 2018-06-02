@@ -33,6 +33,9 @@ namespace DataModel.DataModel
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User_Movies>()
+            .HasKey(x => new { x.User_Id, x.Movie_Id });
+
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
         }
@@ -40,6 +43,7 @@ namespace DataModel.DataModel
         //List of the all the tables we will be using. Any more tables would need to be added here as well as the entities directory
         public DbSet<Users> Users { get; set; }
         public DbSet<Movies> Movies { get; set; }
+        public DbSet<User_Movies> UserMovies { get; set; }
     }
     
 }

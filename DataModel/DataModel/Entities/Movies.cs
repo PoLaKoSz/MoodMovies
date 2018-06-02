@@ -40,5 +40,7 @@ namespace DataModel.DataModel.Entities
         public string Overview { get; set; }
         [Column(Name = "Release_Date", DbType = "STRING", CanBeNull = true)]
         public string Release_date { get; set; }
+
+        public virtual ICollection<User_Movies> Users { get; set; }
     }    
 }

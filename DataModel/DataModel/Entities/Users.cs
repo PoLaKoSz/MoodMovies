@@ -28,9 +28,11 @@ namespace DataModel.DataModel.Entities
         public string User_Name { get; set; }
 
         [Column(Name = "User_Surname", DbType = "STRING", CanBeNull = false)]
-        public String User_Surname { get; set; }
+        public string User_Surname { get; set; }
 
         [Column(Name = "User_ApiKey", DbType = "STRING", CanBeNull = false)]
         public string User_ApiKey { get; set; }
+
+        public virtual ICollection<User_Movies> Movies { get; set; }
     }
 }

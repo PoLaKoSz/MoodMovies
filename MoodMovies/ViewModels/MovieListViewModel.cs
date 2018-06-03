@@ -47,8 +47,8 @@ namespace MoodMovies.ViewModels
                     if (!string.IsNullOrEmpty(movie.Poster_path))
                     {
                         //force updating the list from a different thread using custom cross thread extension method
-                        Movies.AddOnUIThread(new MovieCardViewModel(movie.Id.ToString(), movie.Title, new Uri(posterAddress + movie.Poster_path), movie.Overview,
-                        movie.Release_date, movie.Vote_count.ToString(), movie.Popularity, movie.Original_language, eventAgg));
+                        Movies.AddOnUIThread(new MovieCardViewModel(movie.Id, movie.Title, new Uri(posterAddress + movie.Poster_path), movie.Overview,
+                        movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, eventAgg));
                     }
                 }
             });

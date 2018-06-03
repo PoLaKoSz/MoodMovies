@@ -12,14 +12,18 @@ namespace MoodMovies.ViewModels
 {
     public class MovieCardViewModel: Screen
     {
-        public MovieCardViewModel(string id, string title, Uri imagepath, string overview, string releasedate, string votecount, double popularity, string language, IEventAggregator _event)
+        public MovieCardViewModel(int id, string title, Uri imagepath, string overview, string releasedate, int votecount, double voteAverage, bool video, bool adult, double popularity, string language, IEventAggregator _event)
         {
-            ID = id;
+            Movie_Id = id;
             Title = title;
             ImagePath = imagepath;
+            Poster_path = imagepath.ToString();
             Overview = overview;
             ReleaseDate = releasedate;
-            VoteCount = votecount;
+            Vote_count = votecount;
+            Vote_average = voteAverage;
+            Video = video;
+            Adult = adult;
             Popularity = popularity;
             Language = language;
             myEvent = _event;
@@ -31,20 +35,21 @@ namespace MoodMovies.ViewModels
 
         #region Movie Properties
         public int Vote_count { get; set; }
-        private string _id;
-        public string ID { get => _id; set { _id = value; NotifyOfPropertyChange(); } }
+        private int _id;
+        public int Movie_Id { get => _id; set { _id = value; NotifyOfPropertyChange(); } }
         public bool Video { get; set; }
+        public bool Adult { get; set; }
         public double Vote_average { get; set; }
         private string _title;
         public string Title { get => _title; set { _title = value; NotifyOfPropertyChange(); } }
+        private string posterpath;
+        public string Poster_path { get => posterpath; set { posterpath = value; NotifyOfPropertyChange(); } }
         private Uri imagepath;
         public Uri ImagePath { get => imagepath; set { imagepath = value; NotifyOfPropertyChange(); } }
         private string _overview;
         public string Overview { get => _overview; set { _overview = value; NotifyOfPropertyChange(); } }
         private string _releaseDate;
-        public string ReleaseDate { get => _releaseDate; set { _releaseDate = value; NotifyOfPropertyChange(); } }
-        private string _voteCount;
-        public string VoteCount { get => _voteCount; set { _voteCount = value; NotifyOfPropertyChange(); } }
+        public string ReleaseDate { get => _releaseDate; set { _releaseDate = value; NotifyOfPropertyChange(); } }       
         private double _popularity;
         public double Popularity { get => _popularity; set { _popularity = value; NotifyOfPropertyChange(); } }
         private string _language;
@@ -58,30 +63,36 @@ namespace MoodMovies.ViewModels
         {
             myEvent.PublishOnUIThread(this);
         }
-
+        /// <summary>
+        /// Adds or removes a movie from thewatchlist. Fires an event with a message
+        /// </summary>
+        /// <param name="sender"></param>
         public void AddToWatchList(object sender)
         {
-            var button = sender as ToggleButton;         
-            if (button.IsChecked == true)
-            {
-                myEvent.PublishOnUIThread(new RemoveFromWatchListMessage(this));
-            }
-            else
+            var isChecked = (bool)sender;       
+            if (isChecked == true)
             {
                 myEvent.PublishOnUIThread(new AddToWatchListMessage(this));
             }
+            else
+            {
+                myEvent.PublishOnUIThread(new RemoveFromWatchListMessage(this));               
+            }
         }
-
+        /// <summary>
+        /// Adds or removes a movie from the favourites. Fires an event with a message
+        /// </summary>
+        /// <param name="sender"></param>
         public void AddToFavourites(object sender)
         {
-            var button = sender as ToggleButton;
-            if (button.IsChecked == true)
+            var isChecked = (bool)sender;
+            if (isChecked == true)
             {
-                myEvent.PublishOnUIThread(new RemoveFromFavouritesMessage(this));
+                myEvent.PublishOnUIThread(new AddToFavouritesMessage(this));
             }
             else
             {
-                myEvent.PublishOnUIThread(new AddToFavouritesMessage(this));
+                myEvent.PublishOnUIThread(new RemoveFromFavouritesMessage(this));
             }
         }
         #endregion
@@ -89,7 +100,7 @@ namespace MoodMovies.ViewModels
         #region Ihandle Interface
         public void RequestTrailer()
         {
-            myEvent.PublishOnUIThread(ID);
+            myEvent.PublishOnUIThread(Movie_Id);
         }
         #endregion
 

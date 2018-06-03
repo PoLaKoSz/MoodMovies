@@ -19,7 +19,7 @@ using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.ViewModels
 {
-    internal class SearchViewModel : Screen
+    internal class SearchViewModel : Screen, IHandle<>
     {
         public SearchViewModel(IEventAggregator _event)
         {

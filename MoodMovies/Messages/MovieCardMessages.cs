@@ -7,43 +7,48 @@ using System.Threading.Tasks;
 
 namespace MoodMovies.Messages
 {
-    public class AddToWatchListMessage
+    public class AddToWatchListMessage : IMovieCardMessage
     {
         public AddToWatchListMessage(MovieCardViewModel mvCard)
         {
-            MovieVM = mvCard;
+            MovieCard = mvCard;
         }
 
-        public MovieCardViewModel MovieVM { get; private set; }
+        public MovieCardViewModel MovieCard { get; private set; }
     }
 
-    public class RemoveFromWatchListMessage
+    public class RemoveFromWatchListMessage : IMovieCardMessage
     {
         public RemoveFromWatchListMessage(MovieCardViewModel mvCard)
         {
-            MovieVM = mvCard;
+            MovieCard = mvCard;
         }
 
-        public MovieCardViewModel MovieVM { get; private set; }
+        public MovieCardViewModel MovieCard { get; private set; }
     }
 
-    public class AddToFavouritesMessage
+    public class AddToFavouritesMessage : IMovieCardMessage
     {
         public AddToFavouritesMessage(MovieCardViewModel mvCard)
         {
-            MovieVM = mvCard;
+            MovieCard = mvCard;
         }
 
-        public MovieCardViewModel MovieVM { get; private set; }
+        public MovieCardViewModel MovieCard { get; private set; }
     }
 
-    public class RemoveFromFavouritesMessage
+    public class RemoveFromFavouritesMessage : IMovieCardMessage
     {
         public RemoveFromFavouritesMessage(MovieCardViewModel mvCard)
         {
-            MovieVM = mvCard;
+            MovieCard = mvCard;
         }
 
-        public MovieCardViewModel MovieVM { get; private set; }
+        public MovieCardViewModel MovieCard { get; private set; }
+    }
+
+    public interface IMovieCardMessage
+    {
+        MovieCardViewModel MovieCard { get; }
     }
 }

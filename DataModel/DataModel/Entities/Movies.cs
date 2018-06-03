@@ -15,7 +15,7 @@ namespace DataModel.DataModel.Entities
 
         [Column(Name = "Vote_Count", DbType = "STRING", CanBeNull = false)]
         public int Vote_count { get; set; }
-        [Column(Name = "Movie_Id", IsDbGenerated = true, IsPrimaryKey = true, DbType = "INTEGER")]
+        [Column(Name = "Movie_Id", IsDbGenerated = false, IsPrimaryKey = true, DbType = "INTEGER")]        
         [Key]
         public int Movie_Id { get; set; }
         [Column(Name = "Video", DbType = "BOOLEAN", CanBeNull = false)]

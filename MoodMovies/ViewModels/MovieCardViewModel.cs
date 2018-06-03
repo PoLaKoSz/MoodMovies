@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Windows.Controls.Primitives;
 using Caliburn.Micro;
 using MoodMovies.Messages;
 using MoodMovies.Views;
@@ -56,6 +57,32 @@ namespace MoodMovies.ViewModels
         public void SetSelectedItem()
         {
             myEvent.PublishOnUIThread(this);
+        }
+
+        public void AddToWatchList(object sender)
+        {
+            var button = sender as ToggleButton;         
+            if (button.IsChecked == true)
+            {
+                myEvent.PublishOnUIThread(new RemoveFromWatchListMessage(this));
+            }
+            else
+            {
+                myEvent.PublishOnUIThread(new AddToWatchListMessage(this));
+            }
+        }
+
+        public void AddToFavourites(object sender)
+        {
+            var button = sender as ToggleButton;
+            if (button.IsChecked == true)
+            {
+                myEvent.PublishOnUIThread(new RemoveFromFavouritesMessage(this));
+            }
+            else
+            {
+                myEvent.PublishOnUIThread(new AddToFavouritesMessage(this));
+            }
         }
         #endregion
 

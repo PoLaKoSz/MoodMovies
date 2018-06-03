@@ -60,8 +60,22 @@ namespace MoodMovies.Logic
                 Db.context.Set<User_Movies>().Add(new User_Movies()
                 {
                     Movie_Id = movie.Movie_Id,
-                    User_Id = user.User_Id
+                    User_Id = user.User_Id,
+                    Watchlist = true
                 });
+                Db.context.SaveChanges();
+            });
+        }
+        /// <summary>
+        /// Add a movie to the movie table
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task AddMovie(Movies movie)
+        {
+            await Task.Run(() => {
+                Db.context.Set<Movies>().Add(movie);
                 Db.context.SaveChanges();
             });
         }

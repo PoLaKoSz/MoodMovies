@@ -71,7 +71,8 @@ namespace MoodMovies.ViewModels
             if (SelectedSource is ComboBoxItem obj)
             {
                 var value = Convert.ToString(obj.Content);
-
+                //this needs to change(add a viewmodel and associate an enum possibly) translation wont work here
+                //or never translate this
                 if (value == "Online" || String.IsNullOrEmpty(value))
                 {
                     if (string.IsNullOrEmpty(SearchText))
@@ -87,8 +88,8 @@ namespace MoodMovies.ViewModels
                 {
                     OfflineServiceProvider offDb = new OfflineServiceProvider();
 
-                    await offDb.CreateUser(new Users() { User_Name = "test name1", User_Surname = "surname 2", User_ApiKey = "liuhliuh" });
-                    await offDb.CreateMovie(new Movies() { Movie_Id = 12345, Vote_count = 12, Video =true, Vote_average = 12, Title = "TestMovie", Popularity = 560, Adult = true });
+                    //await offDb.CreateUser(new Users() { User_Name = "test name1", User_Surname = "surname 2", User_ApiKey = "liuhliuh" });
+                    //await offDb.CreateMovie(new Movies() { Movie_Id = 12345, Vote_count = 12, Video =true, Vote_average = 12, Title = "TestMovie", Popularity = 560, Adult = true });
                     var user = await offDb.GetFirstUser();
                     var movie = await offDb.GetFirstMovie();
                     await offDb.AddToWatchList(user, movie);
@@ -102,8 +103,7 @@ namespace MoodMovies.ViewModels
         {
             eventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
 
-            //add support for all the api objects(movie full details etc)
-            // remove all the rest of the clucky http stuff in searchviewmodel
+            //add support for all the api objects(movie full details etc)            
             MovieList = await OnlineServiceProvider.SearchByTitleAsync(text);
 
             if (MovieList.Results != null || MovieList.Results.Count != 0)

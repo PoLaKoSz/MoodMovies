@@ -14,10 +14,10 @@
         <materialDesign:DialogHost>
             <materialDesign:DialogHost.DialogContent>
                 <Grid Width="800" Height="400" Background="{StaticResource PrimaryHueDarkBrush}">
-                    
+
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
-            <Grid>
+            <Grid>               
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="*"/>
@@ -40,11 +40,11 @@
                 </ScrollViewer>
                 <Button Grid.Column="2" x:Name="NextPage" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent"
                         Width="60" Height="60" HorizontalContentAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}">
-                    <iconPacks:MaterialLight Kind="ChevronRight" Width="30" Height="30"/>                   
+                    <iconPacks:MaterialLight Kind="ChevronRight" Width="30" Height="30"/>
                 </Button>
             </Grid>
-        
-        <!--{Binding ElementName=MovieScrollViewer, Path=ViewportWidth}"-->
+
+            <!--{Binding ElementName=MovieScrollViewer, Path=ViewportWidth}"-->
         </materialDesign:DialogHost>
     </Grid>
 </UserControl>

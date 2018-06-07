@@ -87,14 +87,8 @@ namespace MoodMovies.ViewModels
                     }
                 }
                 else if (value == "Favourites" || value == "Watchlist")
-                {                  
-                    //await offDb.CreateUser(new Users() { User_Name = "test name1", User_Surname = "surname 2", User_ApiKey = "liuhliuh" });
-                    //await offDb.CreateMovie(new Movies() { Movie_Id = 12345, Vote_count = 12, Video =true, Vote_average = 12, Title = "TestMovie", Popularity = 560, Adult = true });
-                    var user = await offDb.GetFirstUser();
-                    var movie = await offDb.GetFirstMovie();
-                    await offDb.AddToWatchList(user, movie);
-                    
-                    //await
+                {         
+                    //search the watchlist/favourites
                 }
             }
         }
@@ -158,11 +152,19 @@ namespace MoodMovies.ViewModels
             //get the user from a static class that will contain all the various users
             // for now this is ok ****************
             //first add the movie to the database
-            await offDb.AddMovie(movie);
-            //then create the link between the user and the movie and the watchlist
-            var user = await offDb.GetFirstUser();
+            try
+            {
+                await offDb.AddMovie(movie);
+                //then create the link between the user and the movie and the watchlist
+                var user = await offDb.GetFirstUser();
+                await offDb.AddToWatchList(user, movie);
+            }
+            catch
+            {
+
+            }
+          
             
-            await offDb.AddToWatchList(user, movie);
         }
 
         public async Task RemoveMovieFromWatchList(MovieCardViewModel mvCard)

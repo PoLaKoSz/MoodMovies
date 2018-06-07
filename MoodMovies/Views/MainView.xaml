@@ -71,6 +71,7 @@
                     <materialDesign:Chip Margin="7" Content="{lex:Loc MainView_Menubar_Button_WatchList}" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                            CommandParameter="{x:Static Dock.Left}" Background="{StaticResource PrimaryHueLightBrush}"
+                           cal:Message.Attach="DisplayWatchListVM"
                            Foreground="black" FontSize="17" IconForeground="#FFC229C2">
                         <materialDesign:Chip.Icon>
                             <materialDesign:PackIcon Kind="Watch" />

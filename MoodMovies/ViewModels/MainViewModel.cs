@@ -52,6 +52,8 @@ namespace MoodMovies.ViewModels
         public MovieListViewModel MovieListVM { get => movieListVM; set { movieListVM = value; NotifyOfPropertyChange(); } }
         private FavouritesViewModel _favouriteVM;
         public FavouritesViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
+        private WatchListViewModel _watchListVM;
+        public WatchListViewModel WatchListVM { get => _watchListVM; set { _watchListVM = value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Public Methods
@@ -73,10 +75,12 @@ namespace MoodMovies.ViewModels
             Items.Add(SearchVM = new SearchViewModel(eventAgg));
             Items.Add(MovieListVM = new MovieListViewModel(eventAgg));
             Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg));
+            Items.Add(WatchListVM = new WatchListViewModel(eventAgg));
 
             eventAgg.Subscribe(SearchVM);
             eventAgg.Subscribe(MovieListVM);
             eventAgg.Subscribe(FavouriteVM);
+            eventAgg.Subscribe(WatchListVM);
 
             ActivateItem(SearchVM);
         }
@@ -99,6 +103,12 @@ namespace MoodMovies.ViewModels
         {
             DeactivateItem(ActiveItem, true);
             ActivateItem(FavouriteVM);
+        }
+
+        public void DisplayWatchListVM()
+        {
+            DeactivateItem(ActiveItem, true);
+            ActivateItem(WatchListVM);
         }
 
         public void Handle(ResultsReadyMessage message)

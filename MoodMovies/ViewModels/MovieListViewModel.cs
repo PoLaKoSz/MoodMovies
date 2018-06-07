@@ -25,9 +25,9 @@ namespace MoodMovies.ViewModels
 
         #region Properties
         private ObservableCollection<MovieCardViewModel> movies = new ObservableCollection<MovieCardViewModel>();
-        protected ObservableCollection<MovieCardViewModel> Movies { get => movies; set { movies = value; NotifyOfPropertyChange(); } }
+        public ObservableCollection<MovieCardViewModel> Movies { get => movies; set { movies = value; NotifyOfPropertyChange(); } }
         private MovieCardViewModel _selectedItem;
-        protected MovieCardViewModel SelectedItem { get => _selectedItem; set { _selectedItem = value; NotifyOfPropertyChange(); } }
+        public MovieCardViewModel SelectedItem { get => _selectedItem; set { _selectedItem = value; NotifyOfPropertyChange(); } }
         #endregion
 
         protected const string posterAddress = "https://image.tmdb.org/t/p/w500/";

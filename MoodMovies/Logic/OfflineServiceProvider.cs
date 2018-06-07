@@ -59,7 +59,7 @@ namespace MoodMovies.Logic
             await Task.Run(()=> {
                 Db.context.Set<User_Movies>().Add(new User_Movies()
                 {
-                    Movie_Id = movie.Movie_Id,
+                    UId = movie.Movie_Id,
                     User_Id = user.User_Id,
                     Watchlist = true
                 });
@@ -74,10 +74,18 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task AddMovie(Movies movie)
         {
-            await Task.Run(() => {
-                Db.context.Set<Movies>().Add(movie);
-                Db.context.SaveChanges();
-            });
+            try
+            {
+                await Task.Run(() =>
+                {
+                    Db.context.Set<Movies>().Add(movie);
+                    Db.context.SaveChanges();
+                });
+            }
+            catch
+            {
+                //movie exists already
+            }
         }
     }
 }

@@ -34,7 +34,7 @@ namespace DataModel.DataModel
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User_Movies>()
-            .HasKey(x => new { x.User_Id, x.Movie_Id });
+            .HasKey(x => new { x.User_Id, x.UId });
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);

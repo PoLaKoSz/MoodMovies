@@ -13,11 +13,13 @@ namespace DataModel.DataModel.Entities
     {
         public Movies() { }
 
-        [Column(Name = "Vote_Count", DbType = "STRING", CanBeNull = false)]
-        public int Vote_count { get; set; }
-        [Column(Name = "Movie_Id", IsDbGenerated = false, IsPrimaryKey = true, DbType = "INTEGER")]        
+        [Column(Name = "UId", IsDbGenerated = true, IsPrimaryKey = true, DbType = "INTEGER NOT NULL" )]
         [Key]
+        public int UId { get; set; }
+        [Column(Name = "Movie_Id", IsDbGenerated = false, DbType = "INTEGER NOT NULL")]
         public int Movie_Id { get; set; }
+        [Column(Name = "Vote_Count", DbType = "STRING", CanBeNull = false)]
+        public int Vote_count { get; set; }        
         [Column(Name = "Video", DbType = "BOOLEAN", CanBeNull = false)]
         public bool Video { get; set; }
         [Column(Name = "Vote_Average", DbType = "DOUBLE", CanBeNull = false)]

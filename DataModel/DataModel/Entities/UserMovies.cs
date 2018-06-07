@@ -18,13 +18,11 @@ namespace DataModel.DataModel.Entities
         }
 
         [Column(Name = "User_Id", IsDbGenerated = false, IsPrimaryKey = true, DbType = "INTEGER")]
-        [Key]
-        //[Schema.ForeignKey("User_Id")]
+        [Key] 
         public int User_Id { get; set; }
-        [Column(Name = "Movie_Id", IsDbGenerated = false, IsPrimaryKey = true, DbType = "INTEGER")]
-        [Key]
-        //[Schema.ForeignKey("Movie_Id")]
-        public int Movie_Id { get; set; }
+        [Column(Name = "UId", IsDbGenerated = false, IsPrimaryKey = true, DbType = "INTEGER")]
+        [Key]       
+        public int UId { get; set; }
         [Column(Name = "Favourite", IsDbGenerated = false, IsPrimaryKey = false, DbType = "BOOLEAN")]
         public bool Favourite { get; set; }
         [Column(Name = "Watchlist", IsDbGenerated = false, IsPrimaryKey = false, DbType = "BOOLEAN")]

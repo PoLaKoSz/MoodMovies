@@ -7,17 +7,12 @@ using Caliburn.Micro;
 
 namespace MoodMovies.ViewModels
 {
-    public class FavouritesViewModel: MovieListViewModel
+    public class WatchListViewModel : MovieListViewModel
     {
-        public FavouritesViewModel(IEventAggregator _event) : base(_event)
+        public WatchListViewModel(IEventAggregator _event) : base(_event)
         {
             DisplayName = "Favourites";
-            eventAgg = _event;
         }
-
-        #region Events
-        public IEventAggregator eventAgg;
-        #endregion
 
         #region Fields
 

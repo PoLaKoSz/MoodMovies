@@ -148,19 +148,23 @@
     <Compile Include="Resources\PropertyCopier.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
     <Compile Include="ViewModels\ASearchViewModel.cs" />
+    <Compile Include="ViewModels\WatchListViewModel.cs" />
     <Compile Include="ViewModels\FavouritesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MovieCardViewModel.cs" />
     <Compile Include="ViewModels\MovieListViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
-    <Compile Include="Views\FavouritesView.xaml.cs">
-      <DependentUpon>FavouritesView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MovieCardView.xaml.cs">
       <DependentUpon>MovieCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FavouritesView.xaml.cs">
+      <DependentUpon>FavouritesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WatchListView.xaml.cs">
+      <DependentUpon>WatchListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MovieListView.xaml.cs">
       <DependentUpon>MovieListView.xaml</DependentUpon>
@@ -172,10 +176,6 @@
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\FavouritesView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -183,6 +183,14 @@
     <Page Include="Views\MovieCardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FavouritesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WatchListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MovieListView.xaml">
       <SubType>Designer</SubType>

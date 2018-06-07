@@ -12,12 +12,7 @@ namespace MoodMovies.ViewModels
         public FavouritesViewModel(IEventAggregator _event) : base(_event)
         {
             DisplayName = "Favourites";
-            eventAgg = _event;
         }
-
-        #region Events
-        public IEventAggregator eventAgg;
-        #endregion
 
         #region Fields
 

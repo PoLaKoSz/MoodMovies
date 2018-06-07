@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using MoodMovies.Logic;
 
 namespace MoodMovies.ViewModels
 {
@@ -19,11 +20,17 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Properties
-
+        OfflineServiceProvider offDb = new OfflineServiceProvider();
         #endregion
 
         #region Methods
+        public async Task LoadWatchListItems()
+        {
+            var user = await offDb.GetFirstUser();
+            var movies = await offDb.GetAllWatchListItems(user);
 
+            //build up the movie card view models
+        }
         #endregion
 
     }

@@ -80,8 +80,7 @@ namespace MoodMovies.Logic
 
         #region WatchList methods
         public async Task AddToWatchList(Users user, Movies movie)
-        {
-            
+        {            
             await Task.Run(()=> {
                 Db.context.Set<User_Movies>().Add(new User_Movies()
                 {
@@ -91,6 +90,15 @@ namespace MoodMovies.Logic
                 });
                 Db.context.SaveChanges();
             });
+        }
+
+        public async Task<List<Movies>> GetAllWatchListItems(Users user)
+        {
+            var links = await Task.Run(() => Db.context.UserMovies.Where(x => x.User_Id == user.User_Id));
+            List<Movies> movies = null;
+
+            //needs implementation
+            return movies;
         }
         #endregion
         

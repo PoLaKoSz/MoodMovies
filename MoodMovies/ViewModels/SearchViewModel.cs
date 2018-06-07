@@ -161,7 +161,7 @@ namespace MoodMovies.ViewModels
             }
             catch
             {
-
+                //ping an message to the user if necessary
             }
           
             

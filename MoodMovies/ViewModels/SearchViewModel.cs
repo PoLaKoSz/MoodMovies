@@ -174,7 +174,24 @@ namespace MoodMovies.ViewModels
 
         public async Task AddMovieToFavourites(MovieCardViewModel mvCard)
         {
-            //await
+            var movie = new Movies();
+            //copy the properties that can be copied
+            PropertyCopier<MovieCardViewModel, Movies>.Copy(mvCard, movie);
+
+            //get the user from a static class that will contain all the various users
+            // for now this is ok ****************
+            //first add the movie to the database
+            try
+            {
+                await offDb.AddMovie(movie);
+                //then create the link between the user and the movie and the watchlist
+                var user = await offDb.GetFirstUser();
+                await offDb.AddToFavourites(user, movie);
+            }
+            catch
+            {
+                //ping a message to the user if necessary
+            }
         }
 
         public async Task RemoveMovieFromFavourites(MovieCardViewModel mvCard)

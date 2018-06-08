@@ -28,7 +28,7 @@ namespace DataModel.DataModel.Entities
         [Column(Name = "Watchlist", IsDbGenerated = false, IsPrimaryKey = false, DbType = "BOOLEAN")]
         public bool Watchlist {get; set;}
 
-        public Movies Movie { get; set; }
-        public Users User { get; set; }
+        //public Movies Movie { get; set; }
+        //public Users User { get; set; }
     }
 }

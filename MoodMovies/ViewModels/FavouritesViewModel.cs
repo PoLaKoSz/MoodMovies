@@ -29,12 +29,16 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Loads up movie cards for the favourite items that are found
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadFavouriteItems()
         {
             try
             {
                 var user = await offDb.GetFirstUser();      //replace by getting from static class**********
-                var movies = await offDb.GetAllWatchListItems(user);
+                var movies = await offDb.GetAllFavouriteItems(user);
                 //build up the movie card view models
                 Movies.Clear();
                 await Task.Run(() =>

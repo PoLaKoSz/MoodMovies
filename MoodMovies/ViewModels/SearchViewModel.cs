@@ -37,7 +37,7 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region providers
-        OfflineServiceProvider offDb = new OfflineServiceProvider();
+        OfflineServiceProvider offlineDb = new OfflineServiceProvider();
         OnlineServiceProvider onlineDb = new OnlineServiceProvider();
         #endregion
 
@@ -154,17 +154,15 @@ namespace MoodMovies.ViewModels
             //first add the movie to the database
             try
             {
-                await offDb.AddMovie(movie);
+                await offlineDb.AddMovie(movie);
                 //then create the link between the user and the movie and the watchlist
-                var user = await offDb.GetFirstUser();
-                await offDb.AddToWatchList(user, movie);
+                var user = await offlineDb.GetFirstUser();
+                await offlineDb.AddToWatchList(user, movie);
             }
             catch
             {
                 //ping an message to the user if necessary
-            }
-          
-            
+            }         
         }
 
         public async Task RemoveMovieFromWatchList(MovieCardViewModel mvCard)
@@ -180,13 +178,22 @@ namespace MoodMovies.ViewModels
 
             //get the user from a static class that will contain all the various users
             // for now this is ok ****************
-            //first add the movie to the database
             try
             {
-                await offDb.AddMovie(movie);
-                //then create the link between the user and the movie and the watchlist
-                var user = await offDb.GetFirstUser();
-                await offDb.AddToFavourites(user, movie);
+                try
+                {
+                    await offlineDb.AddMovie(movie);
+                }
+                catch
+                {
+                    //movie already exists
+                }
+                finally
+                {
+                    //then create the link between the user and the movie and the watchlist
+                    var user = await offlineDb.GetFirstUser();
+                    await offlineDb.AddToFavourites(user, movie);
+                }                
             }
             catch
             {

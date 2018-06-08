@@ -37,7 +37,7 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region providers
-        OfflineServiceProvider offlineDb = new OfflineServiceProvider();
+        readonly OfflineServiceProvider offlineDb = new OfflineServiceProvider();
         OnlineServiceProvider onlineDb = new OnlineServiceProvider();
         #endregion
 

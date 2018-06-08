@@ -27,22 +27,30 @@ namespace MoodMovies.ViewModels
         #region Methods
         public async Task LoadWatchListItems()
         {
-            var user = await offDb.GetFirstUser();
-            var movies = await offDb.GetAllWatchListItems(user);
-            //build up the movie card view models
-            Movies.Clear();
-            await Task.Run(() =>
+            try
             {
-                foreach (var movie in movies)
+                var user = await offDb.GetFirstUser();          //replace by getting from static class**********
+                var movies = await offDb.GetAllWatchListItems(user);
+                //build up the movie card view models
+                Movies.Clear();
+                await Task.Run(() =>
                 {
-                    if (!string.IsNullOrEmpty(movie.Poster_path))
+                    foreach (var movie in movies)
                     {
+                        if (!string.IsNullOrEmpty(movie.Poster_path))
+                        {
                         //force updating the list from a different thread using custom cross thread extension method
                         Movies.AddOnUIThread(new MovieCardViewModel(movie.Movie_Id, movie.Title, new Uri(movie.Poster_path), movie.Overview,
-                        movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, eventAgg));
+                            movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, eventAgg));
+                        }
                     }
-                }
-            });
+                });
+            }
+            catch
+            {
+                throw;
+                //implement some error handling*************
+            }
 
         }
         #endregion

@@ -79,6 +79,12 @@ namespace MoodMovies.Logic
         #endregion
 
         #region WatchList methods
+        /// <summary>
+        /// Adds a movie to the watchlist
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="movie"></param>
+        /// <returns></returns>
         public async Task AddToWatchList(Users user, Movies movie)
         {            
             await Task.Run(()=> {
@@ -91,16 +97,48 @@ namespace MoodMovies.Logic
                 Db.context.SaveChanges();
             });
         }
-
+        /// <summary>
+        /// Returns all movies linked to a specific user as a watchlist item
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<List<Movies>> GetAllWatchListItems(Users user)
         {
-            var links = await Task.Run(() => Db.context.UserMovies.Where(x => x.User_Id == user.User_Id));
-            List<Movies> movies = null;
-
-            //needs implementation
-            return movies;
+            var links = await Task.Run(() => Db.context.UserMovies.Where(x => x.User_Id == user.User_Id && x.Watchlist == true));
+            return await Task.Run(() => Db.context.Movies.Join(links, x => x.Movie_Id, y => y.UId, (x, y) => x).ToList());
         }
         #endregion
-        
+
+        #region Favourite methods
+        /// <summary>
+        /// Adds a movie to the favourites list
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task AddToFavourites(Users user, Movies movie)
+        {
+            await Task.Run(() => {
+                Db.context.Set<User_Movies>().Add(new User_Movies()
+                {
+                    UId = movie.Movie_Id,
+                    User_Id = user.User_Id,
+                    Favourite = true
+                });
+                Db.context.SaveChanges();
+            });
+        }
+        /// <summary>
+        /// Returns all movies linked to a specific user as a favourites item
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public async Task<List<Movies>> GetAllFavouriteItems(Users user)
+        {
+            var links = await Task.Run(() => Db.context.UserMovies.Where(x => x.User_Id == user.User_Id && x.Favourite == true));
+            return await Task.Run(() => Db.context.Movies.Join(links, x => x.Movie_Id, y => y.UId, (x, y) => x).ToList());
+        }
+        #endregion
+
     }
 }

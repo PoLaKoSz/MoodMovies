@@ -7,7 +7,7 @@ using Caliburn.Micro;
 
 namespace MoodMovies.ViewModels
 {
-    public class FavouritesViewModel: MovieListViewModel
+    public class FavouritesViewModel: ListBaseViewModel
     {
         public FavouritesViewModel(IEventAggregator _event) : base(_event)
         {

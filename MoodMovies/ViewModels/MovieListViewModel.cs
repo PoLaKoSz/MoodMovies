@@ -12,25 +12,12 @@ using MoodMovies.Resources;
 
 namespace MoodMovies.ViewModels
 {
-    public class MovieListViewModel : Screen, IHandle<MovieListMessage>, IHandle<MovieCardViewModel>
+    public class MovieListViewModel : ListBaseViewModel, IHandle<MovieListMessage>, IHandle<MovieCardViewModel>
     {
-        public MovieListViewModel(IEventAggregator events)
+        public MovieListViewModel(IEventAggregator events):base(events)
         {
-            eventAgg = events;
-            eventAgg.Subscribe(this);
+
         }
-        #region Events
-        protected readonly IEventAggregator eventAgg;
-        #endregion
-
-        #region Properties
-        private ObservableCollection<MovieCardViewModel> movies = new ObservableCollection<MovieCardViewModel>();
-        public ObservableCollection<MovieCardViewModel> Movies { get => movies; set { movies = value; NotifyOfPropertyChange(); } }
-        private MovieCardViewModel _selectedItem;
-        public MovieCardViewModel SelectedItem { get => _selectedItem; set { _selectedItem = value; NotifyOfPropertyChange(); } }
-        #endregion
-
-        protected const string posterAddress = "https://image.tmdb.org/t/p/w500/";
 
         #region Public Methods       
 

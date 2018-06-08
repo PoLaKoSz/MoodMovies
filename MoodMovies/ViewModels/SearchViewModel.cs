@@ -19,7 +19,7 @@ using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.ViewModels
 {
-    internal class SearchViewModel : Screen, IHandle<IMovieCardMessage>
+    internal class SearchViewModel : Screen
     {
         public SearchViewModel(IEventAggregator _event)
         {
@@ -120,79 +120,6 @@ namespace MoodMovies.ViewModels
         private void CheckInputs()
         {
 
-        }
-        #endregion
-
-        #region
-        public async void Handle(IMovieCardMessage message)
-        {
-            switch (message)
-            {
-                case AddToWatchListMessage addWatch:
-                    await AddMovieToWatchList(message.MovieCard);
-                    break;
-                case RemoveFromWatchListMessage removeWatch:
-                    await RemoveMovieFromWatchList(message.MovieCard);
-                    break;
-                case AddToFavouritesMessage addFavourites:
-                    await AddMovieToFavourites(message.MovieCard);
-                    break;
-                case RemoveFromFavouritesMessage removeFavourites:
-                    await RemoveMovieFromFavourites(message.MovieCard);
-                    break;
-            }
-        }
-
-        public async Task AddMovieToWatchList(MovieCardViewModel mvCard)
-        {
-            var movie = new Movies();
-            //copy the properties that can be copied
-            PropertyCopier<MovieCardViewModel, Movies>.Copy(mvCard, movie);
-
-            try
-            {
-                if( await offlineDb.AddMovie(movie) )
-                {
-                    //then create the link between the user and the movie and the watchlist
-                    var user = await offlineDb.GetFirstUser();  //this will betaken from static class******************
-                    await offlineDb.AddToWatchList(user, movie);
-                }                                               
-            }
-            catch
-            {
-                //ping a message to the user if necessary
-            }         
-        }
-
-        public async Task RemoveMovieFromWatchList(MovieCardViewModel mvCard)
-        {
-            //await
-        }
-
-        public async Task AddMovieToFavourites(MovieCardViewModel mvCard)
-        {
-            var movie = new Movies();
-            //copy the properties that can be copied
-            PropertyCopier<MovieCardViewModel, Movies>.Copy(mvCard, movie);
-
-            try
-            {
-               if(await offlineDb.AddMovie(movie))
-                {
-                    //then create the link between the user and the movie and the watchlist
-                    var user = await offlineDb.GetFirstUser(); //this must be taken from static class*************************
-                    await offlineDb.AddToFavourites(user, movie);
-                }
-            }
-            catch
-            {
-                //ping a message to the user if necessary
-            }
-        }
-
-        public async Task RemoveMovieFromFavourites(MovieCardViewModel mvCard)
-        {
-            //await
         }
         #endregion
     }

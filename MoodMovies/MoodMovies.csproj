@@ -148,6 +148,7 @@
     <Compile Include="Resources\PropertyCopier.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
     <Compile Include="ViewModels\ASearchViewModel.cs" />
+    <Compile Include="ViewModels\ListBaseViewModel.cs" />
     <Compile Include="ViewModels\WatchListViewModel.cs" />
     <Compile Include="ViewModels\FavouritesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

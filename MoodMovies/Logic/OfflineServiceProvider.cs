@@ -52,19 +52,29 @@ namespace MoodMovies.Logic
         /// <param name="user"></param>
         /// <param name="movie"></param>
         /// <returns></returns>
-        public async Task AddMovie(Movies movie)
+        public async Task<bool> AddMovie(Movies movie)
         {
             try
             {
-                await Task.Run(() =>
+                if (Db.context.Movies.Any(x => x.Movie_Id == movie.Movie_Id))
                 {
-                    Db.context.Set<Movies>().Add(movie);
-                    Db.context.SaveChanges();
-                });
+                    //movie exists already
+                    return false;
+                }
+                else
+                {
+                    await Task.Run(() =>
+                    {
+                        Db.context.Set<Movies>().Add(movie);
+                        Db.context.SaveChanges();
+                    });
+                    return true;
+                }                    
             }
             catch
             {
-                //movie exists already
+                //error
+                return false;                
             }
         }
         /// <summary>

@@ -134,7 +134,10 @@ namespace MoodMovies.ViewModels
                 }
                 else
                 {
-                    //get the movie we want and manipulate it
+                    var user = await offlineDb.GetFirstUser(); //this must be taken from static class*************************
+                    var usermovie = await offlineDb.GetUserMovieLink(user, movie);
+                    //modify it
+                    //save it
                 }
             }
             catch

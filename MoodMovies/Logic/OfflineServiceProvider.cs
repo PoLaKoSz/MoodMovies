@@ -47,6 +47,15 @@ namespace MoodMovies.Logic
             Db.context.SaveChanges();
         }
         /// <summary>
+        /// gets the usermovie link between a user and a movie
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task<User_Movies> GetUserMovieLink(Users user, Movies movie)
+        {
+            return await Task.Run(() => Db.context.UserMovies.Where(x => x.UId == movie.Movie_Id && x.User_Id == user.User_Id).SingleOrDefault());
+        }
+        /// <summary>
         /// Add a movie to the movie table
         /// </summary>
         /// <param name="user"></param>

@@ -99,10 +99,11 @@ namespace MoodMovies.ViewModels
             ActivateItem(MovieListVM);
         }
 
-        public void DisplayFavouriteVM()
+        public async Task DisplayFavouriteVM()
         {
             DeactivateItem(ActiveItem, true);
             ActivateItem(FavouriteVM);
+            await FavouriteVM.LoadFavouriteItems();
         }
 
         public async Task DisplayWatchListVM()

@@ -110,7 +110,7 @@
                         </Grid.ColumnDefinitions>
                         <materialDesign:RatingBar Grid.Column="0" x:Name="MovieRatingBar" Value="3"  Background="{StaticResource SecondaryAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <ToggleButton Grid.Column="1" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToWatchList}" Background="#FF424242"
-                                      cal:Message.Attach="AddToWatchList($this)">
+                                      cal:Message.Attach="AddToWatchList($this)" IsChecked="{Binding Path=IsWatchListed,Mode=TwoWay}">
                             <ToggleButton.Content>
                                 <materialDesign:PackIcon  Kind="Bookmark"/>
                             </ToggleButton.Content>
@@ -119,7 +119,7 @@
                             </materialDesign:ToggleButtonAssist.OnContent>
                         </ToggleButton>
                         <ToggleButton Grid.Column="2" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToFavourites}" Background="#FF424242"
-                                      cal:Message.Attach="AddToFavourites($this)">
+                                      cal:Message.Attach="AddToFavourites($this)" IsChecked="{Binding Path=IsFavourited,Mode=TwoWay}">
                             <ToggleButton.Content>
                                 <materialDesign:PackIcon  Kind="Heart"/>
                             </ToggleButton.Content>

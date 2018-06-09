@@ -33,6 +33,13 @@ namespace MoodMovies.ViewModels
         public IEventAggregator myEvent;
         #endregion
 
+        #region binding Properties
+        private bool _isFavourited;
+        public bool IsFavourited { get => _isFavourited ; set { _isFavourited = value; NotifyOfPropertyChange(); } }
+        private bool _isWatchListed;
+        public bool IsWatchListed { get => _isWatchListed; set { _isWatchListed = value; NotifyOfPropertyChange(); } }
+        #endregion
+
         #region Movie Properties
         public int Vote_count { get; set; }
         private int _id;

@@ -17,6 +17,7 @@ using DataModel.DataModel.Entities;
 using System.Collections;
 using WPFLocalizeExtension.Engine;
 using System.Globalization;
+using MoodMovies.Logic;
 
 namespace MoodMovies.ViewModels
 {
@@ -26,12 +27,16 @@ namespace MoodMovies.ViewModels
         public MainViewModel()
         {
             eventAgg.Subscribe(this);
-            InitialiseVMs();
-            
+            InitialiseVMs();            
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
-
             //initial setup of the database
-            Db.DumpDatabase();            
+            Db.DumpDatabase();          
+            
+            if(UserControl.CurrentUser == null)
+            {
+                //get user
+                
+            }
         }
 
         #region Events

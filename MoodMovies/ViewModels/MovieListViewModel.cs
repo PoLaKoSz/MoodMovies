@@ -17,7 +17,7 @@ namespace MoodMovies.ViewModels
     {
         public MovieListViewModel(IEventAggregator events):base(events)
         {
-
+            
         }
 
         #region Properties
@@ -176,7 +176,6 @@ namespace MoodMovies.ViewModels
 
             }
         }
-        #endregion
-
+        #endregion        
     }
 }

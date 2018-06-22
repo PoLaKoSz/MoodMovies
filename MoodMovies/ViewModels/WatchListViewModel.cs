@@ -16,10 +16,6 @@ namespace MoodMovies.ViewModels
             DisplayName = "Favourites";
         }
 
-        #region Fields
-
-        #endregion
-
         #region Properties
         OfflineServiceProvider offDb = new OfflineServiceProvider();
         #endregion

@@ -102,6 +102,8 @@ namespace MoodMovies.ViewModels
                 myEvent.PublishOnUIThread(new RemoveFromFavouritesMessage(this));
             }
         }
+
+
         #endregion
 
         #region Ihandle Interface

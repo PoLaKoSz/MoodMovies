@@ -116,7 +116,16 @@ namespace MoodMovies.ViewModels
         /// <param name="mvCard"></param>
         public async Task RemoveMovieFromWatchList(MovieCardViewModel mvCard)
         {
-            //await
+            try
+            {
+                var user = await offlineDb.GetFirstUser();  //this will betaken from static class******************
+                var movie = await offlineDb.GetMovie(mvCard.Movie_Id);
+                await offlineDb.RemoveFromWatchList(user, movie);
+            }
+            catch
+            {
+
+            }
         }
         /// <summary>
         /// Adds movie to the favourites list
@@ -156,7 +165,16 @@ namespace MoodMovies.ViewModels
         /// <param name="mvCard"></param>
         public async Task RemoveMovieFromFavourites(MovieCardViewModel mvCard)
         {
-            //await
+            try
+            {
+                var user = await offlineDb.GetFirstUser();  //this will betaken from static class******************
+                var movie = await offlineDb.GetMovie(mvCard.Movie_Id);
+                await offlineDb.RemoveFromFavourites(user, movie);
+            }
+            catch
+            {
+
+            }
         }
         #endregion
 

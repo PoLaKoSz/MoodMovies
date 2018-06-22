@@ -33,7 +33,7 @@ namespace MoodMovies.ViewModels
         public IEventAggregator myEvent;
         #endregion
 
-        #region binding Properties
+        #region Binding Properties
         private bool _isFavourited;
         public bool IsFavourited { get => _isFavourited ; set { _isFavourited = value; NotifyOfPropertyChange(); } }
         private bool _isWatchListed;
@@ -82,8 +82,12 @@ namespace MoodMovies.ViewModels
                 myEvent.PublishOnUIThread(new AddToWatchListMessage(this));
             }
             else
-            {
-                myEvent.PublishOnUIThread(new RemoveFromWatchListMessage(this));               
+            {                
+                myEvent.PublishOnUIThread(new RemoveFromWatchListMessage(this));
+                if (Parent is WatchListViewModel p)
+                {
+                    p.Movies.Remove(this);                    
+                }
             }
         }
         /// <summary>
@@ -100,6 +104,10 @@ namespace MoodMovies.ViewModels
             else
             {
                 myEvent.PublishOnUIThread(new RemoveFromFavouritesMessage(this));
+                if (Parent is FavouritesViewModel p)
+                {
+                    p.Movies.Remove(this);
+                }
             }
         }
 

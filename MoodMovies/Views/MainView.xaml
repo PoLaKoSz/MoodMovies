@@ -1,144 +1,225 @@
 ﻿<Window x:Class="MoodMovies.Views.MainView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:cal="http://www.caliburnproject.org"
-             FontFamily="Yu Gothic UI Semilight"
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             mc:Ignorable="d" FontSize="17"
-             d:DesignHeight="300" Width="1190" MinWidth="1190" Height="600" MinHeight="600" 
-        WindowStartupLocation="CenterScreen" Title="Moods &amp; Movies"
-        Icon="/MoodMovies;component/Resources/Images/moodmoviesorange.ico"        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:cal="http://www.caliburnproject.org"
+        FontFamily="Yu Gothic UI Semilight"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        FontSize="17"
+        d:DesignHeight="300"
+        Width="1190"
+        MinWidth="1190"
+        Height="600"
+        MinHeight="600"
+        WindowStartupLocation="CenterScreen"
+        Title="Moods &amp; Movies"
+        Icon="/MoodMovies;component/Resources/Images/moodmoviesorange.ico"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         lex:LocalizeDictionary.DesignCulture="en"
         lex:ResxLocalizationProvider.DefaultAssembly="MoodMovies"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings">
-    <materialDesign:DialogHost IsOpen="{Binding Path=IsLoading}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <materialDesign:DialogHost IsOpen="{Binding Path=IsLoading}"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Stretch">
         <materialDesign:DialogHost.DialogContent>
             <Grid>
                 <StackPanel Margin="16">
-                    <ProgressBar Margin="16" HorizontalAlignment="Center" IsIndeterminate="true" Style="{DynamicResource MaterialDesignCircularProgressBar}"
-                                 Value="0"/>
-                    <TextBlock Text="{Binding Path=LoadingMessage}"/>
+                    <ProgressBar Margin="16"
+                                 HorizontalAlignment="Center"
+                                 IsIndeterminate="true"
+                                 Style="{DynamicResource MaterialDesignCircularProgressBar}"
+                                 Value="0" />
+                    <TextBlock Text="{Binding Path=LoadingMessage}" />
                 </StackPanel>
             </Grid>
         </materialDesign:DialogHost.DialogContent>
         <!--drawer host for left drawer-->
-        <materialDesign:DrawerHost BorderThickness="2" LeftDrawerBackground="#FF1E1E1E" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+        <materialDesign:DrawerHost BorderThickness="2"
+                                   LeftDrawerBackground="#FF1E1E1E"
+                                   IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <DockPanel MinWidth="150" Background="White" Margin="-2,0,0,0">
-                    <Grid DockPanel.Dock="Top" Height="89" Background="{StaticResource SecondaryAccentMidBrush}">
-                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
-                                    Foreground="Black" HorizontalAlignment="Right" Margin="16"
-                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" VerticalAlignment="Bottom" />
+                <DockPanel MinWidth="150"
+                           Background="White"
+                           Margin="-2,0,0,0">
+                    <Grid DockPanel.Dock="Top"
+                          Height="89"
+                          Background="{StaticResource SecondaryAccentMidBrush}">
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                                      Foreground="Black"
+                                      HorizontalAlignment="Right"
+                                      Margin="16"
+                                      IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
+                                      VerticalAlignment="Bottom" />
                     </Grid>
                     <StackPanel Margin="0,20,0,0">
                         <!--Search-->
-                    <materialDesign:Chip Margin="7" Content="{lex:Loc MainView_Menubar_Button_Search}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                           CommandParameter="{x:Static Dock.Left}" Background="{StaticResource PrimaryHueLightBrush}"
-                           cal:Message.Attach="DisplaySearchVM" IconForeground="LawnGreen"
-                           Foreground="black" FontSize="17" >
-                        <materialDesign:Chip.Icon>
-                            <materialDesign:PackIcon Kind="Magnify"/>
-                        </materialDesign:Chip.Icon>
-                    </materialDesign:Chip>
-                    <!--Results-->
-                    <materialDesign:Chip Margin="7" Content="{lex:Loc MainView_Menubar_Button_Results}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                           CommandParameter="{x:Static Dock.Left}" Background="{StaticResource PrimaryHueLightBrush}"
-                           cal:Message.Attach="DisplayMovieListVM" FontSize="17"
-                           Foreground="black" IconForeground="Aqua">
-                        <materialDesign:Chip.Icon>
+                        <materialDesign:Chip Margin="7"
+                                             Content="{lex:Loc MainView_Menubar_Button_Search}"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                             CommandParameter="{x:Static Dock.Left}"
+                                             Background="{StaticResource PrimaryHueLightBrush}"
+                                             cal:Message.Attach="DisplaySearchVM"
+                                             IconForeground="LawnGreen"
+                                             Foreground="black"
+                                             FontSize="17">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon Kind="Magnify" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
+                        <!--Results-->
+                        <materialDesign:Chip Margin="7"
+                                             Content="{lex:Loc MainView_Menubar_Button_Results}"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                             CommandParameter="{x:Static Dock.Left}"
+                                             Background="{StaticResource PrimaryHueLightBrush}"
+                                             cal:Message.Attach="DisplayMovieListVM"
+                                             FontSize="17"
+                                             Foreground="black"
+                                             IconForeground="Aqua">
+                            <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Movie" />
                             </materialDesign:Chip.Icon>
-                    </materialDesign:Chip>
-                    <!--Favourites button-->
-                    <materialDesign:Chip Margin="7" Content="{lex:Loc MainView_Menubar_Button_Favourites}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                           CommandParameter="{x:Static Dock.Left}" Background="{StaticResource PrimaryHueLightBrush}"
-                           cal:Message.Attach="DisplayFavouriteVM" FontSize="17"
-                           Foreground="black" IconBackground="{StaticResource PrimaryHueMidBrush}" IconForeground="#FFE44242">
-                        <materialDesign:Chip.Icon>
-                            <materialDesign:PackIcon Kind="Heart"/>
-                        </materialDesign:Chip.Icon>
-                    </materialDesign:Chip>
-                    <!--WatchList-->
-                    <materialDesign:Chip Margin="7" Content="{lex:Loc MainView_Menubar_Button_WatchList}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                           CommandParameter="{x:Static Dock.Left}" Background="{StaticResource PrimaryHueLightBrush}"
-                           cal:Message.Attach="DisplayWatchListVM"
-                           Foreground="black" FontSize="17" IconForeground="#FFC229C2">
-                        <materialDesign:Chip.Icon>
-                            <materialDesign:PackIcon Kind="Watch" />
-                        </materialDesign:Chip.Icon>
-                    </materialDesign:Chip>
+                        </materialDesign:Chip>
+                        <!--Favourites button-->
+                        <materialDesign:Chip Margin="7"
+                                             Content="{lex:Loc MainView_Menubar_Button_Favourites}"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                             CommandParameter="{x:Static Dock.Left}"
+                                             Background="{StaticResource PrimaryHueLightBrush}"
+                                             cal:Message.Attach="DisplayFavouriteVM"
+                                             FontSize="17"
+                                             Foreground="black"
+                                             IconBackground="{StaticResource PrimaryHueMidBrush}"
+                                             IconForeground="#FFE44242">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon Kind="Heart" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
+                        <!--WatchList-->
+                        <materialDesign:Chip Margin="7"
+                                             Content="{lex:Loc MainView_Menubar_Button_WatchList}"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                             CommandParameter="{x:Static Dock.Left}"
+                                             Background="{StaticResource PrimaryHueLightBrush}"
+                                             cal:Message.Attach="DisplayWatchListVM"
+                                             Foreground="black"
+                                             FontSize="17"
+                                             IconForeground="#FFC229C2">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon Kind="Watch" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
                     </StackPanel>
-                </DockPanel>               
+                </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
             <DockPanel>
-                <materialDesign:ColorZone Height="20" Mode="PrimaryDark" DockPanel.Dock="Top"/>
-                <materialDesign:ColorZone DockPanel.Dock="Top" Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                            Mode="PrimaryMid">
+                <materialDesign:ColorZone Height="20"
+                                          Mode="PrimaryDark"
+                                          DockPanel.Dock="Top" />
+                <materialDesign:ColorZone DockPanel.Dock="Top"
+                                          Padding="16"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                          Mode="PrimaryMid">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <!--Hamburger Menu-->
-                        <ToggleButton Grid.Column="0" Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
-                                        x:Name="MenuToggleButton" HorizontalAlignment="Left" Width="50"/>
+                        <ToggleButton Grid.Column="0"
+                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                                      IsChecked="False"
+                                      x:Name="MenuToggleButton"
+                                      HorizontalAlignment="Left"
+                                      Width="50" />
                         <!--Title-->
-                        <DockPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Label Content="Moods &amp; Movies" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <iconPacks:PackIconModern Kind="MovieClapper" Width="30" Height="30" Foreground="{StaticResource SecondaryAccentMidBrush}" RenderTransformOrigin="0.5,0.5">
+                        <DockPanel Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center">
+                            <Label Content="Moods &amp; Movies"
+                                   FontSize="22"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                            <iconPacks:PackIconModern Kind="MovieClapper"
+                                                      Width="30"
+                                                      Height="30"
+                                                      Foreground="{StaticResource SecondaryAccentMidBrush}"
+                                                      RenderTransformOrigin="0.5,0.5">
                                 <iconPacks:PackIconModern.RenderTransform>
                                     <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="-25"/>
-                                        <TranslateTransform/>
+                                        <ScaleTransform />
+                                        <SkewTransform />
+                                        <RotateTransform Angle="-25" />
+                                        <TranslateTransform />
                                     </TransformGroup>
                                 </iconPacks:PackIconModern.RenderTransform>
                             </iconPacks:PackIconModern>
                         </DockPanel>
                         <!--Language and popubox-->
                         <!--right side popup menu-->
-                        <DockPanel Grid.Column="2" Width="120" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <DockPanel Grid.Column="2"
+                                   Width="120"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Bottom">
                             <ComboBox ItemsSource="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=MergedAvailableCultures}"
                                       SelectedItem="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture}"
                                       DisplayMemberPath="NativeName"
                                       DockPanel.Dock="Left" />
-                            <materialDesign:PopupBox Grid.Column="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False"
-                                         HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right">
+                            <materialDesign:PopupBox Grid.Column="5"
+                                                     PlacementMode="BottomAndAlignRightEdges"
+                                                     StaysOpen="False"
+                                                     HorizontalAlignment="Right"
+                                                     VerticalAlignment="Center"
+                                                     DockPanel.Dock="Right">
                                 <StackPanel>
-                                    <Button Content="{lex:Loc MainView_Button_Help}"/>
-                                    <Separator/>
-                                    <Button cal:Message.Attach="CloseApp" Content="{lex:Loc MainView_Button_Exit}" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                                    <Button Content="{lex:Loc MainView_Button_Help}" />
+                                    <Separator />
+                                    <Button cal:Message.Attach="CloseApp"
+                                            Content="{lex:Loc MainView_Button_Exit}"
+                                            VerticalContentAlignment="Bottom"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Stretch" />
                                 </StackPanel>
                             </materialDesign:PopupBox>
                         </DockPanel>
                     </Grid>
                 </materialDesign:ColorZone>
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource PrimaryHueLightBrush}">
+                <Grid HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Background="{StaticResource PrimaryHueLightBrush}">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"/>
-                        <RowDefinition Height="0.3*"/>
-                    </Grid.RowDefinitions>                    
+                        <RowDefinition Height="4*" />
+                        <RowDefinition Height="0.3*" />
+                    </Grid.RowDefinitions>
                     <!--body-->
-                    <Grid Grid.Row="0" Margin="0,5,0,5">
-                        <materialDesign:TransitioningContent x:Name="ActiveItem" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    <Grid Grid.Row="0"
+                          Margin="0,5,0,5">
+                        <materialDesign:TransitioningContent x:Name="ActiveItem"
+                                                             VerticalAlignment="Stretch"
+                                                             HorizontalAlignment="Stretch" />
                     </Grid>
                     <!--footer-->
-                    <Grid Grid.Row="1" Margin="0" Background="White">
+                    <Grid Grid.Row="1"
+                          Margin="0"
+                          Background="White">
 
 
                     </Grid>
                 </Grid>
-            </DockPanel>           
+            </DockPanel>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>
 </Window>

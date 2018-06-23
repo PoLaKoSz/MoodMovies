@@ -4,7 +4,7 @@ using Caliburn.Micro;
 
 namespace MoodMovies
 {
-    class AppBootStrapper: BootstrapperBase
+    class AppBootStrapper : BootstrapperBase
     {
         public AppBootStrapper()
         {

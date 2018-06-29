@@ -6,10 +6,10 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             mc:Ignorable="d"
-             d:DesignHeight="450"
-             d:DesignWidth="300"
-             FontFamily="Yu Gothic UI Semilight"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="300"
+             FontFamily="Segoe UI Light"
+
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              lex:LocalizeDictionary.DesignCulture="en"
              lex:ResxLocalizationProvider.DefaultAssembly="MoodMovies"
@@ -209,7 +209,8 @@
                                                   Value="3"
                                                   Background="{StaticResource SecondaryAccentBrush}"
                                                   VerticalAlignment="Center"
-                                                  HorizontalAlignment="Center" />
+                                                  HorizontalAlignment="Center" 
+                                                  Foreground="Gold"/>
                         <ToggleButton Grid.Column="1"
                                       Style="{StaticResource MaterialDesignActionToggleButton}"
                                       ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToWatchList}"
@@ -227,11 +228,12 @@
                         <ToggleButton Grid.Column="2"
                                       Style="{StaticResource MaterialDesignActionToggleButton}"
                                       ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToFavourites}"
-                                      Background="#FF424242"
                                       cal:Message.Attach="AddToFavourites($this)"
-                                      IsChecked="{Binding Path=IsFavourited,Mode=TwoWay}">
+                                      IsChecked="{Binding Path=IsFavourited,Mode=TwoWay}"
+                                      Background="White">                          
                             <ToggleButton.Content>
-                                <materialDesign:PackIcon  Kind="Heart" />
+                                <materialDesign:PackIcon  Kind="Heart"
+                                                          Foreground="LightGray" />
                             </ToggleButton.Content>
                             <materialDesign:ToggleButtonAssist.OnContent>
                                 <materialDesign:PackIcon Kind="Heart"

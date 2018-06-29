@@ -149,6 +149,7 @@
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
     <Compile Include="ViewModels\ASearchViewModel.cs" />
     <Compile Include="ViewModels\ListBaseViewModel.cs" />
+    <Compile Include="ViewModels\UserControlViewModel.cs" />
     <Compile Include="ViewModels\WatchListViewModel.cs" />
     <Compile Include="ViewModels\FavouritesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -163,6 +164,9 @@
     </Compile>
     <Compile Include="Views\FavouritesView.xaml.cs">
       <DependentUpon>FavouritesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControlView.xaml.cs">
+      <DependentUpon>UserControlView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WatchListView.xaml.cs">
       <DependentUpon>WatchListView.xaml</DependentUpon>
@@ -188,6 +192,10 @@
     <Page Include="Views\FavouritesView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WatchListView.xaml">
       <Generator>MSBuild:Compile</Generator>

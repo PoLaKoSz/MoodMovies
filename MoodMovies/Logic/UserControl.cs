@@ -1,14 +1,9 @@
-﻿using System;
+using System;
 
 namespace MoodMovies.Logic
 {
-    public class UserControl
+    public static class UserControl
     {
-        //private readonly UserLogic userLogic;
-
-        public UserControl()
-        {
-           
-        }        
+           public static Users CurrentUser { get; set; }
     }
 }

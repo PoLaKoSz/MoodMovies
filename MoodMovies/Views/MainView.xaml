@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:cal="http://www.caliburnproject.org"
-        FontFamily="Yu Gothic UI Semilight"
+        FontFamily="Segoe UI Light"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         FontSize="17"
@@ -55,6 +55,22 @@
                                       VerticalAlignment="Bottom" />
                     </Grid>
                     <StackPanel Margin="0,20,0,0">
+                        <!--USers-->
+                        <materialDesign:Chip Margin="7"
+                                             Content="{lex:Loc MainView_Menubar_Button_Search}"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                             CommandParameter="{x:Static Dock.Left}"
+                                             Background="{StaticResource PrimaryHueLightBrush}"
+                                             cal:Message.Attach="DisplayUserVM"
+                                             IconForeground="LawnGreen"
+                                             Foreground="black"
+                                             FontSize="17">
+                            <materialDesign:Chip.Icon>
+                                <iconPacks:Material Kind="Face" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
                         <!--Search-->
                         <materialDesign:Chip Margin="7"
                                              Content="{lex:Loc MainView_Menubar_Button_Search}"
@@ -151,12 +167,13 @@
                             <Label Content="Moods &amp; Movies"
                                    FontSize="22"
                                    HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
+                                   VerticalAlignment="Center" 
+                                   Foreground="White"/>
                             <iconPacks:PackIconModern Kind="MovieClapper"
                                                       Width="30"
                                                       Height="30"
                                                       Foreground="{StaticResource SecondaryAccentMidBrush}"
-                                                      RenderTransformOrigin="0.5,0.5">
+                                                      RenderTransformOrigin="0.5,0.5">                           
                                 <iconPacks:PackIconModern.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform />
@@ -199,7 +216,7 @@
                 </materialDesign:ColorZone>
                 <Grid HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
-                      Background="{StaticResource PrimaryHueLightBrush}">
+                      Background="#FFE1E2E1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="4*" />
                         <RowDefinition Height="0.3*" />

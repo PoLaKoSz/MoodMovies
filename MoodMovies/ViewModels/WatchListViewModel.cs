@@ -13,10 +13,6 @@ namespace MoodMovies.ViewModels
             DisplayName = "Favourites";
         }
 
-        #region Fields
-
-        #endregion
-
         #region Properties
         OfflineServiceProvider offDb = new OfflineServiceProvider();
         #endregion
@@ -39,7 +35,8 @@ namespace MoodMovies.ViewModels
                             var card =  new MovieCardViewModel(movie.Movie_Id, movie.Title, new Uri(movie.Poster_path), movie.Overview,
                             movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, eventAgg)
                             {
-                                IsWatchListed = true
+                                IsWatchListed = true,
+                                Parent = this
                             };
                             //force updating the list from a different thread using custom cross thread extension method
                             Movies.AddOnUIThread(card);

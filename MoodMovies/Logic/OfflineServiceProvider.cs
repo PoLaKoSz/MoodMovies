@@ -32,6 +32,24 @@ namespace MoodMovies.Logic
         {
             return await Task.Run(() => Db.context.Users.FirstOrDefault());
         }
+        /// <summary>
+        /// Gets user in db using id
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task<Users> GetUser(int id)
+        {
+            return await Task.Run(() => Db.context.Users.Where(x => x.User_Id == id).SingleOrDefault());
+        }
+        /// <summary>
+        /// Gets all users in db
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task<List<Users>> GetAllUsers()
+        {
+            return await Task.Run(() => Db.context.Users.ToList());
+        }
         #endregion
 
         #region Movie Methods
@@ -54,6 +72,15 @@ namespace MoodMovies.Logic
         public async Task<User_Movies> GetUserMovieLink(Users user, Movies movie)
         {
             return await Task.Run(() => Db.context.UserMovies.Where(x => x.UId == movie.Movie_Id && x.User_Id == user.User_Id).SingleOrDefault());
+        }
+        /// <summary>
+        /// Gets the movie using the id
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task<Movies> GetMovie(int movieId)
+        {
+            return await Task.Run(() => Db.context.Movies.Where(x => x.Movie_Id == movieId).SingleOrDefault());
         }
         /// <summary>
         /// Add a movie to the movie table
@@ -117,6 +144,24 @@ namespace MoodMovies.Logic
             });
         }
         /// <summary>
+        /// Removes a movie from the watchlist
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task RemoveFromWatchList(Users user, Movies movie)
+        {
+            await Task.Run(() => {
+                var usermovie = Db.context.Set<User_Movies>().Where(x => x.User_Id == user.User_Id
+                && x.UId == movie.Movie_Id).SingleOrDefault();
+                if(usermovie != null)
+                {
+                    usermovie.Watchlist = false;
+                    Db.context.SaveChanges();
+                }                
+            });
+        }
+        /// <summary>
         /// Returns all movies linked to a specific user as a watchlist item
         /// </summary>
         /// <param name="user"></param>
@@ -145,6 +190,25 @@ namespace MoodMovies.Logic
                     Favourite = true
                 });
                 Db.context.SaveChanges();
+            });
+        }
+        /// <summary>
+        /// Removes a movie from the favourites list
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task RemoveFromFavourites(Users user, Movies movie)
+        {
+            await Task.Run(() => {
+                var usermovie = Db.context.Set<User_Movies>().Where(x => x.User_Id == user.User_Id
+                && x.UId == movie.Movie_Id).SingleOrDefault();
+
+                if (usermovie != null)
+                {
+                    usermovie.Favourite = false;
+                    Db.context.SaveChanges();
+                }                
             });
         }
         /// <summary>

@@ -9,7 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300"
-             FontFamily="Yu Gothic UI Semilight"
+             FontFamily="Segoe UI Light"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              lex:LocalizeDictionary.DesignCulture="en"
              lex:ResxLocalizationProvider.DefaultAssembly="MoodMovies"
@@ -108,20 +108,24 @@
                             <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition Width="0.5*"/>
                         </Grid.ColumnDefinitions>
-                        <materialDesign:RatingBar Grid.Column="0" x:Name="MovieRatingBar" Value="3"  Background="{StaticResource SecondaryAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <ToggleButton Grid.Column="1" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToWatchList}" Background="#FF424242"
-                                      cal:Message.Attach="AddToWatchList($this)" IsChecked="{Binding Path=IsWatchListed,Mode=TwoWay}">
+                        <materialDesign:RatingBar Grid.Column="0" x:Name="MovieRatingBar" Value="3"  Background="White" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Gold"/>
+                        <ToggleButton Grid.Column="1" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToWatchList}"
+                                      cal:Message.Attach="AddToWatchList($this)" IsChecked="{Binding Path=IsWatchListed,Mode=TwoWay}" Background="White">
                             <ToggleButton.Content>
-                                <materialDesign:PackIcon  Kind="Bookmark"/>
+                                <materialDesign:PackIcon  Kind="Bookmark" Foreground="LightGray"/>
                             </ToggleButton.Content>
                             <materialDesign:ToggleButtonAssist.OnContent >
                                 <materialDesign:PackIcon Kind="Bookmark" Foreground="Green" />
                             </materialDesign:ToggleButtonAssist.OnContent>
                         </ToggleButton>
-                        <ToggleButton Grid.Column="2" Style="{StaticResource MaterialDesignActionToggleButton}"	ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToFavourites}" Background="#FF424242"
-                                      cal:Message.Attach="AddToFavourites($this)" IsChecked="{Binding Path=IsFavourited,Mode=TwoWay}">
+                        <ToggleButton Grid.Column="2"
+                                      Style="{StaticResource MaterialDesignActionToggleButton}"
+                                      ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToFavourites}"
+                                      cal:Message.Attach="AddToFavourites($this)"
+                                      IsChecked="{Binding Path=IsFavourited,Mode=TwoWay}" Background="White">
                             <ToggleButton.Content>
-                                <materialDesign:PackIcon  Kind="Heart"/>
+                                <materialDesign:PackIcon  Kind="Heart"
+                                                          Foreground="LightGray" />
                             </ToggleButton.Content>
                             <materialDesign:ToggleButtonAssist.OnContent >
                                 <materialDesign:PackIcon Kind="Heart" Foreground="Red" />

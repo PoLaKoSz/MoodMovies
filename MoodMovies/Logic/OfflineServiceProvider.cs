@@ -41,6 +41,15 @@ namespace MoodMovies.Logic
         {
             return await Task.Run(() => Db.context.Users.Where(x => x.User_Id == id).SingleOrDefault());
         }
+        /// <summary>
+        /// Gets all users in db
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task<List<Users>> GetAllUsers()
+        {
+            return await Task.Run(() => Db.context.Users.ToList());
+        }
         #endregion
 
         #region Movie Methods

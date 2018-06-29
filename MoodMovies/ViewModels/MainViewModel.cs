@@ -26,11 +26,12 @@ namespace MoodMovies.ViewModels
         // constructor
         public MainViewModel()
         {
-            eventAgg.Subscribe(this);
-                     
+            eventAgg.Subscribe(this);                     
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
             //initial setup of the database
-            Db.DumpDatabase();                     
+            Db.DumpDatabase();
+
+            UserVM = new UserControlViewModel();
         }
 
         #region Events
@@ -53,6 +54,8 @@ namespace MoodMovies.ViewModels
         public FavouritesViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
         private WatchListViewModel _watchListVM;
         public WatchListViewModel WatchListVM { get => _watchListVM; set { _watchListVM = value; NotifyOfPropertyChange(); } }
+        private UserControlViewModel _userVM;
+        public UserControlViewModel UserVM { get => _userVM; set { _userVM = value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Public Methods
@@ -86,6 +89,12 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Item Activation Methods
+        public void DisplayUserVM()
+        {
+            DeactivateItem(ActiveItem, true);
+            ActivateItem(UserVM);
+        }
+     
         public void DisplaySearchVM()
         {
             DeactivateItem(ActiveItem, true);
@@ -132,11 +141,10 @@ namespace MoodMovies.ViewModels
 
         #region Caliburn Override
         protected override void OnViewLoaded(object view)
-        {          
-
+        {           
             if (UserControl.CurrentUser == null)
             {
-                //get user
+                
 
             }
 

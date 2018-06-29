@@ -10,10 +10,44 @@
              FontFamily="Segoe UI Light"
              mc:Ignorable="d"
              d:DesignHeight="450"
-             d:DesignWidth="300"
              HorizontalAlignment="Stretch"
-             VerticalAlignment="Stretch">
+             VerticalAlignment="Stretch"
+             Width="474.306">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+        <DataGrid Margin="0,8,0,0"
+                  Grid.Row="2"
+                  materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                  materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserSortColumns="True"
+                  ItemsSource="{Binding Path=AllUsers}" SelectedItem="{Binding Path=SelectedUser}"
+                  Background="White"
+                  Foreground="Black">
+            <DataGrid.Columns>               
+                <DataGridTextColumn Binding="{Binding User_Name}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                                    Header="First Name" />
+                <DataGridTextColumn Binding="{Binding User_Surname}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                                    Header="Surname" />
+                <DataGridTextColumn Binding="{Binding User_ApiKey}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                                    Header="Api Key" />
+                <!--<DataGridTextColumn Binding="{Binding User_Active}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                                    Header="Active" />
+                <DataGridTextColumn Binding="{Binding Current_User}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                                    Header="Current User" />-->                
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

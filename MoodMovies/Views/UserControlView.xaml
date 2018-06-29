@@ -12,42 +12,179 @@
              d:DesignHeight="450"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
-             Width="474.306">
+             Width="650">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="100" />
-            <RowDefinition Height="200" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="auto"
+                           MaxHeight="200" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="120" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <DataGrid Margin="0,8,0,0"
-                  Grid.Row="2"
-                  materialDesign:DataGridAssist.CellPadding="13 8 8 8"
-                  materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  CanUserSortColumns="True"
-                  ItemsSource="{Binding Path=AllUsers}" SelectedItem="{Binding Path=SelectedUser}"
-                  Background="White"
-                  Foreground="Black">
-            <DataGrid.Columns>               
-                <DataGridTextColumn Binding="{Binding User_Name}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                                    Header="First Name" />
-                <DataGridTextColumn Binding="{Binding User_Surname}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                                    Header="Surname" />
-                <DataGridTextColumn Binding="{Binding User_ApiKey}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                                    Header="Api Key" />
-                <!--<DataGridTextColumn Binding="{Binding User_Active}"
+        <materialDesign:Card Grid.Row="1"
+                             FontSize="17">
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0"
+                        Background="LightGray"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch">
+                    <Label Content="Current User"
+                           FontWeight="SemiBold"
+                           VerticalContentAlignment="Center"
+                           Foreground="Black" />
+                </Border>
+                <Border Background="#FFEAE8E8"
+                        Grid.Column="1"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch">
+                    <Label Content="{Binding Path=CurrentUser.User_Name}"
+                           VerticalContentAlignment="Center"
+                           Margin="5,0,0,0"
+                           Foreground="Black" />
+                </Border>
+                <Button Grid.Column="3"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Background="#FFEAE8E8"
+                        Foreground="{StaticResource SecondaryAccentBrush}"
+                        ToolTip="Delete Selected User">
+                    <iconPacks:Material Kind="Delete" />
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="3">
+            <DataGrid Margin="0,5"
+                      FontSize="16"
+                      materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                      materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      CanUserSortColumns="False"
+                      CanUserResizeColumns="False"
+                      CanUserResizeRows="False"
+                      ItemsSource="{Binding Path=AllUsers}"
+                      SelectedItem="{Binding Path=SelectedUser}"
+                      Background="White"
+                      Foreground="Black">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding User_Name}"
+                                        IsReadOnly="True"
+                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                                        Header="First Name">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding User_Surname}"
+                                        IsReadOnly="True"
+                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                                        Header="Surname">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding User_ApiKey}"
+                                        IsReadOnly="True"
+                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                                        Header="Api Key">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Action">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button cal:Message.Attach="SetCurrentUser"
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Foreground="#FF1FB31F"
+                                        Height="30"
+                                        VerticalAlignment="Top">Set as Current User</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--<DataGridTextColumn Binding="{Binding User_Active}"
                                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                     Header="Active" />
                 <DataGridTextColumn Binding="{Binding Current_User}"
                                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                                    Header="Current User" />-->                
-            </DataGrid.Columns>
-        </DataGrid>
+                                    Header="Current User" />-->
+                </DataGrid.Columns>
+            </DataGrid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="5"
+                             FontSize="15"
+                             VerticalAlignment="Stretch"
+                             HorizontalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0"
+                       Grid.Row="0"
+                       Content="First Name"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Bottom" />
+                <Label Grid.Column="1"
+                       Grid.Row="0"
+                       Content="Surname"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Bottom" />
+                <Label Grid.Column="2"
+                       Grid.Row="0"
+                       Content="TMDB Api key"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Bottom" />
+                <TextBox Grid.Column="0"
+                         Grid.Row="1"
+                         VerticalAlignment="Center"
+                         Margin="5,0" />
+                <TextBox Grid.Column="1"
+                         Grid.Row="1"
+                         VerticalAlignment="Center"
+                         Margin="5,0" />
+                <TextBox Grid.Column="2"
+                         Grid.Row="1"
+                         VerticalAlignment="Center"
+                         Margin="5,0" />
+                <Button Grid.Row="2"
+                        Grid.ColumnSpan="3"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Height="40"
+                        Margin="0,0,0,5"
+                        Padding="5,0"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Foreground="Green">
+                    Add new User
+                </Button>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </UserControl>

@@ -57,14 +57,14 @@
                     <StackPanel Margin="0,20,0,0">
                         <!--USers-->
                         <materialDesign:Chip Margin="7"
-                                             Content="{lex:Loc MainView_Menubar_Button_Search}"
+                                             Content="{lex:Loc MainView_Menubar_Button_Users}"
                                              HorizontalAlignment="Left"
                                              VerticalAlignment="Center"
                                              Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                              CommandParameter="{x:Static Dock.Left}"
                                              Background="{StaticResource PrimaryHueLightBrush}"
                                              cal:Message.Attach="DisplayUserVM"
-                                             IconForeground="LawnGreen"
+                                             IconForeground="Yellow"
                                              Foreground="black"
                                              FontSize="17">
                             <materialDesign:Chip.Icon>

@@ -6,10 +6,10 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="300"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="300"
              FontFamily="Segoe UI Light"
-
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              lex:LocalizeDictionary.DesignCulture="en"
              lex:ResxLocalizationProvider.DefaultAssembly="MoodMovies"
@@ -23,8 +23,7 @@
                              materialDesign:ShadowAssist.ShadowDepth="Depth5"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Stretch">
-            <materialDesign:DrawerHost
-                    HorizontalAlignment="Stretch"
+            <materialDesign:DrawerHost HorizontalAlignment="Stretch"
                                        VerticalAlignment="Stretch"
                                        BorderThickness="0"
                                        RightDrawerBackground="#D8303030">
@@ -209,16 +208,17 @@
                                                   Value="3"
                                                   Background="{StaticResource SecondaryAccentBrush}"
                                                   VerticalAlignment="Center"
-                                                  HorizontalAlignment="Center" 
-                                                  Foreground="Gold"/>
+                                                  HorizontalAlignment="Center"
+                                                  Foreground="Gold" />
                         <ToggleButton Grid.Column="1"
                                       Style="{StaticResource MaterialDesignActionToggleButton}"
                                       ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToWatchList}"
-                                      Background="#FF424242"
+                                      Background="White"
                                       cal:Message.Attach="AddToWatchList($this)"
                                       IsChecked="{Binding Path=IsWatchListed,Mode=TwoWay}">
                             <ToggleButton.Content>
-                                <materialDesign:PackIcon  Kind="Bookmark" />
+                                <materialDesign:PackIcon  Kind="Bookmark"
+                                                          Foreground="LightGray" />
                             </ToggleButton.Content>
                             <materialDesign:ToggleButtonAssist.OnContent>
                                 <materialDesign:PackIcon Kind="Bookmark"
@@ -230,7 +230,7 @@
                                       ToolTip="{lex:Loc MovieCardView_ToggleButton_AddToFavourites}"
                                       cal:Message.Attach="AddToFavourites($this)"
                                       IsChecked="{Binding Path=IsFavourited,Mode=TwoWay}"
-                                      Background="White">                          
+                                      Background="White">
                             <ToggleButton.Content>
                                 <materialDesign:PackIcon  Kind="Heart"
                                                           Foreground="LightGray" />

@@ -28,18 +28,68 @@ namespace MoodMovies.ViewModels
         private ObservableCollection<Users> _allUsers = new ObservableCollection<Users>();
         public ObservableCollection<Users> AllUsers { get => _allUsers; set { _allUsers = value; NotifyOfPropertyChange(); } }
 
+        private string _firstName;
+        public string FirstName { get => _firstName; set { _firstName = value; NotifyOfPropertyChange(); } }
+
+        private string _surName;
+        public string SurName { get => _surName; set { _surName = value; NotifyOfPropertyChange(); } }
+
+        private string _apiKey;
+        public string ApiKey { get => _apiKey; set { _apiKey = value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Public methods
+        /// <summary>
+        /// Sets the selected item to the current user
+        /// </summary>
         public void SetCurrentUser()
         {
             CurrentUser = SelectedUser;
             UserControl.CurrentUser = CurrentUser;
         }
+        /// <summary>
+        /// Creates and adds a new user to the database
+        /// </summary>
+        public async void CreateNewUser()
+        {
+            if (!string.IsNullOrEmpty(ApiKey) 
+                && !string.IsNullOrEmpty(FirstName)
+                && !string.IsNullOrEmpty(SurName))
+            {
+                try
+                {
+                    var offDb = new OfflineServiceProvider();
+
+                    var user = new Users()
+                    {
+                        User_Name = FirstName,
+                        User_Surname = SurName,
+                        User_ApiKey = ApiKey,
+                        User_Active = true,
+                        Current_User = false
+                    };
+                    //check if user exists
+                    var userfound = await offDb.GetUserByApiKey(ApiKey);
+                    if (userfound == null)
+                    {
+                        await offDb.CreateUser(user);
+                        await GetUsers();
+                    }
+                }
+                catch
+                {
+                    //failed to create user
+                }
+            }
+            else
+            {
+                //details not complete
+            }
+        }
         #endregion
 
         #region Private Methods
-        private async void GetUsers()
+        private async Task GetUsers()
         {
             try
             {

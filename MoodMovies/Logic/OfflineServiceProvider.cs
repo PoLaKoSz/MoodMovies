@@ -39,6 +39,15 @@ namespace MoodMovies.Logic
             return await Task.Run(() => Db.context.Users.Where(x => x.User_Id == id).SingleOrDefault());
         }
         /// <summary>
+        /// Gets user in db using apikey
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task<Users> GetUserByApiKey(string apikey)
+        {
+            return await Task.Run(() => Db.context.Users.Where(x => x.User_ApiKey == apikey).SingleOrDefault());
+        }
+        /// <summary>
         /// Gets all users in db
         /// </summary>
         /// <param name="movie"></param>

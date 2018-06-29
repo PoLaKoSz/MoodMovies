@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+﻿using System.Collections.Generic;
 using System.Data.Linq.Mapping;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity.Core.Metadata.Edm;
 using System.ComponentModel.DataAnnotations;
 
 namespace DataModel.DataModel.Entities

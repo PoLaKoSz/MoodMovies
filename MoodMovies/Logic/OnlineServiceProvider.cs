@@ -1,9 +1,4 @@
-﻿using Caliburn.Micro;
-using MoodMovies.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MoodMovies.Resources;
 using System.Threading.Tasks;
 using TMdbEasy;
 using TMdbEasy.ApiInterfaces;

@@ -6,7 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
-                    <local:AppBootStrapper x:Key="bootstrapper"/>
+                    <local:AppBootStrapper x:Key="bootstrapper" />
                 </ResourceDictionary>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
@@ -15,19 +15,31 @@
                 <!--Custom colors-->
                 <ResourceDictionary>
                     <!-- primary -->
-                    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FFE1E2E1"/>
-                    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FFFFFF"/>
-                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FF263238"/>
-                    <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF"/>
-                    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FF000A12"/>
-                    <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFF"/>
+                    <SolidColorBrush x:Key="PrimaryHueLightBrush"
+                                     Color="#FFE1E2E1" />
+                    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush"
+                                     Color="#FFFFFF" />
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush"
+                                     Color="#FF263238" />
+                    <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush"
+                                     Color="#FFFFFF" />
+                    <SolidColorBrush x:Key="PrimaryHueDarkBrush"
+                                     Color="#FF000A12" />
+                    <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush"
+                                     Color="#FFFFFF" />
                     <!-- accent -->
-                    <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#FFC30000"/>
-                    <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="Black"/>
-                    <SolidColorBrush x:Key="SecondaryAccentMidBrush" Color="#FFFF3D00"/>
-                    <SolidColorBrush x:Key="SecondaryAccentMidForegroundBrush" Color="White"/>
-                    <SolidColorBrush x:Key="SecondaryAccentLightBrush" Color="#FFFF7539"/>
-                    <SolidColorBrush x:Key="SecondaryAccentLightForegroundBrush" Color="Black"/>
+                    <SolidColorBrush x:Key="SecondaryAccentBrush"
+                                     Color="#FFC30000" />
+                    <SolidColorBrush x:Key="SecondaryAccentForegroundBrush"
+                                     Color="Black" />
+                    <SolidColorBrush x:Key="SecondaryAccentMidBrush"
+                                     Color="#FFFF3D00" />
+                    <SolidColorBrush x:Key="SecondaryAccentMidForegroundBrush"
+                                     Color="White" />
+                    <SolidColorBrush x:Key="SecondaryAccentLightBrush"
+                                     Color="#FFFF7539" />
+                    <SolidColorBrush x:Key="SecondaryAccentLightForegroundBrush"
+                                     Color="Black" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

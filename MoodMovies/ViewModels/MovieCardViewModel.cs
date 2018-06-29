@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Windows.Controls.Primitives;
 using Caliburn.Micro;
 using MoodMovies.Messages;
-using MoodMovies.Views;
 
 namespace MoodMovies.ViewModels
 {

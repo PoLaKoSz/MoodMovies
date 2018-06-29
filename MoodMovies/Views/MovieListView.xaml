@@ -2,49 +2,80 @@
              x:Name="mlist"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"     
              xmlns:local="clr-namespace:MoodMovies.Views"
              xmlns:cal="http://www.caliburnproject.org"
              FontFamily="Segoe UI Light"
-             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Grid x:Name="MainGrid" Focusable="True">
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="300"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+    <Grid x:Name="MainGrid"
+          Focusable="True">
         <materialDesign:DialogHost>
             <materialDesign:DialogHost.DialogContent>
-                <Grid Width="800" Height="400" Background="{StaticResource PrimaryHueDarkBrush}">
-                    
+                <Grid Width="800"
+                      Height="400"
+                      Background="{StaticResource PrimaryHueDarkBrush}">
+
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="80" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" x:Name="PreviousPage" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent"
-                        Width="60" Height="60" HorizontalContentAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}">
-                    <iconPacks:MaterialLight Kind="ChevronLeft" Width="30" Height="30"/>
+                <Button Grid.Column="0"
+                        x:Name="PreviousPage"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Width="60"
+                        Height="60"
+                        HorizontalContentAlignment="Center"
+                        Foreground="{StaticResource SecondaryAccentBrush}">
+                    <iconPacks:MaterialLight Kind="ChevronLeft"
+                                             Width="30"
+                                             Height="30" />
                 </Button>
-                <ScrollViewer x:Name="MovieScrollViewer" Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
-                      VerticalAlignment="Center" HorizontalAlignment="Center" Width="{Binding ElementName=MainGrid, Path=ActualWidth}" >
+                <ScrollViewer x:Name="MovieScrollViewer"
+                              Grid.Column="1"
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Hidden"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              Width="{Binding ElementName=MainGrid, Path=ActualWidth}">
                     <ItemsControl x:Name="Movies">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=ActualWidth}" 
-                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <WrapPanel MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=ActualWidth}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </ScrollViewer>
-                <Button Grid.Column="2" x:Name="NextPage" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent"
-                        Width="60" Height="60" HorizontalContentAlignment="Center" Foreground="{StaticResource SecondaryAccentBrush}">
-                    <iconPacks:MaterialLight Kind="ChevronRight" Width="30" Height="30"/>                   
+                <Button Grid.Column="2"
+                        x:Name="NextPage"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Width="60"
+                        Height="60"
+                        HorizontalContentAlignment="Center"
+                        Foreground="{StaticResource SecondaryAccentBrush}">
+                    <iconPacks:MaterialLight Kind="ChevronRight"
+                                             Width="30"
+                                             Height="30" />
                 </Button>
             </Grid>
-        
-        <!--{Binding ElementName=MovieScrollViewer, Path=ViewportWidth}"-->
         </materialDesign:DialogHost>
     </Grid>
 </UserControl>

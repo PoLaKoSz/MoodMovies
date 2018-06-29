@@ -141,6 +141,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Strings.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CommandImp.cs" />
     <Compile Include="Resources\Converters\Converters.cs" />
     <Compile Include="Resources\Enums.cs" />

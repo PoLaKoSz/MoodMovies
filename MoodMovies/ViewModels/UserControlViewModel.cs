@@ -18,12 +18,27 @@ namespace MoodMovies.ViewModels
             GetUsers();
         }
 
+        #region Properties
         private Users _selectedUser;
         public Users SelectedUser { get => _selectedUser; set { _selectedUser = value; NotifyOfPropertyChange(); } }
+
+        private Users _currentUser;
+        public Users CurrentUser { get => _currentUser; set { _currentUser = value; NotifyOfPropertyChange(); } }
 
         private ObservableCollection<Users> _allUsers = new ObservableCollection<Users>();
         public ObservableCollection<Users> AllUsers { get => _allUsers; set { _allUsers = value; NotifyOfPropertyChange(); } }
 
+        #endregion
+
+        #region Public methods
+        public void SetCurrentUser()
+        {
+            CurrentUser = SelectedUser;
+            UserControl.CurrentUser = CurrentUser;
+        }
+        #endregion
+
+        #region Private Methods
         private async void GetUsers()
         {
             try
@@ -42,5 +57,6 @@ namespace MoodMovies.ViewModels
                 //failed to load users
             }           
         }
+        #endregion
     }
 }

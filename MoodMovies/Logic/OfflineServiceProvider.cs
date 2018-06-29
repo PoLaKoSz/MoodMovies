@@ -56,6 +56,21 @@ namespace MoodMovies.Logic
         {
             return await Task.Run(() => Db.context.Users.ToList());
         }
+        /// <summary>
+        /// Set/Unset current user field
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task ChangeCurrentUserField(string apikey, bool value)
+        {
+            var user = await Task.Run(() => Db.context.Users.Where(x => x.User_ApiKey == apikey).SingleOrDefault());
+
+            if(user != null)
+            {
+                user.Current_User = (value) ? true : false;
+            }
+            SaveChanges();
+        }
         #endregion
 
         #region Movie Methods

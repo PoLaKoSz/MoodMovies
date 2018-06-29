@@ -42,10 +42,26 @@ namespace MoodMovies.ViewModels
         /// <summary>
         /// Sets the selected item to the current user
         /// </summary>
-        public void SetCurrentUser()
+        public async Task SetCurrentUser()
         {
-            CurrentUser = SelectedUser;
-            UserControl.CurrentUser = CurrentUser;
+            try
+            {
+                var offdb = new OfflineServiceProvider();
+                if (CurrentUser != null)
+                {                    
+                    //change the fields in db first
+                    await offdb.ChangeCurrentUserField(CurrentUser.User_ApiKey, false);                    
+                }
+                await offdb.ChangeCurrentUserField(SelectedUser.User_ApiKey, true);
+                //then perform the change for the ui and logic
+                CurrentUser = SelectedUser;
+                UserControl.CurrentUser = CurrentUser;
+            }
+            catch
+            {
+                //failed to change currentuser
+            }
+            
         }
         /// <summary>
         /// Creates and adds a new user to the database

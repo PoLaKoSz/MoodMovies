@@ -6,7 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:Resources="clr-namespace:MoodMovies.Resources.Validation"
-             FontFamily="Yu Gothic UI Semilight"
+             FontFamily="Segoe UI Light"
              xmlns:local="clr-namespace:MoodMovies.Views"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" FontSize="17"

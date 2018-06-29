@@ -27,16 +27,10 @@ namespace MoodMovies.ViewModels
         public MainViewModel()
         {
             eventAgg.Subscribe(this);
-            InitialiseVMs();            
+                     
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
             //initial setup of the database
-            Db.DumpDatabase();          
-            
-            if(UserControl.CurrentUser == null)
-            {
-                //get user
-                
-            }
+            Db.DumpDatabase();                     
         }
 
         #region Events
@@ -136,5 +130,20 @@ namespace MoodMovies.ViewModels
 
         #endregion
 
+        #region Caliburn Override
+        protected override void OnViewLoaded(object view)
+        {          
+
+            if (UserControl.CurrentUser == null)
+            {
+                //get user
+
+            }
+
+
+            InitialiseVMs();
+            base.OnViewLoaded(view);
+        }          
+        #endregion
     }
 }

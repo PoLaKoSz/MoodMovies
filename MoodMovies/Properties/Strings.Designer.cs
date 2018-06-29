@@ -106,6 +106,15 @@ namespace MoodMovies.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        internal static string MainView_Menubar_Button_Users {
+            get {
+                return ResourceManager.GetString("MainView_Menubar_Button_Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WatchList.
         /// </summary>
         internal static string MainView_Menubar_Button_WatchList {

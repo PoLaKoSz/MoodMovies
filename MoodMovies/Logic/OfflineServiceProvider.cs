@@ -39,6 +39,15 @@ namespace MoodMovies.Logic
             return await Task.Run(() => Db.context.Users.Where(x => x.User_Id == id).SingleOrDefault());
         }
         /// <summary>
+        /// Gets user in db using apikey
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task<Users> GetUserByApiKey(string apikey)
+        {
+            return await Task.Run(() => Db.context.Users.Where(x => x.User_ApiKey == apikey).SingleOrDefault());
+        }
+        /// <summary>
         /// Gets all users in db
         /// </summary>
         /// <param name="movie"></param>
@@ -46,6 +55,21 @@ namespace MoodMovies.Logic
         public async Task<List<Users>> GetAllUsers()
         {
             return await Task.Run(() => Db.context.Users.ToList());
+        }
+        /// <summary>
+        /// Set/Unset current user field
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task ChangeCurrentUserField(string apikey, bool value)
+        {
+            var user = await Task.Run(() => Db.context.Users.Where(x => x.User_ApiKey == apikey).SingleOrDefault());
+
+            if(user != null)
+            {
+                user.Current_User = (value) ? true : false;
+            }
+            SaveChanges();
         }
         #endregion
 

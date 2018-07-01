@@ -25,7 +25,7 @@ namespace DataModel.DataModel.Entities
         [Column(Name = "User_ApiKey", DbType = "STRING", CanBeNull = false)]
         public string User_ApiKey { get; set; }
 
-        [Column(Name = "User_Actve", DbType = "BOOLEAN", CanBeNull = false)]
+        [Column(Name = "User_Active", DbType = "BOOLEAN", CanBeNull = false)]
         public bool User_Active { get; set; }
 
         [Column(Name = "User_ApiKey", DbType = "BOOLEAN", CanBeNull = false)]

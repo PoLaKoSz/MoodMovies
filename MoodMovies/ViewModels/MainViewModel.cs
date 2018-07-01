@@ -16,9 +16,10 @@ namespace MoodMovies.ViewModels
             eventAgg.Subscribe(this);                     
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
             //initial setup of the database
-            Db.DumpDatabase();
+            IDb database = new Db();
+            database.DumpDatabase();
 
-            offlineDb = new OfflineServiceProvider();
+            offlineDb = new OfflineServiceProvider(database);
             UserVM = new UserControlViewModel(offlineDb);
         }
 

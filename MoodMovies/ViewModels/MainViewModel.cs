@@ -18,11 +18,16 @@ namespace MoodMovies.ViewModels
             //initial setup of the database
             Db.DumpDatabase();
 
-            UserVM = new UserControlViewModel();
+            offlineDb = new OfflineServiceProvider();
+            UserVM = new UserControlViewModel(offlineDb);
         }
 
         #region Events
         public IEventAggregator eventAgg = new EventAggregator();
+        #endregion
+
+        #region Fields
+        readonly IOfflineServiceProvider offlineDb;
         #endregion
 
         #region General Properties
@@ -61,10 +66,10 @@ namespace MoodMovies.ViewModels
         private void InitialiseVMs()
         {
             //pages that will change
-            Items.Add(SearchVM = new SearchViewModel(eventAgg));
-            Items.Add(MovieListVM = new MovieListViewModel(eventAgg));
-            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg));
-            Items.Add(WatchListVM = new WatchListViewModel(eventAgg));
+            Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb));
+            Items.Add(MovieListVM = new MovieListViewModel(eventAgg, offlineDb));
+            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, offlineDb));
+            Items.Add(WatchListVM = new WatchListViewModel(eventAgg, offlineDb));
 
             eventAgg.Subscribe(SearchVM);
             eventAgg.Subscribe(MovieListVM);

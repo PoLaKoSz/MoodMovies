@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoodMovies.Logic
 {
-    public class OfflineServiceProvider : IServiceProvider
+    public class OfflineServiceProvider : IServiceProvider, IOfflineServiceProvider
     {
         #region User Methods
         /// <summary>

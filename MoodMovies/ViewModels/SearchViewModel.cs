@@ -10,11 +10,13 @@ namespace MoodMovies.ViewModels
 {
     internal class SearchViewModel : Screen
     {
-        public SearchViewModel(IEventAggregator _event)
+        public SearchViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider)
         {
             eventAgg = _event;
             eventAgg.Subscribe(this);
             //remember to unsubscribe?? or not
+
+            offlineDb = serviceProvider;
 
             //need to write implementation to get user to input this one time and save to db or
             //create a guest session
@@ -26,7 +28,7 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region providers
-        readonly OfflineServiceProvider offlineDb = new OfflineServiceProvider();
+        readonly IOfflineServiceProvider offlineDb;
         OnlineServiceProvider onlineDb = new OnlineServiceProvider();
         #endregion
 

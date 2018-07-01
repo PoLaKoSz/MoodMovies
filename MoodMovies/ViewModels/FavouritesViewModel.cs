@@ -8,9 +8,10 @@ namespace MoodMovies.ViewModels
 {
     public class FavouritesViewModel: ListBaseViewModel
     {
-        public FavouritesViewModel(IEventAggregator _event) : base(_event)
+        public FavouritesViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider) : base(_event)
         {
             DisplayName = "Favourites";
+            offDb = serviceProvider;
         }
 
         #region Fields
@@ -18,7 +19,7 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Properties
-        readonly OfflineServiceProvider offDb = new OfflineServiceProvider();
+        readonly IOfflineServiceProvider offDb;
         #endregion
 
         #region Properties

@@ -10,13 +10,13 @@ namespace MoodMovies.ViewModels
 {
     public class MovieListViewModel : ListBaseViewModel, IHandle<MovieListMessage>, IHandle<MovieCardViewModel>, IHandle<IMovieCardMessage>
     {
-        public MovieListViewModel(IEventAggregator events):base(events)
+        public MovieListViewModel(IEventAggregator events, IOfflineServiceProvider serviceProvider):base(events)
         {
-            
+            offlineDb = serviceProvider;
         }
 
         #region Properties
-        OfflineServiceProvider offlineDb = new OfflineServiceProvider();
+        IOfflineServiceProvider offlineDb;
         #endregion
 
         #region Public Methods       

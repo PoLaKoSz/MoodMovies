@@ -61,7 +61,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DataModel\DatabaseContext.cs" />
     <Compile Include="DataModel\Db.cs" />
     <Compile Include="DataModel\Entities\UserMovies.cs" />

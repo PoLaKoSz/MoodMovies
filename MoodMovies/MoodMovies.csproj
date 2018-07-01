@@ -126,6 +126,7 @@
     </ApplicationDefinition>
     <Compile Include="AppBootStrapper.cs" />
     <Compile Include="Logic\IOfflineServiceProvider.cs" />
+    <Compile Include="Logic\IOnlineServiceProvider.cs" />
     <Compile Include="Logic\IServiceProvider.cs" />
     <Compile Include="Logic\OfflineServiceProvider.cs" />
     <Compile Include="Logic\OnlineServiceProvider.cs" />

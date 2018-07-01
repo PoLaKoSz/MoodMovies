@@ -56,18 +56,16 @@ namespace MoodMovies.ViewModels
         {
             TryClose();
         }
-
-        public void RunShit()
-        {
-            IsLoading = true;
-        }
         #endregion
 
         #region Private Methods
         private void InitialiseVMs()
         {
             //pages that will change
-            Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb));
+
+            //need to write implementation to get user to input this one time and save to db or
+            //create a guest session
+            Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb, new OnlineServiceProvider("6d4b546936310f017557b2fb498b370b")));
             Items.Add(MovieListVM = new MovieListViewModel(eventAgg, offlineDb));
             Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, offlineDb));
             Items.Add(WatchListVM = new WatchListViewModel(eventAgg, offlineDb));
@@ -137,10 +135,8 @@ namespace MoodMovies.ViewModels
         {           
             if (UserControl.CurrentUser == null)
             {
-                
 
             }
-
 
             InitialiseVMs();
             base.OnViewLoaded(view);

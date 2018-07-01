@@ -23,6 +23,5 @@ namespace MoodMovies.ViewModels
         #endregion
 
         protected const string posterAddress = "https://image.tmdb.org/t/p/w500/";
-
     }
 }

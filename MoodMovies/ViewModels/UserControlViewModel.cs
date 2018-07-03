@@ -3,6 +3,7 @@ using DataModel.DataModel.Entities;
 using MoodMovies.Logic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace MoodMovies.ViewModels
 {
@@ -107,25 +108,20 @@ namespace MoodMovies.ViewModels
             {
                 var users = await offlineDb.GetAllUsers();
 
+                // Get the current user if one has been set
+                UserControl.CurrentUser = users.Where(x => x.Current_User).SingleOrDefault();
+                if(UserControl.CurrentUser  != null)
+                    CurrentUser = UserControl.CurrentUser;
+
                 //clear the list
                 AllUsers.Clear();
                 //renew the list
-                AllUsers = new ObservableCollection<Users>(users);
+                AllUsers = new ObservableCollection<Users>(users);                
             }
             catch
             {
                 //failed to load users
-            }          
-            // Get the current user if one has been set
-            try
-            {
-                UserControl.CurrentUser = await offlineDb.GetCurrentUser();
-                CurrentUser = UserControl.CurrentUser;
-            }
-            catch
-            {
-                //no current user found??
-            }
+            }                  
         }
         #endregion
     }

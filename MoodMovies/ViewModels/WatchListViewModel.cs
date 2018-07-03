@@ -23,7 +23,7 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var user = await offlineDb.GetFirstUser();          //replace by getting from static class**********
+                var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
                 var movies = await offlineDb.GetAllWatchListItems(user);
                 //build up the movie card view models
                 Movies.Clear();

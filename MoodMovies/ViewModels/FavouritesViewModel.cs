@@ -35,7 +35,7 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var user = await offDb.GetFirstUser();      //replace by getting from static class**********
+                var user = await offDb.GetUser(UserControl.CurrentUser.User_Id);
                 var movies = await offDb.GetAllFavouriteItems(user);
                 //build up the movie card view models
                 Movies.Clear();

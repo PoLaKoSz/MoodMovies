@@ -88,12 +88,12 @@ namespace MoodMovies.ViewModels
                 if (await offlineDb.AddMovie(movie))
                 {
                     //then create the link between the user and the movie and the watchlist
-                    var user = await offlineDb.GetFirstUser();  //this will betaken from static class******************
+                    var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id); 
                     await offlineDb.AddToWatchList(user, movie);
                 }
                 else
                 {
-                    var user = await offlineDb.GetFirstUser(); //this must be taken from static class*************************
+                    var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
                     var usermovie = await offlineDb.GetUserMovieLink(user, movie);
 
                     usermovie.Watchlist = true;
@@ -113,7 +113,7 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var user = await offlineDb.GetFirstUser();  //this will betaken from static class******************
+                var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
                 var movie = await offlineDb.GetMovie(mvCard.Movie_Id);
                 await offlineDb.RemoveFromWatchList(user, movie);
             }
@@ -137,12 +137,12 @@ namespace MoodMovies.ViewModels
                 if (await offlineDb.AddMovie(movie))
                 {
                     //then create the link between the user and the movie and the watchlist
-                    var user = await offlineDb.GetFirstUser(); //this must be taken from static class*************************
+                    var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
                     await offlineDb.AddToFavourites(user, movie);
                 }
                 else
                 {
-                    var user = await offlineDb.GetFirstUser(); //this must be taken from static class*************************
+                    var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
                     var usermovie = await offlineDb.GetUserMovieLink(user, movie);
 
                     usermovie.Favourite = true;
@@ -162,7 +162,7 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var user = await offlineDb.GetFirstUser();  //this will betaken from static class******************
+                var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id); 
                 var movie = await offlineDb.GetMovie(mvCard.Movie_Id);
                 await offlineDb.RemoveFromFavourites(user, movie);
             }

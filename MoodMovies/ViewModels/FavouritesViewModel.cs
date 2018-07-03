@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using MaterialDesignThemes.Wpf;
 using MoodMovies.Logic;
 using MoodMovies.Resources;
 
@@ -8,7 +9,7 @@ namespace MoodMovies.ViewModels
 {
     public class FavouritesViewModel: ListBaseViewModel
     {
-        public FavouritesViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider) : base(_event)
+        public FavouritesViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage) : base(_event, statusMessage)
         {
             DisplayName = "Favourites";
             offDb = serviceProvider;
@@ -20,10 +21,6 @@ namespace MoodMovies.ViewModels
 
         #region Properties
         readonly IOfflineServiceProvider offDb;
-        #endregion
-
-        #region Properties
-
         #endregion
 
         #region Methods

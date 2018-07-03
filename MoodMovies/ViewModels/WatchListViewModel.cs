@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using MaterialDesignThemes.Wpf;
 using MoodMovies.Logic;
 using MoodMovies.Resources;
 
@@ -8,7 +9,7 @@ namespace MoodMovies.ViewModels
 {
     public class WatchListViewModel : ListBaseViewModel
     {
-        public WatchListViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider) : base(_event)
+        public WatchListViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage) : base(_event, statusMessage)
         {
             DisplayName = "Favourites";
             offlineDb = serviceProvider;

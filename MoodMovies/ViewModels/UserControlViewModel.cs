@@ -4,19 +4,23 @@ using MoodMovies.Logic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
+using MaterialDesignThemes.Wpf;
 
 namespace MoodMovies.ViewModels
 {
     public class UserControlViewModel : Screen
     {
-        public UserControlViewModel(IOfflineServiceProvider serviceProvider)
+        public UserControlViewModel(IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage)
         {
             AllUsers = new ObservableCollection<Users>();
             offlineDb = serviceProvider;
+            StatusMessage = statusMessage;
             GetUsers();            
         }
 
         #region Properties
+        public SnackbarMessageQueue StatusMessage { get; set; }
+
         private Users _selectedUser;
         public Users SelectedUser { get => _selectedUser; set { _selectedUser = value; NotifyOfPropertyChange(); } }
 

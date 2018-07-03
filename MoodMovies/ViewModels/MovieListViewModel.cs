@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using DataModel.DataModel.Entities;
+using MaterialDesignThemes.Wpf;
 using MoodMovies.Logic;
 using MoodMovies.Messages;
 using MoodMovies.Resources;
@@ -10,7 +11,7 @@ namespace MoodMovies.ViewModels
 {
     public class MovieListViewModel : ListBaseViewModel, IHandle<MovieListMessage>, IHandle<MovieCardViewModel>, IHandle<IMovieCardMessage>
     {
-        public MovieListViewModel(IEventAggregator events, IOfflineServiceProvider serviceProvider):base(events)
+        public MovieListViewModel(IEventAggregator events, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage):base(events, statusMessage)
         {
             offlineDb = serviceProvider;
         }

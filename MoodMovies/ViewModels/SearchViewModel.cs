@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using TMdbEasy.TmdbObjects.Movies;
 using DataModel.DataModel.Entities;
+using MaterialDesignThemes.Wpf;
 
 namespace MoodMovies.ViewModels
 {
     internal class SearchViewModel : Screen
     {
-        public SearchViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService)
+        public SearchViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage)
         {
             eventAgg = _event;
             eventAgg.Subscribe(this);
@@ -19,13 +20,14 @@ namespace MoodMovies.ViewModels
 
             offlineDb = offlineService;
             onlineDb = onlineService;
+            StatusMessage = statusMessage;
         }
 
         #region Events
         public IEventAggregator eventAgg;
         #endregion
 
-        #region providers
+        #region Providers
         readonly IOfflineServiceProvider offlineDb;
         readonly IOnlineServiceProvider onlineDb;
         #endregion
@@ -35,6 +37,7 @@ namespace MoodMovies.ViewModels
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
         private bool _isLoading;
         public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
+        public SnackbarMessageQueue StatusMessage { get; set; }
         #endregion
 
         #region Properties

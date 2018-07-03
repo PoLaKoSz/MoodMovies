@@ -5,6 +5,7 @@ using DataModel.DataModel;
 using WPFLocalizeExtension.Engine;
 using System.Globalization;
 using MoodMovies.Logic;
+using MaterialDesignThemes.Wpf;
 
 namespace MoodMovies.ViewModels
 {
@@ -13,7 +14,7 @@ namespace MoodMovies.ViewModels
         // constructor
         public MainViewModel()
         {
-            eventAgg.Subscribe(this);                     
+            eventAgg.Subscribe(this);
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
             //initial setup of the database
             IDb database = new Db();
@@ -21,6 +22,8 @@ namespace MoodMovies.ViewModels
 
             offlineDb = new OfflineServiceProvider(database);
             UserVM = new UserControlViewModel(offlineDb);
+            StatusMessage = new SnackbarMessageQueue();
+            StatusMessage.Enqueue("Setup succcess");
         }
 
         #region Events
@@ -35,7 +38,8 @@ namespace MoodMovies.ViewModels
         private string _loadingMessage;
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
         private bool _isLoading;
-        public bool IsLoading { get => _isLoading; set { _isLoading= value; NotifyOfPropertyChange(); } }
+        public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
+        public SnackbarMessageQueue StatusMessage { get; set; }
         #endregion
 
         #region Child View Models
@@ -85,7 +89,7 @@ namespace MoodMovies.ViewModels
             DeactivateItem(ActiveItem, true);
             ActivateItem(UserVM);
         }
-     
+
         public void DisplaySearchVM()
         {
             DeactivateItem(ActiveItem, true);
@@ -132,15 +136,15 @@ namespace MoodMovies.ViewModels
 
         #region Caliburn Override
         protected override void OnViewLoaded(object view)
-        {           
+        {
             if (UserControl.CurrentUser == null)
             {
-
+                //prompt user to set the user accoutn etc
             }
 
             InitialiseVMs();
             base.OnViewLoaded(view);
-        }          
+        }
         #endregion
     }
 }

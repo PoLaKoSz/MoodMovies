@@ -21,9 +21,7 @@ namespace MoodMovies.ViewModels
             database.DumpDatabase();
 
             offlineDb = new OfflineServiceProvider(database);
-            UserVM = new UserControlViewModel(offlineDb);
-            StatusMessage = new SnackbarMessageQueue();
-            StatusMessage.Enqueue("Setup succcess");
+            UserVM = new UserControlViewModel(offlineDb, StatusMessage);
         }
 
         #region Events
@@ -39,7 +37,7 @@ namespace MoodMovies.ViewModels
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
         private bool _isLoading;
         public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
-        public SnackbarMessageQueue StatusMessage { get; set; }
+        public SnackbarMessageQueue StatusMessage { get; set; } = new SnackbarMessageQueue();
         #endregion
 
         #region Child View Models
@@ -69,10 +67,10 @@ namespace MoodMovies.ViewModels
 
             //need to write implementation to get user to input this one time and save to db or
             //create a guest session
-            Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb, new OnlineServiceProvider()));
-            Items.Add(MovieListVM = new MovieListViewModel(eventAgg, offlineDb));
-            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, offlineDb));
-            Items.Add(WatchListVM = new WatchListViewModel(eventAgg, offlineDb));
+            Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb, new OnlineServiceProvider(), StatusMessage));
+            Items.Add(MovieListVM = new MovieListViewModel(eventAgg, offlineDb, StatusMessage));
+            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, offlineDb, StatusMessage));
+            Items.Add(WatchListVM = new WatchListViewModel(eventAgg, offlineDb, StatusMessage));
 
             eventAgg.Subscribe(SearchVM);
             eventAgg.Subscribe(MovieListVM);
@@ -136,12 +134,7 @@ namespace MoodMovies.ViewModels
 
         #region Caliburn Override
         protected override void OnViewLoaded(object view)
-        {
-            if (UserControl.CurrentUser == null)
-            {
-                //prompt user to set the user accoutn etc
-            }
-
+        {           
             InitialiseVMs();
             base.OnViewLoaded(view);
         }

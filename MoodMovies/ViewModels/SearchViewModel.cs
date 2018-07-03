@@ -92,12 +92,12 @@ namespace MoodMovies.ViewModels
                 }
                 catch
                 {
-                    //failed to load apikey
+                    StatusMessage.Enqueue("Failed to load the Current user's Api Key");
                 }                
             }
             else
             {
-                //cant search
+                StatusMessage.Enqueue("Please select a user account form the 'User' page.");
             }            
         }
 

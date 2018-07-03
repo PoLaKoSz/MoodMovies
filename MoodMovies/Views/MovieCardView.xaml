@@ -217,11 +217,11 @@
                                       cal:Message.Attach="AddToWatchList($this)"
                                       IsChecked="{Binding Path=IsWatchListed,Mode=TwoWay}">
                             <ToggleButton.Content>
-                                <materialDesign:PackIcon  Kind="Bookmark"
+                                <materialDesign:PackIcon  Kind="Watch"
                                                           Foreground="LightGray" />
                             </ToggleButton.Content>
                             <materialDesign:ToggleButtonAssist.OnContent>
-                                <materialDesign:PackIcon Kind="Bookmark"
+                                <materialDesign:PackIcon Kind="Watch"
                                                          Foreground="Green" />
                             </materialDesign:ToggleButtonAssist.OnContent>
                         </ToggleButton>

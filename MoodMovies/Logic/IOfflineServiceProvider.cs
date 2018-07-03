@@ -38,11 +38,11 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         Task ChangeCurrentUserField(string apikey, bool value);
         /// <summary>
-        /// Gets user in db using id
+        /// Delete user from db
         /// </summary>
-        /// <param name="movie"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
-        //Task<Users> GetCurrentUser();
+        Task DeleteUser(Users user);
         #endregion
 
         #region Movie Methods
@@ -70,13 +70,7 @@ namespace MoodMovies.Logic
         /// <param name="user"></param>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task<bool> AddMovie(Movies movie);
-        /// <summary>
-        /// Gets first movie in db
-        /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        Task<Movies> GetFirstMovie();
+        Task<bool> AddMovie(Movies movie);       
         #endregion
 
         #region WatchList methods

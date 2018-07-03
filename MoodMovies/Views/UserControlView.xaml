@@ -12,7 +12,7 @@
              d:DesignHeight="450"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
-             Width="650">
+             Width="750">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
@@ -33,7 +33,6 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0"
                         Background="LightGray"
@@ -53,13 +52,6 @@
                            Margin="5,0,0,0"
                            Foreground="Black" />
                 </Border>
-                <Button Grid.Column="3"
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Background="#FFEAE8E8"
-                        Foreground="{StaticResource SecondaryAccentBrush}"
-                        ToolTip="Delete Selected User">
-                    <iconPacks:Material Kind="Delete" />
-                </Button>
             </Grid>
         </materialDesign:Card>
 
@@ -131,7 +123,7 @@
 
         <materialDesign:Card Grid.Row="7"
                              materialDesign:ShadowAssist.ShadowDepth="Depth3">
-            <ScrollViewer  Width="650"
+            <ScrollViewer  Width="750"
                            ScrollViewer.VerticalScrollBarVisibility="Auto"
                            HorizontalScrollBarVisibility="Hidden">
                 <DataGrid FontSize="16"
@@ -191,6 +183,19 @@
                                             Foreground="#FF1FB31F"
                                             Height="30"
                                             VerticalAlignment="Top">Set as Current User</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Action">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button cal:Message.Attach="DeleteCurrentUser"
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            Foreground="#FFCA1F1F"
+                                            Height="30"
+                                            VerticalAlignment="Top">
+                                        <iconPacks:Material Kind="Delete" />
+                                    </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

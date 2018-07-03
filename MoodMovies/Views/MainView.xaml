@@ -168,12 +168,12 @@
                                           Width="50" />
                             <Button Grid.Column="2"
                                     HorizontalAlignment="Center"
-                                    Width="50"
-                                    Style="{DynamicResource MaterialDesignFlatButton}"
+                                    Width="55"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
                                     x:Name="DisplaySearchVM" Background="Transparent">
                                 <materialDesign:PackIcon Kind="Magnify"
-                                                         Width="25"
-                                                         Height="25"
+                                                         Width="23"
+                                                         Height="23"
                                                          Foreground="{StaticResource SecondaryAccentMidBrush}" />
                             </Button>
                         </Grid>

@@ -91,6 +91,9 @@ namespace MoodMovies.ViewModels
                     {
                         await offlineDb.CreateUser(user);
                         await GetUsers();
+                        FirstName = "";
+                        SurName = "";
+                        ApiKey = "";
                     }
                     else
                     {
@@ -106,6 +109,18 @@ namespace MoodMovies.ViewModels
             {
                 StatusMessage.Enqueue("Please fill in all the fields and try again.");
             }
+        }
+        /// <summary>
+        /// Deletes current user
+        /// </summary>
+        public async void DeleteCurrentUser()
+        {
+            if(SelectedUser != null)
+            {
+                await offlineDb.DeleteUser(SelectedUser);
+            }
+
+            await GetUsers();
         }
         #endregion
 

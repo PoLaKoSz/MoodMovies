@@ -12,13 +12,7 @@ namespace MoodMovies.Logic
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        Task CreateUser(Users user);
-        /// <summary>
-        /// Gets first user in db
-        /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        Task<Users> GetFirstUser();
+        Task CreateUser(Users user);       
         /// <summary>
         /// Gets user in db using id
         /// </summary>

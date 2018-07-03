@@ -28,16 +28,7 @@ namespace MoodMovies.Logic
             //check to see if a user already exists
             await Task.Run(() => db.context.Users.Add(user));
             db.context.SaveChanges();
-        }
-        /// <summary>
-        /// Gets first user in db
-        /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        public async Task<Users> GetFirstUser()
-        {
-            return await Task.Run(() => db.context.Users.FirstOrDefault());
-        }
+        }        
         /// <summary>
         /// Gets user in db using id
         /// </summary>

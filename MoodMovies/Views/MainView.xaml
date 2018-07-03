@@ -154,7 +154,8 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <!--Hamburger Menu-->
-                        <Grid  Grid.Column="0" HorizontalAlignment="Left">
+                        <Grid  Grid.Column="0"
+                               HorizontalAlignment="Left">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="20" />
@@ -170,14 +171,15 @@
                                     HorizontalAlignment="Center"
                                     Width="55"
                                     Style="{StaticResource MaterialDesignFlatButton}"
-                                    x:Name="DisplaySearchVM" Background="Transparent">
+                                    x:Name="DisplaySearchVM"
+                                    Background="Transparent">
                                 <materialDesign:PackIcon Kind="Magnify"
                                                          Width="23"
                                                          Height="23"
                                                          Foreground="{StaticResource SecondaryAccentMidBrush}" />
                             </Button>
                         </Grid>
-                        
+
                         <!--Title-->
                         <DockPanel Grid.Column="1"
                                    HorizontalAlignment="Center"
@@ -238,7 +240,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="4*" />
                         <RowDefinition Height="50" />
-                    </Grid.RowDefinitions>
+                    </Grid.RowDefinitions>                   
                     <!--body-->
                     <Grid Grid.Row="0"
                           Margin="0,5,0,5">
@@ -250,6 +252,59 @@
                     <Grid Grid.Row="1"
                           Margin="0"
                           Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <!--Results-->
+                        <materialDesign:Chip Grid.Column="1"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Background="Transparent"
+                                             cal:Message.Attach="DisplayMovieListVM"
+                                             IconBackground="Transparent"
+                                             Height="50"
+                                             IconForeground="{StaticResource SecondaryAccentMidBrush}">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon Kind="Movie"
+                                                         Height="26"
+                                                         Width="26" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
+                        <!--Favourites button-->
+                        <materialDesign:Chip Grid.Column="3"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Background="Transparent"
+                                             cal:Message.Attach="DisplayFavouriteVM"
+                                             IconBackground="Transparent"
+                                             Height="50"
+                                             IconForeground="#FFE44242">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon Kind="Heart"
+                                                         Height="26"
+                                                         Width="26" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
+                        <!--WatchList-->
+                        <materialDesign:Chip Grid.Column="5"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Background="Transparent"
+                                             cal:Message.Attach="DisplayWatchListVM"
+                                             IconBackground="Transparent"
+                                             Height="50"
+                                             IconForeground="#FFC229C2">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon Kind="Watch"
+                                                         Height="26"
+                                                         Width="26" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
                         <materialDesign:Snackbar VerticalAlignment="Center"
                                                  HorizontalAlignment="Center"
                                                  MessageQueue="{Binding StatusMessage}">

@@ -12,7 +12,7 @@ namespace MoodMovies.ViewModels
         {
             AllUsers = new ObservableCollection<Users>();
             offlineDb = serviceProvider;
-            GetUsers();
+            GetUsers();            
         }
 
         #region Properties
@@ -37,7 +37,7 @@ namespace MoodMovies.ViewModels
 
         readonly IOfflineServiceProvider offlineDb;
 
-        #region Public methods
+        #region Public methods        
         /// <summary>
         /// Sets the selected item to the current user
         /// </summary>
@@ -115,7 +115,17 @@ namespace MoodMovies.ViewModels
             catch
             {
                 //failed to load users
-            }           
+            }          
+            // Get the current user if one has been set
+            try
+            {
+                UserControl.CurrentUser = await offlineDb.GetCurrentUser();
+                CurrentUser = UserControl.CurrentUser;
+            }
+            catch
+            {
+                //no current user found??
+            }
         }
         #endregion
     }

@@ -131,6 +131,7 @@
     <Compile Include="Logic\OfflineServiceProvider.cs" />
     <Compile Include="Logic\OnlineServiceProvider.cs" />
     <Compile Include="Logic\UserControl.cs" />
+    <Compile Include="Messages\ClientChangeMessage.cs" />
     <Compile Include="Messages\MovieCardMessages.cs" />
     <Compile Include="Messages\MovieListMessage.cs" />
     <Compile Include="Messages\ResultsReadyMessage.cs" />

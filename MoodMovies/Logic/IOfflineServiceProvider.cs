@@ -48,7 +48,7 @@ namespace MoodMovies.Logic
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task<Users> GetCurrentUser();
+        //Task<Users> GetCurrentUser();
         #endregion
 
         #region Movie Methods

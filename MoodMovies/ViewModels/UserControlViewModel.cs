@@ -5,18 +5,25 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
 using MaterialDesignThemes.Wpf;
+using MoodMovies.Messages;
 
 namespace MoodMovies.ViewModels
 {
     public class UserControlViewModel : Screen
     {
-        public UserControlViewModel(IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage)
+        public UserControlViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage)
         {
+            eventAgg = _event;
             AllUsers = new ObservableCollection<Users>();
             offlineDb = serviceProvider;
             StatusMessage = statusMessage;
             GetUsers();            
         }
+
+        #region Events
+        public IEventAggregator eventAgg;
+        #endregion
+
 
         #region Properties
         public SnackbarMessageQueue StatusMessage { get; set; }
@@ -59,6 +66,7 @@ namespace MoodMovies.ViewModels
                 //then perform the change for the ui and logic
                 CurrentUser = SelectedUser;
                 UserControl.CurrentUser = CurrentUser;
+                eventAgg.PublishOnUIThread(new ClientChangeMessage());
             }
             catch
             {
@@ -117,9 +125,14 @@ namespace MoodMovies.ViewModels
         {
             if(SelectedUser != null)
             {
-                await offlineDb.DeleteUser(SelectedUser);
+                if(SelectedUser == UserControl.CurrentUser)
+                {
+                    UserControl.CurrentUser = null;
+                    CurrentUser = null;
+                    eventAgg.PublishOnUIThread(new ClientChangeMessage());
+                }
+                await offlineDb.DeleteUser(SelectedUser);                
             }
-
             await GetUsers();
         }
         #endregion

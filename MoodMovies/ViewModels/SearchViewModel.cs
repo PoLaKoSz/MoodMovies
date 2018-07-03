@@ -10,7 +10,7 @@ using MaterialDesignThemes.Wpf;
 
 namespace MoodMovies.ViewModels
 {
-    internal class SearchViewModel : Screen
+    internal class SearchViewModel : Screen, IHandle<ClientChangeMessage>
     {
         public SearchViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage)
         {
@@ -61,11 +61,17 @@ namespace MoodMovies.ViewModels
         #region Public methods
         public async void BeginSearch()
         {
-            if(onlineDb.Client == null && Logic.UserControl.CurrentUser != null)
+            //if no cient has been set
+            if(onlineDb.Client == null && Logic.UserControl.CurrentUser == null)
+            {
+                StatusMessage.Enqueue("Please select a user account form the 'User' page.");
+            }            
+            else 
             {
                 try
                 {
-                    onlineDb.ChangeClient(Logic.UserControl.CurrentUser.User_ApiKey);
+                    if (onlineDb.Client == null)
+                        onlineDb.ChangeClient(Logic.UserControl.CurrentUser.User_ApiKey);
 
                     CheckInputs();
                     if (SelectedSource is ComboBoxItem obj)
@@ -92,13 +98,9 @@ namespace MoodMovies.ViewModels
                 }
                 catch
                 {
-                    StatusMessage.Enqueue("Failed to load the Current user's Api Key");
-                }                
-            }
-            else
-            {
-                StatusMessage.Enqueue("Please select a user account form the 'User' page.");
-            }            
+                    StatusMessage.Enqueue("Failed to connect with the current User's Api Key");
+                }
+            }         
         }
 
         public async Task GetMoviesByTitle(string text)
@@ -130,5 +132,24 @@ namespace MoodMovies.ViewModels
 
         }
         #endregion
+
+        public void Handle(ClientChangeMessage message)
+        {
+            try
+            {
+                if (Logic.UserControl.CurrentUser != null)
+                {
+                    onlineDb.ChangeClient(Logic.UserControl.CurrentUser.User_ApiKey);                    
+                }
+                else
+                {
+                    onlineDb.Client = null;
+                }
+            }
+            catch
+            {
+                StatusMessage.Enqueue("Failed to load the Current user's Api Key");
+            }
+        }
     }
 }

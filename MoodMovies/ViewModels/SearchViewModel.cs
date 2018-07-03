@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using TMdbEasy.TmdbObjects.Movies;
+using DataModel.DataModel.Entities;
 
 namespace MoodMovies.ViewModels
 {
@@ -57,28 +58,44 @@ namespace MoodMovies.ViewModels
         #region Public methods
         public async void BeginSearch()
         {
-            CheckInputs();
-            if (SelectedSource is ComboBoxItem obj)
+            if(onlineDb.Client == null && Logic.UserControl.CurrentUser != null)
             {
-                var value = Convert.ToString(obj.Content);
-                //this needs to change(add a viewmodel and associate an enum possibly) translation wont work here
-                //or never translate this
-                if (value == "Online" || String.IsNullOrEmpty(value))
+                try
                 {
-                    if (string.IsNullOrEmpty(SearchText))
+                    onlineDb.ChangeClient(Logic.UserControl.CurrentUser.User_ApiKey);
+
+                    CheckInputs();
+                    if (SelectedSource is ComboBoxItem obj)
                     {
-                        //publish message
-                    }
-                    else
-                    {
-                        await GetMoviesByTitle(SearchText);
+                        var value = Convert.ToString(obj.Content);
+                        //this needs to change(add a viewmodel and associate an enum possibly) translation wont work here
+                        //or never translate this
+                        if (value == "Online" || String.IsNullOrEmpty(value))
+                        {
+                            if (string.IsNullOrEmpty(SearchText))
+                            {
+                                //publish message
+                            }
+                            else
+                            {
+                                await GetMoviesByTitle(SearchText);
+                            }
+                        }
+                        else if (value == "Favourites" || value == "Watchlist")
+                        {
+                            //search the watchlist/favourites
+                        }
                     }
                 }
-                else if (value == "Favourites" || value == "Watchlist")
-                {         
-                    //search the watchlist/favourites
-                }
+                catch
+                {
+                    //failed to load apikey
+                }                
             }
+            else
+            {
+                //cant search
+            }            
         }
 
         public async Task GetMoviesByTitle(string text)

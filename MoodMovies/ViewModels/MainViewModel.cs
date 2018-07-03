@@ -65,7 +65,7 @@ namespace MoodMovies.ViewModels
 
             //need to write implementation to get user to input this one time and save to db or
             //create a guest session
-            Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb, new OnlineServiceProvider("6d4b546936310f017557b2fb498b370b")));
+            Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb, new OnlineServiceProvider()));
             Items.Add(MovieListVM = new MovieListViewModel(eventAgg, offlineDb));
             Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, offlineDb));
             Items.Add(WatchListVM = new WatchListViewModel(eventAgg, offlineDb));

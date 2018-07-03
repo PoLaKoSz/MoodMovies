@@ -22,7 +22,8 @@
             <RowDefinition Height="10" />
             <RowDefinition Height="120" />
             <RowDefinition Height="10" />
-            <RowDefinition Height="*" MinHeight="150" />            
+            <RowDefinition Height="*"
+                           MinHeight="150" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -63,7 +64,10 @@
         </materialDesign:Card>
 
         <Label Grid.Row="3"
-               Content="To create a new User please first obtain an Api key from www.themoviedb.org" VerticalAlignment="Center" FontSize="16" Foreground="Red"/>
+               Content="To create a new User please first obtain an Api key from www.themoviedb.org"
+               VerticalAlignment="Center"
+               FontSize="16"
+               Foreground="Red" />
         <materialDesign:Card Grid.Row="5"
                              FontSize="15"
                              VerticalAlignment="Stretch"
@@ -124,10 +128,10 @@
                 </Button>
             </Grid>
         </materialDesign:Card>
-        
+
         <materialDesign:Card Grid.Row="7"
                              materialDesign:ShadowAssist.ShadowDepth="Depth3">
-            <ScrollViewer  Width="650"                           
+            <ScrollViewer  Width="650"
                            ScrollViewer.VerticalScrollBarVisibility="Auto"
                            HorizontalScrollBarVisibility="Hidden">
                 <DataGrid FontSize="16"
@@ -201,6 +205,6 @@
             </ScrollViewer>
         </materialDesign:Card>
 
-        
+
     </Grid>
 </UserControl>

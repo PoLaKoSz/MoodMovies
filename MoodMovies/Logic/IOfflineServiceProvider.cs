@@ -43,6 +43,12 @@ namespace MoodMovies.Logic
         /// <param name="movie"></param>
         /// <returns></returns>
         Task ChangeCurrentUserField(string apikey, bool value);
+        /// <summary>
+        /// Gets user in db using id
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        Task<Users> GetCurrentUser();
         #endregion
 
         #region Movie Methods

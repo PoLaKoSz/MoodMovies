@@ -1,10 +1,15 @@
 ﻿using System.Threading.Tasks;
+using TMdbEasy;
 using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.Logic
 {
     public interface IOnlineServiceProvider
     {
+        EasyClient Client { get; set; }
+
+        void ChangeClient(string Key);
+
         Task<MovieList> SearchByTitleAsync(string title);
 
         Task<MovieList> SearchByActorAsync(string title);

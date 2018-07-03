@@ -8,13 +8,14 @@ namespace MoodMovies.ViewModels
 {
     public class WatchListViewModel : ListBaseViewModel
     {
-        public WatchListViewModel(IEventAggregator _event) : base(_event)
+        public WatchListViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider) : base(_event)
         {
             DisplayName = "Favourites";
+            offlineDb = serviceProvider;
         }
 
         #region Properties
-        OfflineServiceProvider offDb = new OfflineServiceProvider();
+        IOfflineServiceProvider offlineDb;
         #endregion
 
         #region Methods
@@ -22,8 +23,8 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var user = await offDb.GetFirstUser();          //replace by getting from static class**********
-                var movies = await offDb.GetAllWatchListItems(user);
+                var user = await offlineDb.GetFirstUser();          //replace by getting from static class**********
+                var movies = await offlineDb.GetAllWatchListItems(user);
                 //build up the movie card view models
                 Movies.Clear();
                 await Task.Run(() =>

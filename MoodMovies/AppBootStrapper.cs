@@ -15,6 +15,5 @@ namespace MoodMovies
         {
             DisplayRootViewFor<MainViewModel>();
         }
-
     }
 }

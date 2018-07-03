@@ -16,13 +16,19 @@ namespace MoodMovies.ViewModels
             eventAgg.Subscribe(this);                     
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
             //initial setup of the database
-            Db.DumpDatabase();
+            IDb database = new Db();
+            database.DumpDatabase();
 
-            UserVM = new UserControlViewModel();
+            offlineDb = new OfflineServiceProvider(database);
+            UserVM = new UserControlViewModel(offlineDb);
         }
 
         #region Events
         public IEventAggregator eventAgg = new EventAggregator();
+        #endregion
+
+        #region Fields
+        readonly IOfflineServiceProvider offlineDb;
         #endregion
 
         #region General Properties
@@ -50,21 +56,19 @@ namespace MoodMovies.ViewModels
         {
             TryClose();
         }
-
-        public void RunShit()
-        {
-            IsLoading = true;
-        }
         #endregion
 
         #region Private Methods
         private void InitialiseVMs()
         {
             //pages that will change
-            Items.Add(SearchVM = new SearchViewModel(eventAgg));
-            Items.Add(MovieListVM = new MovieListViewModel(eventAgg));
-            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg));
-            Items.Add(WatchListVM = new WatchListViewModel(eventAgg));
+
+            //need to write implementation to get user to input this one time and save to db or
+            //create a guest session
+            Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb, new OnlineServiceProvider("6d4b546936310f017557b2fb498b370b")));
+            Items.Add(MovieListVM = new MovieListViewModel(eventAgg, offlineDb));
+            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, offlineDb));
+            Items.Add(WatchListVM = new WatchListViewModel(eventAgg, offlineDb));
 
             eventAgg.Subscribe(SearchVM);
             eventAgg.Subscribe(MovieListVM);
@@ -131,10 +135,8 @@ namespace MoodMovies.ViewModels
         {           
             if (UserControl.CurrentUser == null)
             {
-                
 
             }
-
 
             InitialiseVMs();
             base.OnViewLoaded(view);

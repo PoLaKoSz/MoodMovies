@@ -10,15 +10,14 @@ namespace MoodMovies.ViewModels
 {
     internal class SearchViewModel : Screen
     {
-        public SearchViewModel(IEventAggregator _event)
+        public SearchViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService)
         {
             eventAgg = _event;
             eventAgg.Subscribe(this);
             //remember to unsubscribe?? or not
 
-            //need to write implementation to get user to input this one time and save to db or
-            //create a guest session
-            onlineDb.SetupKey("6d4b546936310f017557b2fb498b370b");
+            offlineDb = offlineService;
+            onlineDb = onlineService;
         }
 
         #region Events
@@ -26,8 +25,8 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region providers
-        readonly OfflineServiceProvider offlineDb = new OfflineServiceProvider();
-        OnlineServiceProvider onlineDb = new OnlineServiceProvider();
+        readonly IOfflineServiceProvider offlineDb;
+        readonly IOnlineServiceProvider onlineDb;
         #endregion
 
         #region General Properties
@@ -87,7 +86,7 @@ namespace MoodMovies.ViewModels
             eventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
 
             //add support for all the api objects(movie full details etc)            
-            MovieList = await OnlineServiceProvider.SearchByTitleAsync(text);
+            MovieList = await onlineDb.SearchByTitleAsync(text);
 
             if (MovieList.Results != null || MovieList.Results.Count != 0)
             {

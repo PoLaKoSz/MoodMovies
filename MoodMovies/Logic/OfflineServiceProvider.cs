@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace MoodMovies.Logic
 {
-    public class OfflineServiceProvider : IServiceProvider
+    public class OfflineServiceProvider : IServiceProvider, IOfflineServiceProvider
     {
+        public OfflineServiceProvider(IDb database)
+        {
+            db = database;
+        }
+
+        #region Fields
+        readonly IDb db;
+        #endregion
+
         #region User Methods
         /// <summary>
         /// Adds a user to the database
@@ -17,8 +26,8 @@ namespace MoodMovies.Logic
         public async Task CreateUser(Users user)
         {
             //check to see if a user already exists
-            await Task.Run(() => Db.context.Users.Add(user));
-            Db.context.SaveChanges();
+            await Task.Run(() => db.context.Users.Add(user));
+            db.context.SaveChanges();
         }
         /// <summary>
         /// Gets first user in db
@@ -27,7 +36,7 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task<Users> GetFirstUser()
         {
-            return await Task.Run(() => Db.context.Users.FirstOrDefault());
+            return await Task.Run(() => db.context.Users.FirstOrDefault());
         }
         /// <summary>
         /// Gets user in db using id
@@ -36,7 +45,7 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task<Users> GetUser(int id)
         {
-            return await Task.Run(() => Db.context.Users.Where(x => x.User_Id == id).SingleOrDefault());
+            return await Task.Run(() => db.context.Users.Where(x => x.User_Id == id).SingleOrDefault());
         }
         /// <summary>
         /// Gets user in db using apikey
@@ -45,7 +54,7 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task<Users> GetUserByApiKey(string apikey)
         {
-            return await Task.Run(() => Db.context.Users.Where(x => x.User_ApiKey == apikey).SingleOrDefault());
+            return await Task.Run(() => db.context.Users.Where(x => x.User_ApiKey == apikey).SingleOrDefault());
         }
         /// <summary>
         /// Gets all users in db
@@ -54,7 +63,7 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task<List<Users>> GetAllUsers()
         {
-            return await Task.Run(() => Db.context.Users.ToList());
+            return await Task.Run(() => db.context.Users.ToList());
         }
         /// <summary>
         /// Set/Unset current user field
@@ -63,7 +72,7 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task ChangeCurrentUserField(string apikey, bool value)
         {
-            var user = await Task.Run(() => Db.context.Users.Where(x => x.User_ApiKey == apikey).SingleOrDefault());
+            var user = await Task.Run(() => db.context.Users.Where(x => x.User_ApiKey == apikey).SingleOrDefault());
 
             if(user != null)
             {
@@ -82,8 +91,8 @@ namespace MoodMovies.Logic
         public async Task CreateMovie(Movies movie)
         {
             //check to see if a user already exists
-            await Task.Run(() => Db.context.Movies.Add(movie));
-            Db.context.SaveChanges();
+            await Task.Run(() => db.context.Movies.Add(movie));
+            db.context.SaveChanges();
         }
         /// <summary>
         /// gets the usermovie link between a user and a movie
@@ -92,7 +101,7 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task<User_Movies> GetUserMovieLink(Users user, Movies movie)
         {
-            return await Task.Run(() => Db.context.UserMovies.Where(x => x.UId == movie.Movie_Id && x.User_Id == user.User_Id).SingleOrDefault());
+            return await Task.Run(() => db.context.UserMovies.Where(x => x.UId == movie.Movie_Id && x.User_Id == user.User_Id).SingleOrDefault());
         }
         /// <summary>
         /// Gets the movie using the id
@@ -101,7 +110,7 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task<Movies> GetMovie(int movieId)
         {
-            return await Task.Run(() => Db.context.Movies.Where(x => x.Movie_Id == movieId).SingleOrDefault());
+            return await Task.Run(() => db.context.Movies.Where(x => x.Movie_Id == movieId).SingleOrDefault());
         }
         /// <summary>
         /// Add a movie to the movie table
@@ -113,7 +122,7 @@ namespace MoodMovies.Logic
         {
             try
             {
-                if (Db.context.Movies.Any(x => x.Movie_Id == movie.Movie_Id))
+                if (db.context.Movies.Any(x => x.Movie_Id == movie.Movie_Id))
                 {
                     //movie exists already
                     return false;
@@ -122,8 +131,8 @@ namespace MoodMovies.Logic
                 {
                     await Task.Run(() =>
                     {
-                        Db.context.Set<Movies>().Add(movie);
-                        Db.context.SaveChanges();
+                        db.context.Set<Movies>().Add(movie);
+                        db.context.SaveChanges();
                     });
                     return true;
                 }                    
@@ -141,7 +150,7 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task<Movies> GetFirstMovie()
         {
-            return await Task.Run(() => Db.context.Movies.FirstOrDefault());
+            return await Task.Run(() => db.context.Movies.FirstOrDefault());
         }
         #endregion
 
@@ -155,13 +164,13 @@ namespace MoodMovies.Logic
         public async Task AddToWatchList(Users user, Movies movie)
         {            
             await Task.Run(()=> {
-                Db.context.Set<User_Movies>().Add(new User_Movies()
+                db.context.Set<User_Movies>().Add(new User_Movies()
                 {
                     UId = movie.Movie_Id,
                     User_Id = user.User_Id,
                     Watchlist = true
                 });
-                Db.context.SaveChanges();
+                db.context.SaveChanges();
             });
         }
         /// <summary>
@@ -173,12 +182,12 @@ namespace MoodMovies.Logic
         public async Task RemoveFromWatchList(Users user, Movies movie)
         {
             await Task.Run(() => {
-                var usermovie = Db.context.Set<User_Movies>().Where(x => x.User_Id == user.User_Id
+                var usermovie = db.context.Set<User_Movies>().Where(x => x.User_Id == user.User_Id
                 && x.UId == movie.Movie_Id).SingleOrDefault();
                 if(usermovie != null)
                 {
                     usermovie.Watchlist = false;
-                    Db.context.SaveChanges();
+                    db.context.SaveChanges();
                 }                
             });
         }
@@ -189,8 +198,8 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task<List<Movies>> GetAllWatchListItems(Users user)
         {
-            var links = await Task.Run(() => Db.context.UserMovies.Where(x => x.User_Id == user.User_Id && x.Watchlist == true));
-            return await Task.Run(() => Db.context.Movies.Join(links, x => x.Movie_Id, y => y.UId, (x, y) => x).ToList());
+            var links = await Task.Run(() => db.context.UserMovies.Where(x => x.User_Id == user.User_Id && x.Watchlist == true));
+            return await Task.Run(() => db.context.Movies.Join(links, x => x.Movie_Id, y => y.UId, (x, y) => x).ToList());
         }
         #endregion
 
@@ -204,13 +213,13 @@ namespace MoodMovies.Logic
         public async Task AddToFavourites(Users user, Movies movie)
         {
             await Task.Run(() => {
-                Db.context.Set<User_Movies>().Add(new User_Movies()
+                db.context.Set<User_Movies>().Add(new User_Movies()
                 {
                     UId = movie.Movie_Id,
                     User_Id = user.User_Id,
                     Favourite = true
                 });
-                Db.context.SaveChanges();
+                db.context.SaveChanges();
             });
         }
         /// <summary>
@@ -222,13 +231,13 @@ namespace MoodMovies.Logic
         public async Task RemoveFromFavourites(Users user, Movies movie)
         {
             await Task.Run(() => {
-                var usermovie = Db.context.Set<User_Movies>().Where(x => x.User_Id == user.User_Id
+                var usermovie = db.context.Set<User_Movies>().Where(x => x.User_Id == user.User_Id
                 && x.UId == movie.Movie_Id).SingleOrDefault();
 
                 if (usermovie != null)
                 {
                     usermovie.Favourite = false;
-                    Db.context.SaveChanges();
+                    db.context.SaveChanges();
                 }                
             });
         }
@@ -239,15 +248,15 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task<List<Movies>> GetAllFavouriteItems(Users user)
         {
-            var links = await Task.Run(() => Db.context.UserMovies.Where(x => x.User_Id == user.User_Id && x.Favourite == true));
-            return await Task.Run(() => Db.context.Movies.Join(links, x => x.Movie_Id, y => y.UId, (x, y) => x).ToList());
+            var links = await Task.Run(() => db.context.UserMovies.Where(x => x.User_Id == user.User_Id && x.Favourite == true));
+            return await Task.Run(() => db.context.Movies.Join(links, x => x.Movie_Id, y => y.UId, (x, y) => x).ToList());
         }
         #endregion
 
         //Commit changes to database
         public void SaveChanges()
         {
-            Db.context.SaveChanges();
+            db.context.SaveChanges();
         }
     }
 }

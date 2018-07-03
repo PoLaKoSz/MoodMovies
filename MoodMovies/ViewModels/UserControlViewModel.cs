@@ -1,20 +1,17 @@
 ﻿using Caliburn.Micro;
 using DataModel.DataModel.Entities;
 using MoodMovies.Logic;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MoodMovies.ViewModels
 {
     public class UserControlViewModel : Screen
     {
-        public UserControlViewModel()
+        public UserControlViewModel(IOfflineServiceProvider serviceProvider)
         {
             AllUsers = new ObservableCollection<Users>();
+            offlineDb = serviceProvider;
             GetUsers();
         }
 
@@ -38,6 +35,8 @@ namespace MoodMovies.ViewModels
         public string ApiKey { get => _apiKey; set { _apiKey = value; NotifyOfPropertyChange(); } }
         #endregion
 
+        readonly IOfflineServiceProvider offlineDb;
+
         #region Public methods
         /// <summary>
         /// Sets the selected item to the current user
@@ -46,13 +45,12 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var offdb = new OfflineServiceProvider();
                 if (CurrentUser != null)
-                {                    
+                {    
                     //change the fields in db first
-                    await offdb.ChangeCurrentUserField(CurrentUser.User_ApiKey, false);                    
+                    await offlineDb.ChangeCurrentUserField(CurrentUser.User_ApiKey, false);                    
                 }
-                await offdb.ChangeCurrentUserField(SelectedUser.User_ApiKey, true);
+                await offlineDb.ChangeCurrentUserField(SelectedUser.User_ApiKey, true);
                 //then perform the change for the ui and logic
                 CurrentUser = SelectedUser;
                 UserControl.CurrentUser = CurrentUser;
@@ -74,8 +72,6 @@ namespace MoodMovies.ViewModels
             {
                 try
                 {
-                    var offDb = new OfflineServiceProvider();
-
                     var user = new Users()
                     {
                         User_Name = FirstName,
@@ -85,10 +81,10 @@ namespace MoodMovies.ViewModels
                         Current_User = false
                     };
                     //check if user exists
-                    var userfound = await offDb.GetUserByApiKey(ApiKey);
+                    var userfound = await offlineDb.GetUserByApiKey(ApiKey);
                     if (userfound == null)
                     {
-                        await offDb.CreateUser(user);
+                        await offlineDb.CreateUser(user);
                         await GetUsers();
                     }
                 }
@@ -109,9 +105,7 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var offDb = new OfflineServiceProvider();
-
-                var users = await offDb.GetAllUsers();
+                var users = await offlineDb.GetAllUsers();
 
                 //clear the list
                 AllUsers.Clear();

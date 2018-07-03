@@ -4,13 +4,13 @@ using System.Reflection;
 
 namespace DataModel.DataModel
 {
-    public static class Db
+    public class Db : IDb
     {
-        public static DatabaseContext context;
+        public DatabaseContext context { get; private set; }
 
-        private static bool dbIsSetup;
+        private bool dbIsSetup;
 
-        public static void DumpDatabase()
+        public void DumpDatabase()
         {
             var fullDbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies\\MoodMoviesDB.db");
             //check the database has not already been setup

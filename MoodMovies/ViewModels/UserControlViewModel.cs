@@ -62,7 +62,7 @@ namespace MoodMovies.ViewModels
             }
             catch
             {
-                //failed to change currentuser
+                StatusMessage.Enqueue("Failed to change the current user.");
             }
             
         }
@@ -92,15 +92,19 @@ namespace MoodMovies.ViewModels
                         await offlineDb.CreateUser(user);
                         await GetUsers();
                     }
+                    else
+                    {
+                        StatusMessage.Enqueue("A user with the same Api Key already exists.");
+                    }
                 }
                 catch
                 {
-                    //failed to create user
+                    StatusMessage.Enqueue("Failed to create the user.");
                 }
             }
             else
             {
-                //details not complete
+                StatusMessage.Enqueue("Please fill in all the fields and try again.");
             }
         }
         #endregion
@@ -124,7 +128,7 @@ namespace MoodMovies.ViewModels
             }
             catch
             {
-                //failed to load users
+                StatusMessage.Enqueue("Failed to load users.");
             }                  
         }
         #endregion

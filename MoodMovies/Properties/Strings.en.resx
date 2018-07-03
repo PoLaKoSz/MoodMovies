@@ -213,4 +213,37 @@
   <data name="MainView_Menubar_Button_Users" xml:space="preserve">
     <value>Users</value>
   </data>
+  <data name="UserControlView_Label_CurrentUser" xml:space="preserve">
+    <value>Current User</value>
+  </data>
+  <data name="UserControlView_Label_WarningApiKey" xml:space="preserve">
+    <value>To create a new User please first obtain an Api key from www.themoviedb.org</value>
+  </data>
+  <data name="UserControlView_Label_FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="UserControlView_Label_SurName" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="UserControlView_Label_TMBDB_ApiKey" xml:space="preserve">
+    <value>TMDB API Key</value>
+  </data>
+  <data name="UserControlView_DataGrid_Header_FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="UserControlView_DataGrid_Header_SurName" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="UserControlView_DataGrid_Header_ApiKey" xml:space="preserve">
+    <value>API Key</value>
+  </data>
+  <data name="UserControlView_DataGrid_Button_SetAsCurrentUser" xml:space="preserve">
+    <value>Set as current User</value>
+  </data>
+  <data name="UserControlView_Button_AddNewUser" xml:space="preserve">
+    <value>Add new User</value>
+  </data>
+  <data name="UserControlView_DataGrid_Header_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
 </root>

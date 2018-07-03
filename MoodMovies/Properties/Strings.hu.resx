@@ -210,4 +210,40 @@
   <data name="SearchView_Genre_ComboBoxItem_Loved" xml:space="preserve">
     <value>egy kis szerelem</value>
   </data>
+  <data name="MainView_Menubar_Button_Users" xml:space="preserve">
+    <value>Felhasználók</value>
+  </data>
+  <data name="UserControlView_Label_CurrentUser" xml:space="preserve">
+    <value>Jelenlegi Felhasználó</value>
+  </data>
+  <data name="UserControlView_Label_WarningApiKey" xml:space="preserve">
+    <value>Felhasználói fiók létrehozása előtt kérlek hozz létre egy API kulcsot a www.themoviedb.org oldalon</value>
+  </data>
+  <data name="UserControlView_Label_FirstName" xml:space="preserve">
+    <value>Keresztnév</value>
+  </data>
+  <data name="UserControlView_Label_SurName" xml:space="preserve">
+    <value>Vezetéknév</value>
+  </data>
+  <data name="UserControlView_Label_TMBDB_ApiKey" xml:space="preserve">
+    <value>TMDB API Kulcs</value>
+  </data>
+  <data name="UserControlView_DataGrid_Header_FirstName" xml:space="preserve">
+    <value>Keresztnév</value>
+  </data>
+  <data name="UserControlView_DataGrid_Header_SurName" xml:space="preserve">
+    <value>Vezetéknév</value>
+  </data>
+  <data name="UserControlView_DataGrid_Header_ApiKey" xml:space="preserve">
+    <value>API Kulcs</value>
+  </data>
+  <data name="UserControlView_DataGrid_Button_SetAsCurrentUser" xml:space="preserve">
+    <value>Kiválaszt</value>
+  </data>
+  <data name="UserControlView_Button_AddNewUser" xml:space="preserve">
+    <value>Hozzáad</value>
+  </data>
+  <data name="UserControlView_DataGrid_Header_Action" xml:space="preserve">
+    <value>Művelet</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
@@ -34,16 +35,22 @@ namespace MoodMovies.ViewModels
                     {
                         if (!string.IsNullOrEmpty(movie.Poster_path))
                         {
-
-                            var card =  new MovieCardViewModel(movie.Movie_Id, movie.Title, new Uri(movie.Poster_path), movie.Overview,
-                            movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, movie.Poster_Cache, eventAgg)
+                            //check the image exists, if not redownload it and keep the same name and path as stored in the db
+                            string cachedImage;
+                            if (!File.Exists(movie.Poster_Cache))
+                            {
+                                cachedImage = DownloadImage(new Uri(movie.Poster_path), movie.Poster_path, movie.Poster_Cache);
+                            }
+                            
+                            var card = new MovieCardViewModel(movie.Movie_Id, movie.Title, new Uri(movie.Poster_path), movie.Overview,
+                        movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, movie.Poster_Cache, eventAgg)
                             {
                                 IsWatchListed = true,
                                 Parent = this
                             };
                             //force updating the list from a different thread using custom cross thread extension method
                             Movies.AddOnUIThread(card);
-                        }                        
+                        }
                     }
                 });
             }

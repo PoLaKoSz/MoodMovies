@@ -41,11 +41,14 @@ namespace MoodMovies.ViewModels
         /// </summary>
         /// <param name="poster_path">Poster web URL</param>
         /// <param name="fileName">File relative path with extension</param>
+        /// <param name="existingFileName">Optional param. Provide this in the event the file wa originally downloaded and saved to db but needs to be redownloaded and the original name kept.</param>
         /// <returns></returns>
-        protected string DownloadImage(Uri poster_path, string fileName)
+        protected string DownloadImage(Uri poster_path, string fileName, string existingFileName = null)
         {
             string cacheDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies\\ImageCache\\");
-            string file = Path.Combine(cacheDirectory, fileName.Replace("/", ""));
+            string file;
+
+            file = existingFileName ?? Path.Combine(cacheDirectory, fileName.Replace("/", ""));
 
             if (!File.Exists(file))
             {

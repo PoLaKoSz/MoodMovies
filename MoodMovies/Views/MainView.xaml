@@ -259,6 +259,8 @@
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="206" />
                         </Grid.ColumnDefinitions>
                         <!--Results-->
                         <materialDesign:Chip Grid.Column="1"
@@ -298,14 +300,14 @@
                                              cal:Message.Attach="DisplayWatchListVM"
                                              IconBackground="Transparent"
                                              Height="50"
-                                             IconForeground="#FFC229C2">
+                                             IconForeground="Green">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Watch"
                                                          Height="26"
                                                          Width="26" />
                             </materialDesign:Chip.Icon>
                         </materialDesign:Chip>
-                        <materialDesign:Snackbar VerticalAlignment="Center"
+                        <materialDesign:Snackbar Grid.Column="6" VerticalAlignment="Center"
                                                  HorizontalAlignment="Center"
                                                  MessageQueue="{Binding StatusMessage}">
                         </materialDesign:Snackbar>

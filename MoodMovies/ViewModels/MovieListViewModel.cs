@@ -24,33 +24,7 @@ namespace MoodMovies.ViewModels
 
         #region Public Methods       
 
-        #endregion
-
-        #region Private Methods
-        /// <summary>
-        /// Downloads an image from the specified Uri and return the path to that image if it exists.
-        /// </summary>
-        /// <param name="poster_path">Poster web URL</param>
-        /// <param name="fileName">File relative path with extension</param>
-        /// <returns></returns>
-        private string DownloadImage(Uri poster_path, string fileName)
-        {
-            string cacheDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), $"MoodMovies\\ImageCache\\");
-            string file = Path.Combine(cacheDirectory, fileName.Replace("/", ""));
-
-            if (!File.Exists(file))
-            {
-                if (!Directory.Exists(cacheDirectory))
-                    Directory.CreateDirectory(cacheDirectory);
-
-                using (WebClient webClient = new WebClient())
-                {
-                    webClient.DownloadFile(poster_path, file);
-                }
-            }
-            return file;
-        }
-        #endregion
+        #endregion             
 
         #region IHandle methods
         /// <summary>

@@ -347,5 +347,104 @@ namespace MoodMovies.Properties {
                 return ResourceManager.GetString("SearchView_TextBox_Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new User.
+        /// </summary>
+        internal static string UserControlView_Button_AddNewUser {
+            get {
+                return ResourceManager.GetString("UserControlView_Button_AddNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set as current User.
+        /// </summary>
+        internal static string UserControlView_DataGrid_Button_SetAsCurrentUser {
+            get {
+                return ResourceManager.GetString("UserControlView_DataGrid_Button_SetAsCurrentUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        internal static string UserControlView_DataGrid_Header_Action {
+            get {
+                return ResourceManager.GetString("UserControlView_DataGrid_Header_Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to API Key.
+        /// </summary>
+        internal static string UserControlView_DataGrid_Header_ApiKey {
+            get {
+                return ResourceManager.GetString("UserControlView_DataGrid_Header_ApiKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        internal static string UserControlView_DataGrid_Header_FirstName {
+            get {
+                return ResourceManager.GetString("UserControlView_DataGrid_Header_FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname.
+        /// </summary>
+        internal static string UserControlView_DataGrid_Header_SurName {
+            get {
+                return ResourceManager.GetString("UserControlView_DataGrid_Header_SurName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current User.
+        /// </summary>
+        internal static string UserControlView_Label_CurrentUser {
+            get {
+                return ResourceManager.GetString("UserControlView_Label_CurrentUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        internal static string UserControlView_Label_FirstName {
+            get {
+                return ResourceManager.GetString("UserControlView_Label_FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname.
+        /// </summary>
+        internal static string UserControlView_Label_SurName {
+            get {
+                return ResourceManager.GetString("UserControlView_Label_SurName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TMDB API Key.
+        /// </summary>
+        internal static string UserControlView_Label_TMBDB_ApiKey {
+            get {
+                return ResourceManager.GetString("UserControlView_Label_TMBDB_ApiKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To create a new User please first obtain an Api key from www.themoviedb.org.
+        /// </summary>
+        internal static string UserControlView_Label_WarningApiKey {
+            get {
+                return ResourceManager.GetString("UserControlView_Label_WarningApiKey", resourceCulture);
+            }
+        }
     }
 }

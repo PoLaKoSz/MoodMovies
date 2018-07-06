@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:MoodMovies.Views"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
@@ -12,7 +11,11 @@
              d:DesignHeight="450"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
-             Width="750">
+             Width="750"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:LocalizeDictionary.DesignCulture="en"
+             lex:ResxLocalizationProvider.DefaultAssembly="MoodMovies"
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
@@ -31,14 +34,14 @@
                              FontSize="17">
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="160" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0"
                         Background="LightGray"
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch">
-                    <Label Content="Current User"
+                    <Label Content="{lex:Loc UserControlView_Label_CurrentUser}"
                            FontWeight="SemiBold"
                            VerticalContentAlignment="Center"
                            Foreground="Black" />
@@ -56,7 +59,7 @@
         </materialDesign:Card>
 
         <Label Grid.Row="3"
-               Content="To create a new User please first obtain an Api key from www.themoviedb.org"
+               Content="{lex:Loc UserControlView_Label_WarningApiKey}"
                VerticalAlignment="Center"
                FontSize="16"
                Foreground="Red" />
@@ -77,17 +80,17 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0"
                        Grid.Row="0"
-                       Content="First Name"
+                       Content="{lex:Loc UserControlView_Label_FirstName}"
                        FontWeight="SemiBold"
                        VerticalAlignment="Bottom" />
                 <Label Grid.Column="1"
                        Grid.Row="0"
-                       Content="Surname"
+                       Content="{lex:Loc UserControlView_Label_SurName}"
                        FontWeight="SemiBold"
                        VerticalAlignment="Bottom" />
                 <Label Grid.Column="2"
                        Grid.Row="0"
-                       Content="TMDB Api key"
+                       Content="{lex:Loc UserControlView_Label_TMBDB_ApiKey}"
                        FontWeight="SemiBold"
                        VerticalAlignment="Bottom" />
                 <TextBox Grid.Column="0"
@@ -115,9 +118,8 @@
                         Padding="5,0"
                         cal:Message.Attach="CreateNewUser"
                         Style="{StaticResource MaterialDesignFlatButton}"
-                        Foreground="Green">
-                    Add new User
-                </Button>
+                        Foreground="Green"
+                        Content="{lex:Loc UserControlView_Button_AddNewUser}" />
             </Grid>
         </materialDesign:Card>
 
@@ -145,7 +147,7 @@
                         <DataGridTextColumn Binding="{Binding User_Name}"
                                             IsReadOnly="True"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                                            Header="First Name">
+                                            Header="{lex:Loc UserControlView_DataGrid_Header_FirstName}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment"
@@ -156,7 +158,7 @@
                         <DataGridTextColumn Binding="{Binding User_Surname}"
                                             IsReadOnly="True"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                                            Header="Surname">
+                                            Header="{lex:Loc UserControlView_DataGrid_Header_SurName}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment"
@@ -167,7 +169,7 @@
                         <DataGridTextColumn Binding="{Binding User_ApiKey}"
                                             IsReadOnly="True"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                                            Header="Api Key">
+                                            Header="{lex:Loc UserControlView_DataGrid_Header_ApiKey}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment"
@@ -175,18 +177,19 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTemplateColumn Header="Action">
+                        <DataGridTemplateColumn Header="{lex:Loc UserControlView_DataGrid_Header_Action}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button cal:Message.Attach="SetCurrentUser"
                                             Style="{StaticResource MaterialDesignFlatButton}"
                                             Foreground="#FF1FB31F"
                                             Height="30"
-                                            VerticalAlignment="Top">Set as Current User</Button>
+                                            VerticalAlignment="Top"
+                                            Content="{lex:Loc UserControlView_DataGrid_Button_SetAsCurrentUser}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Action">
+                        <DataGridTemplateColumn Header="{lex:Loc UserControlView_DataGrid_Header_Action}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button cal:Message.Attach="DeleteCurrentUser"

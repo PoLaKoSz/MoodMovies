@@ -35,7 +35,7 @@ namespace MoodMovies.ViewModels
                         if (!string.IsNullOrEmpty(movie.Poster_path))
                         {
                             var card =  new MovieCardViewModel(movie.Movie_Id, movie.Title, new Uri(movie.Poster_path), movie.Overview,
-                            movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, eventAgg)
+                            movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, movie.Poster_Cache, eventAgg)
                             {
                                 IsWatchListed = true,
                                 Parent = this

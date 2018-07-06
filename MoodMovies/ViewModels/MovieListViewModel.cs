@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using DataModel.DataModel.Entities;
@@ -11,7 +13,7 @@ namespace MoodMovies.ViewModels
 {
     public class MovieListViewModel : ListBaseViewModel, IHandle<MovieListMessage>, IHandle<MovieCardViewModel>, IHandle<IMovieCardMessage>
     {
-        public MovieListViewModel(IEventAggregator events, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage):base(events, statusMessage)
+        public MovieListViewModel(IEventAggregator events, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage) : base(events, statusMessage)
         {
             offlineDb = serviceProvider;
         }
@@ -24,6 +26,27 @@ namespace MoodMovies.ViewModels
 
         #endregion
 
+        #region Private Methods
+        /// <summary>
+        /// Downloads an image from the specified Uri and return the path to that image if it exists.
+        /// </summary>
+        /// <param name="poster_path"></param>
+        /// <returns></returns>
+        private string DownloadImage(Uri poster_path, string fileName)
+        {
+            var file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), $"MoodMovies\\ImageCache\\{fileName.Replace("/", "")}");
+            //download the image and store in cache folder if it doesnt already exist
+            if (!File.Exists(file))
+            {
+                using (WebClient webClient = new WebClient())
+                {
+                    webClient.DownloadFile(poster_path, file);
+                }
+            }
+            return file;
+        }
+        #endregion
+
         #region IHandle methods
         /// <summary>
         /// Adds movies to the list that have been downloaded either from offline or online db
@@ -33,14 +56,16 @@ namespace MoodMovies.ViewModels
         {
             Movies.Clear();
             await Task.Run(() =>
-            {                
+            {
                 foreach (var movie in message.Movielist.Results)
                 {
                     if (!string.IsNullOrEmpty(movie.Poster_path))
                     {
+                        var fullUri = new Uri(posterAddress + movie.Poster_path);
+                        var cachedImage = DownloadImage(fullUri, movie.Poster_path);
                         //force updating the list from a different thread using custom cross thread extension method
-                        Movies.AddOnUIThread(new MovieCardViewModel(movie.Id, movie.Title, new Uri(posterAddress + movie.Poster_path), movie.Overview,
-                        movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, eventAgg));
+                        Movies.AddOnUIThread(new MovieCardViewModel(movie.Id, movie.Title, fullUri, movie.Overview,
+                        movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, cachedImage, eventAgg));
                     }
                 }
             });
@@ -89,7 +114,7 @@ namespace MoodMovies.ViewModels
                 if (await offlineDb.AddMovie(movie))
                 {
                     //then create the link between the user and the movie and the watchlist
-                    var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id); 
+                    var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
                     await offlineDb.AddToWatchList(user, movie);
                 }
                 else
@@ -163,7 +188,7 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id); 
+                var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
                 var movie = await offlineDb.GetMovie(mvCard.Movie_Id);
                 await offlineDb.RemoveFromFavourites(user, movie);
             }

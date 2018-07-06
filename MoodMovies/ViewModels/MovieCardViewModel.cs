@@ -6,7 +6,8 @@ namespace MoodMovies.ViewModels
 {
     public class MovieCardViewModel: Screen
     {
-        public MovieCardViewModel(int id, string title, Uri imagepath, string overview, string releasedate, int votecount, double voteAverage, bool video, bool adult, double popularity, string language, IEventAggregator _event)
+        public MovieCardViewModel(int id, string title, Uri imagepath, string overview, string releasedate, int votecount, 
+            double voteAverage, bool video, bool adult, double popularity, string language, string posterCache, IEventAggregator _event)
         {
             Movie_Id = id;
             Title = title;
@@ -21,6 +22,7 @@ namespace MoodMovies.ViewModels
             Popularity = popularity;
             Language = language;
             myEvent = _event;
+            Poster_Cache = posterCache;
         }
 
         #region Events
@@ -57,6 +59,8 @@ namespace MoodMovies.ViewModels
         public string Language { get => _language; set { _language = value; NotifyOfPropertyChange(); } }
         private string _trailerUrl;
         public string TrailerUrl { get => _trailerUrl; set { _trailerUrl = value; NotifyOfPropertyChange(); } }
+        private string _poster_Cache;
+        public string Poster_Cache { get => _poster_Cache; set { _poster_Cache = value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Public Methods

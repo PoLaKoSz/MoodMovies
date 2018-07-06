@@ -32,6 +32,6 @@ namespace MoodMovies.ViewModels
         public SnackbarMessageQueue StatusMessage { get; set; }
         #endregion
 
-        protected const string posterAddress = "https://image.tmdb.org/t/p/w500/";
+        protected const string posterAddress = "https://image.tmdb.org/t/p/w500";
     }
 }

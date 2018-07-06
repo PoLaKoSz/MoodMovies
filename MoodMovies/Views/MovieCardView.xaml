@@ -190,7 +190,7 @@
                         <Hyperlink Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
                                    CommandParameter="{x:Static Dock.Right}"
                                    TextDecorations="{x:Null}">                          
-                            <Image Source="{Binding Path=ImagePath}"
+                            <Image Source="{Binding Path=Poster_Cache}"
                                    VerticalAlignment="Stretch"
                                    Stretch="Fill">                                
                             </Image>

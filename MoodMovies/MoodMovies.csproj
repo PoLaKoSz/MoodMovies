@@ -125,6 +125,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootStrapper.cs" />
+    <Compile Include="DataAccessLayer\IWebClient.cs" />
+    <Compile Include="DataAccessLayer\WebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Logic\ImageCacher.cs" />
     <Compile Include="Logic\IOfflineServiceProvider.cs" />
     <Compile Include="Logic\IOnlineServiceProvider.cs" />
     <Compile Include="Logic\IServiceProvider.cs" />
@@ -137,6 +142,7 @@
     <Compile Include="Messages\ResultsReadyMessage.cs" />
     <Compile Include="Messages\TrailerMessage.cs" />
     <Compile Include="Models\Actor.cs" />
+    <Compile Include="Models\AppFolders.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\TrailerResult.cs" />
     <Compile Include="Properties\Strings.Designer.cs">

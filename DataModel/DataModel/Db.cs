@@ -21,9 +21,7 @@ namespace DataModel.DataModel
                     //grab the resource
                     var assembly = Assembly.GetExecutingAssembly();
                     var stream = assembly.GetManifestResourceStream("DataModel.Resources.MoodMoviesDB.db");
-                                        
-                    //create main and image cache directory in AppData
-                    Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies/ImageCache"));
+
                     var fileStream = File.Create(fullDbPath);
                     stream.Seek(0, SeekOrigin.Begin);
                     stream.CopyTo(fileStream);

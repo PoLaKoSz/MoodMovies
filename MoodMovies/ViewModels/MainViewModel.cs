@@ -6,6 +6,10 @@ using WPFLocalizeExtension.Engine;
 using System.Globalization;
 using MoodMovies.Logic;
 using MaterialDesignThemes.Wpf;
+using MoodMovies.Models;
+using System;
+using System.IO;
+using MoodMovies.DataAccessLayer;
 
 namespace MoodMovies.ViewModels
 {
@@ -15,6 +19,10 @@ namespace MoodMovies.ViewModels
         {
             eventAgg.Subscribe(this);
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
+
+            string appRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies");
+            AppFolders = new AppFolders(appRootFolder);
+
             //initial setup of the database
             IDb database = new Db();
             database.DumpDatabase();
@@ -29,6 +37,7 @@ namespace MoodMovies.ViewModels
 
         #region Fields
         readonly IOfflineServiceProvider offlineDb;
+        private readonly AppFolders AppFolders;
         #endregion
 
         #region General Properties
@@ -62,13 +71,12 @@ namespace MoodMovies.ViewModels
         #region Private Methods
         private void InitialiseVMs()
         {
+            ImageCacher imageCacher = new ImageCacher(AppFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
 
-            //need to write implementation to get user to input this one time and save to db or
-            //create a guest session
             Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb, new OnlineServiceProvider(), StatusMessage));
-            Items.Add(MovieListVM = new MovieListViewModel(eventAgg, offlineDb, StatusMessage));
-            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, offlineDb, StatusMessage));
-            Items.Add(WatchListVM = new WatchListViewModel(eventAgg, offlineDb, StatusMessage));
+            Items.Add(MovieListVM = new MovieListViewModel(eventAgg, offlineDb, StatusMessage, imageCacher));
+            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, offlineDb, StatusMessage, imageCacher));
+            Items.Add(WatchListVM = new WatchListViewModel(eventAgg, offlineDb, StatusMessage, imageCacher));
 
             eventAgg.Subscribe(SearchVM);
             eventAgg.Subscribe(MovieListVM);

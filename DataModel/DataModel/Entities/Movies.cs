@@ -49,7 +49,8 @@ namespace DataModel.DataModel.Entities
 
         [Column(Name = "Release_Date", DbType = "STRING", CanBeNull = true)]
         public string Release_date { get; set; }
-        [Column(Name = "Poster_Cache", DbType = "STRING", CanBeNull = true)]
+
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string Poster_Cache { get; set; }
 
         public virtual ICollection<User_Movies> Users { get; set; }

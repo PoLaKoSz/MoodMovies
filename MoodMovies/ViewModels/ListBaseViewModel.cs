@@ -1,9 +1,6 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
-using System;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Net;
 
 namespace MoodMovies.ViewModels
 {
@@ -34,36 +31,5 @@ namespace MoodMovies.ViewModels
         public MovieCardViewModel SelectedItem { get => _selectedItem; set { _selectedItem = value; NotifyOfPropertyChange(); } }
         public SnackbarMessageQueue StatusMessage { get; set; }
         #endregion
-
-        #region Private Methods
-        /// <summary>
-        /// Downloads an image from the specified Uri and return the path to that image if it exists.
-        /// </summary>
-        /// <param name="poster_path">Poster web URL</param>
-        /// <param name="fileName">File relative path with extension</param>
-        /// <param name="existingFileName">Optional param. Provide this in the event the file wa originally downloaded and saved to db but needs to be redownloaded and the original name kept.</param>
-        /// <returns></returns>
-        protected string DownloadImage(Uri poster_path, string fileName, string existingFileName = null)
-        {
-            string cacheDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies\\ImageCache\\");
-            string file;
-
-            file = existingFileName ?? Path.Combine(cacheDirectory, fileName.Replace("/", ""));
-
-            if (!File.Exists(file))
-            {
-                if (!Directory.Exists(cacheDirectory))
-                    Directory.CreateDirectory(cacheDirectory);
-
-                using (WebClient webClient = new WebClient())
-                {
-                    webClient.DownloadFile(poster_path, file);
-                }
-            }
-            return file;
-        }
-        #endregion
-
-        protected const string posterAddress = "https://image.tmdb.org/t/p/w500";
     }
 }

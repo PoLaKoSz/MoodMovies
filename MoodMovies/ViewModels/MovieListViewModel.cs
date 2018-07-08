@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using DataModel.DataModel.Entities;
@@ -8,24 +6,50 @@ using MaterialDesignThemes.Wpf;
 using MoodMovies.Logic;
 using MoodMovies.Messages;
 using MoodMovies.Resources;
+using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.ViewModels
 {
     public class MovieListViewModel : ListBaseViewModel, IHandle<MovieListMessage>, IHandle<MovieCardViewModel>, IHandle<IMovieCardMessage>
     {
-        public MovieListViewModel(IEventAggregator events, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage) : base(events, statusMessage)
+        public MovieListViewModel(IEventAggregator events, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage, ImageCacher imageCacher)
+            : base(events, statusMessage)
         {
             offlineDb = serviceProvider;
+            ImageCacher = imageCacher;
         }
 
-        #region Properties
-        IOfflineServiceProvider offlineDb;
+        #region Fields
+        private IOfflineServiceProvider offlineDb;
+        private readonly ImageCacher ImageCacher;
         #endregion
 
-        #region Public Methods       
-
-        #endregion             
-
+        /// <summary>
+        /// Create a <see cref="Movies"/> object from a <see cref="Movie"/> one
+        /// </summary>
+        /// <param name="movie">TMDB Movie object</param>
+        /// <param name="cachedPosterPath">Movie poster absolute path on the HDD</param>
+        /// <returns></returns>
+        private Movies ParseFromTmdb(Movie movie)
+        {
+            return new Movies()
+            {
+                Movie_Id = movie.Id,
+                Vote_count = movie.Vote_count,
+                Video = movie.Video,
+                Vote_average = movie.Vote_average,
+                Title = movie.Title,
+                Popularity = movie.Popularity,
+                Poster_path = movie.Poster_path,
+                Original_language = movie.Original_language,
+                Original_title = movie.Original_title,
+                Backdrop_path = movie.Backdrop_path,
+                Adult = movie.Adult,
+                Overview = movie.Overview,
+                Release_date = movie.Release_date,
+            };
+        }
+        
         #region IHandle methods
         /// <summary>
         /// Adds movies to the list that have been downloaded either from offline or online db
@@ -36,15 +60,14 @@ namespace MoodMovies.ViewModels
             Movies.Clear();
             await Task.Run(() =>
             {
-                foreach (var movie in message.Movielist.Results)
+                foreach (Movie movie in message.Movielist.Results)
                 {
                     if (!string.IsNullOrEmpty(movie.Poster_path))
                     {
-                        var fullUri = new Uri(posterAddress + movie.Poster_path);
-                        var cachedImage = DownloadImage(fullUri, movie.Poster_path);
-                        //force updating the list from a different thread using custom cross thread extension method
-                        Movies.AddOnUIThread(new MovieCardViewModel(movie.Id, movie.Title, fullUri, movie.Overview,
-                        movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, cachedImage, eventAgg));
+                        Movies movieEntity = ParseFromTmdb(movie);
+                        ImageCacher.ScanPoster(movieEntity);
+
+                        Movies.AddOnUIThread(new MovieCardViewModel(movieEntity, eventAgg));
                     }
                 }
             });
@@ -84,22 +107,18 @@ namespace MoodMovies.ViewModels
         /// <param name="mvCard"></param>
         public async Task AddMovieToWatchList(MovieCardViewModel mvCard)
         {
-            var movie = new Movies();
-            //copy the properties that can be copied
-            PropertyCopier<MovieCardViewModel, Movies>.Copy(mvCard, movie);
-
             try
             {
-                if (await offlineDb.AddMovie(movie))
+                if (await offlineDb.AddMovie(mvCard.Movie))
                 {
                     //then create the link between the user and the movie and the watchlist
                     var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
-                    await offlineDb.AddToWatchList(user, movie);
+                    await offlineDb.AddToWatchList(user, mvCard.Movie);
                 }
                 else
                 {
                     var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
-                    var usermovie = await offlineDb.GetUserMovieLink(user, movie);
+                    var usermovie = await offlineDb.GetUserMovieLink(user, mvCard.Movie);
 
                     usermovie.Watchlist = true;
                     offlineDb.SaveChanges();
@@ -119,7 +138,7 @@ namespace MoodMovies.ViewModels
             try
             {
                 var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
-                var movie = await offlineDb.GetMovie(mvCard.Movie_Id);
+                var movie = await offlineDb.GetMovie(mvCard.Movie.Movie_Id);
                 await offlineDb.RemoveFromWatchList(user, movie);
             }
             catch
@@ -133,22 +152,18 @@ namespace MoodMovies.ViewModels
         /// <param name="mvCard"></param>
         public async Task AddMovieToFavourites(MovieCardViewModel mvCard)
         {
-            var movie = new Movies();
-            //copy the properties that can be copied
-            PropertyCopier<MovieCardViewModel, Movies>.Copy(mvCard, movie);
-
             try
             {
-                if (await offlineDb.AddMovie(movie))
+                if (await offlineDb.AddMovie(mvCard.Movie))
                 {
                     //then create the link between the user and the movie and the watchlist
                     var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
-                    await offlineDb.AddToFavourites(user, movie);
+                    await offlineDb.AddToFavourites(user, mvCard.Movie);
                 }
                 else
                 {
                     var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
-                    var usermovie = await offlineDb.GetUserMovieLink(user, movie);
+                    var usermovie = await offlineDb.GetUserMovieLink(user, mvCard.Movie);
 
                     usermovie.Favourite = true;
                     offlineDb.SaveChanges();
@@ -168,7 +183,7 @@ namespace MoodMovies.ViewModels
             try
             {
                 var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
-                var movie = await offlineDb.GetMovie(mvCard.Movie_Id);
+                var movie = await offlineDb.GetMovie(mvCard.Movie.Movie_Id);
                 await offlineDb.RemoveFromFavourites(user, movie);
             }
             catch

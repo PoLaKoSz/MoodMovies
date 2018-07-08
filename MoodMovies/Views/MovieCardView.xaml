@@ -58,7 +58,7 @@
                             </Grid.RowDefinitions>
                             <TextBlock TextWrapping="WrapWithOverflow"
                                        Grid.Row="1"
-                                       Text="{Binding Path=Overview}"
+                                       Text="{Binding Path=Movie.Overview}"
                                        HorizontalAlignment="Center"
                                        Foreground="{StaticResource SecondaryAccentBrush}"
                                        Margin="5,0,5,0"
@@ -81,7 +81,7 @@
                                            TextOptions.TextFormattingMode="Display"
                                            TextAlignment="Center" />
                                 <TextBlock Grid.Column="1"
-                                           Text="{Binding Path=ReleaseDate}"
+                                           Text="{Binding Path=Movie.Release_date}"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Center"
                                            Foreground="{StaticResource PrimaryHueMidBrush}"
@@ -105,7 +105,7 @@
                                            TextOptions.TextFormattingMode="Display"
                                            TextAlignment="Center" />
                                 <TextBlock Grid.Column="1"
-                                           Text="{Binding Path=Language}"
+                                           Text="{Binding Path=Movie.Original_language}"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Center"
                                            Foreground="{StaticResource PrimaryHueMidBrush}"
@@ -129,7 +129,7 @@
                                            TextOptions.TextFormattingMode="Display"
                                            TextAlignment="Center" />
                                 <TextBlock Grid.Column="1"
-                                           Text="{Binding Path=VoteCount}"
+                                           Text="{Binding Path=Movie.Vote_count}"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Center"
                                            Foreground="{StaticResource PrimaryHueMidBrush}"
@@ -153,7 +153,7 @@
                                            TextOptions.TextFormattingMode="Display"
                                            TextAlignment="Center" />
                                 <ProgressBar  Grid.Column="1"
-                                              Value="{Binding Path=Popularity}"
+                                              Value="{Binding Path=Movie.Popularity}"
                                               HorizontalAlignment="Stretch"
                                               VerticalAlignment="Center"
                                               VerticalContentAlignment="Center"
@@ -190,7 +190,7 @@
                         <Hyperlink Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
                                    CommandParameter="{x:Static Dock.Right}"
                                    TextDecorations="{x:Null}">                          
-                            <Image Source="{Binding Path=Poster_Cache}"
+                            <Image Source="{Binding Path=Movie.Poster_Cache}"
                                    VerticalAlignment="Stretch"
                                    Stretch="Fill">                                
                             </Image>

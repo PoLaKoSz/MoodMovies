@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.Logic;
 using MoodMovies.Resources;
@@ -10,14 +11,17 @@ namespace MoodMovies.ViewModels
 {
     public class FavouritesViewModel: ListBaseViewModel
     {
-        public FavouritesViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage) : base(_event, statusMessage)
+        public FavouritesViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage, ImageCacher imageCacher)
+            : base(_event, statusMessage)
         {
             DisplayName = "Favourites";
             offDb = serviceProvider;
+            ImageCacher = imageCacher;
         }
 
         #region Fields
         readonly IOfflineServiceProvider offDb;
+        private readonly ImageCacher ImageCacher;
         #endregion
 
         #region Methods
@@ -35,19 +39,13 @@ namespace MoodMovies.ViewModels
                 Movies.Clear();
                 await Task.Run(() =>
                 {
-                    foreach (var movie in movies)
+                    foreach (Movies movie in movies)
                     {
                         if (!string.IsNullOrEmpty(movie.Poster_path))
                         {
-                            //check the image exists, if not redownload it and keep the same name and path as stored in the db
-                            string cachedImage;
-                            if (!File.Exists(movie.Poster_Cache))
-                            {
-                                cachedImage = DownloadImage(new Uri(movie.Poster_path), movie.Poster_path, movie.Poster_Cache);
-                            }
+                            ImageCacher.ScanPoster(movie);
 
-                            var card = new MovieCardViewModel(movie.Movie_Id, movie.Title, new Uri(movie.Poster_path), movie.Overview,
-                                movie.Release_date, movie.Vote_count, movie.Vote_average, movie.Video, movie.Adult, movie.Popularity, movie.Original_language, movie.Poster_Cache, eventAgg)
+                            var card = new MovieCardViewModel(movie, eventAgg)
                             {
                                 IsFavourited = true,
                                 Parent = this

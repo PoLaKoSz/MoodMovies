@@ -1,66 +1,29 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
+using DataModel.DataModel.Entities;
 using MoodMovies.Messages;
 
 namespace MoodMovies.ViewModels
 {
-    public class MovieCardViewModel: Screen
+    public class MovieCardViewModel : Screen
     {
-        public MovieCardViewModel(int id, string title, Uri imagepath, string overview, string releasedate, int votecount, 
-            double voteAverage, bool video, bool adult, double popularity, string language, string posterCache, IEventAggregator _event)
+        private Movies _movie;
+        public Movies Movie { get => _movie; set { _movie = value; NotifyOfPropertyChange(); } }
+        
+        public MovieCardViewModel(Movies movie, IEventAggregator _event)
         {
-            Movie_Id = id;
-            Title = title;
-            ImagePath = imagepath;
-            Poster_path = imagepath.ToString();
-            Overview = overview;
-            ReleaseDate = releasedate;
-            Vote_count = votecount;
-            Vote_average = voteAverage;
-            Video = video;
-            Adult = adult;
-            Popularity = popularity;
-            Language = language;
+            Movie = movie;
             myEvent = _event;
-            Poster_Cache = posterCache;
         }
-
+        
         #region Events
         public IEventAggregator myEvent;
         #endregion
 
         #region Binding Properties
         private bool _isFavourited;
-        public bool IsFavourited { get => _isFavourited ; set { _isFavourited = value; NotifyOfPropertyChange(); } }
+        public bool IsFavourited { get => _isFavourited; set { _isFavourited = value; NotifyOfPropertyChange(); } }
         private bool _isWatchListed;
         public bool IsWatchListed { get => _isWatchListed; set { _isWatchListed = value; NotifyOfPropertyChange(); } }
-        #endregion
-
-        #region Movie Properties
-        public int Vote_count { get; set; }
-        private int _id;
-        public int Movie_Id { get => _id; set { _id = value; NotifyOfPropertyChange(); } }
-        public bool Video { get; set; }
-        public bool Adult { get; set; }
-        public double Vote_average { get; set; }
-        private string _title;
-        public string Title { get => _title; set { _title = value; NotifyOfPropertyChange(); } }
-        private string posterpath;
-        public string Poster_path { get => posterpath; set { posterpath = value; NotifyOfPropertyChange(); } }
-        private Uri imagepath;
-        public Uri ImagePath { get => imagepath; set { imagepath = value; NotifyOfPropertyChange(); } }
-        private string _overview;
-        public string Overview { get => _overview; set { _overview = value; NotifyOfPropertyChange(); } }
-        private string _releaseDate;
-        public string ReleaseDate { get => _releaseDate; set { _releaseDate = value; NotifyOfPropertyChange(); } }       
-        private double _popularity;
-        public double Popularity { get => _popularity; set { _popularity = value; NotifyOfPropertyChange(); } }
-        private string _language;
-        public string Language { get => _language; set { _language = value; NotifyOfPropertyChange(); } }
-        private string _trailerUrl;
-        public string TrailerUrl { get => _trailerUrl; set { _trailerUrl = value; NotifyOfPropertyChange(); } }
-        private string _poster_Cache;
-        public string Poster_Cache { get => _poster_Cache; set { _poster_Cache = value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Public Methods
@@ -115,7 +78,7 @@ namespace MoodMovies.ViewModels
         #region Ihandle Interface
         public void RequestTrailer()
         {
-            myEvent.PublishOnUIThread(Movie_Id);
+            myEvent.PublishOnUIThread(Movie.Movie_Id);
         }
         #endregion
     }

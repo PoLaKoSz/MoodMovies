@@ -74,17 +74,17 @@ namespace MoodMovies.ViewModels
         /// <param name="sender"></param>
         public void AddToWatchList(object sender)
         {
-            var isChecked = (bool)sender;       
+            var isChecked = (bool)sender;
             if (isChecked == true)
             {
                 myEvent.PublishOnUIThread(new AddToWatchListMessage(this));
             }
             else
-            {                
+            {
                 myEvent.PublishOnUIThread(new RemoveFromWatchListMessage(this));
                 if (Parent is WatchListViewModel p)
                 {
-                    p.Movies.Remove(this);                    
+                    p.Movies.Remove(this);
                 }
             }
         }
@@ -118,6 +118,5 @@ namespace MoodMovies.ViewModels
             myEvent.PublishOnUIThread(Movie_Id);
         }
         #endregion
-
     }
 }

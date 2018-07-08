@@ -6,12 +6,7 @@ namespace DataModel.DataModel.Entities
 {
     [Table(Name = "Users")]
     public class Users
-    {        
-        public Users()
-        {
-
-        }
-
+    {
         [Column(Name = "User_Id", IsDbGenerated = true, IsPrimaryKey = true, DbType = "INTEGER")]
         [Key]
         public int User_Id { get; set; }

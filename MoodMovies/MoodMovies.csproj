@@ -155,7 +155,6 @@
     <Compile Include="Resources\Extensions.cs" />
     <Compile Include="Resources\PropertyCopier.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
-    <Compile Include="ViewModels\ASearchViewModel.cs" />
     <Compile Include="ViewModels\ListBaseViewModel.cs" />
     <Compile Include="ViewModels\UserControlViewModel.cs" />
     <Compile Include="ViewModels\WatchListViewModel.cs" />
@@ -265,9 +264,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\moodmoviesorange.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataModel\MoodMoviesModel.csproj">

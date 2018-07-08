@@ -17,10 +17,6 @@ namespace MoodMovies.ViewModels
         }
 
         #region Fields
-
-        #endregion
-
-        #region Properties
         readonly IOfflineServiceProvider offDb;
         #endregion
 
@@ -73,6 +69,5 @@ namespace MoodMovies.ViewModels
 
         }
         #endregion
-
     }
 }

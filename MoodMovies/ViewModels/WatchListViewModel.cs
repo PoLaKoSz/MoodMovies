@@ -16,7 +16,7 @@ namespace MoodMovies.ViewModels
             offlineDb = serviceProvider;
         }
 
-        #region Properties
+        #region Fields
         IOfflineServiceProvider offlineDb;
         #endregion
 
@@ -65,6 +65,5 @@ namespace MoodMovies.ViewModels
 
         }
         #endregion
-
     }
 }

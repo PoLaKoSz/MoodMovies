@@ -11,7 +11,6 @@ namespace MoodMovies.ViewModels
 {
     internal class MainViewModel : Conductor<Screen>.Collection.OneActive, IHandle<ResultsReadyMessage>, IHandle<StartLoadingMessage>
     {
-        // constructor
         public MainViewModel()
         {
             eventAgg.Subscribe(this);
@@ -63,7 +62,6 @@ namespace MoodMovies.ViewModels
         #region Private Methods
         private void InitialiseVMs()
         {
-            //pages that will change
 
             //need to write implementation to get user to input this one time and save to db or
             //create a guest session
@@ -126,10 +124,6 @@ namespace MoodMovies.ViewModels
             IsLoading = true;
             LoadingMessage = message.Text;
         }
-        #endregion
-
-        #region IHandle Interface
-
         #endregion
 
         #region Caliburn Override

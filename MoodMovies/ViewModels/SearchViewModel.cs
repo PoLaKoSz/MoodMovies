@@ -5,7 +5,6 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using TMdbEasy.TmdbObjects.Movies;
-using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
 
 namespace MoodMovies.ViewModels

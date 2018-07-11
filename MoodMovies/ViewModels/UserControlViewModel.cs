@@ -17,7 +17,7 @@ namespace MoodMovies.ViewModels
             AllUsers = new ObservableCollection<Users>();
             offlineDb = serviceProvider;
             StatusMessage = statusMessage;
-            GetUsers();            
+            NewUser = new Users();
         }
 
         #region Events
@@ -36,14 +36,8 @@ namespace MoodMovies.ViewModels
         private ObservableCollection<Users> _allUsers = new ObservableCollection<Users>();
         public ObservableCollection<Users> AllUsers { get => _allUsers; set { _allUsers = value; NotifyOfPropertyChange(); } }
 
-        private string _firstName;
-        public string FirstName { get => _firstName; set { _firstName = value; NotifyOfPropertyChange(); } }
-
-        private string _surName;
-        public string SurName { get => _surName; set { _surName = value; NotifyOfPropertyChange(); } }
-
-        private string _apiKey;
-        public string ApiKey { get => _apiKey; set { _apiKey = value; NotifyOfPropertyChange(); } }
+        public Users NewUser { get => _newUser; set { _newUser = value; NotifyOfPropertyChange(); } }
+        private Users _newUser;
         #endregion
 
         readonly IOfflineServiceProvider offlineDb;
@@ -57,15 +51,15 @@ namespace MoodMovies.ViewModels
             try
             {
                 if (CurrentUser != null)
-                {    
+                {
                     //change the fields in db first
-                    await offlineDb.ChangeCurrentUserField(CurrentUser.User_ApiKey, false);                    
+                    await offlineDb.ChangeCurrentUserField(CurrentUser.User_ApiKey, false);
                 }
                 await offlineDb.ChangeCurrentUserField(SelectedUser.User_ApiKey, true);
-                //then perform the change for the ui and logic
+
                 CurrentUser = SelectedUser;
-                UserControl.CurrentUser = CurrentUser;
-                eventAgg.PublishOnUIThread(new ClientChangeMessage());
+
+                eventAgg.PublishOnUIThread(new ClientChangeMessage(CurrentUser));
             }
             catch
             {
@@ -78,29 +72,23 @@ namespace MoodMovies.ViewModels
         /// </summary>
         public async void CreateNewUser()
         {
-            if (!string.IsNullOrEmpty(ApiKey) 
-                && !string.IsNullOrEmpty(FirstName)
-                && !string.IsNullOrEmpty(SurName))
+            if (!string.IsNullOrEmpty(NewUser.User_ApiKey)
+                && !string.IsNullOrEmpty(NewUser.User_Name)
+                && !string.IsNullOrEmpty(NewUser.User_Surname))
             {
                 try
                 {
-                    var user = new Users()
-                    {
-                        User_Name = FirstName,
-                        User_Surname = SurName,
-                        User_ApiKey = ApiKey,
-                        User_Active = true,
-                        Current_User = false
-                    };
-                    //check if user exists
-                    var userfound = await offlineDb.GetUserByApiKey(ApiKey);
+                    NewUser.User_Active = true;
+                    NewUser.Current_User = false;
+
+                    var userfound = await offlineDb.GetUserByApiKey(NewUser.User_ApiKey);
                     if (userfound == null)
                     {
-                        await offlineDb.CreateUser(user);
-                        await GetUsers();
-                        FirstName = "";
-                        SurName = "";
-                        ApiKey = "";
+                        await offlineDb.CreateUser(NewUser);
+
+                        AllUsers.Add(NewUser);
+
+                        NewUser = new Users();
                     }
                     else
                     {
@@ -123,34 +111,31 @@ namespace MoodMovies.ViewModels
         /// </summary>
         public async void DeleteCurrentUser()
         {
-            if(SelectedUser != null)
+            if (SelectedUser != null)
             {
-                if(SelectedUser == UserControl.CurrentUser)
+                if (SelectedUser == CurrentUser)
                 {
-                    UserControl.CurrentUser = null;
                     CurrentUser = null;
-                    eventAgg.PublishOnUIThread(new ClientChangeMessage());
+                    eventAgg.PublishOnUIThread(new ClientChangeMessage(new Users()));
                 }
-                await offlineDb.DeleteUser(SelectedUser);                
+                await offlineDb.DeleteUser(SelectedUser);
             }
             await GetUsers();
         }
-        #endregion
 
-        #region Private Methods
-        private async Task GetUsers()
+        public async Task GetUsers()
         {
             try
             {
                 var users = await offlineDb.GetAllUsers();
 
-                // Get the current user if one has been set
-                UserControl.CurrentUser = users.Where(x => x.Current_User).SingleOrDefault();
-                if(UserControl.CurrentUser  != null)
-                    CurrentUser = UserControl.CurrentUser;
+                CurrentUser = users.Where(x => x.Current_User).SingleOrDefault();
+
+                eventAgg.PublishOnUIThread(new ClientChangeMessage(CurrentUser));
 
                 AllUsers.Clear();
-                AllUsers = new ObservableCollection<Users>(users);                
+
+                AllUsers = new ObservableCollection<Users>(users);
             }
             catch
             {

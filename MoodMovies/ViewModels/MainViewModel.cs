@@ -28,6 +28,7 @@ namespace MoodMovies.ViewModels
 
             offlineDb = new OfflineServiceProvider(database);
             UserVM = new UserControlViewModel(eventAgg, offlineDb, StatusMessage);
+            UserVM.GetUsers();
         }
 
         #region Events

@@ -94,18 +94,18 @@
                        FontWeight="SemiBold"
                        VerticalAlignment="Bottom" />
                 <TextBox Grid.Column="0"
-                         Text="{Binding Path=FirstName}"
+                         Text="{Binding Path=NewUser.User_Name}"
                          Grid.Row="1"
                          VerticalAlignment="Center"
                          Margin="5,0" />
                 <TextBox Grid.Column="1"
                          Grid.Row="1"
-                         Text="{Binding Path=SurName}"
+                         Text="{Binding Path=NewUser.User_Surname}"
                          VerticalAlignment="Center"
                          Margin="5,0" />
                 <TextBox Grid.Column="2"
                          Grid.Row="1"
-                         Text="{Binding Path=ApiKey}"
+                         Text="{Binding Path=NewUser.User_ApiKey}"
                          VerticalAlignment="Center"
                          Margin="5,0" />
                 <Button Grid.Row="2"

@@ -13,10 +13,16 @@ using MoodMovies.DataAccessLayer;
 
 namespace MoodMovies.ViewModels
 {
-    internal class MainViewModel : Conductor<Screen>.Collection.OneActive, IHandle<ResultsReadyMessage>, IHandle<StartLoadingMessage>
+    internal class MainViewModel : Conductor<Screen>.Collection.OneActive,
+        IHandle<ResultsReadyMessage>,
+        IHandle<StartLoadingMessage>,
+        IHandle<NavigateToUsersMenu>,
+        IHandle<ClientChangeMessage>
     {
         public MainViewModel()
         {
+            CanNavigate = false;
+
             eventAgg.Subscribe(this);
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
 
@@ -47,7 +53,11 @@ namespace MoodMovies.ViewModels
 
         #region General Properties
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
+
         public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
+
+        public bool CanNavigate { get => _canNavigate; set { _canNavigate = value; NotifyOfPropertyChange(); } }
+
         public SnackbarMessageQueue StatusMessage { get; set; } = new SnackbarMessageQueue();
         #endregion
 
@@ -61,6 +71,7 @@ namespace MoodMovies.ViewModels
         private WatchListViewModel _watchListVM;
         public WatchListViewModel WatchListVM { get => _watchListVM; set { _watchListVM = value; NotifyOfPropertyChange(); } }
         private UserControlViewModel _userVM;
+
         public UserControlViewModel UserVM { get => _userVM; set { _userVM = value; NotifyOfPropertyChange(); } }
         #endregion
 
@@ -134,6 +145,18 @@ namespace MoodMovies.ViewModels
         {
             IsLoading = true;
             LoadingMessage = message.Text;
+        }
+
+        public void Handle(NavigateToUsersMenu message)
+        {
+            DisplayUserVM();
+            IsLoading = false;
+        }
+
+        public void Handle(ClientChangeMessage message)
+        {
+            CanNavigate = true;
+            IsLoading = false;
         }
         #endregion
 

@@ -14,6 +14,8 @@ namespace MoodMovies.ViewModels
         public UserControlViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage)
         {
             eventAgg = _event;
+            eventAgg.PublishOnUIThread(new StartLoadingMessage("Logging in ..."));
+
             AllUsers = new ObservableCollection<Users>();
             offlineDb = serviceProvider;
             StatusMessage = statusMessage;
@@ -33,7 +35,7 @@ namespace MoodMovies.ViewModels
         private Users _currentUser;
         public Users CurrentUser { get => _currentUser; set { _currentUser = value; NotifyOfPropertyChange(); } }
 
-        private ObservableCollection<Users> _allUsers = new ObservableCollection<Users>();
+        private ObservableCollection<Users> _allUsers;
         public ObservableCollection<Users> AllUsers { get => _allUsers; set { _allUsers = value; NotifyOfPropertyChange(); } }
 
         public Users NewUser { get => _newUser; set { _newUser = value; NotifyOfPropertyChange(); } }
@@ -131,7 +133,10 @@ namespace MoodMovies.ViewModels
 
                 CurrentUser = users.Where(x => x.Current_User).SingleOrDefault();
 
-                eventAgg.PublishOnUIThread(new ClientChangeMessage(CurrentUser));
+                if (CurrentUser == null)
+                    eventAgg.PublishOnUIThread(new NavigateToUsersMenu());
+                else
+                    eventAgg.PublishOnUIThread(new ClientChangeMessage(CurrentUser));
 
                 AllUsers.Clear();
 

@@ -55,7 +55,7 @@
                                       VerticalAlignment="Bottom" />
                     </Grid>
                     <StackPanel Margin="0,20,0,0">
-                        <!--USers-->
+                        <!--Users-->
                         <materialDesign:Chip Margin="7"
                                              Content="{lex:Loc MainView_Menubar_Button_Users}"
                                              HorizontalAlignment="Left"
@@ -82,7 +82,8 @@
                                              cal:Message.Attach="DisplaySearchVM"
                                              IconForeground="LawnGreen"
                                              Foreground="black"
-                                             FontSize="17">
+                                             FontSize="17"
+                                             IsEnabled="{Binding CanNavigate}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Magnify" />
                             </materialDesign:Chip.Icon>
@@ -98,7 +99,8 @@
                                              cal:Message.Attach="DisplayMovieListVM"
                                              FontSize="17"
                                              Foreground="black"
-                                             IconForeground="Aqua">
+                                             IconForeground="Aqua"
+                                             IsEnabled="{Binding CanNavigate}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Movie" />
                             </materialDesign:Chip.Icon>
@@ -115,7 +117,8 @@
                                              FontSize="17"
                                              Foreground="black"
                                              IconBackground="{StaticResource PrimaryHueMidBrush}"
-                                             IconForeground="#FFE44242">
+                                             IconForeground="#FFE44242"
+                                             IsEnabled="{Binding CanNavigate}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Heart" />
                             </materialDesign:Chip.Icon>
@@ -131,7 +134,8 @@
                                              cal:Message.Attach="DisplayWatchListVM"
                                              Foreground="black"
                                              FontSize="17"
-                                             IconForeground="#FFC229C2">
+                                             IconForeground="#FFC229C2"
+                                             IsEnabled="{Binding CanNavigate}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Watch" />
                             </materialDesign:Chip.Icon>
@@ -154,8 +158,8 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <!--Hamburger Menu-->
-                        <Grid  Grid.Column="0"
-                               HorizontalAlignment="Left">
+                        <Grid Grid.Column="0"
+                              HorizontalAlignment="Left">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="20" />
@@ -172,7 +176,8 @@
                                     Width="55"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     x:Name="DisplaySearchVM"
-                                    Background="Transparent">
+                                    Background="Transparent"
+                                    IsEnabled="{Binding CanNavigate}">
                                 <materialDesign:PackIcon Kind="Magnify"
                                                          Width="23"
                                                          Height="23"
@@ -270,7 +275,8 @@
                                              cal:Message.Attach="DisplayMovieListVM"
                                              IconBackground="Transparent"
                                              Height="50"
-                                             IconForeground="{StaticResource SecondaryAccentMidBrush}">
+                                             IconForeground="{StaticResource SecondaryAccentMidBrush}"
+                                             IsEnabled="{Binding CanNavigate}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Movie"
                                                          Height="26"
@@ -285,7 +291,8 @@
                                              cal:Message.Attach="DisplayFavouriteVM"
                                              IconBackground="Transparent"
                                              Height="50"
-                                             IconForeground="#FFE44242">
+                                             IconForeground="#FFE44242"
+                                             IsEnabled="{Binding CanNavigate}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Heart"
                                                          Height="26"
@@ -300,7 +307,8 @@
                                              cal:Message.Attach="DisplayWatchListVM"
                                              IconBackground="Transparent"
                                              Height="50"
-                                             IconForeground="Green">
+                                             IconForeground="Green"
+                                             IsEnabled="{Binding CanNavigate}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Watch"
                                                          Height="26"

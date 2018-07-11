@@ -27,6 +27,7 @@ namespace MoodMovies.ViewModels
             database.DumpDatabase();
 
             offlineDb = new OfflineServiceProvider(database);
+            _onlineDB = new OnlineServiceProvider();
             UserVM = new UserControlViewModel(eventAgg, offlineDb, StatusMessage);
             UserVM.GetUsers();
         }
@@ -38,6 +39,7 @@ namespace MoodMovies.ViewModels
         #region Fields
         readonly IOfflineServiceProvider offlineDb;
         private readonly AppFolders AppFolders;
+        private IOnlineServiceProvider _onlineDB;
         #endregion
 
         #region General Properties
@@ -73,10 +75,10 @@ namespace MoodMovies.ViewModels
         {
             ImageCacher imageCacher = new ImageCacher(AppFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
 
-            Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb, new OnlineServiceProvider(), StatusMessage));
-            Items.Add(MovieListVM = new MovieListViewModel(eventAgg, offlineDb, StatusMessage, imageCacher));
-            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, offlineDb, StatusMessage, imageCacher));
-            Items.Add(WatchListVM = new WatchListViewModel(eventAgg, offlineDb, StatusMessage, imageCacher));
+            Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb, _onlineDB, StatusMessage));
+            Items.Add(MovieListVM = new MovieListViewModel(eventAgg, offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
+            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
+            Items.Add(WatchListVM = new WatchListViewModel(eventAgg, offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
 
             eventAgg.Subscribe(SearchVM);
             eventAgg.Subscribe(MovieListVM);

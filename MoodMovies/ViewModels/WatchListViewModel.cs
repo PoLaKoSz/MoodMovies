@@ -9,8 +9,8 @@ namespace MoodMovies.ViewModels
 {
     public class WatchListViewModel : ListBaseViewModel
     {
-        public WatchListViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage, ImageCacher imageCacher)
-            : base(_event, statusMessage)
+        public WatchListViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage, ImageCacher imageCacher, Users currentUser)
+            : base(_event, statusMessage, currentUser)
         {
             DisplayName = "Favourites";
             offlineDb = serviceProvider;
@@ -18,7 +18,7 @@ namespace MoodMovies.ViewModels
         }
 
         #region Fields
-        IOfflineServiceProvider offlineDb;
+        private IOfflineServiceProvider offlineDb;
         private readonly ImageCacher ImageCacher;
         #endregion
 
@@ -27,8 +27,7 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
-                var movies = await offlineDb.GetAllWatchListItems(user);
+                var movies = await offlineDb.GetAllWatchListItems(CurrentUser);
                 //build up the movie card view models
                 Movies.Clear();
                 await Task.Run(() =>

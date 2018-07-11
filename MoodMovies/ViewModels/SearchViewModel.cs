@@ -9,7 +9,7 @@ using MaterialDesignThemes.Wpf;
 
 namespace MoodMovies.ViewModels
 {
-    internal class SearchViewModel : Screen, IHandle<ClientChangeMessage>
+    internal class SearchViewModel : Screen
     {
         public SearchViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage)
         {
@@ -27,7 +27,7 @@ namespace MoodMovies.ViewModels
 
         #region Providers
         readonly IOfflineServiceProvider offlineDb;
-        readonly IOnlineServiceProvider onlineDb;
+        private IOnlineServiceProvider onlineDb;
         #endregion
 
         #region General Properties
@@ -60,37 +60,24 @@ namespace MoodMovies.ViewModels
         public async void BeginSearch()
         {
             //if no cient has been set
-            if(onlineDb.Client == null && Logic.UserControl.CurrentUser == null)
+            if (onlineDb.Client == null)
             {
                 StatusMessage.Enqueue("Please select a user account form the 'User' page.");
-            }            
-            else 
+            }
+            else
             {
                 try
                 {
-                    if (onlineDb.Client == null)
-                        onlineDb.ChangeClient(Logic.UserControl.CurrentUser.User_ApiKey);
-
-                    CheckInputs();
                     if (SelectedSource is ComboBoxItem obj)
                     {
                         var value = Convert.ToString(obj.Content);
-                        //this needs to change(add a viewmodel and associate an enum possibly) translation wont work here
-                        //or never translate this
+
                         if (value == "Online" || String.IsNullOrEmpty(value))
                         {
-                            if (string.IsNullOrEmpty(SearchText))
-                            {
-                                //publish message
-                            }
-                            else
+                            if (!string.IsNullOrEmpty(SearchText))
                             {
                                 await GetMoviesByTitle(SearchText);
                             }
-                        }
-                        else if (value == "Favourites" || value == "Watchlist")
-                        {
-                            //search the watchlist/favourites
                         }
                     }
                 }
@@ -120,34 +107,5 @@ namespace MoodMovies.ViewModels
             IsLoading = false;
         }
         #endregion
-
-        #region Private Methods     
-        /// <summary>
-        /// Checks what inputs are provided in order to perform the relevant searches
-        /// </summary>
-        private void CheckInputs()
-        {
-
-        }
-        #endregion
-
-        public void Handle(ClientChangeMessage message)
-        {
-            try
-            {
-                if (Logic.UserControl.CurrentUser != null)
-                {
-                    onlineDb.ChangeClient(Logic.UserControl.CurrentUser.User_ApiKey);                    
-                }
-                else
-                {
-                    onlineDb.Client = null;
-                }
-            }
-            catch
-            {
-                StatusMessage.Enqueue("Failed to load the Current user's Api Key");
-            }
-        }
     }
 }

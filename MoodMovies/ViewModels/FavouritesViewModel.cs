@@ -53,7 +53,7 @@ namespace MoodMovies.ViewModels
                     }
                 });
             }
-            catch when (UserControl.CurrentUser == null)
+            catch when (CurrentUser == null)
             {
                 StatusMessage.Enqueue("Please select a user from the 'User' page.");
             }

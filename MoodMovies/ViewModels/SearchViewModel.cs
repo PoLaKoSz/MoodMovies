@@ -9,7 +9,7 @@ using MaterialDesignThemes.Wpf;
 
 namespace MoodMovies.ViewModels
 {
-    internal class SearchViewModel : Screen
+    internal class SearchViewModel : Screen, IHandle<ClientChangeMessage>
     {
         public SearchViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage)
         {
@@ -105,6 +105,11 @@ namespace MoodMovies.ViewModels
             }
 
             IsLoading = false;
+        }
+
+        public void Handle(ClientChangeMessage message)
+        {
+            onlineDb.ChangeClient(message.NewUser.User_ApiKey);
         }
         #endregion
     }

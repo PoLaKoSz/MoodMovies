@@ -58,7 +58,6 @@ namespace MoodMovies.ViewModels
             {
                 StatusMessage.Enqueue("Internal Error");
             }
-
         }
         #endregion
     }

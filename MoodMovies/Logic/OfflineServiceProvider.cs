@@ -247,7 +247,9 @@ namespace MoodMovies.Logic
         }
         #endregion
 
-        //Commit changes to database
+        /// <summary>
+        /// Commit changes to the database
+        /// </summary>
         public void SaveChanges()
         {
             db.context.SaveChanges();

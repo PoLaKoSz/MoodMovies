@@ -10,6 +10,9 @@ namespace MoodMovies.ViewModels
         {
             eventAgg = events;
             eventAgg.Subscribe(this);
+
+            Movies = new ObservableCollection<MovieCardViewModel>();
+
             StatusMessage = statusMessage;
         }
 
@@ -24,11 +27,12 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Properties
-        private ObservableCollection<MovieCardViewModel> movies = new ObservableCollection<MovieCardViewModel>();
+        private ObservableCollection<MovieCardViewModel> movies;
         public ObservableCollection<MovieCardViewModel> Movies { get => movies; set { movies = value; NotifyOfPropertyChange(); } }
-        private MovieCardViewModel _selectedItem;
 
+        private MovieCardViewModel _selectedItem;
         public MovieCardViewModel SelectedItem { get => _selectedItem; set { _selectedItem = value; NotifyOfPropertyChange(); } }
+
         public SnackbarMessageQueue StatusMessage { get; set; }
         #endregion
     }

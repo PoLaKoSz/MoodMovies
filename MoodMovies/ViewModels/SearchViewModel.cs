@@ -15,7 +15,6 @@ namespace MoodMovies.ViewModels
         {
             eventAgg = _event;
             eventAgg.Subscribe(this);
-            //remember to unsubscribe?? or not
 
             offlineDb = offlineService;
             onlineDb = onlineService;

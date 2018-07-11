@@ -23,8 +23,7 @@ namespace MoodMovies.ViewModels
         #region Events
         public IEventAggregator eventAgg;
         #endregion
-
-
+        
         #region Properties
         public SnackbarMessageQueue StatusMessage { get; set; }
 
@@ -72,8 +71,8 @@ namespace MoodMovies.ViewModels
             {
                 StatusMessage.Enqueue("Failed to change the current user.");
             }
-            
         }
+
         /// <summary>
         /// Creates and adds a new user to the database
         /// </summary>
@@ -118,6 +117,7 @@ namespace MoodMovies.ViewModels
                 StatusMessage.Enqueue("Please fill in all the fields and try again.");
             }
         }
+
         /// <summary>
         /// Deletes current user
         /// </summary>
@@ -149,15 +149,13 @@ namespace MoodMovies.ViewModels
                 if(UserControl.CurrentUser  != null)
                     CurrentUser = UserControl.CurrentUser;
 
-                //clear the list
                 AllUsers.Clear();
-                //renew the list
                 AllUsers = new ObservableCollection<Users>(users);                
             }
             catch
             {
                 StatusMessage.Enqueue("Failed to load users.");
-            }                  
+            }
         }
         #endregion
     }

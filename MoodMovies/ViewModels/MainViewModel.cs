@@ -22,8 +22,7 @@ namespace MoodMovies.ViewModels
 
             string appRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies");
             AppFolders = new AppFolders(appRootFolder);
-
-            //initial setup of the database
+            
             IDb database = new Db();
             database.DumpDatabase();
 

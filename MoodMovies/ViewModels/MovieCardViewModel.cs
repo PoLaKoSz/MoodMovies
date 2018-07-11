@@ -71,15 +71,11 @@ namespace MoodMovies.ViewModels
                 }
             }
         }
-
-
         #endregion
-
-        #region Ihandle Interface
+        
         public void RequestTrailer()
         {
             myEvent.PublishOnUIThread(Movie.Movie_Id);
         }
-        #endregion
     }
 }

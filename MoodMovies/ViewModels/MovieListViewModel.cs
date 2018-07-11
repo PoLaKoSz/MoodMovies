@@ -129,6 +129,7 @@ namespace MoodMovies.ViewModels
                 //ping a message to the user if necessary
             }
         }
+
         /// <summary>
         /// Remove movie from the watchlist
         /// </summary>
@@ -146,6 +147,7 @@ namespace MoodMovies.ViewModels
 
             }
         }
+
         /// <summary>
         /// Adds movie to the favourites list
         /// </summary>
@@ -174,6 +176,7 @@ namespace MoodMovies.ViewModels
                 //ping a message to the user if necessary
             }
         }
+
         /// <summary>
         /// Removes a movie from the favourites list
         /// </summary>
@@ -191,6 +194,6 @@ namespace MoodMovies.ViewModels
 
             }
         }
-        #endregion        
+        #endregion
     }
 }

@@ -52,16 +52,16 @@ namespace MoodMovies.ViewModels
         {
             try
             {
+                eventAgg.PublishOnUIThread(new ClientChangeMessage(SelectedUser));
+
                 if (CurrentUser != null)
-                {
+                {                    
                     //change the fields in db first
                     await offlineDb.ChangeCurrentUserField(CurrentUser.User_ApiKey, false);
                 }
                 await offlineDb.ChangeCurrentUserField(SelectedUser.User_ApiKey, true);
 
-                CurrentUser = SelectedUser;
-
-                eventAgg.PublishOnUIThread(new ClientChangeMessage(CurrentUser));
+                CurrentUser = SelectedUser;                
             }
             catch
             {
@@ -144,6 +144,7 @@ namespace MoodMovies.ViewModels
             }
             catch
             {
+                eventAgg.PublishOnUIThread(new NavigateToUsersMenu());
                 StatusMessage.Enqueue("Failed to load users.");
             }
         }

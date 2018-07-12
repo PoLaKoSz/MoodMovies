@@ -8,12 +8,6 @@ namespace MoodMovies.Logic
 {
     internal class OnlineServiceProvider : IOnlineServiceProvider
     {
-        public OnlineServiceProvider()
-        {
-            if (UserControl.CurrentUser != null)
-                Client = new EasyClient(UserControl.CurrentUser.User_ApiKey);
-        }
-
         #region Properties
         public EasyClient Client { get; set; }
         private IMovieApi MovieClient;

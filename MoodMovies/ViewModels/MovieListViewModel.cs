@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Caliburn.Micro;
 using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
@@ -12,8 +11,8 @@ namespace MoodMovies.ViewModels
 {
     public class MovieListViewModel : ListBaseViewModel, IHandle<MovieListMessage>, IHandle<MovieCardViewModel>, IHandle<IMovieCardMessage>
     {
-        public MovieListViewModel(IEventAggregator events, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage, ImageCacher imageCacher)
-            : base(events, statusMessage)
+        public MovieListViewModel(IEventAggregator events, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage, ImageCacher imageCacher, Users currentUser)
+            : base(events, statusMessage, currentUser)
         {
             offlineDb = serviceProvider;
             ImageCacher = imageCacher;
@@ -112,13 +111,11 @@ namespace MoodMovies.ViewModels
                 if (await offlineDb.AddMovie(mvCard.Movie))
                 {
                     //then create the link between the user and the movie and the watchlist
-                    var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
-                    await offlineDb.AddToWatchList(user, mvCard.Movie);
+                    await offlineDb.AddToWatchList(CurrentUser, mvCard.Movie);
                 }
                 else
                 {
-                    var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
-                    var usermovie = await offlineDb.GetUserMovieLink(user, mvCard.Movie);
+                    var usermovie = await offlineDb.GetUserMovieLink(CurrentUser, mvCard.Movie);
 
                     usermovie.Watchlist = true;
                     offlineDb.SaveChanges();
@@ -138,9 +135,8 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
                 var movie = await offlineDb.GetMovie(mvCard.Movie.Movie_Id);
-                await offlineDb.RemoveFromWatchList(user, movie);
+                await offlineDb.RemoveFromWatchList(CurrentUser, movie);
             }
             catch
             {
@@ -159,13 +155,11 @@ namespace MoodMovies.ViewModels
                 if (await offlineDb.AddMovie(mvCard.Movie))
                 {
                     //then create the link between the user and the movie and the watchlist
-                    var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
-                    await offlineDb.AddToFavourites(user, mvCard.Movie);
+                    await offlineDb.AddToFavourites(CurrentUser, mvCard.Movie);
                 }
                 else
                 {
-                    var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
-                    var usermovie = await offlineDb.GetUserMovieLink(user, mvCard.Movie);
+                    var usermovie = await offlineDb.GetUserMovieLink(CurrentUser, mvCard.Movie);
 
                     usermovie.Favourite = true;
                     offlineDb.SaveChanges();
@@ -185,9 +179,8 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var user = await offlineDb.GetUser(UserControl.CurrentUser.User_Id);
                 var movie = await offlineDb.GetMovie(mvCard.Movie.Movie_Id);
-                await offlineDb.RemoveFromFavourites(user, movie);
+                await offlineDb.RemoveFromFavourites(CurrentUser, movie);
             }
             catch
             {

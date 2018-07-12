@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Caliburn.Micro;
 using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
@@ -11,8 +9,8 @@ namespace MoodMovies.ViewModels
 {
     public class FavouritesViewModel: ListBaseViewModel
     {
-        public FavouritesViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage, ImageCacher imageCacher)
-            : base(_event, statusMessage)
+        public FavouritesViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage, ImageCacher imageCacher, Users currentUser)
+            : base(_event, statusMessage, currentUser)
         {
             DisplayName = "Favourites";
             offDb = serviceProvider;
@@ -33,8 +31,7 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var user = await offDb.GetUser(UserControl.CurrentUser.User_Id);
-                var movies = await offDb.GetAllFavouriteItems(user);
+                var movies = await offDb.GetAllFavouriteItems(CurrentUser);
                 //build up the movie card view models
                 Movies.Clear();
                 await Task.Run(() =>
@@ -56,7 +53,7 @@ namespace MoodMovies.ViewModels
                     }
                 });
             }
-            catch when (UserControl.CurrentUser == null)
+            catch when (CurrentUser == null)
             {
                 StatusMessage.Enqueue("Please select a user from the 'User' page.");
             }

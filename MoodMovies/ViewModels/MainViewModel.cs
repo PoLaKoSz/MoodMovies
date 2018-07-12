@@ -13,21 +13,29 @@ using MoodMovies.DataAccessLayer;
 
 namespace MoodMovies.ViewModels
 {
-    internal class MainViewModel : Conductor<Screen>.Collection.OneActive, IHandle<ResultsReadyMessage>, IHandle<StartLoadingMessage>
+    internal class MainViewModel : Conductor<Screen>.Collection.OneActive,
+        IHandle<ResultsReadyMessage>,
+        IHandle<StartLoadingMessage>,
+        IHandle<NavigateToUsersMenu>,
+        IHandle<ClientChangeMessage>
     {
         public MainViewModel()
         {
+            CanNavigate = false;
+
             eventAgg.Subscribe(this);
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
 
             string appRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies");
-            AppFolders = new AppFolders(appRootFolder);
-            
+            _appFolders = new AppFolders(appRootFolder);
+
             IDb database = new Db();
             database.DumpDatabase();
 
-            offlineDb = new OfflineServiceProvider(database);
-            UserVM = new UserControlViewModel(eventAgg, offlineDb, StatusMessage);
+            _offlineDb = new OfflineServiceProvider(database);
+            _onlineDB = new OnlineServiceProvider();
+            UserVM = new UserControlViewModel(eventAgg, _offlineDb, StatusMessage);
+            UserVM.GetUsers();
         }
 
         #region Events
@@ -35,15 +43,21 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Fields
-        readonly IOfflineServiceProvider offlineDb;
-        private readonly AppFolders AppFolders;
+        readonly IOfflineServiceProvider _offlineDb;
+        private readonly AppFolders _appFolders;
+        private IOnlineServiceProvider _onlineDB;
+        private string _loadingMessage;
+        private bool _isLoading;
+        private bool _canNavigate;
         #endregion
 
         #region General Properties
-        private string _loadingMessage;
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
-        private bool _isLoading;
+
         public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
+
+        public bool CanNavigate { get => _canNavigate; set { _canNavigate = value; NotifyOfPropertyChange(); } }
+
         public SnackbarMessageQueue StatusMessage { get; set; } = new SnackbarMessageQueue();
         #endregion
 
@@ -57,6 +71,7 @@ namespace MoodMovies.ViewModels
         private WatchListViewModel _watchListVM;
         public WatchListViewModel WatchListVM { get => _watchListVM; set { _watchListVM = value; NotifyOfPropertyChange(); } }
         private UserControlViewModel _userVM;
+
         public UserControlViewModel UserVM { get => _userVM; set { _userVM = value; NotifyOfPropertyChange(); } }
         #endregion
 
@@ -70,12 +85,12 @@ namespace MoodMovies.ViewModels
         #region Private Methods
         private void InitialiseVMs()
         {
-            ImageCacher imageCacher = new ImageCacher(AppFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
+            ImageCacher imageCacher = new ImageCacher(_appFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
 
-            Items.Add(SearchVM = new SearchViewModel(eventAgg, offlineDb, new OnlineServiceProvider(), StatusMessage));
-            Items.Add(MovieListVM = new MovieListViewModel(eventAgg, offlineDb, StatusMessage, imageCacher));
-            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, offlineDb, StatusMessage, imageCacher));
-            Items.Add(WatchListVM = new WatchListViewModel(eventAgg, offlineDb, StatusMessage, imageCacher));
+            Items.Add(SearchVM = new SearchViewModel(eventAgg, _offlineDb, _onlineDB, StatusMessage));
+            Items.Add(MovieListVM = new MovieListViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
+            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
+            Items.Add(WatchListVM = new WatchListViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
 
             eventAgg.Subscribe(SearchVM);
             eventAgg.Subscribe(MovieListVM);
@@ -131,11 +146,23 @@ namespace MoodMovies.ViewModels
             IsLoading = true;
             LoadingMessage = message.Text;
         }
+
+        public void Handle(NavigateToUsersMenu message)
+        {
+            DisplayUserVM();
+            IsLoading = false;
+        }
+
+        public void Handle(ClientChangeMessage message)
+        {
+            CanNavigate = true;
+            IsLoading = false;
+        }
         #endregion
 
         #region Caliburn Override
         protected override void OnViewLoaded(object view)
-        {           
+        {
             InitialiseVMs();
             base.OnViewLoaded(view);
         }

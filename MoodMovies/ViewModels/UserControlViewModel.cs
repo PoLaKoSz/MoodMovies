@@ -76,42 +76,45 @@ namespace MoodMovies.ViewModels
         public async void CreateNewUser()
         {
             if (string.IsNullOrEmpty(NewUser.User_ApiKey)
-                && string.IsNullOrEmpty(NewUser.User_Name)
-                && string.IsNullOrEmpty(NewUser.User_Surname))
+                || string.IsNullOrEmpty(NewUser.User_Name)
+                || string.IsNullOrEmpty(NewUser.User_Surname))
             {
                 StatusMessage.Enqueue("Please fill in all the fields and try again.");
                 return;
             }
-
-            try
+            else
             {
-                NewUser.User_Active = true;
-                NewUser.Current_User = false;
-
-                var userfound = await offlineDb.GetUserByApiKey(NewUser.User_ApiKey);
-                if (userfound == null)
+                //this code must only run if we have all the fields input
+                try
                 {
-                    if (!IsValidApiKey(NewUser.User_ApiKey))
+                    NewUser.User_Active = true;
+                    NewUser.Current_User = false;
+
+                    var userfound = await offlineDb.GetUserByApiKey(NewUser.User_ApiKey);
+                    if (userfound == null)
                     {
-                        StatusMessage.Enqueue("The API Key not valid.");
-                        return;
+                        if (!IsValidApiKey(NewUser.User_ApiKey))
+                        {
+                            StatusMessage.Enqueue("The API Key not valid.");
+                            return;
+                        }
+
+                        await offlineDb.CreateUser(NewUser);
+
+                        AllUsers.Add(NewUser);
+
+                        NewUser = new Users();
                     }
-
-                    await offlineDb.CreateUser(NewUser);
-
-                    AllUsers.Add(NewUser);
-
-                    NewUser = new Users();
+                    else
+                    {
+                        StatusMessage.Enqueue("A user with the same Api Key already exists.");
+                    }
                 }
-                else
+                catch
                 {
-                    StatusMessage.Enqueue("A user with the same Api Key already exists.");
+                    StatusMessage.Enqueue("Failed to create the user.");
                 }
-            }
-            catch
-            {
-                StatusMessage.Enqueue("Failed to create the user.");
-            }
+            }          
         }
 
         /// <summary>

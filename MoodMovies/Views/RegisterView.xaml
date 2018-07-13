@@ -160,7 +160,7 @@
         </StackPanel>
         <Button Style="{DynamicResource RoundButton}"
                 Content="Create Account"
-                cal:Message.Attach="Login"
+                cal:Message.Attach="Register"
                 Grid.Row="2"
                 Grid.Column="1"
                 Width="175"

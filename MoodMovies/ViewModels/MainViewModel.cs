@@ -16,6 +16,7 @@ namespace MoodMovies.ViewModels
     internal class MainViewModel : Conductor<Screen>.Collection.OneActive,
         IHandle<ResultsReadyMessage>,
         IHandle<StartLoadingMessage>,
+        IHandle<StopLoadingMessage>,
         IHandle<ClientChangeMessage>
     {
         public MainViewModel()
@@ -153,6 +154,11 @@ namespace MoodMovies.ViewModels
         {
             IsLoading = false;
         }
+
+        public void Handle(StopLoadingMessage message)
+        {
+            IsLoading = false;
+        }
         #endregion
 
         #region Caliburn Override
@@ -160,7 +166,7 @@ namespace MoodMovies.ViewModels
         {
             InitialiseVMs();
             base.OnViewLoaded(view);
-        }
+        }                
         #endregion
     }
 }

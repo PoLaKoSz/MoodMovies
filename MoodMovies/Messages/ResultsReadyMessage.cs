@@ -15,4 +15,12 @@ namespace MoodMovies.Messages
 
         public string Text { get; set; }
     }
+
+    public class StopLoadingMessage
+    {
+        public StopLoadingMessage()
+        {
+            
+        }
+    }
 }

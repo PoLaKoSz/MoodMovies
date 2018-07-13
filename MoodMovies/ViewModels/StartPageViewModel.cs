@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.Logic;
 using MoodMovies.Messages;
@@ -80,14 +81,14 @@ namespace MoodMovies.ViewModels
             {
                 var user = await offlineDb.GetUserByEmailPassword(message.Email);
 
-                if(user != null)
+                if (user != null)
                 {
-                    if(user.User_Password == message.Password)
+                    if (user.User_Password == message.Password)
                     {
                         //set the apikey
                         onlineDb.ChangeClient(user.User_ApiKey);
                         //set to current user if keep me logged in checkboc selected
-                        if(message.KeepLoggedIn)
+                        if (message.KeepLoggedIn)
                         {
 
                         }
@@ -110,7 +111,53 @@ namespace MoodMovies.ViewModels
         /// <param name="message"></param>
         private async Task RegisterNewUser(IAccountMessage obj)
         {
+            eventAgg.PublishOnUIThread(new StartLoadingMessage("Verifying your details"));
 
+            if (obj is RegisterMessage message)
+            {
+                var user = await offlineDb.GetUserByEmailPassword(message.Email);
+
+                if (user == null)
+                {
+                    try
+                    {
+                        onlineDb.ChangeClient(message.ApiKey);
+                        var apikeyExists = await offlineDb.ApiKeyExists(message.ApiKey);
+                        if (!apikeyExists)
+                        {
+                            var newUser = new Users()
+                            {
+                                User_Name = message.FirstName,
+                                User_Surname = message.Surname,
+                                User_ApiKey = message.ApiKey,
+                                User_Email = message.Email,
+                                User_Password = message.Password
+                            };
+                            await offlineDb.CreateUser(newUser);
+
+                            //send them straight to login page
+                            ShowLoginPage();
+                            LoginVM.UserEmail = message.Email;
+                            LoginVM.UserPassword = message.Password;
+                            LoginVM.KeepLoggedIn = true;
+                        }
+                        else
+                        {
+                            StatusMessage.Enqueue("The Api Key You provided is already allocated to a user.");
+                        }
+                    }
+                    catch
+                    {
+                        StatusMessage.Enqueue("The Api Key You provided is invalid.");
+                    }                                    
+                }
+                else
+                {
+                    StatusMessage.Enqueue("A User with that email already exists.");
+                }
+            }
+
+            eventAgg.PublishOnUIThread(new StopLoadingMessage());
         }
         #endregion
         /// <summary>

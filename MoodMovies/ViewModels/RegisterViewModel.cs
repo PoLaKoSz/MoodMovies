@@ -39,6 +39,10 @@ namespace MoodMovies.ViewModels
         public void Register()
         {
             if (!string.IsNullOrEmpty(UserEmail)
+                && !string.IsNullOrEmpty(UserFirstName)
+                && !string.IsNullOrEmpty(UserSurname)
+                && !string.IsNullOrEmpty(UserApiKey)
+                && !string.IsNullOrEmpty(UserEmail)
                 && !string.IsNullOrEmpty(UserPassword))
             {
                 eventAgg.PublishOnUIThread(new RegisterMessage(UserFirstName, UserSurname, UserApiKey, UserEmail, UserPassword));

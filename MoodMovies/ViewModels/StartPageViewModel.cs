@@ -112,7 +112,7 @@ namespace MoodMovies.ViewModels
             }
             catch
             {
-
+                StatusMessage.Enqueue("Api Key is not valid");
             }
 
             eventAgg.PublishOnUIThread(new StopLoadingMessage());

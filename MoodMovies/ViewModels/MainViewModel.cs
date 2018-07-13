@@ -51,7 +51,7 @@ namespace MoodMovies.ViewModels
 
         #region General Properties
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
-        public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }       
+        public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
         public bool CanNavigate { get => _canNavigate; set { _canNavigate = value; NotifyOfPropertyChange(); } }
         public SnackbarMessageQueue StatusMessage { get; set; } = new SnackbarMessageQueue();
         #endregion
@@ -79,8 +79,10 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Private Methods
-        private void InitialiseVMs()
+        private async Task InitialiseVMs()
         {
+            IsLoading = true;
+            LoadingMessage = "Loading..";
             ImageCacher imageCacher = new ImageCacher(_appFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
 
             Items.Add(StartVM = new StartPageViewModel(eventAgg, _offlineDb, _onlineDB, StatusMessage));
@@ -95,7 +97,19 @@ namespace MoodMovies.ViewModels
             eventAgg.Subscribe(FavouriteVM);
             eventAgg.Subscribe(WatchListVM);
 
-            ActivateItem(StartVM);
+            //check for current user
+            var loggedInUserSuccess = await LoggedInCurrentUser();
+
+            if(loggedInUserSuccess)
+            {
+                ActivateItem(SearchVM);
+                CanNavigate = true;
+            }
+            else
+            {
+                ActivateItem(StartVM);
+            }
+            IsLoading = false;
         }
         //Inject Current User into any view models that may have the old version or a null value
         private void InjectCurrentUser(Users currentUser)
@@ -103,6 +117,15 @@ namespace MoodMovies.ViewModels
             MovieListVM.CurrentUser = currentUser;
             WatchListVM.CurrentUser = currentUser;
             FavouriteVM.CurrentUser = currentUser;
+        }
+        /// <summary>
+        /// This will login the user that is set to current
+        /// </summary>
+        private async Task<bool> LoggedInCurrentUser()
+        {
+            var user = await _offlineDb.GetCurrentUSer();
+            InjectCurrentUser(user);
+            return (user != null) ? true : false;
         }
         #endregion
 
@@ -158,7 +181,7 @@ namespace MoodMovies.ViewModels
             IsLoading = true;
             LoadingMessage = message.Text;
         }
-        
+
         public void Handle(ClientChangeMessage message)
         {
             IsLoading = false;

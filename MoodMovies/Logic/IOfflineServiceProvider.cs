@@ -36,7 +36,12 @@ namespace MoodMovies.Logic
         /// </summary>
         /// <param name="emailAddress"></param>
         /// <returns></returns>
-        Task<Users> GetUserByEmail(string emailAddress);        
+        Task<Users> GetUserByEmail(string emailAddress);
+        /// <summary>
+        /// Gets current user in db. there should only be one
+        /// </summary>
+        /// <returns></returns>
+        Task<Users> GetCurrentUSer();
         /// <summary>
         /// Gets all users in db
         /// </summary>

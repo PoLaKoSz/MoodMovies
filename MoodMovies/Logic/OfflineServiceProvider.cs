@@ -54,8 +54,7 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task<Users> GetUserByEmailPassword(string emailAddress, string password)
         {
-            var t = await Task.Run(() => db.context.Users.Where(x => x.User_Email == emailAddress && x.User_Password == password).SingleOrDefault());
-            return t;
+            return await Task.Run(() => db.context.Users.Where(x => x.User_Email == emailAddress && x.User_Password == password).SingleOrDefault());           
         }
         /// <summary>
         /// Gets user in db using email
@@ -64,8 +63,15 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         public async Task<Users> GetUserByEmail(string emailAddress)
         {
-            var t = await Task.Run(() => db.context.Users.Where(x => x.User_Email == emailAddress).SingleOrDefault());
-            return t;
+            return await Task.Run(() => db.context.Users.Where(x => x.User_Email == emailAddress).SingleOrDefault());
+        }
+        /// <summary>
+        /// Gets current user in db. there should only be one
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Users> GetCurrentUSer()
+        {
+            return await Task.Run(() => db.context.Users.Where(x => x.Current_User == true).SingleOrDefault());
         }
         /// <summary>
         /// Gets all users in db

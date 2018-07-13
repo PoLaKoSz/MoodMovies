@@ -21,6 +21,9 @@
         lex:LocalizeDictionary.DesignCulture="en"
         lex:ResxLocalizationProvider.DefaultAssembly="MoodMovies"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="Converter" />
+    </Window.Resources>
     <materialDesign:DialogHost IsOpen="{Binding Path=IsLoading}"
                                VerticalAlignment="Stretch"
                                HorizontalAlignment="Stretch">
@@ -170,14 +173,15 @@
                                           IsChecked="False"
                                           x:Name="MenuToggleButton"
                                           HorizontalAlignment="Left"
-                                          Width="50" />
+                                          Width="50"
+                                          Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}" />
                             <Button Grid.Column="2"
                                     HorizontalAlignment="Center"
                                     Width="55"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     x:Name="DisplaySearchVM"
                                     Background="Transparent"
-                                    IsEnabled="{Binding CanNavigate}">
+                                    Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}">
                                 <materialDesign:PackIcon Kind="Magnify"
                                                          Width="23"
                                                          Height="23"
@@ -245,7 +249,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="4*" />
                         <RowDefinition Height="50" />
-                    </Grid.RowDefinitions>                   
+                    </Grid.RowDefinitions>
                     <!--body-->
                     <Grid Grid.Row="0"
                           Margin="0,5,0,5">
@@ -256,7 +260,8 @@
                     <!--footer-->
                     <Grid Grid.Row="1"
                           Margin="0"
-                          Background="White">
+                          Background="White"
+                          Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="16" />
                             <ColumnDefinition Width="50" />
@@ -315,7 +320,8 @@
                                                          Width="26" />
                             </materialDesign:Chip.Icon>
                         </materialDesign:Chip>
-                        <materialDesign:Snackbar Grid.Column="6" VerticalAlignment="Center"
+                        <materialDesign:Snackbar Grid.Column="6"
+                                                 VerticalAlignment="Center"
                                                  HorizontalAlignment="Center"
                                                  MessageQueue="{Binding StatusMessage}">
                         </materialDesign:Snackbar>

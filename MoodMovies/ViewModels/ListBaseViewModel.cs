@@ -33,7 +33,7 @@ namespace MoodMovies.ViewModels
 
         public SnackbarMessageQueue StatusMessage { get; set; }
 
-        public Users CurrentUser { get; protected set; }
+        public Users CurrentUser { get; set; }
         #endregion
 
         /// <summary>

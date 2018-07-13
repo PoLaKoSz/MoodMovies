@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using DataModel.DataModel;
+using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.DataAccessLayer;
 using MoodMovies.Logic;
@@ -17,7 +18,8 @@ namespace MoodMovies.ViewModels
         IHandle<ResultsReadyMessage>,
         IHandle<StartLoadingMessage>,
         IHandle<StopLoadingMessage>,
-        IHandle<ClientChangeMessage>
+        IHandle<ClientChangeMessage>,
+        IHandle<LoggedInMessage>
     {
         public MainViewModel()
         {
@@ -95,6 +97,13 @@ namespace MoodMovies.ViewModels
 
             ActivateItem(StartVM);
         }
+        //Inject Current User into any view models that may have the old version or a null value
+        private void InjectCurrentUser(Users currentUser)
+        {
+            MovieListVM.CurrentUser = currentUser;
+            WatchListVM.CurrentUser = currentUser;
+            FavouriteVM.CurrentUser = currentUser;
+        }
         #endregion
 
         #region Item Activation Methods
@@ -159,6 +168,13 @@ namespace MoodMovies.ViewModels
         {
             IsLoading = false;
         }
+
+        public void Handle(LoggedInMessage message)
+        {
+            DisplaySearchVM();
+            UserVM.CurrentUser = message.CurrentUser;
+            InjectCurrentUser(message.CurrentUser);
+        }
         #endregion
 
         #region Caliburn Override
@@ -166,7 +182,7 @@ namespace MoodMovies.ViewModels
         {
             InitialiseVMs();
             base.OnViewLoaded(view);
-        }                
+        }
         #endregion
     }
 }

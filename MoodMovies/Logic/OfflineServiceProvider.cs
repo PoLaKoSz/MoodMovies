@@ -48,13 +48,24 @@ namespace MoodMovies.Logic
             return await Task.Run(() => db.context.Users.Where(x => x.User_ApiKey == apikey).SingleOrDefault());
         }
         /// <summary>
+        /// Gets user in db using email and password
+        /// </summary>
+        /// <param name="emailAddress"></param>
+        /// <returns></returns>
+        public async Task<Users> GetUserByEmailPassword(string emailAddress, string password)
+        {
+            var t = await Task.Run(() => db.context.Users.Where(x => x.User_Email == emailAddress && x.User_Password == password).SingleOrDefault());
+            return t;
+        }
+        /// <summary>
         /// Gets user in db using email
         /// </summary>
-        /// <param name="movie"></param>
+        /// <param name="emailAddress"></param>
         /// <returns></returns>
-        public async Task<Users> GetUserByEmailPassword(string email)
+        public async Task<Users> GetUserByEmail(string emailAddress)
         {
-            return await Task.Run(() => db.context.Users.Where(x => x.User_Email == email).SingleOrDefault());
+            var t = await Task.Run(() => db.context.Users.Where(x => x.User_Email == emailAddress).SingleOrDefault());
+            return t;
         }
         /// <summary>
         /// Gets all users in db
@@ -64,6 +75,27 @@ namespace MoodMovies.Logic
         public async Task<List<Users>> GetAllUsers()
         {
             return await Task.Run(() => db.context.Users.ToList());
+        }
+        /// <summary>
+        /// Set/Unset current user field
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task SetCurrentUserFieldToTrue(Users user)
+        {
+            //previous user that was curren if any
+            var previousCurrentUser = await Task.Run(() => db.context.Users.Where(x => x.Current_User == true).SingleOrDefault());
+
+            if(previousCurrentUser != null)
+            {
+                previousCurrentUser.Current_User = false;
+            }
+
+            if (user != null)
+            {
+                user.Current_User = true;
+            }
+            SaveChanges();
         }
         /// <summary>
         /// Set/Unset current user field
@@ -87,6 +119,17 @@ namespace MoodMovies.Logic
         {
             await Task.Run(() => db.context.Users.Remove(currentUser));
             SaveChanges();
+        }
+        /// <summary>
+        /// See if Api Key exists in db
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public async Task<bool> ApiKeyExists(string apikey)
+        {
+            //check to see if a user already exists
+            var count = await Task.Run(() => db.context.Users.Where(x => x.User_ApiKey == apikey).Count());
+            return (count == 0) ? false : true;
         }
         #endregion
 
@@ -255,18 +298,6 @@ namespace MoodMovies.Logic
             return await Task.Run(() => db.context.Movies.Join(links, x => x.Movie_Id, y => y.UId, (x, y) => x).ToList());
         }
         #endregion
-
-        /// <summary>
-        /// See if Api Key exists in db
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public async Task<bool> ApiKeyExists(string apikey)
-        {
-            //check to see if a user already exists
-            var count = await Task.Run(() => db.context.Users.Where(x => x.User_ApiKey == apikey).Count());
-            return (count == 0) ? false : true;
-        }
 
         /// <summary>
         /// Commit changes to the database

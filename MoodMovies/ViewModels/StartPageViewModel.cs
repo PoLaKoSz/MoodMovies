@@ -77,32 +77,45 @@ namespace MoodMovies.ViewModels
         /// <param name="message"></param>
         private async Task VerifyLogin(IAccountMessage obj)
         {
-            if (obj is LoginMessage message)
+            eventAgg.PublishOnUIThread(new StartLoadingMessage("Logging in"));
+            try
             {
-                var user = await offlineDb.GetUserByEmailPassword(message.Email);
-
-                if (user != null)
+                if (obj is LoginMessage message)
                 {
-                    if (user.User_Password == message.Password)
-                    {
-                        //set the apikey
-                        onlineDb.ChangeClient(user.User_ApiKey);
-                        //set to current user if keep me logged in checkboc selected
-                        if (message.KeepLoggedIn)
-                        {
+                    var user = await offlineDb.GetUserByEmailPassword(message.Email, message.Password);                                  
 
+                    if (user != null)
+                    {
+                        if (user.User_Password == message.Password)
+                        {
+                            //set the apikey
+                            onlineDb.ChangeClient(user.User_ApiKey);
+                            //set to current user if keep me logged in checkboc selected
+                            if (message.KeepLoggedIn)
+                            {
+                                //change status in db
+                                await offlineDb.SetCurrentUserFieldToTrue(user);
+                            }
+
+                            eventAgg.PublishOnUIThread(new LoggedInMessage(user));
+                        }
+                        else
+                        {
+                            StatusMessage.Enqueue("Login credentials do not match. Password incorrect.");
                         }
                     }
                     else
                     {
-                        StatusMessage.Enqueue("Login credentials do not match. Password incorrect.");
+                        StatusMessage.Enqueue("Login credentials do not match. A User with that email does not exist.");
                     }
                 }
-                else
-                {
-                    StatusMessage.Enqueue("Login credentials do not match. A User with that email does not exist.");
-                }
             }
+            catch
+            {
+
+            }
+
+            eventAgg.PublishOnUIThread(new StopLoadingMessage());
         }
         /// <summary>
         /// Creates a new user account and verifies the given credentials are correct.
@@ -115,7 +128,7 @@ namespace MoodMovies.ViewModels
 
             if (obj is RegisterMessage message)
             {
-                var user = await offlineDb.GetUserByEmailPassword(message.Email);
+                var user = await offlineDb.GetUserByEmail(message.Email);
 
                 if (user == null)
                 {
@@ -149,7 +162,7 @@ namespace MoodMovies.ViewModels
                     catch
                     {
                         StatusMessage.Enqueue("The Api Key You provided is invalid.");
-                    }                                    
+                    }
                 }
                 else
                 {
@@ -164,15 +177,15 @@ namespace MoodMovies.ViewModels
         /// Handle The various account messages
         /// </summary>
         /// <param name="message"></param>
-        public void Handle(IAccountMessage message)
+        public async void Handle(IAccountMessage message)
         {
             switch (message)
             {
                 case LoginMessage lm:
-                    VerifyLogin(message);
+                    await VerifyLogin(message);
                     break;
                 case RegisterMessage rm:
-                    RegisterNewUser(message);
+                    await RegisterNewUser(message);
                     break;
             }
         }

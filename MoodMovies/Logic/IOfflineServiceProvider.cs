@@ -30,13 +30,25 @@ namespace MoodMovies.Logic
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task<Users> GetUserByEmailPassword(string email);
+        Task<Users> GetUserByEmailPassword(string emailAdress, string password);
+        /// <summary>
+        /// Gets user in db using email
+        /// </summary>
+        /// <param name="emailAddress"></param>
+        /// <returns></returns>
+        Task<Users> GetUserByEmail(string emailAddress);        
         /// <summary>
         /// Gets all users in db
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
         Task<List<Users>> GetAllUsers();
+        /// <summary>
+        /// Set/Unset current user field
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        Task SetCurrentUserFieldToTrue(Users user);
         /// <summary>
         /// Set/Unset current user field
         /// </summary>

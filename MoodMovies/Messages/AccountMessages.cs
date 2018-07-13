@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataModel.DataModel.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,5 +42,15 @@ namespace MoodMovies.Messages
     public interface IAccountMessage
     {
 
+    }
+
+    public class LoggedInMessage
+    {
+        public LoggedInMessage(Users user)
+        {
+            CurrentUser = user;
+        }
+
+        public Users CurrentUser { get; set; }
     }
 }

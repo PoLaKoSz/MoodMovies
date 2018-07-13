@@ -19,18 +19,18 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="0.4*" />
+            <RowDefinition Height="0.1*" />
             <RowDefinition Height="20" />
             <RowDefinition Height="50" />
             <RowDefinition Height="10" />
-            <RowDefinition Height="400" />           
-            <RowDefinition Height="0.4*" />
+            <RowDefinition Height="450" />           
+            <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="195" />
+            <ColumnDefinition Width="250" />
             <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="195" />
+            <ColumnDefinition Width="250" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>      
 

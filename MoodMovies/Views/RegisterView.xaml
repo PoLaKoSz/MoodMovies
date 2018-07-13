@@ -4,9 +4,166 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MoodMovies.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
+             FontFamily="Segoe UI Light"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             FontSize="17"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:LocalizeDictionary.DesignCulture="en"
+             lex:ResxLocalizationProvider.DefaultAssembly="MoodMovies"
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="330" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="500" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1"
+                    Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <Label Content="First Name:"
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       Foreground="Black"
+                       FontSize="17" />
+                <Border CornerRadius="10"
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        BorderBrush="White"
+                        BorderThickness="1"
+                        Background="White"
+                        Height="36"
+                        Margin="5"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <TextBox Margin="15,0,15,0"
+                             BorderBrush="Transparent"
+                             VerticalAlignment="Stretch"
+                             HorizontalAlignment="Stretch"
+                             materialDesign:HintAssist.Hint="first name"
+                             materialDesign:HintAssist.HintOpacity="0.5"
+                             VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             FontSize="17"
+                             Text="{Binding FirstName}" />
+                </Border>
+                <Label Content="Surname:"
+                       Foreground="Black"
+                       Grid.Column="2"
+                       Grid.Row="1"
+                       FontSize="17" />
+                <Border CornerRadius="10"
+                        Grid.Column="2"
+                        Grid.Row="3"
+                        BorderBrush="White"
+                        BorderThickness="1"
+                        Background="White"
+                        Height="36"
+                        Margin="5"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <TextBox Margin="15,0,15,0"
+                             BorderBrush="Transparent"
+                             VerticalAlignment="Stretch"
+                             HorizontalAlignment="Stretch"
+                             materialDesign:HintAssist.Hint="Surname"
+                             materialDesign:HintAssist.HintOpacity="0.5"
+                             VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             FontSize="17"
+                             Text="{Binding Surname}" />
+                </Border>
+            </Grid>
+          
+            <Label Content="TMdb Api Key:"
+                   Foreground="Black"
+                   FontSize="17" />
+            <Border CornerRadius="10"
+                    BorderBrush="White"
+                    BorderThickness="1"
+                    Background="White"
+                    Height="36"
+                    Margin="5"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                <TextBox Margin="15,0,15,0"
+                         BorderBrush="Transparent"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"
+                         materialDesign:HintAssist.Hint="Api key"
+                         materialDesign:HintAssist.HintOpacity="0.5"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         FontSize="17"
+                         Text="{Binding ApiKey}" />
+            </Border>
+            <Label Content="Email:"
+                   Foreground="Black"
+                   FontSize="17" />
+            <Border CornerRadius="10"
+                    BorderBrush="White"
+                    BorderThickness="1"
+                    Background="White"
+                    Height="36"
+                    Margin="5"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                <TextBox Margin="15,0,15,0"
+                         BorderBrush="Transparent"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"
+                         materialDesign:HintAssist.Hint="email"
+                         materialDesign:HintAssist.HintOpacity="0.5"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         FontSize="17"
+                         Text="{Binding UserEmail}" />
+            </Border>
+            <Label Content="Password:"
+                   Foreground="Black"
+                   FontSize="17" />
+            <Border CornerRadius="10"
+                    BorderBrush="White"
+                    BorderThickness="1"
+                    Background="White"
+                    Height="36"
+                    Margin="5"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                <TextBox Margin="15,0,15,0"
+                         BorderBrush="Transparent"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"
+                         materialDesign:HintAssist.Hint="password"
+                         materialDesign:HintAssist.HintOpacity="0.5"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         FontSize="17"
+                         Text="{Binding UserPassword}" />
+            </Border>          
+        </StackPanel>
+        <Button Style="{DynamicResource RoundButton}"
+                Content="Create Account"
+                cal:Message.Attach="Login"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="175"
+                Background="{StaticResource SecondaryAccentLightBrush}" />
     </Grid>
 </UserControl>

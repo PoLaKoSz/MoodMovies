@@ -20,9 +20,9 @@
              lex:ResxLocalizationProvider.DefaultDictionary="Strings">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="200" />
-            <RowDefinition Height="70" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="0.4*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>

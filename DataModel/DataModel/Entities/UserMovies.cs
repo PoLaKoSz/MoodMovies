@@ -1,5 +1,5 @@
-﻿using System.Data.Linq.Mapping;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Linq.Mapping;
 
 namespace DataModel.DataModel.Entities
 {

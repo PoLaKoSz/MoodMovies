@@ -1,15 +1,15 @@
-﻿using System.Threading.Tasks;
-using Caliburn.Micro;
-using MoodMovies.Messages;
+﻿using Caliburn.Micro;
 using DataModel.DataModel;
-using WPFLocalizeExtension.Engine;
-using System.Globalization;
-using MoodMovies.Logic;
 using MaterialDesignThemes.Wpf;
+using MoodMovies.DataAccessLayer;
+using MoodMovies.Logic;
+using MoodMovies.Messages;
 using MoodMovies.Models;
 using System;
+using System.Globalization;
 using System.IO;
-using MoodMovies.DataAccessLayer;
+using System.Threading.Tasks;
+using WPFLocalizeExtension.Engine;
 
 namespace MoodMovies.ViewModels
 {

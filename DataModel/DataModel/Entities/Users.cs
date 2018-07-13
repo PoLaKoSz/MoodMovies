@@ -23,11 +23,14 @@ namespace DataModel.DataModel.Entities
         [Column(Name = "User_Active", DbType = "BOOLEAN", CanBeNull = false)]
         public bool User_Active { get; set; }
 
-        [Column(Name = "User_ApiKey", DbType = "BOOLEAN", CanBeNull = false)]
+        [Column(Name = "Current_user", DbType = "BOOLEAN", CanBeNull = false)]
         public bool Current_User { get; set; }
 
         [Column(Name = "User_Email", DbType = "STRING", CanBeNull = false)]
         public bool User_Email { get; set; }
+
+        [Column(Name = "User_Password", DbType = "STRING", CanBeNull = false)]
+        public bool User_Password { get; set; }
 
         public virtual ICollection<User_Movies> Movies { get; set; }
     }

@@ -162,6 +162,9 @@
     <Compile Include="Resources\PropertyCopier.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
     <Compile Include="ViewModels\ListBaseViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\StartPageViewModel.cs" />
     <Compile Include="ViewModels\UserControlViewModel.cs" />
     <Compile Include="ViewModels\WatchListViewModel.cs" />
     <Compile Include="ViewModels\FavouritesViewModel.cs" />
@@ -169,6 +172,9 @@
     <Compile Include="ViewModels\MovieCardViewModel.cs" />
     <Compile Include="ViewModels\MovieListViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -177,6 +183,12 @@
     </Compile>
     <Compile Include="Views\FavouritesView.xaml.cs">
       <DependentUpon>FavouritesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterView.xaml.cs">
+      <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartPageView.xaml.cs">
+      <DependentUpon>StartPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControlView.xaml.cs">
       <DependentUpon>UserControlView.xaml</DependentUpon>
@@ -194,6 +206,10 @@
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -205,6 +221,14 @@
     <Page Include="Views\FavouritesView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StartPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControlView.xaml">
       <SubType>Designer</SubType>

@@ -1,11 +1,12 @@
 ﻿using Caliburn.Micro;
 using DataModel.DataModel.Entities;
-using MoodMovies.Logic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Linq;
 using MaterialDesignThemes.Wpf;
+using MoodMovies.Logic;
 using MoodMovies.Messages;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using TMdbEasy;
 
 namespace MoodMovies.ViewModels
 {
@@ -74,38 +75,62 @@ namespace MoodMovies.ViewModels
         /// </summary>
         public async void CreateNewUser()
         {
-            if (!string.IsNullOrEmpty(NewUser.User_ApiKey)
-                && !string.IsNullOrEmpty(NewUser.User_Name)
-                && !string.IsNullOrEmpty(NewUser.User_Surname))
-            {
-                try
-                {
-                    NewUser.User_Active = true;
-                    NewUser.Current_User = false;
-
-                    var userfound = await offlineDb.GetUserByApiKey(NewUser.User_ApiKey);
-                    if (userfound == null)
-                    {
-                        await offlineDb.CreateUser(NewUser);
-
-                        AllUsers.Add(NewUser);
-
-                        NewUser = new Users();
-                    }
-                    else
-                    {
-                        StatusMessage.Enqueue("A user with the same Api Key already exists.");
-                    }
-                }
-                catch
-                {
-                    StatusMessage.Enqueue("Failed to create the user.");
-                }
-            }
-            else
+            if (string.IsNullOrEmpty(NewUser.User_ApiKey)
+                && string.IsNullOrEmpty(NewUser.User_Name)
+                && string.IsNullOrEmpty(NewUser.User_Surname))
             {
                 StatusMessage.Enqueue("Please fill in all the fields and try again.");
+                return;
             }
+
+            try
+            {
+                NewUser.User_Active = true;
+                NewUser.Current_User = false;
+
+                var userfound = await offlineDb.GetUserByApiKey(NewUser.User_ApiKey);
+                if (userfound == null)
+                {
+                    if (!IsValidApiKey(NewUser.User_ApiKey))
+                    {
+                        StatusMessage.Enqueue("The API Key not valid.");
+                        return;
+                    }
+
+                    await offlineDb.CreateUser(NewUser);
+
+                    AllUsers.Add(NewUser);
+
+                    NewUser = new Users();
+                }
+                else
+                {
+                    StatusMessage.Enqueue("A user with the same Api Key already exists.");
+                }
+            }
+            catch
+            {
+                StatusMessage.Enqueue("Failed to create the user.");
+            }
+        }
+
+        /// <summary>
+        /// Validate the API Key with the TMDB Easy wrapper
+        /// </summary>
+        /// <param name="apiKey">TMDB API Key</param>
+        /// <returns></returns>
+        private bool IsValidApiKey(string apiKey)
+        {
+            try
+            {
+                new EasyClient(apiKey);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>

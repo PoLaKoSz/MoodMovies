@@ -260,8 +260,7 @@
                     <!--footer-->
                     <Grid Grid.Row="1"
                           Margin="0"
-                          Background="White"
-                          Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}">
+                          Background="White">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="16" />
                             <ColumnDefinition Width="50" />
@@ -280,6 +279,7 @@
                                              cal:Message.Attach="DisplayMovieListVM"
                                              IconBackground="Transparent"
                                              Height="50"
+                                             Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
                                              IconForeground="{StaticResource SecondaryAccentMidBrush}"
                                              IsEnabled="{Binding CanNavigate}">
                             <materialDesign:Chip.Icon>
@@ -296,6 +296,7 @@
                                              cal:Message.Attach="DisplayFavouriteVM"
                                              IconBackground="Transparent"
                                              Height="50"
+                                             Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
                                              IconForeground="#FFE44242"
                                              IsEnabled="{Binding CanNavigate}">
                             <materialDesign:Chip.Icon>
@@ -312,6 +313,7 @@
                                              cal:Message.Attach="DisplayWatchListVM"
                                              IconBackground="Transparent"
                                              Height="50"
+                                             Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
                                              IconForeground="Green"
                                              IsEnabled="{Binding CanNavigate}">
                             <materialDesign:Chip.Icon>

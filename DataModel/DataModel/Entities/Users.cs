@@ -26,6 +26,9 @@ namespace DataModel.DataModel.Entities
         [Column(Name = "User_ApiKey", DbType = "BOOLEAN", CanBeNull = false)]
         public bool Current_User { get; set; }
 
+        [Column(Name = "User_Email", DbType = "STRING", CanBeNull = false)]
+        public bool User_Email { get; set; }
+
         public virtual ICollection<User_Movies> Movies { get; set; }
     }
 }

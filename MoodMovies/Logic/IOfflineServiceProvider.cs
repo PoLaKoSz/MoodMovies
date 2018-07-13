@@ -26,6 +26,12 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         Task<Users> GetUserByApiKey(string apikey);
         /// <summary>
+        /// Gets user in db using email
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        Task<Users> GetUserByEmailPassword(string email);
+        /// <summary>
         /// Gets all users in db
         /// </summary>
         /// <param name="movie"></param>

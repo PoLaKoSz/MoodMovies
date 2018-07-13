@@ -48,6 +48,15 @@ namespace MoodMovies.Logic
             return await Task.Run(() => db.context.Users.Where(x => x.User_ApiKey == apikey).SingleOrDefault());
         }
         /// <summary>
+        /// Gets user in db using email
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public async Task<Users> GetUserByEmailPassword(string email)
+        {
+            return await Task.Run(() => db.context.Users.Where(x => x.User_Email == email).SingleOrDefault());
+        }
+        /// <summary>
         /// Gets all users in db
         /// </summary>
         /// <param name="movie"></param>

@@ -139,7 +139,6 @@
     <Compile Include="Messages\ClientChangeMessage.cs" />
     <Compile Include="Messages\MovieCardMessages.cs" />
     <Compile Include="Messages\MovieListMessage.cs" />
-    <Compile Include="Messages\NavigateToUsersMenu.cs" />
     <Compile Include="Messages\ResultsReadyMessage.cs" />
     <Compile Include="Messages\TrailerMessage.cs" />
     <Compile Include="Models\Actor.cs" />

@@ -22,10 +22,20 @@ namespace MoodMovies.Messages
 
     public class RegisterMessage :IAccountMessage
     {
-        public  RegisterMessage()
+        public  RegisterMessage(string firstname, string surname, string apikey, string email, string password)
         {
-
+            FirstName = firstname;
+            Surname = surname;
+            ApiKey = apikey;
+            Email = email;
+            Password = password;
         }
+
+        public string FirstName { get; set; }
+        public string Surname { get; set; }
+        public string ApiKey { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }      
     }
 
     public interface IAccountMessage

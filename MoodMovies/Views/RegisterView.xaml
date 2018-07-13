@@ -65,7 +65,7 @@
                              VerticalContentAlignment="Center"
                              HorizontalContentAlignment="Center"
                              FontSize="17"
-                             Text="{Binding FirstName}" />
+                             Text="{Binding UserFirstName}" />
                 </Border>
                 <Label Content="Surname:"
                        Foreground="Black"
@@ -90,7 +90,7 @@
                              VerticalContentAlignment="Center"
                              HorizontalContentAlignment="Center"
                              FontSize="17"
-                             Text="{Binding Surname}" />
+                             Text="{Binding UserSurname}" />
                 </Border>
             </Grid>
           
@@ -113,7 +113,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          FontSize="17"
-                         Text="{Binding ApiKey}" />
+                         Text="{Binding UserApiKey}" />
             </Border>
             <Label Content="Email:"
                    Foreground="Black"

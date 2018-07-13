@@ -23,7 +23,7 @@
             <RowDefinition Height="20" />
             <RowDefinition Height="50" />
             <RowDefinition Height="10" />
-            <RowDefinition Height="450" />           
+            <RowDefinition Height="450" />
             <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -32,7 +32,7 @@
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="250" />
             <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>      
+        </Grid.ColumnDefinitions>
 
         <Button Grid.Row="3"
                 cal:Message.Attach="ShowRegistrationPage"

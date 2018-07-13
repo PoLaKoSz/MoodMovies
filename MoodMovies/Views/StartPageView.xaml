@@ -1,12 +1,88 @@
 ﻿<UserControl x:Class="MoodMovies.Views.StartPageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MoodMovies.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
+             FontFamily="Segoe UI Light"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d"
+             FontSize="17"
+             d:DesignHeight="650"
+             d:DesignWidth="800"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:LocalizeDictionary.DesignCulture="en"
+             lex:ResxLocalizationProvider.DefaultAssembly="MoodMovies"
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="350" />           
+            <RowDefinition Height="0.4*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="175" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="175" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--Title-->
+        <DockPanel Grid.Column="1"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="3"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+            <Label Content="Moods &amp; Movies"
+                   FontSize="22"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White" />
+            <iconPacks:PackIconModern Kind="MovieClapper"
+                                      Width="30"
+                                      Height="30"
+                                      Foreground="{StaticResource SecondaryAccentMidBrush}"
+                                      RenderTransformOrigin="0.5,0.5">
+                <iconPacks:PackIconModern.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform Angle="-25" />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </iconPacks:PackIconModern.RenderTransform>
+            </iconPacks:PackIconModern>
+        </DockPanel>
+
+        <Button Grid.Row="3"
+                cal:Message.Attach="ShowRegistrationPage"
+                Grid.Column="1"
+                Content="Create Account"
+                Background="{StaticResource SecondaryAccentBrush}"
+                Foreground="White"
+                Style="{DynamicResource RoundButton}" />
+        <Button Grid.Row="3"
+                Grid.Column="3"
+                cal:Message.Attach="ShowLoginPage"
+                Content="Login"
+                Background="{StaticResource PrimaryHueMidBrush}"
+                Foreground="White"
+                Style="{DynamicResource RoundButton}" />
+
+        <Grid Grid.Row="5"
+              Grid.Column="1"
+              Grid.ColumnSpan="3"
+              Margin="0,5,0,5">
+            <materialDesign:TransitioningContent x:Name="ActiveItem"
+                                                 VerticalAlignment="Stretch"
+                                                 HorizontalAlignment="Stretch" />
+        </Grid>
     </Grid>
 </UserControl>

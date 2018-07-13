@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.Logic;
+using MoodMovies.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MoodMovies.ViewModels
 {
-    public class StartPageViewModel : Conductor<Screen>.Collection.OneActive
+    public class StartPageViewModel : Conductor<Screen>.Collection.OneActive, IHandle<IAccountMessage>
     {
         public StartPageViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage)
         {
@@ -68,6 +69,65 @@ namespace MoodMovies.ViewModels
         {
             eventAgg.Unsubscribe(this);
         }
+        /// <summary>
+        /// Verifies the given user credentials are correct and proceeds to log them in if so.
+        /// Checks: Email and Password match
+        /// </summary>
+        /// <param name="message"></param>
+        private async Task VerifyLogin(IAccountMessage obj)
+        {
+            if (obj is LoginMessage message)
+            {
+                var user = await offlineDb.GetUserByEmailPassword(message.Email);
+
+                if(user != null)
+                {
+                    if(user.User_Password == message.Password)
+                    {
+                        //set the apikey
+                        onlineDb.ChangeClient(user.User_ApiKey);
+                        //set to current user if keep me logged in checkboc selected
+                        if(message.KeepLoggedIn)
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        StatusMessage.Enqueue("Login credentials do not match. Password incorrect.");
+                    }
+                }
+                else
+                {
+                    StatusMessage.Enqueue("Login credentials do not match. A User with that email does not exist.");
+                }
+            }
+        }
+        /// <summary>
+        /// Creates a new user account and verifies the given credentials are correct.
+        /// Checks: Email does not exist already, ApiKey is Valid.
+        /// </summary>
+        /// <param name="message"></param>
+        private async Task RegisterNewUser(IAccountMessage obj)
+        {
+
+        }
         #endregion
+        /// <summary>
+        /// Handle The various account messages
+        /// </summary>
+        /// <param name="message"></param>
+        public void Handle(IAccountMessage message)
+        {
+            switch (message)
+            {
+                case LoginMessage lm:
+                    VerifyLogin(message);
+                    break;
+                case RegisterMessage rm:
+                    RegisterNewUser(message);
+                    break;
+            }
+        }
     }
 }

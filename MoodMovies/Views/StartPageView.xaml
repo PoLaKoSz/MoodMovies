@@ -18,60 +18,33 @@
              lex:ResxLocalizationProvider.DefaultDictionary="Strings">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="0.4*" />
             <RowDefinition Height="20" />
             <RowDefinition Height="50" />
             <RowDefinition Height="10" />
-            <RowDefinition Height="350" />           
+            <RowDefinition Height="400" />           
             <RowDefinition Height="0.4*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="175" />
+            <ColumnDefinition Width="195" />
             <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="175" />
+            <ColumnDefinition Width="195" />
             <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
-        <!--Title-->
-        <DockPanel Grid.Column="1"
-                   Grid.Row="1"
-                   Grid.ColumnSpan="3"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center">
-            <Label Content="Moods &amp; Movies"
-                   FontSize="22"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Foreground="White" />
-            <iconPacks:PackIconModern Kind="MovieClapper"
-                                      Width="30"
-                                      Height="30"
-                                      Foreground="{StaticResource SecondaryAccentMidBrush}"
-                                      RenderTransformOrigin="0.5,0.5">
-                <iconPacks:PackIconModern.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform Angle="-25" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </iconPacks:PackIconModern.RenderTransform>
-            </iconPacks:PackIconModern>
-        </DockPanel>
+        </Grid.ColumnDefinitions>      
 
         <Button Grid.Row="3"
                 cal:Message.Attach="ShowRegistrationPage"
                 Grid.Column="1"
-                Content="Create Account"
+                Content="New Users"
                 Background="{StaticResource SecondaryAccentBrush}"
                 Foreground="White"
                 Style="{DynamicResource RoundButton}" />
         <Button Grid.Row="3"
                 Grid.Column="3"
                 cal:Message.Attach="ShowLoginPage"
-                Content="Login"
+                Content="Existing Users"
                 Background="{StaticResource PrimaryHueMidBrush}"
                 Foreground="White"
                 Style="{DynamicResource RoundButton}" />

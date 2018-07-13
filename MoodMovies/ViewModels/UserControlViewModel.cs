@@ -15,7 +15,6 @@ namespace MoodMovies.ViewModels
         public UserControlViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage)
         {
             eventAgg = _event;
-            eventAgg.PublishOnUIThread(new StartLoadingMessage("Logging in ..."));
 
             AllUsers = new ObservableCollection<Users>();
             offlineDb = serviceProvider;
@@ -161,9 +160,7 @@ namespace MoodMovies.ViewModels
 
                 CurrentUser = users.Where(x => x.Current_User).SingleOrDefault();
 
-                if (CurrentUser == null)
-                    eventAgg.PublishOnUIThread(new NavigateToUsersMenu());
-                else
+                if (CurrentUser != null)                  
                     eventAgg.PublishOnUIThread(new ClientChangeMessage(CurrentUser));
 
                 AllUsers.Clear();
@@ -171,8 +168,7 @@ namespace MoodMovies.ViewModels
                 AllUsers = new ObservableCollection<Users>(users);
             }
             catch
-            {
-                eventAgg.PublishOnUIThread(new NavigateToUsersMenu());
+            {               
                 StatusMessage.Enqueue("Failed to load users.");
             }
         }

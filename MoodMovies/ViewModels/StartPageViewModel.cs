@@ -18,7 +18,11 @@ namespace MoodMovies.ViewModels
 
             offlineDb = offlineService;
             onlineDb = onlineService;
-            StatusMessage = statusMessage; 
+            StatusMessage = statusMessage;
+
+            Items.Add(LoginVM = new LoginViewModel(eventAgg, offlineDb, onlineDb, statusMessage));
+            Items.Add(RegisterVM = new RegisterViewModel(eventAgg, offlineDb, onlineDb, statusMessage));
+            ActivateItem(RegisterVM);
         }
 
         #region Events
@@ -56,6 +60,13 @@ namespace MoodMovies.ViewModels
         {
             DeactivateItem(ActiveItem, false);
             ActivateItem(RegisterVM);
+        }
+        #endregion
+
+        #region Private Methods
+        private void CleanUp()
+        {
+            eventAgg.Unsubscribe(this);
         }
         #endregion
     }

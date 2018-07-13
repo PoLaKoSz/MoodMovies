@@ -8,15 +8,21 @@ namespace MoodMovies.Messages
 {
     public class LoginMessage : IAccountMessage
     {
-        public LoginMessage()
+        public LoginMessage(string email, string password, bool keeploggedin)
         {
-
+            Email = email;
+            Password = password;
+            KeepLoggedIn = keeploggedin;
         }
+
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public bool KeepLoggedIn { get; set; }
     }
 
-    public class Registermessage :IAccountMessage
+    public class RegisterMessage :IAccountMessage
     {
-        public  Registermessage()
+        public  RegisterMessage()
         {
 
         }

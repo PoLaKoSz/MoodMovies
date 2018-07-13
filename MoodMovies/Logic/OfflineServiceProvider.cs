@@ -83,13 +83,13 @@ namespace MoodMovies.Logic
             return await Task.Run(() => db.context.Users.ToList());
         }
         /// <summary>
-        /// Set/Unset current user field
+        /// Set current user field and unset previous user if any
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
         public async Task SetCurrentUserFieldToTrue(Users user)
         {
-            //previous user that was curren if any
+            //previous user that was current if any
             var previousCurrentUser = await Task.Run(() => db.context.Users.Where(x => x.Current_User == true).SingleOrDefault());
 
             if(previousCurrentUser != null)
@@ -100,6 +100,19 @@ namespace MoodMovies.Logic
             if (user != null)
             {
                 user.Current_User = true;
+            }
+            SaveChanges();
+        }
+        /// <summary>
+        /// Unset current user field of current user
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        public void SetCurrentUserFieldToFalse(Users user)
+        {
+            if (user != null)
+            {
+                user.Current_User = false;
             }
             SaveChanges();
         }

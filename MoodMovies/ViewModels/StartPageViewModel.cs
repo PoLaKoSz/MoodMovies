@@ -96,6 +96,11 @@ namespace MoodMovies.ViewModels
                                 //change status in db
                                 await offlineDb.SetCurrentUserFieldToTrue(user);
                             }
+                            else if(user.Current_User && !message.KeepLoggedIn)
+                            {
+                                //change status in db for 
+                                offlineDb.SetCurrentUserFieldToFalse(user);
+                            }
 
                             eventAgg.PublishOnUIThread(new LoggedInMessage(user));
                         }

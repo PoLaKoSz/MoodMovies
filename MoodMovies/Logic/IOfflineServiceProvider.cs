@@ -49,11 +49,17 @@ namespace MoodMovies.Logic
         /// <returns></returns>
         Task<List<Users>> GetAllUsers();
         /// <summary>
-        /// Set/Unset current user field
+        /// Set current user field and unset previous user if any
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
         Task SetCurrentUserFieldToTrue(Users user);
+        /// <summary>
+        /// Unset current user field of current user
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        void SetCurrentUserFieldToFalse(Users user);
         /// <summary>
         /// Set/Unset current user field
         /// </summary>

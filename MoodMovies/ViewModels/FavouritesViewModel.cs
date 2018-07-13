@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.Logic;
 using MoodMovies.Resources;
+using System.Threading.Tasks;
 
 namespace MoodMovies.ViewModels
 {

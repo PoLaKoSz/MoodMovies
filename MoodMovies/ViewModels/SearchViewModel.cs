@@ -1,11 +1,11 @@
 ﻿using Caliburn.Micro;
+using MaterialDesignThemes.Wpf;
 using MoodMovies.Logic;
 using MoodMovies.Messages;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using TMdbEasy.TmdbObjects.Movies;
-using MaterialDesignThemes.Wpf;
 
 namespace MoodMovies.ViewModels
 {

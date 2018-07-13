@@ -37,7 +37,7 @@
                                  Value="True">
                             <Setter Property="BorderThickness"
                                     TargetName="HoverBorder"
-                                    Value="3" />
+                                    Value="2" />
                         </Trigger>
                         <Trigger Property="IsFocused"
                                  Value="false">

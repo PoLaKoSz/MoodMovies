@@ -126,6 +126,12 @@ namespace MoodMovies.Logic
         #endregion
 
         /// <summary>
+        /// See if Api Key exists in db
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        Task<bool> ApiKeyExists(string apikey);
+        /// <summary>
         /// Commit changes to database
         /// </summary>
         void SaveChanges();

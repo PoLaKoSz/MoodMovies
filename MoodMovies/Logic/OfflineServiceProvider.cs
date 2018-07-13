@@ -257,6 +257,18 @@ namespace MoodMovies.Logic
         #endregion
 
         /// <summary>
+        /// See if Api Key exists in db
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public async Task<bool> ApiKeyExists(string apikey)
+        {
+            //check to see if a user already exists
+            var count = await Task.Run(() => db.context.Users.Where(x => x.User_ApiKey == apikey).Count());
+            return (count == 0) ? false : true;
+        }
+
+        /// <summary>
         /// Commit changes to the database
         /// </summary>
         public void SaveChanges()

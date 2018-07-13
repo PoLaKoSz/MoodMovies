@@ -41,6 +41,7 @@
                     <SolidColorBrush x:Key="SecondaryAccentLightForegroundBrush"
                                      Color="Black" />
                 </ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Xaml Resources/RoundButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

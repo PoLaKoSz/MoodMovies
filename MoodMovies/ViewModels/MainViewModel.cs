@@ -100,7 +100,7 @@ namespace MoodMovies.ViewModels
             //check for current user
             var loggedInUserSuccess = await LoggedInCurrentUser();
 
-            if(loggedInUserSuccess)
+            if (loggedInUserSuccess)
             {
                 ActivateItem(SearchVM);
                 CanNavigate = true;
@@ -197,6 +197,11 @@ namespace MoodMovies.ViewModels
             DisplaySearchVM();
             UserVM.CurrentUser = message.CurrentUser;
             InjectCurrentUser(message.CurrentUser);
+        }
+
+        public void LogOut()
+        {
+            DisplayStartVM();
         }
         #endregion
 

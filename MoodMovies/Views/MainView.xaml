@@ -86,7 +86,7 @@
                                              IconForeground="LawnGreen"
                                              Foreground="black"
                                              FontSize="17"
-                                             IsEnabled="{Binding CanNavigate}">
+                                             >
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Magnify" />
                             </materialDesign:Chip.Icon>
@@ -103,7 +103,7 @@
                                              FontSize="17"
                                              Foreground="black"
                                              IconForeground="Aqua"
-                                             IsEnabled="{Binding CanNavigate}">
+                                            >
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Movie" />
                             </materialDesign:Chip.Icon>
@@ -121,7 +121,7 @@
                                              Foreground="black"
                                              IconBackground="{StaticResource PrimaryHueMidBrush}"
                                              IconForeground="#FFE44242"
-                                             IsEnabled="{Binding CanNavigate}">
+                                             >
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Heart" />
                             </materialDesign:Chip.Icon>
@@ -138,7 +138,7 @@
                                              Foreground="black"
                                              FontSize="17"
                                              IconForeground="#FFC229C2"
-                                             IsEnabled="{Binding CanNavigate}">
+                                             >
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Watch" />
                             </materialDesign:Chip.Icon>
@@ -281,7 +281,7 @@
                                              Height="50"
                                              Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
                                              IconForeground="{StaticResource SecondaryAccentMidBrush}"
-                                             IsEnabled="{Binding CanNavigate}">
+                                             >
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Movie"
                                                          Height="26"
@@ -298,7 +298,7 @@
                                              Height="50"
                                              Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
                                              IconForeground="#FFE44242"
-                                             IsEnabled="{Binding CanNavigate}">
+                                             >
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Heart"
                                                          Height="26"
@@ -315,7 +315,7 @@
                                              Height="50"
                                              Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
                                              IconForeground="Green"
-                                             IsEnabled="{Binding CanNavigate}">
+                                             >
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Watch"
                                                          Height="26"
@@ -327,6 +327,24 @@
                                                  HorizontalAlignment="Center"
                                                  MessageQueue="{Binding StatusMessage}">
                         </materialDesign:Snackbar>
+                        <!--WatchList-->
+                        <materialDesign:Chip Grid.Column="7"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Background="Transparent"
+                                             cal:Message.Attach="LogOut"
+                                             IconBackground="#FFE1E2E1"
+                                             Content="Log Out"
+                                             Height="50"
+                                             Margin="0,0,20,0"
+                                             Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
+                                             IconForeground="DarkBlue">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon Kind="Account"
+                                                         Height="26"
+                                                         Width="26" />
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
                     </Grid>
                 </Grid>
             </DockPanel>

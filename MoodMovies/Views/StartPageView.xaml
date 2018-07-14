@@ -37,14 +37,14 @@
         <Button Grid.Row="3"
                 cal:Message.Attach="ShowRegistrationPage"
                 Grid.Column="1"
-                Content="New Users"
+                Content="{lex:Loc StartPageView_Button_NewUser}"
                 Background="{StaticResource SecondaryAccentBrush}"
                 Foreground="White"
                 Style="{DynamicResource RoundButton}" />
         <Button Grid.Row="3"
                 Grid.Column="3"
                 cal:Message.Attach="ShowLoginPage"
-                Content="Existing Users"
+                Content="{lex:Loc StartPageView_Button_ExistingUser}"
                 Background="{StaticResource PrimaryHueMidBrush}"
                 Foreground="White"
                 Style="{DynamicResource RoundButton}" />

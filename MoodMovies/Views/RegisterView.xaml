@@ -42,7 +42,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
-                <Label Content="First Name:"
+                <Label Content="{lex:Loc RegisterView_Label_FirstName}"
                        Grid.Column="0"
                        Grid.Row="1"
                        Foreground="Black"
@@ -60,14 +60,14 @@
                              BorderBrush="Transparent"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"
-                             materialDesign:HintAssist.Hint="first name"
+                             materialDesign:HintAssist.Hint="{lex:Loc RegisterView_TextBox_FirstName_Hint}"
                              materialDesign:HintAssist.HintOpacity="0.5"
                              VerticalContentAlignment="Center"
                              HorizontalContentAlignment="Center"
                              FontSize="17"
                              Text="{Binding UserFirstName}" />
                 </Border>
-                <Label Content="Surname:"
+                <Label Content="{lex:Loc RegisterView_Label_SurName}"
                        Foreground="Black"
                        Grid.Column="2"
                        Grid.Row="1"
@@ -85,7 +85,7 @@
                              BorderBrush="Transparent"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"
-                             materialDesign:HintAssist.Hint="Surname"
+                             materialDesign:HintAssist.Hint="{lex:Loc RegisterView_TextBox_SurName_Hint}"
                              materialDesign:HintAssist.HintOpacity="0.5"
                              VerticalContentAlignment="Center"
                              HorizontalContentAlignment="Center"
@@ -93,8 +93,8 @@
                              Text="{Binding UserSurname}" />
                 </Border>
             </Grid>
-          
-            <Label Content="TMdb Api Key:"
+
+            <Label Content="{lex:Loc RegisterView_Label_ApiKey}"
                    Foreground="Black"
                    FontSize="17" />
             <Border CornerRadius="10"
@@ -108,14 +108,14 @@
                          BorderBrush="Transparent"
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch"
-                         materialDesign:HintAssist.Hint="Api key"
+                         materialDesign:HintAssist.Hint="{lex:Loc RegisterView_TextBox_ApiKey_Hint}"
                          materialDesign:HintAssist.HintOpacity="0.5"
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          FontSize="17"
                          Text="{Binding UserApiKey}" />
             </Border>
-            <Label Content="Email:"
+            <Label Content="{lex:Loc RegisterView_Label_Email}"
                    Foreground="Black"
                    FontSize="17" />
             <Border CornerRadius="10"
@@ -129,14 +129,14 @@
                          BorderBrush="Transparent"
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch"
-                         materialDesign:HintAssist.Hint="email"
+                         materialDesign:HintAssist.Hint="{lex:Loc RegisterView_TextBox_Email_Hint}"
                          materialDesign:HintAssist.HintOpacity="0.5"
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          FontSize="17"
                          Text="{Binding UserEmail}" />
             </Border>
-            <Label Content="Password:"
+            <Label Content="{lex:Loc RegisterView_Label_Password}"
                    Foreground="Black"
                    FontSize="17" />
             <Border CornerRadius="10"
@@ -150,7 +150,7 @@
                          BorderBrush="Transparent"
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch"
-                         materialDesign:HintAssist.Hint="password"
+                         materialDesign:HintAssist.Hint="{lex:Loc RegisterView_TextBox_Password_Hint}"
                          materialDesign:HintAssist.HintOpacity="0.5"
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
@@ -159,7 +159,7 @@
             </Border>          
         </StackPanel>
         <Button Style="{DynamicResource RoundButton}"
-                Content="Create Account"
+                Content="{lex:Loc RegisterView_Button_CreateAccount}"
                 cal:Message.Attach="Register"
                 Grid.Row="2"
                 Grid.Column="1"

@@ -61,6 +61,60 @@ namespace MoodMovies.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string LoginView_Button_Login {
+            get {
+                return ResourceManager.GetString("LoginView_Button_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email:.
+        /// </summary>
+        internal static string LoginView_Label_Email {
+            get {
+                return ResourceManager.GetString("LoginView_Label_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep me logged in.
+        /// </summary>
+        internal static string LoginView_Label_KeepMeLoggedIn {
+            get {
+                return ResourceManager.GetString("LoginView_Label_KeepMeLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        internal static string LoginView_Label_Password {
+            get {
+                return ResourceManager.GetString("LoginView_Label_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string LoginView_TextBox_Email_Hint {
+            get {
+                return ResourceManager.GetString("LoginView_TextBox_Email_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string LoginView_TextBox_Password_Hint {
+            get {
+                return ResourceManager.GetString("LoginView_TextBox_Password_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit App.
         /// </summary>
         internal static string MainView_Button_Exit {
@@ -75,6 +129,15 @@ namespace MoodMovies.Properties {
         internal static string MainView_Button_Help {
             get {
                 return ResourceManager.GetString("MainView_Button_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log Out.
+        /// </summary>
+        internal static string MainView_Chip_LogOut {
+            get {
+                return ResourceManager.GetString("MainView_Chip_LogOut", resourceCulture);
             }
         }
         
@@ -183,6 +246,105 @@ namespace MoodMovies.Properties {
         internal static string MovieCardView_ToggleButton_AddToWatchList {
             get {
                 return ResourceManager.GetString("MovieCardView_ToggleButton_AddToWatchList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Account.
+        /// </summary>
+        internal static string RegisterView_Button_CreateAccount {
+            get {
+                return ResourceManager.GetString("RegisterView_Button_CreateAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TMDB API Key:.
+        /// </summary>
+        internal static string RegisterView_Label_ApiKey {
+            get {
+                return ResourceManager.GetString("RegisterView_Label_ApiKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email:.
+        /// </summary>
+        internal static string RegisterView_Label_Email {
+            get {
+                return ResourceManager.GetString("RegisterView_Label_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First name:.
+        /// </summary>
+        internal static string RegisterView_Label_FirstName {
+            get {
+                return ResourceManager.GetString("RegisterView_Label_FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        internal static string RegisterView_Label_Password {
+            get {
+                return ResourceManager.GetString("RegisterView_Label_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname:.
+        /// </summary>
+        internal static string RegisterView_Label_SurName {
+            get {
+                return ResourceManager.GetString("RegisterView_Label_SurName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TMDB API Key.
+        /// </summary>
+        internal static string RegisterView_TextBox_ApiKey_Hint {
+            get {
+                return ResourceManager.GetString("RegisterView_TextBox_ApiKey_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string RegisterView_TextBox_Email_Hint {
+            get {
+                return ResourceManager.GetString("RegisterView_TextBox_Email_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First name.
+        /// </summary>
+        internal static string RegisterView_TextBox_FirstName_Hint {
+            get {
+                return ResourceManager.GetString("RegisterView_TextBox_FirstName_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string RegisterView_TextBox_Password_Hint {
+            get {
+                return ResourceManager.GetString("RegisterView_TextBox_Password_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname.
+        /// </summary>
+        internal static string RegisterView_TextBox_SurName_Hint {
+            get {
+                return ResourceManager.GetString("RegisterView_TextBox_SurName_Hint", resourceCulture);
             }
         }
         
@@ -345,6 +507,24 @@ namespace MoodMovies.Properties {
         internal static string SearchView_TextBox_Title {
             get {
                 return ResourceManager.GetString("SearchView_TextBox_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Existing User.
+        /// </summary>
+        internal static string StartPageView_Button_ExistingUser {
+            get {
+                return ResourceManager.GetString("StartPageView_Button_ExistingUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New User.
+        /// </summary>
+        internal static string StartPageView_Button_NewUser {
+            get {
+                return ResourceManager.GetString("StartPageView_Button_NewUser", resourceCulture);
             }
         }
         

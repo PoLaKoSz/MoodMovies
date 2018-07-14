@@ -327,14 +327,14 @@
                                                  HorizontalAlignment="Center"
                                                  MessageQueue="{Binding StatusMessage}">
                         </materialDesign:Snackbar>
-                        <!--WatchList-->
+                        <!--LogOut-->
                         <materialDesign:Chip Grid.Column="7"
                                              HorizontalAlignment="Right"
                                              VerticalAlignment="Center"
                                              Background="Transparent"
                                              cal:Message.Attach="LogOut"
                                              IconBackground="#FFE1E2E1"
-                                             Content="Log Out"
+                                             Content="{lex:Loc MainView_Chip_LogOut}"
                                              Height="50"
                                              Margin="0,0,20,0"
                                              Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"

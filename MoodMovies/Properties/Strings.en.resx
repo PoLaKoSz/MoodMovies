@@ -246,4 +246,64 @@
   <data name="UserControlView_DataGrid_Header_Action" xml:space="preserve">
     <value>Action</value>
   </data>
+  <data name="LoginView_Label_Email" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="LoginView_Label_Password" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="LoginView_Label_KeepMeLoggedIn" xml:space="preserve">
+    <value>Keep me logged in</value>
+  </data>
+  <data name="RegisterView_Label_FirstName" xml:space="preserve">
+    <value>First name:</value>
+  </data>
+  <data name="RegisterView_TextBox_FirstName_Hint" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="RegisterView_Label_SurName" xml:space="preserve">
+    <value>Surname:</value>
+  </data>
+  <data name="RegisterView_TextBox_SurName_Hint" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="RegisterView_Button_CreateAccount" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
+  <data name="RegisterView_TextBox_Password_Hint" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="RegisterView_Label_Password" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="RegisterView_TextBox_Email_Hint" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="RegisterView_Label_Email" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="RegisterView_TextBox_ApiKey_Hint" xml:space="preserve">
+    <value>TMDB API Key</value>
+  </data>
+  <data name="RegisterView_Label_ApiKey" xml:space="preserve">
+    <value>TMDB API Key:</value>
+  </data>
+  <data name="StartPageView_Button_NewUser" xml:space="preserve">
+    <value>New User</value>
+  </data>
+  <data name="StartPageView_Button_ExistingUser" xml:space="preserve">
+    <value>Existing User</value>
+  </data>
+  <data name="LoginView_TextBox_Email_Hint" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="LoginView_TextBox_Password_Hint" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="LoginView_Button_Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="MainView_Chip_LogOut" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
 </root>

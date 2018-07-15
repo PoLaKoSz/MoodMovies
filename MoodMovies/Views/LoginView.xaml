@@ -32,7 +32,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1"
                     Grid.Row="1">
-            <Label Content="Email:"
+            <Label Content="{lex:Loc LoginView_Label_Email}"
                    Foreground="Black"
                    FontSize="17" />
             <Border CornerRadius="10"
@@ -46,14 +46,14 @@
                          BorderBrush="Transparent"
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch"
-                         materialDesign:HintAssist.Hint="email"
+                         materialDesign:HintAssist.Hint="{lex:Loc LoginView_TextBox_Email_Hint}"
                          materialDesign:HintAssist.HintOpacity="0.5"
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          FontSize="17"
                          Text="{Binding UserEmail}" />
             </Border>
-            <Label Content="Password:"
+            <Label Content="{lex:Loc LoginView_Label_Password}"
                    Foreground="Black"
                    FontSize="17" />
             <Border CornerRadius="10"
@@ -67,19 +67,19 @@
                          BorderBrush="Transparent"
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch"
-                         materialDesign:HintAssist.Hint="password"
+                         materialDesign:HintAssist.Hint="{lex:Loc LoginView_TextBox_Password_Hint}"
                          materialDesign:HintAssist.HintOpacity="0.5"
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          FontSize="17"
                          Text="{Binding UserPassword}" />
             </Border>
-            <CheckBox Content="Keep me logged in"
+            <CheckBox Content="{lex:Loc LoginView_Label_KeepMeLoggedIn}"
                       Margin="5,10,0,0"
                       IsChecked="{Binding Path=KeepLoggedIn}" />
         </StackPanel>
         <Button Style="{DynamicResource RoundButton}"
-                Content="Login"
+                Content="{lex:Loc LoginView_Button_Login}"
                 cal:Message.Attach="Login"
                 Grid.Row="2"
                 Grid.Column="1"

@@ -246,4 +246,64 @@
   <data name="UserControlView_DataGrid_Header_Action" xml:space="preserve">
     <value>Művelet</value>
   </data>
+  <data name="LoginView_Label_Email" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="LoginView_Label_Password" xml:space="preserve">
+    <value>Jelszó:</value>
+  </data>
+  <data name="LoginView_Label_KeepMeLoggedIn" xml:space="preserve">
+    <value>Maradjak bejelentkezve</value>
+  </data>
+  <data name="RegisterView_Label_FirstName" xml:space="preserve">
+    <value>Keresztnév:</value>
+  </data>
+  <data name="RegisterView_TextBox_FirstName_Hint" xml:space="preserve">
+    <value>Keresztnév</value>
+  </data>
+  <data name="RegisterView_Label_SurName" xml:space="preserve">
+    <value>Vezetéknév:</value>
+  </data>
+  <data name="RegisterView_TextBox_SurName_Hint" xml:space="preserve">
+    <value>Vezetéknév</value>
+  </data>
+  <data name="RegisterView_Button_CreateAccount" xml:space="preserve">
+    <value>Felhasználó létrehozása</value>
+  </data>
+  <data name="RegisterView_TextBox_Password_Hint" xml:space="preserve">
+    <value>Jelszó</value>
+  </data>
+  <data name="RegisterView_Label_Password" xml:space="preserve">
+    <value>Jelszó:</value>
+  </data>
+  <data name="RegisterView_TextBox_Email_Hint" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="RegisterView_Label_Email" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="RegisterView_TextBox_ApiKey_Hint" xml:space="preserve">
+    <value>TMDB API Kulcs</value>
+  </data>
+  <data name="RegisterView_Label_ApiKey" xml:space="preserve">
+    <value>TMDB API Kulcs:</value>
+  </data>
+  <data name="StartPageView_Button_NewUser" xml:space="preserve">
+    <value>Új fiók</value>
+  </data>
+  <data name="StartPageView_Button_ExistingUser" xml:space="preserve">
+    <value>Belépés</value>
+  </data>
+  <data name="LoginView_TextBox_Email_Hint" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="LoginView_TextBox_Password_Hint" xml:space="preserve">
+    <value>Jelszó</value>
+  </data>
+  <data name="LoginView_Button_Login" xml:space="preserve">
+    <value>Bejelentkezés</value>
+  </data>
+  <data name="MainView_Chip_LogOut" xml:space="preserve">
+    <value>Kijelentkezés</value>
+  </data>
 </root>

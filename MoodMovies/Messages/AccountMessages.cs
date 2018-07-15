@@ -53,4 +53,14 @@ namespace MoodMovies.Messages
 
         public Users CurrentUser { get; set; }
     }
+
+    public class SwitchedUserMessage
+    {
+        public SwitchedUserMessage(Users user)
+        {
+            CurrentUser = user;
+        }
+
+        public Users CurrentUser { get; set; }
+    }
 }

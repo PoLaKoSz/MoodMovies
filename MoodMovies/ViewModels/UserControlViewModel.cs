@@ -19,18 +19,17 @@ namespace MoodMovies.ViewModels
             AllUsers = new ObservableCollection<Users>();
             offlineDb = serviceProvider;
             StatusMessage = statusMessage;
-            NewUser = new Users();
         }
 
         #region Events
         public IEventAggregator eventAgg;
         #endregion
-        
+
         #region Properties
         public SnackbarMessageQueue StatusMessage { get; set; }
 
         private Users _selectedUser;
-        public Users SelectedUser { get => _selectedUser; set { _selectedUser = value; NotifyOfPropertyChange(); } }
+        public Users SelectedUser { get => _selectedUser; set { _selectedUser = value; NotifyOfPropertyChange(); Email = SelectedUser?.User_Email ?? ""; } }
 
         private Users _currentUser;
         public Users CurrentUser { get => _currentUser; set { _currentUser = value; NotifyOfPropertyChange(); } }
@@ -38,139 +37,75 @@ namespace MoodMovies.ViewModels
         private ObservableCollection<Users> _allUsers;
         public ObservableCollection<Users> AllUsers { get => _allUsers; set { _allUsers = value; NotifyOfPropertyChange(); } }
 
-        public Users NewUser { get => _newUser; set { _newUser = value; NotifyOfPropertyChange(); } }
-        private Users _newUser;
+        private string _email;
+        public string Email { get => _email; set { _email = value; NotifyOfPropertyChange(); } }
+
+        private string _password;
+        public string Password { get => _password; set { _password = value; NotifyOfPropertyChange(); } }
+
+        private bool _keepLoggedIn;
+        public bool KeepLoggedIn { get => _keepLoggedIn; set { _keepLoggedIn = value; NotifyOfPropertyChange(); } }
         #endregion
 
         readonly IOfflineServiceProvider offlineDb;
 
-        #region Public methods        
+        #region Public methods                 
         /// <summary>
-        /// Sets the selected item to the current user
+        /// Get all users from db
         /// </summary>
-        public async Task SetCurrentUser()
-        {
-            try
-            {
-                eventAgg.PublishOnUIThread(new ClientChangeMessage(SelectedUser));
-
-                if (CurrentUser != null)
-                {                    
-                    //change the fields in db first
-                    await offlineDb.ChangeCurrentUserField(CurrentUser.User_ApiKey, false);
-                }
-                await offlineDb.ChangeCurrentUserField(SelectedUser.User_ApiKey, true);
-
-                CurrentUser = SelectedUser;                
-            }
-            catch
-            {
-                StatusMessage.Enqueue("Failed to change the current user.");
-            }
-        }
-
-        /// <summary>
-        /// Creates and adds a new user to the database
-        /// </summary>
-        public async void CreateNewUser()
-        {
-            if (string.IsNullOrEmpty(NewUser.User_ApiKey)
-                || string.IsNullOrEmpty(NewUser.User_Name)
-                || string.IsNullOrEmpty(NewUser.User_Surname))
-            {
-                StatusMessage.Enqueue("Please fill in all the fields and try again.");
-                return;
-            }
-            else
-            {
-                //this code must only run if we have all the fields input
-                try
-                {
-                    NewUser.User_Active = true;
-                    NewUser.Current_User = false;
-
-                    var userfound = await offlineDb.GetUserByApiKey(NewUser.User_ApiKey);
-                    if (userfound == null)
-                    {
-                        if (!IsValidApiKey(NewUser.User_ApiKey))
-                        {
-                            StatusMessage.Enqueue("The API Key not valid.");
-                            return;
-                        }
-
-                        await offlineDb.CreateUser(NewUser);
-
-                        AllUsers.Add(NewUser);
-
-                        NewUser = new Users();
-                    }
-                    else
-                    {
-                        StatusMessage.Enqueue("A user with the same Api Key already exists.");
-                    }
-                }
-                catch
-                {
-                    StatusMessage.Enqueue("Failed to create the user.");
-                }
-            }          
-        }
-
-        /// <summary>
-        /// Validate the API Key with the TMDB Easy wrapper
-        /// </summary>
-        /// <param name="apiKey">TMDB API Key</param>
         /// <returns></returns>
-        private bool IsValidApiKey(string apiKey)
-        {
-            try
-            {
-                new EasyClient(apiKey);
-            }
-            catch
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Deletes current user
-        /// </summary>
-        public async void DeleteCurrentUser()
-        {
-            if (SelectedUser != null)
-            {
-                if (SelectedUser == CurrentUser)
-                {
-                    CurrentUser = null;
-                    eventAgg.PublishOnUIThread(new ClientChangeMessage(new Users()));
-                }
-                await offlineDb.DeleteUser(SelectedUser);
-            }
-            await GetUsers();
-        }
-
         public async Task GetUsers()
         {
             try
             {
                 var users = await offlineDb.GetAllUsers();
 
-                CurrentUser = users.Where(x => x.Current_User).SingleOrDefault();
-
-                if (CurrentUser != null)                  
-                    eventAgg.PublishOnUIThread(new ClientChangeMessage(CurrentUser));
-
                 AllUsers.Clear();
 
                 AllUsers = new ObservableCollection<Users>(users);
             }
             catch
-            {               
+            {
                 StatusMessage.Enqueue("Failed to load users.");
             }
+        }
+
+        public async Task Login()
+        {
+            eventAgg.PublishOnUIThread(new StartLoadingMessage("Logging in"));
+            try
+            {
+                var user = await offlineDb.GetUserByEmailPassword(Email, Password);
+
+                if (user != null)
+                {
+
+                    //set to current user if keep me logged in checkbock selected
+                    if (KeepLoggedIn)
+                    {
+                        //change status in db
+                        await offlineDb.SetCurrentUserFieldToTrue(user);
+                    }
+                    else if (user.Current_User && !KeepLoggedIn)
+                    {
+                        offlineDb.SetCurrentUserFieldToFalse(user);
+                    }
+                    CurrentUser = SelectedUser;
+                    eventAgg.PublishOnUIThread(new SwitchedUserMessage(user));
+                    Email = "";
+                    Password = "";
+                }
+                else
+                {
+                    StatusMessage.Enqueue("Login credentials do not match. Email or the password is incorrect.");
+                }
+            }
+            catch
+            {
+
+            }
+
+            eventAgg.PublishOnUIThread(new StopLoadingMessage());
         }
         #endregion
     }

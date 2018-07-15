@@ -106,7 +106,7 @@ namespace MoodMovies.ViewModels
                     }
                     else
                     {
-                        StatusMessage.Enqueue("Login credentials do not match. A User with that email does not exist or the password is incorrect.");
+                        StatusMessage.Enqueue("Login credentials do not match. Email or the password is incorrect.");
                     }
                 }
             }

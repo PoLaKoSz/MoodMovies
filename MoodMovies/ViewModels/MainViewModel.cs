@@ -19,7 +19,8 @@ namespace MoodMovies.ViewModels
         IHandle<StartLoadingMessage>,
         IHandle<StopLoadingMessage>,
         IHandle<ClientChangeMessage>,
-        IHandle<LoggedInMessage>
+        IHandle<LoggedInMessage>,
+        IHandle<SwitchedUserMessage>
     {
         public MainViewModel()
         {
@@ -110,11 +111,14 @@ namespace MoodMovies.ViewModels
             {
                 ActivateItem(StartVM);
             }
+
+            await UserVM.GetUsers();
             IsLoading = false;
         }
         //Inject Current User into any view models that may have the old version or a null value
         private void InjectCurrentUser(Users currentUser)
         {
+            UserVM.CurrentUser = currentUser;
             MovieListVM.CurrentUser = currentUser;
             WatchListVM.CurrentUser = currentUser;
             FavouriteVM.CurrentUser = currentUser;
@@ -193,11 +197,26 @@ namespace MoodMovies.ViewModels
             IsLoading = false;
         }
 
-        public void Handle(LoggedInMessage message)
+        public async void Handle(LoggedInMessage message)
         {
-            DisplaySearchVM();
-            UserVM.CurrentUser = message.CurrentUser;
+            await UserVM.GetUsers();
+            DisplaySearchVM();            
             InjectCurrentUser(message.CurrentUser);
+        }
+
+        public void Handle(SwitchedUserMessage message)
+        {
+            try
+            {
+                //set the apikey
+                _onlineDB.ChangeClient(message.CurrentUser.User_ApiKey);
+                InjectCurrentUser(message.CurrentUser);
+            }
+            catch
+            {
+                StatusMessage.Enqueue("Api of this user is invalid");
+            }
+            
         }
 
         public void LogOut()
@@ -207,9 +226,9 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Caliburn Override
-        protected override void OnViewLoaded(object view)
+        protected async override void OnViewLoaded(object view)
         {
-            InitialiseVMs();
+            await InitialiseVMs();
             base.OnViewLoaded(view);
         }
         #endregion

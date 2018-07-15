@@ -82,36 +82,31 @@ namespace MoodMovies.ViewModels
             {
                 if (obj is LoginMessage message)
                 {
-                    var user = await offlineDb.GetUserByEmailPassword(message.Email, message.Password);                                  
+                    var user = await offlineDb.GetUserByEmailPassword(message.Email, message.Password);
 
                     if (user != null)
                     {
-                        if (user.User_Password == message.Password)
+                        //set the apikey
+                        onlineDb.ChangeClient(user.User_ApiKey);
+                        //set to current user if keep me logged in checkboc selected
+                        if (message.KeepLoggedIn)
                         {
-                            //set the apikey
-                            onlineDb.ChangeClient(user.User_ApiKey);
-                            //set to current user if keep me logged in checkboc selected
-                            if (message.KeepLoggedIn)
-                            {
-                                //change status in db
-                                await offlineDb.SetCurrentUserFieldToTrue(user);
-                            }
-                            else if(user.Current_User && !message.KeepLoggedIn)
-                            {
-                                //change status in db for 
-                                offlineDb.SetCurrentUserFieldToFalse(user);
-                            }
+                            //change status in db
+                            await offlineDb.SetCurrentUserFieldToTrue(user);
+                        }
+                        else if (user.Current_User && !message.KeepLoggedIn)
+                        {
+                            //change status in db for 
+                            offlineDb.SetCurrentUserFieldToFalse(user);
+                        }
 
-                            eventAgg.PublishOnUIThread(new LoggedInMessage(user));
-                        }
-                        else
-                        {
-                            StatusMessage.Enqueue("Login credentials do not match. Password incorrect.");
-                        }
+                        eventAgg.PublishOnUIThread(new LoggedInMessage(user));
+                        LoginVM.UserEmail = "";
+                        LoginVM.UserPassword = "";
                     }
                     else
                     {
-                        StatusMessage.Enqueue("Login credentials do not match. A User with that email does not exist.");
+                        StatusMessage.Enqueue("Login credentials do not match. A User with that email does not exist or the password is incorrect.");
                     }
                 }
             }
@@ -158,7 +153,7 @@ namespace MoodMovies.ViewModels
                             LoginVM.UserEmail = message.Email;
                             LoginVM.UserPassword = message.Password;
                             LoginVM.KeepLoggedIn = true;
-                        
+
                             //cleare the data from the register page
                             RegisterVM.UserApiKey = "";
                             RegisterVM.UserFirstName = "";

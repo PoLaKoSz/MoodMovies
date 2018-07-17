@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Data.Linq.Mapping;
 
 namespace DataModel.DataModel.Entities
@@ -52,7 +51,5 @@ namespace DataModel.DataModel.Entities
 
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string Poster_Cache { get; set; }
-
-        public virtual ICollection<User_Movies> Users { get; set; }
     }    
 }

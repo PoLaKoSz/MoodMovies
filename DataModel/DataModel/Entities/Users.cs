@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Data.Linq.Mapping;
 
 namespace DataModel.DataModel.Entities
@@ -31,10 +30,5 @@ namespace DataModel.DataModel.Entities
 
         [Column(Name = "Current_User")]
         public bool Current_User { get; set; }
-
-       // [Column(Name = "User_Password", DbType = "STRING", IsPrimaryKey = false, CanBeNull = false)]
-       // public string User_Password { get; set; }
-
-        public virtual ICollection<User_Movies> Movies { get; set; }
     }
 }

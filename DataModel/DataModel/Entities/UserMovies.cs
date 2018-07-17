@@ -6,18 +6,18 @@ namespace DataModel.DataModel.Entities
     [Table(Name = "User_Movies")]
     public class User_Movies
     {
-        [Column(Name = "User_Id", IsDbGenerated = false, IsPrimaryKey = true, DbType = "INTEGER")]
+        [Column(Name = "User_Id")]
         [Key]
         public int User_Id { get; set; }
 
-        [Column(Name = "UId", IsDbGenerated = false, IsPrimaryKey = true, DbType = "INTEGER")]
+        [Column(Name = "UId")]
         [Key]
         public int UId { get; set; }
 
-        [Column(Name = "Favourite", IsDbGenerated = false, IsPrimaryKey = false, DbType = "BOOLEAN")]
+        [Column(Name = "Favourite")]
         public bool Favourite { get; set; }
 
-        [Column(Name = "Watchlist", IsDbGenerated = false, IsPrimaryKey = false, DbType = "BOOLEAN")]
+        [Column(Name = "Watchlist")]
         public bool Watchlist {get; set;}
     }
 }

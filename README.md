@@ -1,6 +1,6 @@
 # MoodMovies
 
-Open Source application built for windows using C# and XAML. Search for movies based on your mood as well as a few other search and filtering options. It is built to be intuitive with the purpose of saving you from scrolling through never ending lists of movie suggestions. Targetting specific actors whilst selecting your mood and filtering by year are amongst the many awesome features you will find.
+Open Source application built for windows using C# and XAML. Search for movies based on your mood as well as a few other search and filtering options. It is built to be intuitive with the purpose of saving you from scrolling through never ending lists of movie suggestions. Targetting specific actors whilst selecting your mood and filtering by year are amongst the many awesome features you will find. Plus we can support multiple languages as well.
 
 ## Getting Started
 
@@ -16,6 +16,7 @@ List of Dependencies
 -Material Xaml Toolkit
 -NewtonSoft
 -TMdbEasy Light-weight package I wrote to get data from TMdb Api v3
+-FluentMigrator
 ```
 
 ## Deployment
@@ -27,8 +28,8 @@ Deployment details still to come.
 I am Currently accepting pull requests, however I urge First-Time contributors to tackle an issue. Feel free to fork the repo if you wish to go off on your own or start contributing.
 
 ## Authors
-
-* **Tony Karalis** - *Design and Implementation* - [tonykaralis](https://github.com/tonykaralis)
+* **Tony Karalis** - *Design and Implementation* - [Tony Karalis](https://github.com/tonykaralis)
+* **Tom PoLáKoSz** - *Generally writing awesome code, and making this project better* - [Tom PoLáKoSz](https://github.com/PoLaKoSz)
 
 ## License
 
@@ -38,5 +39,5 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE Version 3, 29 June
 
 * Material Xaml Toolkit creaters for developing such an amazing toolkit and making it open source.
 * Caliburn Micro for an awesome library that makes MVVM a little easier to manage.
-* CefSharp for an awesome chromium browser.
 * NewtonSoft for making Json easier to handle.
+* Fluent Migrator for saving our sqlite lives.

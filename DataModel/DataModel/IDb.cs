@@ -6,6 +6,14 @@ namespace DataModel.DataModel
     {
         DatabaseContext context { get; }
 
-        void DumpDatabase();
+        /// <summary>
+        /// Update the DB shema to the latest version
+        /// </summary>
+        void AutoMigrate();
+
+        /// <summary>
+        /// Set the DB's datacontext
+        /// </summary>
+        void Connect();
     }
 }

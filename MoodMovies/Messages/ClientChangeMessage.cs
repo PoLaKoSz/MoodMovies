@@ -1,5 +1,5 @@
 ﻿using DataModel.DataModel.Entities;
-using MoodMovies.Logic;
+using MoodMovies.DataAccessLayer;
 
 namespace MoodMovies.Messages
 {

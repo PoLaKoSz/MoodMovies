@@ -4,7 +4,7 @@ using TMdbEasy;
 using TMdbEasy.ApiInterfaces;
 using TMdbEasy.TmdbObjects.Movies;
 
-namespace MoodMovies.Logic
+namespace MoodMovies.DataAccessLayer
 {
     internal class OnlineServiceProvider : IOnlineServiceProvider
     {

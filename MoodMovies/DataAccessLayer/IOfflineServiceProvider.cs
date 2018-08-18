@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MoodMovies.Logic
+namespace MoodMovies.DataAccessLayer
 {
     public interface IOfflineServiceProvider
     {

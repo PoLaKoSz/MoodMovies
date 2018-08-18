@@ -2,7 +2,7 @@
 using TMdbEasy;
 using TMdbEasy.TmdbObjects.Movies;
 
-namespace MoodMovies.Logic
+namespace MoodMovies.DataAccessLayer
 {
     public interface IOnlineServiceProvider
     {

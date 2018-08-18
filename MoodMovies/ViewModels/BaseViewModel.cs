@@ -1,6 +1,6 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
-using MoodMovies.Logic;
+using MoodMovies.DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

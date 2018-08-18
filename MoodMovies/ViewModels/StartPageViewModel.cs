@@ -1,7 +1,7 @@
 ﻿using Caliburn.Micro;
 using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
-using MoodMovies.Logic;
+using MoodMovies.DataAccessLayer;
 using MoodMovies.Messages;
 using System;
 using System.Collections.Generic;

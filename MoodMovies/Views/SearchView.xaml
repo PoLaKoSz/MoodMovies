@@ -151,7 +151,7 @@
                           VerticalContentAlignment="Center"
                           FontSize="17"
                           IsEditable="False"
-                          SelectedValue="{Binding Path=SelectedBatch}"
+                          SelectedItem="{Binding Path=SelectedBatch}"
                           HorizontalContentAlignment="Center">
                     <ComboBoxItem Content="{lex:Loc SearchView_Filter_ComboBox_TopRated}"
                                   HorizontalAlignment="Center"

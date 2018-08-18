@@ -1,7 +1,9 @@
 ﻿using Caliburn.Micro;
+using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.Logic;
 using MoodMovies.Messages;
+using MoodMovies.Services;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -11,7 +13,7 @@ namespace MoodMovies.ViewModels
 {
     internal class SearchViewModel : Screen, IHandle<ClientChangeMessage>
     {
-        public SearchViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage)
+        public SearchViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage, ISearchService searchService)
         {
             eventAgg = _event;
             eventAgg.Subscribe(this);
@@ -19,15 +21,17 @@ namespace MoodMovies.ViewModels
             offlineDb = offlineService;
             onlineDb = onlineService;
             StatusMessage = statusMessage;
+            SearchService = searchService;
         }
 
         #region Events
         public IEventAggregator eventAgg;
         #endregion
 
-        #region Providers
+        #region Providers & Services
         readonly IOfflineServiceProvider offlineDb;
         private IOnlineServiceProvider onlineDb;
+        private readonly ISearchService SearchService;
         #endregion
 
         #region General Properties
@@ -43,17 +47,19 @@ namespace MoodMovies.ViewModels
         public string SimpleSearchBox { get => _simpleSearchBox; set { _simpleSearchBox = value; NotifyOfPropertyChange(); } }
         private string _searchText;
         public string SearchText { get => _searchText; set { _searchText = value; NotifyOfPropertyChange(); } }
-                
+
+        private string _actorText;
+        public string ActorText { get => _actorText; set { _actorText = value; NotifyOfPropertyChange(); } }
+
         private string _selectedBatch;
         public string SelectedBatch { get => _selectedBatch; set { _selectedBatch = value; NotifyOfPropertyChange(); } }
 
         private string _selectedMood;
         public string SelectedMood { get => _selectedMood; set { _selectedMood = value; NotifyOfPropertyChange(); } }
 
-        private object _selectedSource;
-        public object SelectedSource { get => _selectedSource; set { _selectedSource = value; NotifyOfPropertyChange(); } }
-
         private MovieList MovieList = new MovieList();
+
+        public Users CurrentUser { get; set; }
         #endregion
 
         #region Public methods
@@ -68,29 +74,26 @@ namespace MoodMovies.ViewModels
             {
                 try
                 {
-                    if (SelectedSource is ComboBoxItem obj)
+                    if (!string.IsNullOrEmpty(SearchText))
                     {
-                        var value = Convert.ToString(obj.Content);
-
-                        if (value == "Online" || String.IsNullOrEmpty(value))
-                        {
-                            if (!string.IsNullOrEmpty(SearchText))
-                            {
-                                await GetMoviesByTitle(SearchText);
-                            }
-                        }
+                        eventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
+                        MovieList = await SearchService.Search(CurrentUser.User_ApiKey);
                     }
                 }
                 catch
                 {
                     StatusMessage.Enqueue("Failed to connect with the current User's Api Key");
                 }
-            }         
+                finally
+                {
+                    IsLoading = false;
+                }
+            }
         }
 
         public async Task GetMoviesByTitle(string text)
         {
-            eventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
+            
 
             //add support for all the api objects(movie full details etc)            
             MovieList = await onlineDb.SearchByTitleAsync(text);
@@ -104,7 +107,7 @@ namespace MoodMovies.ViewModels
                 // return no search results via a message window
             }
 
-            IsLoading = false;
+            
         }
 
         public void Handle(ClientChangeMessage message)

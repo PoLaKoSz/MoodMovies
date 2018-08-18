@@ -6,6 +6,7 @@ using MoodMovies.DataAccessLayer;
 using MoodMovies.Logic;
 using MoodMovies.Messages;
 using MoodMovies.Models;
+using MoodMovies.Services;
 using System;
 using System.Globalization;
 using System.IO;
@@ -89,7 +90,7 @@ namespace MoodMovies.ViewModels
 
             Items.Add(StartVM = new StartPageViewModel(eventAgg, _offlineDb, _onlineDB, StatusMessage));
             Items.Add(UserVM = new UserControlViewModel(eventAgg, _offlineDb, StatusMessage));
-            Items.Add(SearchVM = new SearchViewModel(eventAgg, _offlineDb, _onlineDB, StatusMessage));
+            Items.Add(SearchVM = new SearchViewModel(eventAgg, _offlineDb, _onlineDB, StatusMessage, new SearchService()));
             Items.Add(MovieListVM = new MovieListViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
             Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
             Items.Add(WatchListVM = new WatchListViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
@@ -122,6 +123,7 @@ namespace MoodMovies.ViewModels
             MovieListVM.CurrentUser = currentUser;
             WatchListVM.CurrentUser = currentUser;
             FavouriteVM.CurrentUser = currentUser;
+            SearchVM.CurrentUser = currentUser;
         }
         /// <summary>
         /// This will login the user that is set to current

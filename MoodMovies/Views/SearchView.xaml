@@ -92,9 +92,11 @@
                          materialDesign:HintAssist.HintOpacity="0.5"
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
-                         FontSize="17" />
+                         FontSize="17"
+                         Text="{Binding ActorText}" />
             </Border>
-            <Border CornerRadius="10"
+            <!--removed temporarily until functionailty is ready-->
+            <!--<Border CornerRadius="10"
                     BorderBrush="White"
                     BorderThickness="1"
                     Background="White"
@@ -130,7 +132,7 @@
                                   HorizontalAlignment="Center"
                                   HorizontalContentAlignment="Center" />
                 </ComboBox>
-            </Border>
+            </Border>-->
             <Border CornerRadius="10"
                     BorderBrush="White"
                     BorderThickness="1"
@@ -153,52 +155,27 @@
                           HorizontalContentAlignment="Center">
                     <ComboBoxItem Content="{lex:Loc SearchView_Filter_ComboBox_TopRated}"
                                   HorizontalAlignment="Center"
+                                  Tag="TopRated"
                                   HorizontalContentAlignment="Center" />
                     <ComboBoxItem Content="{lex:Loc SearchView_Filter_ComboBox_Popular}"
                                   HorizontalAlignment="Center"
+                                  Tag="Popular"
                                   HorizontalContentAlignment="Center" />
                     <ComboBoxItem Content="{lex:Loc SearchView_Filter_ComboBox_Upcoming}"
+                                  Tag="Upcoming"
                                   HorizontalAlignment="Center"
                                   HorizontalContentAlignment="Center" />
                     <ComboBoxItem Content="{lex:Loc SearchView_Filter_ComboBox_NowPlaying}"
                                   HorizontalAlignment="Center"
+                                  Tag="NowPlaying"
                                   HorizontalContentAlignment="Center" />
                     <ComboBoxItem Content="{lex:Loc SearchView_Filter_ComboBox_Everything}"
                                   HorizontalAlignment="Center"
+                                  Tag="Everything"
                                   HorizontalContentAlignment="Center" />
                 </ComboBox>
             </Border>
-            <Border CornerRadius="10"
-                    BorderBrush="White"
-                    BorderThickness="1"
-                    Background="White"
-                    Height="36"
-                    Margin="5"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth2">
-                <ComboBox BorderBrush="Transparent"
-                          Background="White"
-                          VerticalAlignment="Stretch"
-                          HorizontalAlignment="Stretch"
-                          Width="160"
-                          materialDesign:HintAssist.Hint="{lex:Loc SearchView_Source_ComboBox_Hint}"
-                          materialDesign:HintAssist.HintOpacity="0.5"
-                          Margin="0,0,-15,0"
-                          VerticalContentAlignment="Center"
-                          FontSize="17"
-                          IsEditable="False"
-                          SelectedValue="{Binding Path=SelectedSource}"
-                          HorizontalContentAlignment="Center">
-                    <ComboBoxItem Content="{lex:Loc SearchView_Source_ComboBox_Online}"
-                                  HorizontalAlignment="Center"
-                                  HorizontalContentAlignment="Center" />
-                    <ComboBoxItem Content="{lex:Loc SearchView_Source_ComboBox_Favourites}"
-                                  HorizontalAlignment="Center"
-                                  HorizontalContentAlignment="Center" />
-                    <ComboBoxItem Content="{lex:Loc SearchView_Source_ComboBox_WatchList}"
-                                  HorizontalAlignment="Center"
-                                  HorizontalContentAlignment="Center" />
-                </ComboBox>
-            </Border>
+           
             <Button Height="60"
                     HorizontalAlignment="Center"
                     Width="60"

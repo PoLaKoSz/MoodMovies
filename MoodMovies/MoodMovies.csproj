@@ -161,6 +161,8 @@
     <Compile Include="Resources\Extensions.cs" />
     <Compile Include="Resources\PropertyCopier.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
+    <Compile Include="Services\ISearchService.cs" />
+    <Compile Include="Services\SearchService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ListBaseViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

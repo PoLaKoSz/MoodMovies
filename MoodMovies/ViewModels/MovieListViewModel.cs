@@ -59,7 +59,7 @@ namespace MoodMovies.ViewModels
             Movies.Clear();
             await Task.Run(() =>
             {
-                foreach (Movie movie in message.Movielist.Results)
+                foreach (Movie movie in message.Movielist)
                 {
                     if (!string.IsNullOrEmpty(movie.Poster_path))
                     {

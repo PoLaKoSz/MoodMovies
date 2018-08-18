@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TMdbEasy.TmdbObjects.Movies;
+using TMDB = TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.Services
 {
     public interface ISearchService
     {
-        Task<MovieList> Search(string apiKey);
+        Task<List<TMDB.Movie>> Search(string apiKey, string SearchText, string ActorText, string SelectedBatch, string SelectedMood);
     }
 }

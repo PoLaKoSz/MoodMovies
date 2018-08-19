@@ -14,16 +14,14 @@ namespace MoodMovies.Messages
             CurrentUser = user;
         }
 
-        public User CurrentUser { get; set; }
+        public User CurrentUser { get; }
     }
 
-    public class SwitchedUserMessage
+    public class SwitchedUserMessage : LoggedInMessage
     {
         public SwitchedUserMessage(User user)
+            : base(user)
         {
-            CurrentUser = user;
         }
-
-        public User CurrentUser { get; set; }
     }
 }

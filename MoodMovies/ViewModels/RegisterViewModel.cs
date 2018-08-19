@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.DataAccessLayer;
 using MoodMovies.Messages;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MoodMovies.Resources.Validation;
 using System.Threading.Tasks;
 
 namespace MoodMovies.ViewModels
@@ -15,47 +17,83 @@ namespace MoodMovies.ViewModels
         public RegisterViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage) : base(
             _event, offlineService, onlineService, statusMessage)
         {
-
+            NewUser = new User();
         }
 
-        #region  public Properties
-        private string _userFirstName;
-        public string UserFirstName { get => _userFirstName; set { _userFirstName = value; NotifyOfPropertyChange(); } }
+        private User _newUser;
+        public User NewUser { get => _newUser; set { _newUser = value; NotifyOfPropertyChange(); } }
 
-        private string _userSurname;
-        public string UserSurname { get => _userSurname; set { _userSurname = value; NotifyOfPropertyChange(); } }
-
-        private string _userApiKey;
-        public string UserApiKey { get => _userApiKey; set { _userApiKey = value; NotifyOfPropertyChange(); } }
-
-        private string _userEmail;
-        public string UserEmail { get => _userEmail; set { _userEmail = value; NotifyOfPropertyChange(); } }
-
-        private string _userPassword;
-        public string UserPassword { get => _userPassword; set { _userPassword = value; NotifyOfPropertyChange(); } }   
-        #endregion
-
-        #region Public Methods
-        public void Register()
+        public async void Register()
         {
-            if (!string.IsNullOrEmpty(UserEmail)
-                && !string.IsNullOrEmpty(UserFirstName)
-                && !string.IsNullOrEmpty(UserSurname)
-                && !string.IsNullOrEmpty(UserApiKey)
-                && !string.IsNullOrEmpty(UserEmail)
-                && !string.IsNullOrEmpty(UserPassword))
+            var isValidFields = await IsFieldsValid();
+
+            if (!isValidFields)
+                return;
+
+            var isUserWithEmailExists = await offlineDb.GetUserByEmail(NewUser.Email);
+
+            if (isUserWithEmailExists != null)
             {
-                eventAgg.PublishOnUIThread(new RegisterMessage(UserFirstName, UserSurname, UserApiKey, UserEmail, UserPassword));
+                StatusMessage.Enqueue("A User already registered with the same Email adddress!");
+                NewUser.Email = "";
+                return;
             }
-            else
+
+            var isValidApiKey = await Task.Run(() => CredentialValidation.IsValidApiKey(NewUser.ApiKey, onlineDb));
+
+            if (!isValidApiKey)
             {
-                StatusMessage.Enqueue("Please complete all fields.");
+                StatusMessage.Enqueue("TMDB API Key is not valid!");
+                NewUser.ApiKey = "";
+                return;
             }
+
+            await offlineDb.CreateUser(NewUser);
+
+            StatusMessage.Enqueue("Your account has been successfully created!");
+            NewUser = new User();
         }
-        #endregion
 
-        #region Private Methods
+        private async Task<bool> IsFieldsValid()
+        {
+            if (!CredentialValidation.IsValidFirstName(NewUser.Name))
+            {
+                StatusMessage.Enqueue("First name is not valid!");
+                NewUser.Name = "";
+                return false;
+            }
 
-        #endregion
+            if (!CredentialValidation.IsValidSurName(NewUser.Surname))
+            {
+                StatusMessage.Enqueue("Surname is not valid!");
+                NewUser.Surname = "";
+                return false;
+            }
+
+            var isUserWithApiKeyEmailExists = await offlineDb.GetUserByApiKey(NewUser.ApiKey);
+
+            if (isUserWithApiKeyEmailExists != null)
+            {
+                StatusMessage.Enqueue("A User already registered with the same API Key!");
+                NewUser.ApiKey = "";
+                return false;
+            }
+
+            if (!CredentialValidation.IsValidEmail(NewUser.Email))
+            {
+                StatusMessage.Enqueue("Email address is not valid!");
+                NewUser.Email = "";
+                return false;
+            }
+
+            if (!CredentialValidation.IsValidPassword(NewUser.Password))
+            {
+                StatusMessage.Enqueue("Password is not valid!");
+                NewUser.Password = "";
+                return false;
+            }
+
+            return true;
+        }
     }
 }

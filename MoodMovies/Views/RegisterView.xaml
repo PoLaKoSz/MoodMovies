@@ -65,7 +65,7 @@
                              VerticalContentAlignment="Center"
                              HorizontalContentAlignment="Center"
                              FontSize="17"
-                             Text="{Binding UserFirstName}" />
+                             Text="{Binding NewUser.Name}" />
                 </Border>
                 <Label Content="{lex:Loc RegisterView_Label_SurName}"
                        Foreground="Black"
@@ -90,7 +90,7 @@
                              VerticalContentAlignment="Center"
                              HorizontalContentAlignment="Center"
                              FontSize="17"
-                             Text="{Binding UserSurname}" />
+                             Text="{Binding NewUser.Surname}" />
                 </Border>
             </Grid>
 
@@ -113,7 +113,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          FontSize="17"
-                         Text="{Binding UserApiKey}" />
+                         Text="{Binding NewUser.ApiKey}" />
             </Border>
             <Label Content="{lex:Loc RegisterView_Label_Email}"
                    Foreground="Black"
@@ -134,7 +134,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          FontSize="17"
-                         Text="{Binding UserEmail}" />
+                         Text="{Binding NewUser.Email}" />
             </Border>
             <Label Content="{lex:Loc RegisterView_Label_Password}"
                    Foreground="Black"
@@ -155,7 +155,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          FontSize="17"
-                         Text="{Binding UserPassword}" />
+                         Text="{Binding NewUser.Password}" />
             </Border>          
         </StackPanel>
         <Button Style="{DynamicResource RoundButton}"

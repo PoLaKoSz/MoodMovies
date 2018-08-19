@@ -155,11 +155,11 @@ namespace MoodMovies.ViewModels
                             LoginVM.KeepLoggedIn = true;
 
                             //cleare the data from the register page
-                            RegisterVM.UserApiKey = "";
-                            RegisterVM.UserFirstName = "";
-                            RegisterVM.UserSurname = "";
-                            RegisterVM.UserEmail = "";
-                            RegisterVM.UserPassword = "";
+                            //RegisterVM.UserApiKey = "";
+                            //RegisterVM.UserFirstName = "";
+                            //RegisterVM.UserSurname = "";
+                            //RegisterVM.UserEmail = "";
+                            //RegisterVM.UserPassword = "";
                         }
                         else
                         {

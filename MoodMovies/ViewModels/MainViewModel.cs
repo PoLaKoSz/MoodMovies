@@ -37,6 +37,15 @@ namespace MoodMovies.ViewModels
 
             _offlineDb = new OfflineServiceProvider(database);
             _onlineDB = new OnlineServiceProvider();
+
+            ImageCacher imageCacher = new ImageCacher(_appFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
+
+            StartVM = new StartPageViewModel(eventAgg, _offlineDb, _onlineDB, StatusMessage);
+            UserVM = new UserControlViewModel(eventAgg, _offlineDb, StatusMessage);
+            SearchVM = new SearchViewModel(eventAgg, _offlineDb, _onlineDB, StatusMessage, new SearchService(_onlineDB));
+            MovieListVM = new MovieListViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser);
+            FavouriteVM = new FavouritesViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser);
+            WatchListVM = new WatchListViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser);
         }
 
         #region Events
@@ -82,23 +91,10 @@ namespace MoodMovies.ViewModels
         #endregion
 
         #region Private Methods
-        private async Task InitialiseVMs()
+        private async Task DisplayStartPage()
         {
             IsLoading = true;
             LoadingMessage = "Loading..";
-            ImageCacher imageCacher = new ImageCacher(_appFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
-
-            Items.Add(StartVM = new StartPageViewModel(eventAgg, _offlineDb, _onlineDB, StatusMessage));
-            Items.Add(UserVM = new UserControlViewModel(eventAgg, _offlineDb, StatusMessage));
-            Items.Add(SearchVM = new SearchViewModel(eventAgg, _offlineDb, _onlineDB, StatusMessage, new SearchService(_onlineDB)));
-            Items.Add(MovieListVM = new MovieListViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
-            Items.Add(FavouriteVM = new FavouritesViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
-            Items.Add(WatchListVM = new WatchListViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser));
-
-            eventAgg.Subscribe(SearchVM);
-            eventAgg.Subscribe(MovieListVM);
-            eventAgg.Subscribe(FavouriteVM);
-            eventAgg.Subscribe(WatchListVM);
 
             DisplayStartVM();
             await _startVM.DisplayInitialPage();
@@ -219,7 +215,19 @@ namespace MoodMovies.ViewModels
         #region Caliburn Override
         protected async override void OnViewLoaded(object view)
         {
-            await InitialiseVMs();
+            Items.Add(StartVM);
+            Items.Add(UserVM);
+            Items.Add(SearchVM);
+            Items.Add(MovieListVM);
+            Items.Add(FavouriteVM);
+            Items.Add(WatchListVM);
+
+            eventAgg.Subscribe(SearchVM);
+            eventAgg.Subscribe(MovieListVM);
+            eventAgg.Subscribe(FavouriteVM);
+            eventAgg.Subscribe(WatchListVM);
+
+            await DisplayStartPage();
             base.OnViewLoaded(view);
         }
         #endregion

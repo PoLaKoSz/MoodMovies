@@ -100,20 +100,9 @@ namespace MoodMovies.ViewModels
             eventAgg.Subscribe(FavouriteVM);
             eventAgg.Subscribe(WatchListVM);
 
-            //check for current user
-            var loggedInUserSuccess = await LoggedInCurrentUser();
+            DisplayStartVM();
+            await _startVM.DisplayInitialPage();
 
-            if (loggedInUserSuccess)
-            {
-                ActivateItem(SearchVM);
-                CanNavigate = true;
-            }
-            else
-            {
-                ActivateItem(StartVM);
-            }
-
-            await UserVM.GetUsers();
             IsLoading = false;
         }
         //Inject Current User into any view models that may have the old version or a null value

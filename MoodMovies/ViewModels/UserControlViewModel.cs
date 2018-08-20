@@ -19,9 +19,6 @@ namespace MoodMovies.ViewModels
         private User _selectedUser;
         public User SelectedUser { get => _selectedUser; set { _selectedUser = value; NotifyOfPropertyChange(); Email = SelectedUser?.Email ?? ""; } }
 
-        private User _currentUser;
-        public User CurrentUser { get => _currentUser; set { _currentUser = value; NotifyOfPropertyChange(); } }
-
         private ObservableCollection<User> _allUsers;
         public ObservableCollection<User> AllUsers { get => _allUsers; set { _allUsers = value; NotifyOfPropertyChange(); } }
 
@@ -75,7 +72,7 @@ namespace MoodMovies.ViewModels
                     {
                         OfflineDb.SetCurrentUserFieldToFalse(user);
                     }
-                    CurrentUser = SelectedUser;
+                    //CurrentUser = SelectedUser;
                     EventAgg.PublishOnUIThread(new SwitchedUserMessage(user));
                     Email = "";
                     Password = "";

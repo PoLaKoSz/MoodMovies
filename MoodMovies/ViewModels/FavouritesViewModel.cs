@@ -8,8 +8,8 @@ namespace MoodMovies.ViewModels
 {
     public class FavouritesViewModel: ListBaseViewModel
     {
-        public FavouritesViewModel(IListViewModelParams commonParameters, ImageCacher imageCacher, User currentUser)
-            : base(commonParameters, currentUser)
+        public FavouritesViewModel(IListViewModelParams commonParameters, ImageCacher imageCacher)
+            : base(commonParameters)
         {
             DisplayName = "Favourites";
             ImageCacher = imageCacher;

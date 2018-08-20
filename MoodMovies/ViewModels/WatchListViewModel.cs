@@ -8,8 +8,8 @@ namespace MoodMovies.ViewModels
 {
     public class WatchListViewModel : ListBaseViewModel
     {
-        public WatchListViewModel(CommonParameters commonParameters, ImageCacher imageCacher, User currentUser)
-            : base(commonParameters, currentUser)
+        public WatchListViewModel(CommonParameters commonParameters, ImageCacher imageCacher)
+            : base(commonParameters)
         {
             DisplayName = "Favourites";
             ImageCacher = imageCacher;

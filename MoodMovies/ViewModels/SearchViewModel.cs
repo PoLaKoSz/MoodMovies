@@ -44,8 +44,6 @@ namespace MoodMovies.ViewModels
         public string SelectedMood { get => _selectedMood; set { _selectedMood = value; NotifyOfPropertyChange(); } }
 
         private List<Movie> MovieList = new List<Movie>();
-
-        public User CurrentUser { get; set; }
         #endregion
 
         public async void BeginSearch()
@@ -81,7 +79,7 @@ namespace MoodMovies.ViewModels
                         }
                     }
                 }
-                catch(Exception ex)
+                catch
                 {
                     StatusMessage.Enqueue("Failed to connect with the current User's Api Key");
                 }

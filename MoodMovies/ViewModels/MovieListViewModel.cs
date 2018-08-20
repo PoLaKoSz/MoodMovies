@@ -14,8 +14,8 @@ namespace MoodMovies.ViewModels
         IHandle<MovieCardViewModel>,
         IHandle<IMovieCardMessage>
     {
-        public MovieListViewModel(CommonParameters commonParameters, ImageCacher imageCacher, User currentUser)
-            : base(commonParameters, currentUser)
+        public MovieListViewModel(CommonParameters commonParameters, ImageCacher imageCacher)
+            : base(commonParameters)
         {
             ImageCacher = imageCacher;
         }

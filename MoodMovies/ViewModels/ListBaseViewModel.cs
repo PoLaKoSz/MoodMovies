@@ -10,7 +10,7 @@ namespace MoodMovies.ViewModels
 {
     public abstract class ListBaseViewModel : Screen, IHandle<LoggedInMessage>
     {
-        public ListBaseViewModel(IListViewModelParams commonParameters, User currentUser)
+        public ListBaseViewModel(IListViewModelParams commonParameters)
         {
             EventAgg = commonParameters.EventAggregator;
             EventAgg.Subscribe(this);
@@ -20,12 +20,12 @@ namespace MoodMovies.ViewModels
             Movies = new ObservableCollection<MovieCardViewModel>();
 
             StatusMessage = commonParameters.StatusMessage;
-
-            CurrentUser = currentUser;
         }
+
 
         protected readonly IEventAggregator EventAgg;
         protected readonly IOfflineServiceProvider OfflineDB;
+
 
         #region Properties
         private ObservableCollection<MovieCardViewModel> movies;
@@ -39,10 +39,7 @@ namespace MoodMovies.ViewModels
         protected User CurrentUser { get; private set; }
         #endregion
 
-        /// <summary>
-        /// Handle when a new User selected
-        /// </summary>
-        /// <param name="message"></param>
+
         public void Handle(LoggedInMessage message)
         {
             CurrentUser = message.CurrentUser;

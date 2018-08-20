@@ -44,9 +44,9 @@ namespace MoodMovies.ViewModels
             StartVM = new StartPageViewModel(commonParameters);
             UserVM = new UserControlViewModel(commonParameters);
             SearchVM = new SearchViewModel(commonParameters, new SearchService(onlineDB));
-            MovieListVM = new MovieListViewModel(commonParameters, imageCacher, UserVM.CurrentUser);
-            FavouriteVM = new FavouritesViewModel(commonParameters, imageCacher, UserVM.CurrentUser);
-            WatchListVM = new WatchListViewModel(commonParameters, imageCacher, UserVM.CurrentUser);
+            MovieListVM = new MovieListViewModel(commonParameters, imageCacher);
+            FavouriteVM = new FavouritesViewModel(commonParameters, imageCacher);
+            WatchListVM = new WatchListViewModel(commonParameters, imageCacher);
         }
 
         #region Fields

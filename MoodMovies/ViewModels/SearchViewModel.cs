@@ -11,7 +11,7 @@ using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.ViewModels
 {
-    internal class SearchViewModel : Screen, IHandle<ClientChangeMessage>
+    internal class SearchViewModel : Screen, IHandle<LoggedInMessage>
     {
         public SearchViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage, ISearchService searchService)
         {
@@ -107,9 +107,9 @@ namespace MoodMovies.ViewModels
             }
         }
 
-        public void Handle(ClientChangeMessage message)
+        public void Handle(LoggedInMessage message)
         {
-            onlineDb.ChangeClient(message.NewUser.ApiKey);
+            onlineDb.ChangeClient(message.CurrentUser.ApiKey);
         }
         #endregion
     }

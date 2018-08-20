@@ -1,6 +1,5 @@
 ﻿using Caliburn.Micro;
 using DataModel.DataModel;
-using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.DataAccessLayer;
 using MoodMovies.Logic;
@@ -18,10 +17,7 @@ namespace MoodMovies.ViewModels
     internal class MainViewModel : Conductor<Screen>.Collection.OneActive,
         IHandle<ResultsReadyMessage>,
         IHandle<StartLoadingMessage>,
-        IHandle<StopLoadingMessage>,
-        IHandle<ClientChangeMessage>,
-        IHandle<LoggedInMessage>,
-        IHandle<SwitchedUserMessage>
+        IHandle<StopLoadingMessage>
     {
         public MainViewModel()
         {
@@ -93,7 +89,6 @@ namespace MoodMovies.ViewModels
         }
         #endregion
 
-        #region Private Methods
         private async Task DisplayStartPage()
         {
             IsLoading = true;
@@ -104,25 +99,6 @@ namespace MoodMovies.ViewModels
 
             IsLoading = false;
         }
-        //Inject Current User into any view models that may have the old version or a null value
-        private void InjectCurrentUser(User currentUser)
-        {
-            UserVM.CurrentUser = currentUser;
-            MovieListVM.CurrentUser = currentUser;
-            WatchListVM.CurrentUser = currentUser;
-            FavouriteVM.CurrentUser = currentUser;
-            SearchVM.CurrentUser = currentUser;
-        }
-        /// <summary>
-        /// This will login the user that is set to current
-        /// </summary>
-        private async Task<bool> LoggedInCurrentUser()
-        {
-            var user = await _offlineDb.GetCurrentUSer();
-            InjectCurrentUser(user);
-            return (user != null) ? true : false;
-        }
-        #endregion
 
         #region Item Activation Methods
         public void DisplayStartVM()
@@ -177,36 +153,9 @@ namespace MoodMovies.ViewModels
             LoadingMessage = message.Text;
         }
 
-        public void Handle(ClientChangeMessage message)
-        {
-            IsLoading = false;
-        }
-
         public void Handle(StopLoadingMessage message)
         {
             IsLoading = false;
-        }
-
-        public async void Handle(LoggedInMessage message)
-        {
-            await UserVM.GetUsers();
-            DisplaySearchVM();            
-            InjectCurrentUser(message.CurrentUser);
-        }
-
-        public void Handle(SwitchedUserMessage message)
-        {
-            try
-            {
-                //set the apikey
-                _onlineDB.ChangeClient(message.CurrentUser.ApiKey);
-                InjectCurrentUser(message.CurrentUser);
-            }
-            catch
-            {
-                StatusMessage.Enqueue("Api of this user is invalid");
-            }
-            
         }
 
         public void LogOut()

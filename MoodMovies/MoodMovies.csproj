@@ -136,7 +136,6 @@
     <Compile Include="DataAccessLayer\OfflineServiceProvider.cs" />
     <Compile Include="DataAccessLayer\OnlineServiceProvider.cs" />
     <Compile Include="Messages\AccountMessages.cs" />
-    <Compile Include="Messages\ClientChangeMessage.cs" />
     <Compile Include="Messages\MovieCardMessages.cs" />
     <Compile Include="Messages\MovieListMessage.cs" />
     <Compile Include="Messages\ResultsReadyMessage.cs" />

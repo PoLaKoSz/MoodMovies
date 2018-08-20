@@ -75,7 +75,6 @@ namespace MoodMovies.ViewModels
 
                 if (user != null)
                 {
-
                     //set to current user if keep me logged in checkbock selected
                     if (KeepLoggedIn)
                     {

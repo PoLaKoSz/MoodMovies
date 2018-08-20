@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace MoodMovies.ViewModels
 {
-    public abstract class ListBaseViewModel : Screen, IHandle<ClientChangeMessage>
+    public abstract class ListBaseViewModel : Screen, IHandle<LoggedInMessage>
     {
         public ListBaseViewModel(IEventAggregator events, SnackbarMessageQueue statusMessage, User currentUser)
         {
@@ -38,9 +38,9 @@ namespace MoodMovies.ViewModels
         /// Handle when a new User selected
         /// </summary>
         /// <param name="message"></param>
-        public void Handle(ClientChangeMessage message)
+        public void Handle(LoggedInMessage message)
         {
-            CurrentUser = message.NewUser;
+            CurrentUser = message.CurrentUser;
         }
     }
 }

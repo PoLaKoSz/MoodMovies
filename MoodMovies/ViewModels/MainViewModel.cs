@@ -117,7 +117,7 @@ namespace MoodMovies.ViewModels
             IsLoading = false;
         }
         //Inject Current User into any view models that may have the old version or a null value
-        private void InjectCurrentUser(Users currentUser)
+        private void InjectCurrentUser(User currentUser)
         {
             UserVM.CurrentUser = currentUser;
             MovieListVM.CurrentUser = currentUser;
@@ -211,7 +211,7 @@ namespace MoodMovies.ViewModels
             try
             {
                 //set the apikey
-                _onlineDB.ChangeClient(message.CurrentUser.User_ApiKey);
+                _onlineDB.ChangeClient(message.CurrentUser.ApiKey);
                 InjectCurrentUser(message.CurrentUser);
             }
             catch

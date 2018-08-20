@@ -87,14 +87,14 @@ namespace MoodMovies.ViewModels
                     if (user != null)
                     {
                         //set the apikey
-                        onlineDb.ChangeClient(user.User_ApiKey);
+                        onlineDb.ChangeClient(user.ApiKey);
                         //set to current user if keep me logged in checkboc selected
                         if (message.KeepLoggedIn)
                         {
                             //change status in db
                             await offlineDb.SetCurrentUserFieldToTrue(user);
                         }
-                        else if (user.Current_User && !message.KeepLoggedIn)
+                        else if (user.IsCurrentUser && !message.KeepLoggedIn)
                         {
                             //change status in db for 
                             offlineDb.SetCurrentUserFieldToFalse(user);
@@ -138,13 +138,13 @@ namespace MoodMovies.ViewModels
                         var apikeyExists = await offlineDb.ApiKeyExists(message.ApiKey);
                         if (!apikeyExists)
                         {
-                            var newUser = new Users()
+                            var newUser = new User()
                             {
-                                User_Name = message.FirstName,
-                                User_Surname = message.Surname,
-                                User_ApiKey = message.ApiKey,
-                                User_Email = message.Email,
-                                User_Password = message.Password
+                                Name = message.FirstName,
+                                Surname = message.Surname,
+                                ApiKey = message.ApiKey,
+                                Email = message.Email,
+                                Password = message.Password
                             };
                             await offlineDb.CreateUser(newUser);
 

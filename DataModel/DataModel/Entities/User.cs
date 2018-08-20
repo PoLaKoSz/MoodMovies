@@ -4,31 +4,31 @@ using System.Data.Linq.Mapping;
 namespace DataModel.DataModel.Entities
 {
     [Table(Name = "Users")]
-    public class Users
+    public class User
     {
-        [Column(Name = "User_Id")]
         [Key]
-        public int User_Id { get; set; }
+        [Column(Name = "User_Id")]
+        public int ID { get; set; }
 
         [Column(Name = "User_Name")]
-        public string User_Name { get; set; }
+        public string Name { get; set; }
 
         [Column(Name = "User_Surname")]
-        public string User_Surname { get; set; }
+        public string Surname { get; set; }
 
         [Column(Name = "User_ApiKey")]
-        public string User_ApiKey { get; set; }
+        public string ApiKey { get; set; }
 
         [Column(Name = "User_Email")]
-        public string User_Email { get; set; }
+        public string Email { get; set; }
 
         [Column(Name = "User_Password")]
-        public string User_Password { get; set; }
+        public string Password { get; set; }
 
         [Column(Name = "User_Active")]
-        public bool User_Active { get; set; }
+        public bool IsActive { get; set; }
 
         [Column(Name = "Current_User")]
-        public bool Current_User { get; set; }
+        public bool IsCurrentUser { get; set; }
     }
 }

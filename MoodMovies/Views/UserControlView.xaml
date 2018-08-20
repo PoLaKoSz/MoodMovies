@@ -50,11 +50,11 @@
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="{Binding Path=CurrentUser.User_Name}"
+                        <Label Content="{Binding Path=CurrentUser.Name}"
                                VerticalContentAlignment="Center"
                                Margin="5,0,0,0"
                                Foreground="Black" />
-                        <Label Content="{Binding Path=CurrentUser.User_Surname}"
+                        <Label Content="{Binding Path=CurrentUser.Surname}"
                                VerticalContentAlignment="Center"
                                Margin="5,0,0,0"
                                Foreground="Black" />
@@ -93,8 +93,8 @@
                                        FontSize="16">
                                 <TextBlock.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
-                                        <Binding Path="User_Name" />
-                                        <Binding Path="User_Surname" />
+                                        <Binding Path="Name" />
+                                        <Binding Path="Surname" />
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>

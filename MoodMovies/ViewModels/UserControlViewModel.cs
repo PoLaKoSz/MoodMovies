@@ -16,7 +16,7 @@ namespace MoodMovies.ViewModels
         {
             eventAgg = _event;
 
-            AllUsers = new ObservableCollection<Users>();
+            AllUsers = new ObservableCollection<User>();
             offlineDb = serviceProvider;
             StatusMessage = statusMessage;
         }
@@ -28,14 +28,14 @@ namespace MoodMovies.ViewModels
         #region Properties
         public SnackbarMessageQueue StatusMessage { get; set; }
 
-        private Users _selectedUser;
-        public Users SelectedUser { get => _selectedUser; set { _selectedUser = value; NotifyOfPropertyChange(); Email = SelectedUser?.User_Email ?? ""; } }
+        private User _selectedUser;
+        public User SelectedUser { get => _selectedUser; set { _selectedUser = value; NotifyOfPropertyChange(); Email = SelectedUser?.Email ?? ""; } }
 
-        private Users _currentUser;
-        public Users CurrentUser { get => _currentUser; set { _currentUser = value; NotifyOfPropertyChange(); } }
+        private User _currentUser;
+        public User CurrentUser { get => _currentUser; set { _currentUser = value; NotifyOfPropertyChange(); } }
 
-        private ObservableCollection<Users> _allUsers;
-        public ObservableCollection<Users> AllUsers { get => _allUsers; set { _allUsers = value; NotifyOfPropertyChange(); } }
+        private ObservableCollection<User> _allUsers;
+        public ObservableCollection<User> AllUsers { get => _allUsers; set { _allUsers = value; NotifyOfPropertyChange(); } }
 
         private string _email;
         public string Email { get => _email; set { _email = value; NotifyOfPropertyChange(); } }
@@ -62,7 +62,7 @@ namespace MoodMovies.ViewModels
 
                 AllUsers.Clear();
 
-                AllUsers = new ObservableCollection<Users>(users);
+                AllUsers = new ObservableCollection<User>(users);
             }
             catch
             {
@@ -86,7 +86,7 @@ namespace MoodMovies.ViewModels
                         //change status in db
                         await offlineDb.SetCurrentUserFieldToTrue(user);
                     }
-                    else if (user.Current_User && !KeepLoggedIn)
+                    else if (user.IsCurrentUser && !KeepLoggedIn)
                     {
                         offlineDb.SetCurrentUserFieldToFalse(user);
                     }

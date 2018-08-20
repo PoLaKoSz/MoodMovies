@@ -12,54 +12,54 @@ namespace MoodMovies.Logic
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        Task CreateUser(Users user);       
+        Task CreateUser(User user);       
         /// <summary>
         /// Gets user in db using id
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task<Users> GetUser(int id);
+        Task<User> GetUser(int id);
         /// <summary>
         /// Gets user in db using apikey
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task<Users> GetUserByApiKey(string apikey);
+        Task<User> GetUserByApiKey(string apikey);
         /// <summary>
         /// Gets user in db using email
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task<Users> GetUserByEmailPassword(string emailAdress, string password);
+        Task<User> GetUserByEmailPassword(string emailAdress, string password);
         /// <summary>
         /// Gets user in db using email
         /// </summary>
         /// <param name="emailAddress"></param>
         /// <returns></returns>
-        Task<Users> GetUserByEmail(string emailAddress);
+        Task<User> GetUserByEmail(string emailAddress);
         /// <summary>
         /// Gets current user in db. there should only be one
         /// </summary>
         /// <returns></returns>
-        Task<Users> GetCurrentUSer();
+        Task<User> GetCurrentUSer();
         /// <summary>
         /// Gets all users in db
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task<List<Users>> GetAllUsers();
+        Task<List<User>> GetAllUsers();
         /// <summary>
         /// Set current user field and unset previous user if any
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task SetCurrentUserFieldToTrue(Users user);
+        Task SetCurrentUserFieldToTrue(User user);
         /// <summary>
         /// Unset current user field of current user
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
-        void SetCurrentUserFieldToFalse(Users user);
+        void SetCurrentUserFieldToFalse(User user);
         /// <summary>
         /// Set/Unset current user field
         /// </summary>
@@ -71,7 +71,7 @@ namespace MoodMovies.Logic
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        Task DeleteUser(Users user);
+        Task DeleteUser(User user);
         #endregion
 
         #region Movie Methods
@@ -86,7 +86,7 @@ namespace MoodMovies.Logic
         /// </summary>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task<User_Movies> GetUserMovieLink(Users user, Movies movie);
+        Task<User_Movies> GetUserMovieLink(User user, Movies movie);
         /// <summary>
         /// Gets the movie using the id
         /// </summary>
@@ -109,20 +109,20 @@ namespace MoodMovies.Logic
         /// <param name="user"></param>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task AddToWatchList(Users user, Movies movie);
+        Task AddToWatchList(User user, Movies movie);
         /// <summary>
         /// Removes a movie from the watchlist
         /// </summary>
         /// <param name="user"></param>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task RemoveFromWatchList(Users user, Movies movie);
+        Task RemoveFromWatchList(User user, Movies movie);
         /// <summary>
         /// Returns all movies linked to a specific user as a watchlist item
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        Task<List<Movies>> GetAllWatchListItems(Users user);
+        Task<List<Movies>> GetAllWatchListItems(User user);
         #endregion
 
         #region Favourite methods
@@ -132,20 +132,20 @@ namespace MoodMovies.Logic
         /// <param name="user"></param>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task AddToFavourites(Users user, Movies movie);
+        Task AddToFavourites(User user, Movies movie);
         /// <summary>
         /// Removes a movie from the favourites list
         /// </summary>
         /// <param name="user"></param>
         /// <param name="movie"></param>
         /// <returns></returns>
-        Task RemoveFromFavourites(Users user, Movies movie);
+        Task RemoveFromFavourites(User user, Movies movie);
         /// <summary>
         /// Returns all movies linked to a specific user as a favourites item
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        Task<List<Movies>> GetAllFavouriteItems(Users user);
+        Task<List<Movies>> GetAllFavouriteItems(User user);
         #endregion
 
         /// <summary>

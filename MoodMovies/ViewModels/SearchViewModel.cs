@@ -60,7 +60,7 @@ namespace MoodMovies.ViewModels
 
         private List<Movie> MovieList = new List<Movie>();
 
-        public Users CurrentUser { get; set; }
+        public User CurrentUser { get; set; }
         #endregion
 
         #region Public methods
@@ -69,7 +69,7 @@ namespace MoodMovies.ViewModels
             //if no cient has been set
             if (onlineDb.Client == null)
             {
-                onlineDb.ChangeClient(CurrentUser.User_ApiKey);
+                onlineDb.ChangeClient(CurrentUser.ApiKey);
             }
 
             if (onlineDb.Client == null)
@@ -86,7 +86,7 @@ namespace MoodMovies.ViewModels
                         || !string.IsNullOrEmpty(SelectedMood))
                     {
                         eventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
-                        MovieList = await SearchService.Search(CurrentUser.User_ApiKey, SearchText, ActorText, (SelectedBatch != null) ? SelectedBatch.Tag.ToString() : null, SelectedMood);
+                        MovieList = await SearchService.Search(CurrentUser.ApiKey, SearchText, ActorText, (SelectedBatch != null) ? SelectedBatch.Tag.ToString() : null, SelectedMood);
                         if (MovieList != null || MovieList.Count != 0)
                         {
                             eventAgg.PublishOnUIThread(new MovieListMessage(MovieList, true, SearchText));
@@ -111,7 +111,7 @@ namespace MoodMovies.ViewModels
 
         public void Handle(ClientChangeMessage message)
         {
-            onlineDb.ChangeClient(message.NewUser.User_ApiKey);
+            onlineDb.ChangeClient(message.NewUser.ApiKey);
         }
         #endregion
     }

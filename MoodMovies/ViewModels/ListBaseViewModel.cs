@@ -8,7 +8,7 @@ namespace MoodMovies.ViewModels
 {
     public abstract class ListBaseViewModel : Screen, IHandle<ClientChangeMessage>
     {
-        public ListBaseViewModel(IEventAggregator events, SnackbarMessageQueue statusMessage, Users currentUser)
+        public ListBaseViewModel(IEventAggregator events, SnackbarMessageQueue statusMessage, User currentUser)
         {
             eventAgg = events;
             eventAgg.Subscribe(this);
@@ -33,7 +33,7 @@ namespace MoodMovies.ViewModels
 
         public SnackbarMessageQueue StatusMessage { get; set; }
 
-        public Users CurrentUser { get; set; }
+        public User CurrentUser { get; set; }
         #endregion
 
         /// <summary>

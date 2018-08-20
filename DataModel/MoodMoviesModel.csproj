@@ -152,7 +152,7 @@
     <Compile Include="DataModel\Db.cs" />
     <Compile Include="DataModel\Entities\UserMovies.cs" />
     <Compile Include="DataModel\Entities\Movies.cs" />
-    <Compile Include="DataModel\Entities\Users.cs" />
+    <Compile Include="DataModel\Entities\User.cs" />
     <Compile Include="DataModel\IDb.cs" />
     <Compile Include="DataModel\SQLiteConfiguration.cs" />
     <Compile Include="Migrations\001_Create_Basic_Tables.cs" />

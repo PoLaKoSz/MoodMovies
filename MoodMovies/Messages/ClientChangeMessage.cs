@@ -6,16 +6,16 @@ namespace MoodMovies.Messages
     public class ClientChangeMessage
     {
         public IOnlineServiceProvider OnlineDB { get; private set; }
-        public Users NewUser { get; private set; }
+        public User NewUser { get; private set; }
 
 
 
-        public ClientChangeMessage(Users newUser)
+        public ClientChangeMessage(User newUser)
         {
             NewUser = newUser;
 
             OnlineDB = new OnlineServiceProvider();
-            OnlineDB.ChangeClient(NewUser.User_ApiKey);
+            OnlineDB.ChangeClient(NewUser.ApiKey);
         }
     }
 }

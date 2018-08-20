@@ -46,21 +46,21 @@ namespace MoodMovies.Messages
 
     public class LoggedInMessage
     {
-        public LoggedInMessage(Users user)
+        public LoggedInMessage(User user)
         {
             CurrentUser = user;
         }
 
-        public Users CurrentUser { get; set; }
+        public User CurrentUser { get; set; }
     }
 
     public class SwitchedUserMessage
     {
-        public SwitchedUserMessage(Users user)
+        public SwitchedUserMessage(User user)
         {
             CurrentUser = user;
         }
 
-        public Users CurrentUser { get; set; }
+        public User CurrentUser { get; set; }
     }
 }

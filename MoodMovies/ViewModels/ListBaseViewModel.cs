@@ -20,9 +20,7 @@ namespace MoodMovies.ViewModels
             CurrentUser = currentUser;
         }
 
-        #region Events
         protected readonly IEventAggregator eventAgg;
-        #endregion
 
         #region Properties
         private ObservableCollection<MovieCardViewModel> movies;

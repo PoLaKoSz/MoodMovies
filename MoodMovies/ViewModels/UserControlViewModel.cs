@@ -4,9 +4,7 @@ using MaterialDesignThemes.Wpf;
 using MoodMovies.DataAccessLayer;
 using MoodMovies.Messages;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
-using TMdbEasy;
 
 namespace MoodMovies.ViewModels
 {
@@ -21,9 +19,7 @@ namespace MoodMovies.ViewModels
             StatusMessage = statusMessage;
         }
 
-        #region Events
         public IEventAggregator eventAgg;
-        #endregion
 
         #region Properties
         public SnackbarMessageQueue StatusMessage { get; set; }

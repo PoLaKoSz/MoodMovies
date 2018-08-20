@@ -3,11 +3,6 @@ using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.DataAccessLayer;
 using MoodMovies.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MoodMovies.Resources.Validation;
 
 namespace MoodMovies.ViewModels
@@ -26,7 +21,9 @@ namespace MoodMovies.ViewModels
 
         #region  public Properties
         public string UserEmail { get => _userEmail; set { _userEmail = value; NotifyOfPropertyChange(); } }
+
         public string UserPassword { get => _userPassword; set { _userPassword = value; NotifyOfPropertyChange(); } }
+
         public bool KeepLoggedIn;
         #endregion
 

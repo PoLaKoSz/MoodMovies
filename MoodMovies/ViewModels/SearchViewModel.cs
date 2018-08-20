@@ -6,7 +6,6 @@ using MoodMovies.Messages;
 using MoodMovies.Services;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using TMdbEasy.TmdbObjects.Movies;
 
@@ -25,9 +24,7 @@ namespace MoodMovies.ViewModels
             SearchService = searchService;
         }
 
-        #region Events
         public IEventAggregator eventAgg;
-        #endregion
 
         #region Providers & Services
         readonly IOfflineServiceProvider offlineDb;
@@ -46,6 +43,7 @@ namespace MoodMovies.ViewModels
         #region Properties
         private string _simpleSearchBox;
         public string SimpleSearchBox { get => _simpleSearchBox; set { _simpleSearchBox = value; NotifyOfPropertyChange(); } }
+
         private string _searchText;
         public string SearchText { get => _searchText; set { _searchText = value; NotifyOfPropertyChange(); } }
 

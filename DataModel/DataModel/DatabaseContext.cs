@@ -11,7 +11,8 @@ namespace DataModel.DataModel
         /// Pass the connection string dynamically at runtime.
         /// </summary>
         /// <param name="dbPath"></param>
-        public DatabaseContext(string dbPath) : base(new SQLiteConnection()
+        public DatabaseContext(string dbPath)
+            : base(new SQLiteConnection()
         {
             ConnectionString = new SQLiteConnectionStringBuilder()
             {
@@ -20,8 +21,8 @@ namespace DataModel.DataModel
             }.ConnectionString
         }, true)
         {
-
         }
+
         /// <summary>
         /// This override solves this exception 'System.Data.Entity.Infrastructure.DbUpdateException'
         /// </summary>
@@ -34,8 +35,7 @@ namespace DataModel.DataModel
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
         }
-
-        //List of the all the tables we will be using. Any more tables would need to be added here as well as the entities directory
+        
         public DbSet<User> Users { get; set; }
         public DbSet<Movies> Movies { get; set; }
         public DbSet<User_Movies> UserMovies { get; set; }

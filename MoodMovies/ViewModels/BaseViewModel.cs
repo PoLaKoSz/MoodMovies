@@ -1,11 +1,6 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.DataAccessLayer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoodMovies.ViewModels
 {
@@ -19,17 +14,13 @@ namespace MoodMovies.ViewModels
             onlineDb = onlineService;
         }
 
-        #region Events
         public IEventAggregator eventAgg;
-        #endregion
 
         #region Providers
         protected IOfflineServiceProvider offlineDb;
         protected IOnlineServiceProvider onlineDb;
         #endregion
 
-        #region Properties
         public SnackbarMessageQueue StatusMessage { get; set; }
-        #endregion
     }
 }

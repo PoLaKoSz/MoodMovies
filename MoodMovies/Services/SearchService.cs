@@ -1,9 +1,6 @@
-﻿using DataModel.DataModel.Entities;
-using MoodMovies.DataAccessLayer;
-using System;
+﻿using MoodMovies.DataAccessLayer;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TMDB = TMdbEasy.TmdbObjects.Movies;
 

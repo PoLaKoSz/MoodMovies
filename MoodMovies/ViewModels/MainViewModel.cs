@@ -48,9 +48,7 @@ namespace MoodMovies.ViewModels
             WatchListVM = new WatchListViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser);
         }
 
-        #region Events
         public IEventAggregator eventAgg = new EventAggregator();
-        #endregion
 
         #region Fields
         readonly IOfflineServiceProvider _offlineDb;
@@ -71,14 +69,19 @@ namespace MoodMovies.ViewModels
         #region Child View Models
         private StartPageViewModel _startVM;
         public StartPageViewModel StartVM { get => _startVM; set { _startVM = value; NotifyOfPropertyChange(); } }
+
         private SearchViewModel _searchVM;
         public SearchViewModel SearchVM { get => _searchVM; set { _searchVM = value; NotifyOfPropertyChange(); } }
+
         private MovieListViewModel movieListVM;
         public MovieListViewModel MovieListVM { get => movieListVM; set { movieListVM = value; NotifyOfPropertyChange(); } }
+
         private FavouritesViewModel _favouriteVM;
         public FavouritesViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
+
         private WatchListViewModel _watchListVM;
         public WatchListViewModel WatchListVM { get => _watchListVM; set { _watchListVM = value; NotifyOfPropertyChange(); } }
+
         private UserControlViewModel _userVM;
         public UserControlViewModel UserVM { get => _userVM; set { _userVM = value; NotifyOfPropertyChange(); } }
         #endregion

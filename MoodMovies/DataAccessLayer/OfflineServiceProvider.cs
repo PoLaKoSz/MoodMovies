@@ -29,6 +29,7 @@ namespace MoodMovies.DataAccessLayer
             await Task.Run(() => db.context.Users.Add(user));
             db.context.SaveChanges();
         }
+
         /// <summary>
         /// Gets user in db using id
         /// </summary>
@@ -38,6 +39,7 @@ namespace MoodMovies.DataAccessLayer
         {
             return await Task.Run(() => db.context.Users.Where(x => x.ID == id).SingleOrDefault());
         }
+
         /// <summary>
         /// Gets user in db using apikey
         /// </summary>
@@ -47,6 +49,7 @@ namespace MoodMovies.DataAccessLayer
         {
             return await Task.Run(() => db.context.Users.Where(x => x.ApiKey == apikey).SingleOrDefault());
         }
+
         /// <summary>
         /// Gets user in db using email and password
         /// </summary>
@@ -56,6 +59,7 @@ namespace MoodMovies.DataAccessLayer
         {
             return await Task.Run(() => db.context.Users.Where(x => x.Email == emailAddress && x.Password == password).SingleOrDefault());           
         }
+
         /// <summary>
         /// Gets user in db using email
         /// </summary>
@@ -65,6 +69,7 @@ namespace MoodMovies.DataAccessLayer
         {
             return await Task.Run(() => db.context.Users.Where(x => x.Email == emailAddress).SingleOrDefault());
         }
+
         /// <summary>
         /// Gets current user in db. there should only be one
         /// </summary>
@@ -73,6 +78,7 @@ namespace MoodMovies.DataAccessLayer
         {
             return await Task.Run(() => db.context.Users.Where(x => x.IsCurrentUser == true).SingleOrDefault());
         }
+
         /// <summary>
         /// Gets all users in db
         /// </summary>
@@ -82,6 +88,7 @@ namespace MoodMovies.DataAccessLayer
         {
             return await Task.Run(() => db.context.Users.ToList());
         }
+
         /// <summary>
         /// Set current user field and unset previous user if any
         /// </summary>
@@ -103,6 +110,7 @@ namespace MoodMovies.DataAccessLayer
             }
             SaveChanges();
         }
+
         /// <summary>
         /// Unset current user field of current user
         /// </summary>
@@ -116,6 +124,7 @@ namespace MoodMovies.DataAccessLayer
             }
             SaveChanges();
         }
+
         /// <summary>
         /// Set/Unset current user field
         /// </summary>
@@ -131,6 +140,7 @@ namespace MoodMovies.DataAccessLayer
             }
             SaveChanges();
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -139,6 +149,7 @@ namespace MoodMovies.DataAccessLayer
             await Task.Run(() => db.context.Users.Remove(currentUser));
             SaveChanges();
         }
+
         /// <summary>
         /// See if Api Key exists in db
         /// </summary>
@@ -164,6 +175,7 @@ namespace MoodMovies.DataAccessLayer
             await Task.Run(() => db.context.Movies.Add(movie));
             db.context.SaveChanges();
         }
+
         /// <summary>
         /// gets the usermovie link between a user and a movie
         /// </summary>
@@ -173,6 +185,7 @@ namespace MoodMovies.DataAccessLayer
         {
             return await Task.Run(() => db.context.UserMovies.Where(x => x.UId == movie.Movie_Id && x.User_Id == user.ID).SingleOrDefault());
         }
+
         /// <summary>
         /// Gets the movie using the id
         /// </summary>
@@ -182,6 +195,7 @@ namespace MoodMovies.DataAccessLayer
         {
             return await Task.Run(() => db.context.Movies.Where(x => x.Movie_Id == movieId).SingleOrDefault());
         }
+
         /// <summary>
         /// Add a movie to the movie table
         /// </summary>
@@ -235,6 +249,7 @@ namespace MoodMovies.DataAccessLayer
                 db.context.SaveChanges();
             });
         }
+
         /// <summary>
         /// Removes a movie from the watchlist
         /// </summary>
@@ -254,6 +269,7 @@ namespace MoodMovies.DataAccessLayer
                 }
             });
         }
+
         /// <summary>
         /// Returns all movies linked to a specific user as a watchlist item
         /// </summary>
@@ -286,6 +302,7 @@ namespace MoodMovies.DataAccessLayer
                 db.context.SaveChanges();
             });
         }
+
         /// <summary>
         /// Removes a movie from the favourites list
         /// </summary>
@@ -306,6 +323,7 @@ namespace MoodMovies.DataAccessLayer
                 }
             });
         }
+
         /// <summary>
         /// Returns all movies linked to a specific user as a favourites item
         /// </summary>

@@ -1,12 +1,7 @@
 ﻿using Caliburn.Micro;
-using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.DataAccessLayer;
 using MoodMovies.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MoodMovies.ViewModels
@@ -26,9 +21,7 @@ namespace MoodMovies.ViewModels
             Items.Add(RegisterVM = new RegisterViewModel(eventAgg, offlineDb, onlineDb, statusMessage));
         }
 
-        #region Events
         public IEventAggregator eventAgg;
-        #endregion
 
         #region Providers
         readonly IOfflineServiceProvider offlineDb;

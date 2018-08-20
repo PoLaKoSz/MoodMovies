@@ -6,8 +6,6 @@ namespace MoodMovies.ViewModels
 {
     public class MovieCardViewModel : Screen
     {
-        private Movies _movie;
-        public Movies Movie { get => _movie; set { _movie = value; NotifyOfPropertyChange(); } }
         
         public MovieCardViewModel(Movies movie, IEventAggregator _event)
         {
@@ -15,15 +13,17 @@ namespace MoodMovies.ViewModels
             myEvent = _event;
         }
         
-        #region Events
         public IEventAggregator myEvent;
-        #endregion
 
         #region Binding Properties
         private bool _isFavourited;
         public bool IsFavourited { get => _isFavourited; set { _isFavourited = value; NotifyOfPropertyChange(); } }
+
         private bool _isWatchListed;
         public bool IsWatchListed { get => _isWatchListed; set { _isWatchListed = value; NotifyOfPropertyChange(); } }
+
+        private Movies _movie;
+        public Movies Movie { get => _movie; set { _movie = value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Public Methods
@@ -31,6 +31,7 @@ namespace MoodMovies.ViewModels
         {
             myEvent.PublishOnUIThread(this);
         }
+
         /// <summary>
         /// Adds or removes a movie from thewatchlist. Fires an event with a message
         /// </summary>
@@ -51,6 +52,7 @@ namespace MoodMovies.ViewModels
                 }
             }
         }
+
         /// <summary>
         /// Adds or removes a movie from the favourites. Fires an event with a message
         /// </summary>
@@ -71,11 +73,11 @@ namespace MoodMovies.ViewModels
                 }
             }
         }
-        #endregion
         
         public void RequestTrailer()
         {
             myEvent.PublishOnUIThread(Movie.Movie_Id);
         }
+        #endregion
     }
 }

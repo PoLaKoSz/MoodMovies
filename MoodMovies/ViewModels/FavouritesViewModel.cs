@@ -22,8 +22,7 @@ namespace MoodMovies.ViewModels
         readonly IOfflineServiceProvider offDb;
         private readonly ImageCacher ImageCacher;
         #endregion
-
-        #region Methods
+        
         /// <summary>
         /// Loads up movie cards for the favourite items that are found
         /// </summary>
@@ -64,6 +63,5 @@ namespace MoodMovies.ViewModels
             }
 
         }
-        #endregion
     }
 }

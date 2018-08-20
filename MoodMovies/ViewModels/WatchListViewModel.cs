@@ -22,8 +22,7 @@ namespace MoodMovies.ViewModels
         private IOfflineServiceProvider offlineDb;
         private readonly ImageCacher ImageCacher;
         #endregion
-
-        #region Methods
+        
         public async Task LoadWatchListItems()
         {
             try
@@ -59,6 +58,5 @@ namespace MoodMovies.ViewModels
                 StatusMessage.Enqueue("Internal Error");
             }
         }
-        #endregion
     }
 }

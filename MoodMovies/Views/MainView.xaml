@@ -85,8 +85,7 @@
                                              cal:Message.Attach="DisplaySearchVM"
                                              IconForeground="LawnGreen"
                                              Foreground="black"
-                                             FontSize="17"
-                                             >
+                                             FontSize="17">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Magnify" />
                             </materialDesign:Chip.Icon>
@@ -102,8 +101,7 @@
                                              cal:Message.Attach="DisplayMovieListVM"
                                              FontSize="17"
                                              Foreground="black"
-                                             IconForeground="Aqua"
-                                            >
+                                             IconForeground="Aqua">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Movie" />
                             </materialDesign:Chip.Icon>
@@ -120,8 +118,7 @@
                                              FontSize="17"
                                              Foreground="black"
                                              IconBackground="{StaticResource PrimaryHueMidBrush}"
-                                             IconForeground="#FFE44242"
-                                             >
+                                             IconForeground="#FFE44242">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Heart" />
                             </materialDesign:Chip.Icon>
@@ -137,8 +134,7 @@
                                              cal:Message.Attach="DisplayWatchListVM"
                                              Foreground="black"
                                              FontSize="17"
-                                             IconForeground="#FFC229C2"
-                                             >
+                                             IconForeground="#FFC229C2">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Watch" />
                             </materialDesign:Chip.Icon>
@@ -280,8 +276,7 @@
                                              IconBackground="Transparent"
                                              Height="50"
                                              Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
-                                             IconForeground="{StaticResource SecondaryAccentMidBrush}"
-                                             >
+                                             IconForeground="{StaticResource SecondaryAccentMidBrush}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Movie"
                                                          Height="26"
@@ -297,8 +292,7 @@
                                              IconBackground="Transparent"
                                              Height="50"
                                              Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
-                                             IconForeground="#FFE44242"
-                                             >
+                                             IconForeground="#FFE44242">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Heart"
                                                          Height="26"
@@ -314,8 +308,7 @@
                                              IconBackground="Transparent"
                                              Height="50"
                                              Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
-                                             IconForeground="Green"
-                                             >
+                                             IconForeground="Green">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Watch"
                                                          Height="26"

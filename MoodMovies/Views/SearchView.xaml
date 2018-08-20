@@ -175,7 +175,7 @@
                                   HorizontalContentAlignment="Center" />
                 </ComboBox>
             </Border>
-           
+
             <Button Height="60"
                     HorizontalAlignment="Center"
                     Width="60"

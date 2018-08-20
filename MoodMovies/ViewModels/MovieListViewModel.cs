@@ -1,28 +1,26 @@
 ﻿using Caliburn.Micro;
 using DataModel.DataModel.Entities;
-using MaterialDesignThemes.Wpf;
-using MoodMovies.DataAccessLayer;
 using MoodMovies.Logic;
 using MoodMovies.Messages;
+using MoodMovies.Models;
 using MoodMovies.Resources;
 using System.Threading.Tasks;
 using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.ViewModels
 {
-    public class MovieListViewModel : ListBaseViewModel, IHandle<MovieListMessage>, IHandle<MovieCardViewModel>, IHandle<IMovieCardMessage>
+    public class MovieListViewModel : ListBaseViewModel,
+        IHandle<MovieListMessage>,
+        IHandle<MovieCardViewModel>,
+        IHandle<IMovieCardMessage>
     {
-        public MovieListViewModel(IEventAggregator events, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage, ImageCacher imageCacher, User currentUser)
-            : base(events, statusMessage, currentUser)
+        public MovieListViewModel(CommonParameters commonParameters, ImageCacher imageCacher, User currentUser)
+            : base(commonParameters, currentUser)
         {
-            offlineDb = serviceProvider;
             ImageCacher = imageCacher;
         }
 
-        #region Fields
-        private IOfflineServiceProvider offlineDb;
         private readonly ImageCacher ImageCacher;
-        #endregion
 
         /// <summary>
         /// Create a <see cref="Movies"/> object from a <see cref="Movie"/> one
@@ -109,17 +107,17 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                if (await offlineDb.AddMovie(mvCard.Movie))
+                if (await OfflineDB.AddMovie(mvCard.Movie))
                 {
                     //then create the link between the user and the movie and the watchlist
-                    await offlineDb.AddToWatchList(CurrentUser, mvCard.Movie);
+                    await OfflineDB.AddToWatchList(CurrentUser, mvCard.Movie);
                 }
                 else
                 {
-                    var usermovie = await offlineDb.GetUserMovieLink(CurrentUser, mvCard.Movie);
+                    var usermovie = await OfflineDB.GetUserMovieLink(CurrentUser, mvCard.Movie);
 
                     usermovie.Watchlist = true;
-                    offlineDb.SaveChanges();
+                    OfflineDB.SaveChanges();
                 }
             }
             catch
@@ -136,8 +134,8 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var movie = await offlineDb.GetMovie(mvCard.Movie.Movie_Id);
-                await offlineDb.RemoveFromWatchList(CurrentUser, movie);
+                var movie = await OfflineDB.GetMovie(mvCard.Movie.Movie_Id);
+                await OfflineDB.RemoveFromWatchList(CurrentUser, movie);
             }
             catch
             {
@@ -153,17 +151,17 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                if (await offlineDb.AddMovie(mvCard.Movie))
+                if (await OfflineDB.AddMovie(mvCard.Movie))
                 {
                     //then create the link between the user and the movie and the watchlist
-                    await offlineDb.AddToFavourites(CurrentUser, mvCard.Movie);
+                    await OfflineDB.AddToFavourites(CurrentUser, mvCard.Movie);
                 }
                 else
                 {
-                    var usermovie = await offlineDb.GetUserMovieLink(CurrentUser, mvCard.Movie);
+                    var usermovie = await OfflineDB.GetUserMovieLink(CurrentUser, mvCard.Movie);
 
                     usermovie.Favourite = true;
-                    offlineDb.SaveChanges();
+                    OfflineDB.SaveChanges();
                 }
             }
             catch
@@ -180,8 +178,8 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var movie = await offlineDb.GetMovie(mvCard.Movie.Movie_Id);
-                await offlineDb.RemoveFromFavourites(CurrentUser, movie);
+                var movie = await OfflineDB.GetMovie(mvCard.Movie.Movie_Id);
+                await OfflineDB.RemoveFromFavourites(CurrentUser, movie);
             }
             catch
             {

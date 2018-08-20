@@ -1,26 +1,31 @@
 ﻿using Caliburn.Micro;
 using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
+using MoodMovies.DataAccessLayer;
 using MoodMovies.Messages;
+using MoodMovies.Models;
 using System.Collections.ObjectModel;
 
 namespace MoodMovies.ViewModels
 {
     public abstract class ListBaseViewModel : Screen, IHandle<LoggedInMessage>
     {
-        public ListBaseViewModel(IEventAggregator events, SnackbarMessageQueue statusMessage, User currentUser)
+        public ListBaseViewModel(IListViewModelParams commonParameters, User currentUser)
         {
-            eventAgg = events;
+            eventAgg = commonParameters.EventAggregator;
             eventAgg.Subscribe(this);
+
+            OfflineDB = commonParameters.OfflineService;
 
             Movies = new ObservableCollection<MovieCardViewModel>();
 
-            StatusMessage = statusMessage;
+            StatusMessage = commonParameters.StatusMessage;
 
             CurrentUser = currentUser;
         }
 
         protected readonly IEventAggregator eventAgg;
+        protected readonly IOfflineServiceProvider OfflineDB;
 
         #region Properties
         private ObservableCollection<MovieCardViewModel> movies;

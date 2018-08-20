@@ -1,8 +1,6 @@
-﻿using Caliburn.Micro;
-using DataModel.DataModel.Entities;
-using MaterialDesignThemes.Wpf;
-using MoodMovies.DataAccessLayer;
+﻿using DataModel.DataModel.Entities;
 using MoodMovies.Logic;
+using MoodMovies.Models;
 using MoodMovies.Resources;
 using System.Threading.Tasks;
 
@@ -10,18 +8,14 @@ namespace MoodMovies.ViewModels
 {
     public class FavouritesViewModel: ListBaseViewModel
     {
-        public FavouritesViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage, ImageCacher imageCacher, User currentUser)
-            : base(_event, statusMessage, currentUser)
+        public FavouritesViewModel(IListViewModelParams commonParameters, ImageCacher imageCacher, User currentUser)
+            : base(commonParameters, currentUser)
         {
             DisplayName = "Favourites";
-            offDb = serviceProvider;
             ImageCacher = imageCacher;
         }
 
-        #region Fields
-        readonly IOfflineServiceProvider offDb;
         private readonly ImageCacher ImageCacher;
-        #endregion
         
         /// <summary>
         /// Loads up movie cards for the favourite items that are found
@@ -31,7 +25,7 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var movies = await offDb.GetAllFavouriteItems(CurrentUser);
+                var movies = await OfflineDB.GetAllFavouriteItems(CurrentUser);
                 //build up the movie card view models
                 Movies.Clear();
                 await Task.Run(() =>

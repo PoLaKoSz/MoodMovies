@@ -2,23 +2,24 @@
 using MaterialDesignThemes.Wpf;
 using MoodMovies.DataAccessLayer;
 using MoodMovies.Messages;
+using MoodMovies.Models;
 using System.Threading.Tasks;
 
 namespace MoodMovies.ViewModels
 {
     public class StartPageViewModel : Conductor<Screen>.Collection.OneActive
     {
-        public StartPageViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage)
+        public StartPageViewModel(CommonParameters commonParameters)
         {
-            eventAgg = _event;
+            eventAgg = commonParameters.EventAggregator;
             eventAgg.Subscribe(this);
 
-            offlineDb = offlineService;
-            onlineDb = onlineService;
-            StatusMessage = statusMessage;
+            offlineDb = commonParameters.OfflineService;
+            onlineDb = commonParameters.OnlineService;
+            StatusMessage = commonParameters.StatusMessage;
 
-            Items.Add(LoginVM = new LoginViewModel(eventAgg, offlineDb, onlineDb, statusMessage));
-            Items.Add(RegisterVM = new RegisterViewModel(eventAgg, offlineDb, onlineDb, statusMessage));
+            Items.Add(LoginVM = new LoginViewModel(commonParameters));
+            Items.Add(RegisterVM = new RegisterViewModel(commonParameters));
         }
 
         public IEventAggregator eventAgg;

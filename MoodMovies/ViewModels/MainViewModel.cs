@@ -35,13 +35,14 @@ namespace MoodMovies.ViewModels
             _onlineDB = new OnlineServiceProvider();
 
             ImageCacher imageCacher = new ImageCacher(_appFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
+            CommonParameters commonParameters = new CommonParameters(eventAgg, _offlineDb, _onlineDB, StatusMessage);
 
-            StartVM = new StartPageViewModel(eventAgg, _offlineDb, _onlineDB, StatusMessage);
-            UserVM = new UserControlViewModel(eventAgg, _offlineDb, StatusMessage);
-            SearchVM = new SearchViewModel(eventAgg, _offlineDb, _onlineDB, StatusMessage, new SearchService(_onlineDB));
-            MovieListVM = new MovieListViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser);
-            FavouriteVM = new FavouritesViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser);
-            WatchListVM = new WatchListViewModel(eventAgg, _offlineDb, StatusMessage, imageCacher, UserVM.CurrentUser);
+            StartVM = new StartPageViewModel(commonParameters);
+            UserVM = new UserControlViewModel(commonParameters);
+            SearchVM = new SearchViewModel(commonParameters, new SearchService(_onlineDB));
+            MovieListVM = new MovieListViewModel(commonParameters, imageCacher, UserVM.CurrentUser);
+            FavouriteVM = new FavouritesViewModel(commonParameters, imageCacher, UserVM.CurrentUser);
+            WatchListVM = new WatchListViewModel(commonParameters, imageCacher, UserVM.CurrentUser);
         }
 
         public IEventAggregator eventAgg = new EventAggregator();

@@ -1,8 +1,6 @@
-﻿using Caliburn.Micro;
-using DataModel.DataModel.Entities;
-using MaterialDesignThemes.Wpf;
-using MoodMovies.DataAccessLayer;
+﻿using DataModel.DataModel.Entities;
 using MoodMovies.Logic;
+using MoodMovies.Models;
 using MoodMovies.Resources;
 using System.Threading.Tasks;
 
@@ -10,24 +8,20 @@ namespace MoodMovies.ViewModels
 {
     public class WatchListViewModel : ListBaseViewModel
     {
-        public WatchListViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage, ImageCacher imageCacher, User currentUser)
-            : base(_event, statusMessage, currentUser)
+        public WatchListViewModel(CommonParameters commonParameters, ImageCacher imageCacher, User currentUser)
+            : base(commonParameters, currentUser)
         {
             DisplayName = "Favourites";
-            offlineDb = serviceProvider;
             ImageCacher = imageCacher;
         }
 
-        #region Fields
-        private IOfflineServiceProvider offlineDb;
         private readonly ImageCacher ImageCacher;
-        #endregion
         
         public async Task LoadWatchListItems()
         {
             try
             {
-                var movies = await offlineDb.GetAllWatchListItems(CurrentUser);
+                var movies = await OfflineDB.GetAllWatchListItems(CurrentUser);
                 //build up the movie card view models
                 Movies.Clear();
                 await Task.Run(() =>

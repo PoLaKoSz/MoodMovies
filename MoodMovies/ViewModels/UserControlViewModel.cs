@@ -1,29 +1,21 @@
 ﻿using Caliburn.Micro;
 using DataModel.DataModel.Entities;
-using MaterialDesignThemes.Wpf;
-using MoodMovies.DataAccessLayer;
 using MoodMovies.Messages;
+using MoodMovies.Models;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace MoodMovies.ViewModels
 {
-    public class UserControlViewModel : Screen
+    public class UserControlViewModel : BaseViewModel
     {
-        public UserControlViewModel(IEventAggregator _event, IOfflineServiceProvider serviceProvider, SnackbarMessageQueue statusMessage)
+        public UserControlViewModel(CommonParameters commonParameters)
+            : base(commonParameters)
         {
-            eventAgg = _event;
-
             AllUsers = new ObservableCollection<User>();
-            offlineDb = serviceProvider;
-            StatusMessage = statusMessage;
         }
 
-        public IEventAggregator eventAgg;
-
         #region Properties
-        public SnackbarMessageQueue StatusMessage { get; set; }
-
         private User _selectedUser;
         public User SelectedUser { get => _selectedUser; set { _selectedUser = value; NotifyOfPropertyChange(); Email = SelectedUser?.Email ?? ""; } }
 
@@ -42,8 +34,6 @@ namespace MoodMovies.ViewModels
         private bool _keepLoggedIn;
         public bool KeepLoggedIn { get => _keepLoggedIn; set { _keepLoggedIn = value; NotifyOfPropertyChange(); } }
         #endregion
-
-        readonly IOfflineServiceProvider offlineDb;
 
         #region Public methods                 
         /// <summary>

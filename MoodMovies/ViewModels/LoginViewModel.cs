@@ -1,16 +1,15 @@
 ﻿using Caliburn.Micro;
 using DataModel.DataModel.Entities;
-using MaterialDesignThemes.Wpf;
-using MoodMovies.DataAccessLayer;
 using MoodMovies.Messages;
+using MoodMovies.Models;
 using MoodMovies.Resources.Validation;
 
 namespace MoodMovies.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public LoginViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage) : base(
-            _event, offlineService, onlineService, statusMessage)
+        public LoginViewModel(CommonParameters commonParameters)
+            : base(commonParameters)
         {
             UserEmail = string.Empty;
             UserPassword = string.Empty;

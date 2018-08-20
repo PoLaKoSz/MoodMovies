@@ -1,7 +1,5 @@
-﻿using Caliburn.Micro;
-using DataModel.DataModel.Entities;
-using MaterialDesignThemes.Wpf;
-using MoodMovies.DataAccessLayer;
+﻿using DataModel.DataModel.Entities;
+using MoodMovies.Models;
 using MoodMovies.Resources.Validation;
 using System.Threading.Tasks;
 
@@ -9,8 +7,8 @@ namespace MoodMovies.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {
-        public RegisterViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage) : base(
-            _event, offlineService, onlineService, statusMessage)
+        public RegisterViewModel(CommonParameters commonParameters)
+            : base(commonParameters)
         {
             NewUser = new User();
         }

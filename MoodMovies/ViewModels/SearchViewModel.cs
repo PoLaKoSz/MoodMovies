@@ -1,8 +1,7 @@
 ﻿using Caliburn.Micro;
 using DataModel.DataModel.Entities;
-using MaterialDesignThemes.Wpf;
-using MoodMovies.DataAccessLayer;
 using MoodMovies.Messages;
+using MoodMovies.Models;
 using MoodMovies.Services;
 using System;
 using System.Collections.Generic;
@@ -11,33 +10,21 @@ using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.ViewModels
 {
-    internal class SearchViewModel : Screen, IHandle<LoggedInMessage>
+    internal class SearchViewModel : BaseViewModel
     {
-        public SearchViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage, ISearchService searchService)
+        public SearchViewModel(CommonParameters commonParameters, ISearchService searchService)
+            : base(commonParameters)
         {
-            eventAgg = _event;
-            eventAgg.Subscribe(this);
-
-            offlineDb = offlineService;
-            onlineDb = onlineService;
-            StatusMessage = statusMessage;
             SearchService = searchService;
         }
 
-        public IEventAggregator eventAgg;
-
-        #region Providers & Services
-        readonly IOfflineServiceProvider offlineDb;
-        private IOnlineServiceProvider onlineDb;
         private readonly ISearchService SearchService;
-        #endregion
 
         #region General Properties
         private string _loadingMessage;
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
         private bool _isLoading;
         public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
-        public SnackbarMessageQueue StatusMessage { get; set; }
         #endregion
 
         #region Properties
@@ -61,7 +48,6 @@ namespace MoodMovies.ViewModels
         public User CurrentUser { get; set; }
         #endregion
 
-        #region Public methods
         public async void BeginSearch()
         {
             //if no cient has been set
@@ -106,11 +92,5 @@ namespace MoodMovies.ViewModels
                 }
             }
         }
-
-        public void Handle(LoggedInMessage message)
-        {
-            onlineDb.ChangeClient(message.CurrentUser.ApiKey);
-        }
-        #endregion
     }
 }

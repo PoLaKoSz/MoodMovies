@@ -1,17 +1,18 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.DataAccessLayer;
+using MoodMovies.Models;
 
 namespace MoodMovies.ViewModels
 {
     public class BaseViewModel : Screen
     {
-        public BaseViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage)
+        public BaseViewModel(CommonParameters commonParameters)
         {
-            eventAgg = _event;
-            StatusMessage = statusMessage;
-            offlineDb = offlineService;
-            onlineDb = onlineService;
+            eventAgg = commonParameters.EventAggregator;
+            StatusMessage = commonParameters.StatusMessage;
+            offlineDb = commonParameters.OfflineService;
+            onlineDb = commonParameters.OnlineService;
         }
 
         public IEventAggregator eventAgg;

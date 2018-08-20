@@ -23,7 +23,7 @@ namespace MoodMovies.ViewModels
             if (!isValidFields)
                 return;
 
-            var isUserWithEmailExists = await offlineDb.GetUserByEmail(NewUser.Email);
+            var isUserWithEmailExists = await OfflineDb.GetUserByEmail(NewUser.Email);
 
             if (isUserWithEmailExists != null)
             {
@@ -32,7 +32,7 @@ namespace MoodMovies.ViewModels
                 return;
             }
 
-            var isValidApiKey = await Task.Run(() => CredentialValidation.IsValidApiKey(NewUser.ApiKey, onlineDb));
+            var isValidApiKey = await Task.Run(() => CredentialValidation.IsValidApiKey(NewUser.ApiKey, OnlineDb));
 
             if (!isValidApiKey)
             {
@@ -41,7 +41,7 @@ namespace MoodMovies.ViewModels
                 return;
             }
 
-            await offlineDb.CreateUser(NewUser);
+            await OfflineDb.CreateUser(NewUser);
 
             StatusMessage.Enqueue("Your account has been successfully created!");
             NewUser = new User();
@@ -63,7 +63,7 @@ namespace MoodMovies.ViewModels
                 return false;
             }
 
-            var isUserWithApiKeyEmailExists = await offlineDb.GetUserByApiKey(NewUser.ApiKey);
+            var isUserWithApiKeyEmailExists = await OfflineDb.GetUserByApiKey(NewUser.ApiKey);
 
             if (isUserWithApiKeyEmailExists != null)
             {

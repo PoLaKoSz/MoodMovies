@@ -32,7 +32,7 @@ namespace MoodMovies.ViewModels
                         {
                             ImageCacher.ScanPoster(movie);
 
-                            var card = new MovieCardViewModel(movie, eventAgg)
+                            var card = new MovieCardViewModel(movie, EventAgg)
                             {
                                 IsWatchListed = true,
                                 Parent = this

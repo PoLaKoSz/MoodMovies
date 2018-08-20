@@ -21,36 +21,35 @@ namespace MoodMovies.ViewModels
     {
         public MainViewModel()
         {
+            var eventAgg = new EventAggregator();
             eventAgg.Subscribe(this);
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
 
             string appRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies");
-            _appFolders = new AppFolders(appRootFolder);
+            var appFolders = new AppFolders(appRootFolder);
 
             IDb database = new Db(appRootFolder);
             database.AutoMigrate();
             database.Connect();
 
-            _offlineDb = new OfflineServiceProvider(database);
-            _onlineDB = new OnlineServiceProvider();
+            var offlineDb = new OfflineServiceProvider(database);
+            var onlineDB = new OnlineServiceProvider();
 
-            ImageCacher imageCacher = new ImageCacher(_appFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
-            CommonParameters commonParameters = new CommonParameters(eventAgg, _offlineDb, _onlineDB, StatusMessage);
+            ImageCacher imageCacher = new ImageCacher(
+                appFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
+
+            CommonParameters commonParameters = new CommonParameters(
+                eventAgg, offlineDb, onlineDB, new SnackbarMessageQueue());
 
             StartVM = new StartPageViewModel(commonParameters);
             UserVM = new UserControlViewModel(commonParameters);
-            SearchVM = new SearchViewModel(commonParameters, new SearchService(_onlineDB));
+            SearchVM = new SearchViewModel(commonParameters, new SearchService(onlineDB));
             MovieListVM = new MovieListViewModel(commonParameters, imageCacher, UserVM.CurrentUser);
             FavouriteVM = new FavouritesViewModel(commonParameters, imageCacher, UserVM.CurrentUser);
             WatchListVM = new WatchListViewModel(commonParameters, imageCacher, UserVM.CurrentUser);
         }
 
-        public IEventAggregator eventAgg = new EventAggregator();
-
         #region Fields
-        readonly IOfflineServiceProvider _offlineDb;
-        private readonly AppFolders _appFolders;
-        private IOnlineServiceProvider _onlineDB;
         private string _loadingMessage;
         private bool _isLoading;
         private bool _canNavigate;
@@ -60,7 +59,6 @@ namespace MoodMovies.ViewModels
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
         public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
         public bool CanNavigate { get => _canNavigate; set { _canNavigate = value; NotifyOfPropertyChange(); } }
-        public SnackbarMessageQueue StatusMessage { get; set; } = new SnackbarMessageQueue();
         #endregion
 
         #region Child View Models
@@ -174,11 +172,6 @@ namespace MoodMovies.ViewModels
             Items.Add(MovieListVM);
             Items.Add(FavouriteVM);
             Items.Add(WatchListVM);
-
-            eventAgg.Subscribe(SearchVM);
-            eventAgg.Subscribe(MovieListVM);
-            eventAgg.Subscribe(FavouriteVM);
-            eventAgg.Subscribe(WatchListVM);
 
             await DisplayStartPage();
             base.OnViewLoaded(view);

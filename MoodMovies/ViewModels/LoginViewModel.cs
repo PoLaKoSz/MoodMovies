@@ -31,7 +31,7 @@ namespace MoodMovies.ViewModels
             if (!IsFieldsValid())
                 return;
 
-            var loggingUser = await offlineDb.GetUserByEmailPassword(UserEmail, UserPassword);
+            var loggingUser = await OfflineDb.GetUserByEmailPassword(UserEmail, UserPassword);
 
             if (loggingUser == null)
             {
@@ -44,7 +44,7 @@ namespace MoodMovies.ViewModels
             UserEmail = "";
             UserPassword = "";
 
-            eventAgg.PublishOnUIThread(new LoggedInMessage(loggingUser));
+            EventAgg.PublishOnUIThread(new LoggedInMessage(loggingUser));
         }
 
         private bool IsFieldsValid()
@@ -70,11 +70,11 @@ namespace MoodMovies.ViewModels
         {
             if (KeepLoggedIn)
             {
-                offlineDb.SetCurrentUserFieldToTrue(loggingUser);
+                OfflineDb.SetCurrentUserFieldToTrue(loggingUser);
             }
             else if (loggingUser.IsCurrentUser && KeepLoggedIn)
             {
-                offlineDb.SetCurrentUserFieldToFalse(loggingUser);
+                OfflineDb.SetCurrentUserFieldToFalse(loggingUser);
             }
         }
     }

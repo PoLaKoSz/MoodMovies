@@ -44,7 +44,7 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var users = await offlineDb.GetAllUsers();
+                var users = await OfflineDb.GetAllUsers();
 
                 AllUsers.Clear();
 
@@ -58,10 +58,10 @@ namespace MoodMovies.ViewModels
 
         public async Task Login()
         {
-            eventAgg.PublishOnUIThread(new StartLoadingMessage("Logging in"));
+            EventAgg.PublishOnUIThread(new StartLoadingMessage("Logging in"));
             try
             {
-                var user = await offlineDb.GetUserByEmailPassword(Email, Password);
+                var user = await OfflineDb.GetUserByEmailPassword(Email, Password);
 
                 if (user != null)
                 {
@@ -69,14 +69,14 @@ namespace MoodMovies.ViewModels
                     if (KeepLoggedIn)
                     {
                         //change status in db
-                        await offlineDb.SetCurrentUserFieldToTrue(user);
+                        await OfflineDb.SetCurrentUserFieldToTrue(user);
                     }
                     else if (user.IsCurrentUser && !KeepLoggedIn)
                     {
-                        offlineDb.SetCurrentUserFieldToFalse(user);
+                        OfflineDb.SetCurrentUserFieldToFalse(user);
                     }
                     CurrentUser = SelectedUser;
-                    eventAgg.PublishOnUIThread(new SwitchedUserMessage(user));
+                    EventAgg.PublishOnUIThread(new SwitchedUserMessage(user));
                     Email = "";
                     Password = "";
                 }
@@ -90,7 +90,7 @@ namespace MoodMovies.ViewModels
 
             }
 
-            eventAgg.PublishOnUIThread(new StopLoadingMessage());
+            EventAgg.PublishOnUIThread(new StopLoadingMessage());
         }
         #endregion
     }

@@ -65,12 +65,12 @@ namespace MoodMovies.ViewModels
                         Movies movieEntity = ParseFromTmdb(movie);
                         ImageCacher.ScanPoster(movieEntity);
 
-                        Movies.AddOnUIThread(new MovieCardViewModel(movieEntity, eventAgg));
+                        Movies.AddOnUIThread(new MovieCardViewModel(movieEntity, EventAgg));
                     }
                 }
             });
 
-            eventAgg.PublishOnUIThread(new ResultsReadyMessage());
+            EventAgg.PublishOnUIThread(new ResultsReadyMessage());
         }
 
         public void Handle(MovieCardViewModel message)

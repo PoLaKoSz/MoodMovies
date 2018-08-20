@@ -51,12 +51,12 @@ namespace MoodMovies.ViewModels
         public async void BeginSearch()
         {
             //if no cient has been set
-            if (onlineDb.Client == null)
+            if (OnlineDb.Client == null)
             {
-                onlineDb.ChangeClient(CurrentUser.ApiKey);
+                OnlineDb.ChangeClient(CurrentUser.ApiKey);
             }
 
-            if (onlineDb.Client == null)
+            if (OnlineDb.Client == null)
             {
                 StatusMessage.Enqueue("Please select a user account from the 'User' page.");
             }
@@ -69,11 +69,11 @@ namespace MoodMovies.ViewModels
                         || SelectedBatch != null 
                         || !string.IsNullOrEmpty(SelectedMood))
                     {
-                        eventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
+                        EventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
                         MovieList = await SearchService.Search(CurrentUser.ApiKey, SearchText, ActorText, (SelectedBatch != null) ? SelectedBatch.Tag.ToString() : null, SelectedMood);
                         if (MovieList != null || MovieList.Count != 0)
                         {
-                            eventAgg.PublishOnUIThread(new MovieListMessage(MovieList, true, SearchText));
+                            EventAgg.PublishOnUIThread(new MovieListMessage(MovieList, true, SearchText));
                         }
                         else
                         {
@@ -88,7 +88,7 @@ namespace MoodMovies.ViewModels
                 finally
                 {
                     IsLoading = false;
-                    eventAgg.PublishOnUIThread(new StopLoadingMessage());
+                    EventAgg.PublishOnUIThread(new StopLoadingMessage());
                 }
             }
         }

@@ -12,8 +12,8 @@ namespace MoodMovies.ViewModels
     {
         public ListBaseViewModel(IListViewModelParams commonParameters, User currentUser)
         {
-            eventAgg = commonParameters.EventAggregator;
-            eventAgg.Subscribe(this);
+            EventAgg = commonParameters.EventAggregator;
+            EventAgg.Subscribe(this);
 
             OfflineDB = commonParameters.OfflineService;
 
@@ -24,7 +24,7 @@ namespace MoodMovies.ViewModels
             CurrentUser = currentUser;
         }
 
-        protected readonly IEventAggregator eventAgg;
+        protected readonly IEventAggregator EventAgg;
         protected readonly IOfflineServiceProvider OfflineDB;
 
         #region Properties
@@ -34,9 +34,9 @@ namespace MoodMovies.ViewModels
         private MovieCardViewModel _selectedItem;
         public MovieCardViewModel SelectedItem { get => _selectedItem; set { _selectedItem = value; NotifyOfPropertyChange(); } }
 
-        public SnackbarMessageQueue StatusMessage { get; set; }
+        protected SnackbarMessageQueue StatusMessage { get; }
 
-        public User CurrentUser { get; set; }
+        protected User CurrentUser { get; private set; }
         #endregion
 
         /// <summary>

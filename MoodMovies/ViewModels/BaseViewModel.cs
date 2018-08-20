@@ -5,23 +5,22 @@ using MoodMovies.Models;
 
 namespace MoodMovies.ViewModels
 {
-    public class BaseViewModel : Screen
+    public abstract class BaseViewModel : Screen
     {
         public BaseViewModel(CommonParameters commonParameters)
         {
-            eventAgg = commonParameters.EventAggregator;
+            EventAgg = commonParameters.EventAggregator;
             StatusMessage = commonParameters.StatusMessage;
-            offlineDb = commonParameters.OfflineService;
-            onlineDb = commonParameters.OnlineService;
+            OfflineDb = commonParameters.OfflineService;
+            OnlineDb = commonParameters.OnlineService;
+
+            EventAgg.Subscribe(this);
         }
 
-        public IEventAggregator eventAgg;
+        protected readonly IEventAggregator EventAgg;
+        protected readonly SnackbarMessageQueue StatusMessage;
 
-        #region Providers
-        protected IOfflineServiceProvider offlineDb;
-        protected IOnlineServiceProvider onlineDb;
-        #endregion
-
-        public SnackbarMessageQueue StatusMessage { get; set; }
+        protected IOfflineServiceProvider OfflineDb { get; private set; }
+        protected IOnlineServiceProvider OnlineDb { get; private set; }
     }
 }

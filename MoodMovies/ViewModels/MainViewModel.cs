@@ -17,12 +17,14 @@ namespace MoodMovies.ViewModels
     internal class MainViewModel : Conductor<Screen>.Collection.OneActive,
         IHandle<ResultsReadyMessage>,
         IHandle<StartLoadingMessage>,
-        IHandle<StopLoadingMessage>
+        IHandle<StopLoadingMessage>,
+        IHandle<LoggedInMessage>
     {
         public MainViewModel()
         {
-            var eventAgg = new EventAggregator();
-            eventAgg.Subscribe(this);
+            _eventAggregator = new EventAggregator();
+            _eventAggregator.Subscribe(this);
+
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
 
             string appRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies");
@@ -38,8 +40,10 @@ namespace MoodMovies.ViewModels
             ImageCacher imageCacher = new ImageCacher(
                 appFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
 
+            StatusMessage = new SnackbarMessageQueue();
+
             CommonParameters commonParameters = new CommonParameters(
-                eventAgg, offlineDb, onlineDB, new SnackbarMessageQueue());
+                _eventAggregator, offlineDb, onlineDB, StatusMessage);
 
             StartVM = new StartPageViewModel(commonParameters);
             UserVM = new UserControlViewModel(commonParameters);
@@ -53,12 +57,15 @@ namespace MoodMovies.ViewModels
         private string _loadingMessage;
         private bool _isLoading;
         private bool _canNavigate;
+        private readonly IEventAggregator _eventAggregator;
         #endregion
 
         #region General Properties
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
         public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
         public bool CanNavigate { get => _canNavigate; set { _canNavigate = value; NotifyOfPropertyChange(); } }
+
+        public SnackbarMessageQueue StatusMessage { get; }
         #endregion
 
         #region Child View Models
@@ -155,6 +162,11 @@ namespace MoodMovies.ViewModels
         public void Handle(StopLoadingMessage message)
         {
             IsLoading = false;
+        }
+
+        public void Handle(LoggedInMessage message)
+        {
+            DisplaySearchVM();
         }
 
         public void LogOut()

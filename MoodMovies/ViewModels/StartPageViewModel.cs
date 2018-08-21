@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace MoodMovies.ViewModels
 {
-    public class StartPageViewModel : Conductor<Screen>.Collection.OneActive
+    public class StartPageViewModel : Conductor<Screen>.Collection.OneActive, IHandle<RegisteredMessage>
     {
         public StartPageViewModel(CommonParameters commonParameters)
         {
             _eventAgg = commonParameters.EventAggregator;
+            _eventAgg.Subscribe(this);
 
             _offlineDb = commonParameters.OfflineService;
             var onlineDb = commonParameters.OnlineService;
@@ -74,6 +75,11 @@ namespace MoodMovies.ViewModels
         {
             DeactivateItem(ActiveItem, false);
             ActivateItem(RegisterVM);
+        }
+
+        public void Handle(RegisteredMessage message)
+        {
+            CanShowLoginPage = true;
         }
         #endregion
 

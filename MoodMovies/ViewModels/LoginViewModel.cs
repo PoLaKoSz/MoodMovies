@@ -31,10 +31,14 @@ namespace MoodMovies.ViewModels
             if (!IsFieldsValid())
                 return;
 
+            EventAgg.PublishOnUIThread(new StartLoadingMessage("Logging in"));
+
             var loggingUser = await OfflineDb.GetUserByEmailPassword(UserEmail, UserPassword);
 
             if (loggingUser == null)
             {
+                EventAgg.PublishOnUIThread(new StopLoadingMessage());
+
                 StatusMessage.Enqueue("Couldn't find a User with this Email and Password combination!");
                 return;
             }
@@ -45,6 +49,7 @@ namespace MoodMovies.ViewModels
             UserPassword = "";
 
             EventAgg.PublishOnUIThread(new LoggedInMessage(loggingUser));
+            EventAgg.BeginPublishOnUIThread(new StopLoadingMessage());
         }
 
         private bool IsFieldsValid()

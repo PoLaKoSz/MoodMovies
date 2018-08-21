@@ -2,6 +2,10 @@
 
 namespace MoodMovies.Messages
 {
+    public class RegisteredMessage
+    {
+    }
+
     public class LoggedInMessage
     {
         public LoggedInMessage(User user)

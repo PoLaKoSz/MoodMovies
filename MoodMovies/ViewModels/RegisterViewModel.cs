@@ -1,4 +1,6 @@
-﻿using DataModel.DataModel.Entities;
+﻿using Caliburn.Micro;
+using DataModel.DataModel.Entities;
+using MoodMovies.Messages;
 using MoodMovies.Models;
 using MoodMovies.Resources.Validation;
 using System.Threading.Tasks;
@@ -40,6 +42,8 @@ namespace MoodMovies.ViewModels
                 NewUser.ApiKey = "";
                 return;
             }
+
+            EventAgg.PublishOnUIThread(new RegisteredMessage());
 
             await OfflineDb.CreateUser(NewUser);
 

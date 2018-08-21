@@ -23,7 +23,7 @@ namespace MoodMovies.ViewModels
 
         public string UserPassword { get => _userPassword; set { _userPassword = value; NotifyOfPropertyChange(); } }
 
-        public bool KeepLoggedIn;
+        public bool KeepLoggedIn { get; set; }
         #endregion
 
         public async void Login()
@@ -77,7 +77,7 @@ namespace MoodMovies.ViewModels
             {
                 OfflineDb.SetCurrentUserFieldToTrue(loggingUser);
             }
-            else if (loggingUser.IsCurrentUser && KeepLoggedIn)
+            else if (loggingUser.IsCurrentUser && !KeepLoggedIn)
             {
                 OfflineDb.SetCurrentUserFieldToFalse(loggingUser);
             }

@@ -113,10 +113,12 @@ namespace MoodMovies.ViewModels
             DeactivateItem(ActiveItem, true);
             ActivateItem(StartVM);
         }
-        public void DisplayUserVM()
+
+        public async void DisplayUserVM()
         {
             DeactivateItem(ActiveItem, true);
             ActivateItem(UserVM);
+            await UserVM.GetUsers();
         }
 
         public void DisplaySearchVM()

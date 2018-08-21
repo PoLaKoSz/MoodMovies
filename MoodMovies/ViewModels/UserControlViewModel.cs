@@ -43,8 +43,6 @@ namespace MoodMovies.ViewModels
             {
                 var users = await OfflineDb.GetAllUsers();
 
-                AllUsers.Clear();
-
                 AllUsers = new ObservableCollection<User>(users);
             }
             catch

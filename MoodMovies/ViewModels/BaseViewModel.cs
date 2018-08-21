@@ -26,7 +26,7 @@ namespace MoodMovies.ViewModels
         protected IOfflineServiceProvider OfflineDb { get; private set; }
         protected IOnlineServiceProvider OnlineDb { get; private set; }
 
-        protected User CurrentUser { get; private set; }
+        public User CurrentUser { get; private set; }
 
 
         public void Handle(LoggedInMessage message)

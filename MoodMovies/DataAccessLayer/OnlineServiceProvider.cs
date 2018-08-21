@@ -8,15 +8,14 @@ namespace MoodMovies.DataAccessLayer
 {
     internal class OnlineServiceProvider : IOnlineServiceProvider
     {
-        #region Properties
-        public EasyClient Client { get; set; }
+        private EasyClient Client { get; set; }
         private IMovieApi MovieClient;
-        #endregion
 
         public void ChangeClient(string Key)
         {
             Client = new EasyClient(Key);
         }
+
         public async Task<MovieList> SearchByTitleAsync(string title)
         {
             MovieClient = Client.GetApi<IMovieApi>().Value;

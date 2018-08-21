@@ -47,15 +47,10 @@ namespace MoodMovies.ViewModels
                     }
                 });
             }
-            catch when (CurrentUser == null)
-            {
-                StatusMessage.Enqueue("Please select a user from the 'User' page.");
-            }
             catch
             {
                 StatusMessage.Enqueue("Internal Error");
             }
-
         }
     }
 }

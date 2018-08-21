@@ -24,13 +24,6 @@ namespace MoodMovies.ViewModels
         private readonly IEventAggregator _eventAgg;
         private readonly IOfflineServiceProvider _offlineDb;
 
-        #region General Properties
-        private string _loadingMessage;
-        public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
-        private bool _isLoading;
-        public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
-        #endregion
-
         #region Child View Models
         private LoginViewModel _loginVM;
         public LoginViewModel LoginVM { get => _loginVM; set { _loginVM = value; NotifyOfPropertyChange(); } }

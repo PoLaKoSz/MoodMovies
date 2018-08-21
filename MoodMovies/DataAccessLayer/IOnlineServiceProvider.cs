@@ -6,8 +6,6 @@ namespace MoodMovies.DataAccessLayer
 {
     public interface IOnlineServiceProvider
     {
-        EasyClient Client { get; set; }
-
         void ChangeClient(string Key);
 
         Task<MovieList> SearchByTitleAsync(string title);

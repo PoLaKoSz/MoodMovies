@@ -1,7 +1,6 @@
 ﻿using Caliburn.Micro;
 using MoodMovies.Messages;
 using MoodMovies.Models;
-using MoodMovies.Services;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using TMdbEasy.TmdbObjects.Movies;
@@ -10,13 +9,10 @@ namespace MoodMovies.ViewModels
 {
     internal class SearchViewModel : BaseViewModel
     {
-        public SearchViewModel(CommonParameters commonParameters, ISearchService searchService)
+        public SearchViewModel(CommonParameters commonParameters)
             : base(commonParameters)
         {
-            SearchService = searchService;
         }
-
-        private readonly ISearchService SearchService;
 
         #region Properties
         private string _simpleSearchBox;
@@ -48,7 +44,7 @@ namespace MoodMovies.ViewModels
                 {
                     EventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
 
-                    MovieList = await SearchService.Search(CurrentUser.ApiKey, SearchText, ActorText, (SelectedBatch != null) ? SelectedBatch.Tag.ToString() : null, SelectedMood);
+                    MovieList = await OnlineDb.Search(CurrentUser.ApiKey, SearchText, ActorText, (SelectedBatch != null) ? SelectedBatch.Tag.ToString() : null, SelectedMood);
 
                     if (MovieList != null || MovieList.Count != 0)
                     {

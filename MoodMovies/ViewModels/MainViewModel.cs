@@ -5,7 +5,6 @@ using MoodMovies.DataAccessLayer;
 using MoodMovies.Logic;
 using MoodMovies.Messages;
 using MoodMovies.Models;
-using MoodMovies.Services;
 using System;
 using System.Globalization;
 using System.IO;
@@ -47,7 +46,7 @@ namespace MoodMovies.ViewModels
 
             StartVM = new StartPageViewModel(commonParameters);
             UserVM = new UserControlViewModel(commonParameters);
-            SearchVM = new SearchViewModel(commonParameters, new SearchService(onlineDB));
+            SearchVM = new SearchViewModel(commonParameters);
             MovieListVM = new MovieListViewModel(commonParameters, imageCacher);
             FavouriteVM = new FavouritesViewModel(commonParameters, imageCacher);
             WatchListVM = new WatchListViewModel(commonParameters, imageCacher);

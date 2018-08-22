@@ -1,4 +1,6 @@
 ﻿using MoodMovies.Resources;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TMdbEasy;
 using TMdbEasy.ApiInterfaces;
@@ -14,6 +16,67 @@ namespace MoodMovies.DataAccessLayer
         public void ChangeClient(string Key)
         {
             Client = new EasyClient(Key);
+        }
+
+        public async Task<List<Movie>> Search(string apiKey, string SearchText, string ActorText, string SelectedBatch, string SelectedMood)
+        {
+            List<Movie> finalResult = new List<Movie>();
+
+            MovieList moviesByText = null;
+            MovieList moviesByActor = null;
+            MovieList moviesByBatch = null;
+            MovieList moviesByMood = null;
+            //we need to do traverse the pages as well as there might be more than 1
+            //not implemented yet
+            if (!string.IsNullOrEmpty(SearchText))
+            {
+                moviesByText = await SearchByTitleAsync(SearchText);
+            }
+
+            if (!string.IsNullOrEmpty(ActorText))
+            {
+                moviesByActor = await SearchByActorAsync(ActorText);
+            }
+
+            if (!string.IsNullOrEmpty(SelectedBatch) && SelectedBatch.ToLower() != "everything")
+            {
+                switch (SelectedBatch)
+                {
+                    case "TopRated":
+                        moviesByBatch = await SearchTopRatedAsync();
+                        break;
+                    case "Popular":
+                        moviesByBatch = await SearchPopularAsync();
+                        break;
+                    case "Upcoming":
+                        moviesByBatch = await SearchUpcomingAsync();
+                        break;
+                    case "NowPlaying":
+                        moviesByBatch = await GetNowPlayingAsync();
+                        break;
+                }
+            }
+
+            finalResult = await Filter(moviesByText, moviesByActor, moviesByBatch, moviesByMood);
+
+            return finalResult;
+        }
+
+        private async Task<List<Movie>> Filter(MovieList text, MovieList actors, MovieList batch, MovieList mood)
+        {
+            await Task.Delay(10);
+            List<Movie> movies = new List<Movie>();
+
+            //add them all to the same list
+            if (text != null && text.Results != null && text.Results.Count > 0) movies.AddRange(text.Results);
+            if (actors != null && actors.Results != null && actors.Results.Count > 0) movies.AddRange(actors.Results);
+            if (batch != null && batch.Results != null && batch.Results.Count > 0) movies.AddRange(batch.Results);
+            if (mood != null && mood.Results != null && mood.Results.Count > 0) movies.AddRange(mood.Results);
+
+            //get the intersect
+            return movies.GroupBy(x => x.Id)
+                .Select(x => x.First())?
+                .ToList();
         }
 
         public async Task<MovieList> SearchByTitleAsync(string title)

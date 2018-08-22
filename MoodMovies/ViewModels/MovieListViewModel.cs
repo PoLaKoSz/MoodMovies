@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using DataModel.DataModel.Entities;
+using MoodMovies.DataAccessLayer;
 using MoodMovies.Logic;
 using MoodMovies.Messages;
 using MoodMovies.Models;
@@ -18,9 +19,26 @@ namespace MoodMovies.ViewModels
             : base(commonParameters)
         {
             ImageCacher = imageCacher;
+            _onlineDB = commonParameters.OnlineService;
         }
 
         private readonly ImageCacher ImageCacher;
+        private readonly IOnlineServiceProvider _onlineDB;
+
+        public bool CanNavigateToPreviousPage => _onlineDB.SearchQuery.PageNumber != 1;
+
+
+        public void NavigateToPreviousPage()
+        {
+            EventAgg.PublishOnUIThread(new BrowseSearchResultsMessage(--_onlineDB.SearchQuery.PageNumber));
+        }
+
+        public void NavigateToNextPage()
+        {
+            EventAgg.PublishOnUIThread(new BrowseSearchResultsMessage(++_onlineDB.SearchQuery.PageNumber));
+        }
+
+
 
         /// <summary>
         /// Create a <see cref="Movies"/> object from a <see cref="Movie"/> one

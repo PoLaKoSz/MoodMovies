@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using MoodMovies.Messages;
+using MoodMovies.Models;
 using MoodMovies.Resources;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace MoodMovies.DataAccessLayer
 {
     internal class OnlineServiceProvider : IOnlineServiceProvider, IHandle<LoggedInMessage>
     {
+        public SearchQuery SearchQuery { get; private set; }
+
+
         private EasyClient Client { get; set; }
         private IMovieApi MovieClient;
         private readonly IEventAggregator EventAgg;
@@ -24,15 +28,6 @@ namespace MoodMovies.DataAccessLayer
             EventAgg.Subscribe(this);
         }
 
-
-
-        /// <summary>
-        /// Change the API Key in the requests
-        /// </summary>
-        private void ChangeClient(string apiKey)
-        {
-            Client = new EasyClient(apiKey);
-        }
 
 
         public bool IsValidApiKey(string apiKey)
@@ -48,7 +43,31 @@ namespace MoodMovies.DataAccessLayer
             }
         }
 
-        public async Task<List<Movie>> Search(string apiKey, string SearchText, string ActorText, string SelectedBatch, string SelectedMood)
+        /// <summary>
+        /// Make a new search
+        /// </summary>
+        /// <returns>Collection of <see cref="Movie"/> from TMDb</returns>
+        public async Task<List<Movie>> Search(SearchQuery query)
+        {
+            SearchQuery = query;
+
+            return await Search(SearchQuery.SearchText,
+                SearchQuery.ActorName,
+                SearchQuery.Batch.Tag.ToString(),
+                SearchQuery.Mood);
+        }
+
+
+        /// <summary>
+        /// Change the API Key in the requests
+        /// </summary>
+        private void ChangeClient(string apiKey)
+        {
+            Client = new EasyClient(apiKey);
+            MovieClient = Client.GetApi<IMovieApi>().Value;
+        }
+
+        private async Task<List<Movie>> Search(string SearchText, string ActorText, string SelectedBatch, string SelectedMood)
         {
             List<Movie> finalResult = new List<Movie>();
 
@@ -56,16 +75,15 @@ namespace MoodMovies.DataAccessLayer
             MovieList moviesByActor = null;
             MovieList moviesByBatch = null;
             MovieList moviesByMood = null;
-            //we need to do traverse the pages as well as there might be more than 1
-            //not implemented yet
+
             if (!string.IsNullOrEmpty(SearchText))
             {
-                moviesByText = await SearchByTitleAsync(SearchText);
+                moviesByText = await SearchByTitleAsync();
             }
 
             if (!string.IsNullOrEmpty(ActorText))
             {
-                moviesByActor = await SearchByActorAsync(ActorText);
+                moviesByActor = await SearchByActorAsync();
             }
 
             if (!string.IsNullOrEmpty(SelectedBatch) && SelectedBatch.ToLower() != "everything")
@@ -109,47 +127,38 @@ namespace MoodMovies.DataAccessLayer
                 .ToList();
         }
 
-        public async Task<MovieList> SearchByTitleAsync(string title)
+        private async Task<MovieList> SearchByTitleAsync()
         {
-            MovieClient = Client.GetApi<IMovieApi>().Value;
-            return await MovieClient.SearchMoviesAsync(title);
+            return await MovieClient.SearchMoviesAsync(SearchQuery.SearchText, page:SearchQuery.PageNumber);
         }
 
-        public async Task<MovieList> SearchByActorAsync(string title)
+        private async Task<MovieList> SearchByActorAsync()
         {
-            MovieClient = Client.GetApi<IMovieApi>().Value;
-            return await MovieClient.SearchMoviesAsync(title);
+            throw new System.NotImplementedException("TMdbEasy IMovieApi not implemented SearchByActorAsync() method yet!");
         }
 
-        public async Task<MovieList> SearchTopRatedAsync(string language = "en")
+        private async Task<MovieList> SearchTopRatedAsync(string language = "en")
         {
-            MovieClient = Client.GetApi<IMovieApi>().Value;
-            return await MovieClient.GetTopRatedAsync(language);
+            return await MovieClient.GetTopRatedAsync(language, page: SearchQuery.PageNumber);
         }
 
-        public async Task<MovieList> GetNowPlayingAsync(string language = "en")
+        private async Task<MovieList> GetNowPlayingAsync(string language = "en")
         {
-            MovieClient = Client.GetApi<IMovieApi>().Value;
-
-            var datedMovieList = MovieClient.GetNowPlayingAsync(language).Result;
+            var datedMovieList = MovieClient.GetNowPlayingAsync(language, page: SearchQuery.PageNumber).Result;
 
             return await Task.Run(() => MapDatedMovieList(datedMovieList));
         }
 
-        public async Task<MovieList> SearchUpcomingAsync(string language = "en")
+        private async Task<MovieList> SearchUpcomingAsync(string language = "en")
         {
-            MovieClient = Client.GetApi<IMovieApi>().Value;
-
-            var datedMovieList = MovieClient.GetUpcomingAsync(language).Result;
+            var datedMovieList = MovieClient.GetUpcomingAsync(language, page: SearchQuery.PageNumber).Result;
 
             return await Task.Run(() => MapDatedMovieList(datedMovieList));
         }
 
-        public async Task<MovieList> SearchPopularAsync(string language = "en")
+        private async Task<MovieList> SearchPopularAsync(string language = "en")
         {
-            MovieClient = Client.GetApi<IMovieApi>().Value;
-
-            return await MovieClient.GetPopularAsync(language);
+            return await MovieClient.GetPopularAsync(language, page: SearchQuery.PageNumber);
         }
 
         private MovieList MapDatedMovieList(DatedMovieList dMovieList)
@@ -158,6 +167,7 @@ namespace MoodMovies.DataAccessLayer
             PropertyCopier<DatedMovieList, MovieList>.Copy(dMovieList, movieList);
             return movieList;
         }
+
 
         public void Handle(LoggedInMessage message)
         {

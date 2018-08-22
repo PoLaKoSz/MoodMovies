@@ -2,53 +2,42 @@
 using MoodMovies.Messages;
 using MoodMovies.Models;
 using System.Collections.Generic;
-using System.Windows.Controls;
+using System.Threading.Tasks;
 using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.ViewModels
 {
-    internal class SearchViewModel : BaseViewModel
+    internal class SearchViewModel : BaseViewModel, IHandle<BrowseSearchResultsMessage>
     {
         public SearchViewModel(CommonParameters commonParameters)
             : base(commonParameters)
         {
+            SearchQuery = new SearchQuery();
+            MovieList = new List<Movie>();
         }
 
         #region Properties
-        private string _simpleSearchBox;
-        public string SimpleSearchBox { get => _simpleSearchBox; set { _simpleSearchBox = value; NotifyOfPropertyChange(); } }
+        public SearchQuery SearchQuery { get; set; }
 
-        private string _searchText;
-        public string SearchText { get => _searchText; set { _searchText = value; NotifyOfPropertyChange(); } }
-
-        private string _actorText;
-        public string ActorText { get => _actorText; set { _actorText = value; NotifyOfPropertyChange(); } }
-
-        private ComboBoxItem _selectedBatch;
-        public ComboBoxItem SelectedBatch { get => _selectedBatch; set { _selectedBatch = value; NotifyOfPropertyChange(); } }
-
-        private string _selectedMood;
-        public string SelectedMood { get => _selectedMood; set { _selectedMood = value; NotifyOfPropertyChange(); } }
-
-        private List<Movie> MovieList = new List<Movie>();
+        private List<Movie> MovieList;
         #endregion
 
-        public async void BeginSearch()
+        public async Task BeginSearch()
         {
             try
             {
-                if (!string.IsNullOrEmpty(SearchText) 
-                    || !string.IsNullOrEmpty(ActorText) 
-                    || SelectedBatch != null 
-                    || !string.IsNullOrEmpty(SelectedMood))
+                if (!string.IsNullOrEmpty(SearchQuery.SearchText)
+                    || !string.IsNullOrEmpty(SearchQuery.ActorName)
+                    || SearchQuery.Batch != null
+                    || !string.IsNullOrEmpty(SearchQuery.Mood))
                 {
                     EventAgg.PublishOnUIThread(new StartLoadingMessage("Searching for movies..."));
 
-                    MovieList = await OnlineDb.Search(CurrentUser.ApiKey, SearchText, ActorText, (SelectedBatch != null) ? SelectedBatch.Tag.ToString() : null, SelectedMood);
+                    MovieList = await OnlineDB.Search(SearchQuery);
 
                     if (MovieList != null || MovieList.Count != 0)
                     {
-                        EventAgg.PublishOnUIThread(new MovieListMessage(MovieList, true, SearchText));
+                        EventAgg.PublishOnUIThread(new MovieListMessage(MovieList, true, SearchQuery.SearchText));
                     }
                 }
             }
@@ -60,6 +49,13 @@ namespace MoodMovies.ViewModels
             {
                 EventAgg.PublishOnUIThread(new StopLoadingMessage());
             }
+        }
+
+        public async void Handle(BrowseSearchResultsMessage message)
+        {
+            SearchQuery.PageNumber = message.PageNumber;
+
+            await BeginSearch();
         }
     }
 }

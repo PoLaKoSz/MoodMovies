@@ -28,7 +28,7 @@
                     <ColumnDefinition Width="80" />
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
-                        x:Name="PreviousPage"
+                        x:Name="NavigateToPreviousPage"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Background="Transparent"
@@ -59,7 +59,7 @@
                     </ItemsControl>
                 </ScrollViewer>
                 <Button Grid.Column="2"
-                        x:Name="NextPage"
+                        x:Name="NavigateToNextPage"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Background="Transparent"

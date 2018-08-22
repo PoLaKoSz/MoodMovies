@@ -11,6 +11,8 @@ namespace MoodMovies.Messages
         public string SearchString { get; set; }
         public DateTime DateOfSearch { get; }
 
+
+
         public MovieListMessage(List<Movie> results, bool isadult, string text)
         {
             Movielist = results;

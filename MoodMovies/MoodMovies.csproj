@@ -138,6 +138,7 @@
     <Compile Include="Messages\AccountMessages.cs" />
     <Compile Include="Messages\MovieCardMessages.cs" />
     <Compile Include="Messages\MovieListMessage.cs" />
+    <Compile Include="Messages\BrowseSearchResultsMessage.cs" />
     <Compile Include="Messages\ResultsReadyMessage.cs" />
     <Compile Include="Messages\TrailerMessage.cs" />
     <Compile Include="Models\Actor.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IListViewModelParams.cs" />
     <Compile Include="Models\IViewModelParams.cs" />
+    <Compile Include="Models\SearchQuery.cs" />
     <Compile Include="Models\TrailerResult.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>

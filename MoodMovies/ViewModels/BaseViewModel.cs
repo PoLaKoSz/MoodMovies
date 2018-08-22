@@ -32,6 +32,7 @@ namespace MoodMovies.ViewModels
         public void Handle(LoggedInMessage message)
         {
             CurrentUser = message.CurrentUser;
+            OnlineDb.ChangeClient(CurrentUser.ApiKey);
         }
     }
 }

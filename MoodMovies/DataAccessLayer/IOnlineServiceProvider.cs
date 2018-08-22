@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
+﻿using Caliburn.Micro;
+using MoodMovies.Messages;
 using System.Threading.Tasks;
 using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.DataAccessLayer
 {
-    public interface IOnlineServiceProvider
+    public interface IOnlineServiceProvider : IHandle<LoggedInMessage>
     {
-        void ChangeClient(string Key);
+        bool IsValidApiKey(string apiKey);
 
         Task<List<Movie>> Search(string apiKey, string SearchText, string ActorText, string SelectedBatch, string SelectedMood);
 

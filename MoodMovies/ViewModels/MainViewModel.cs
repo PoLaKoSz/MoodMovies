@@ -34,7 +34,7 @@ namespace MoodMovies.ViewModels
             database.Connect();
 
             var offlineDb = new OfflineServiceProvider(database);
-            var onlineDB = new OnlineServiceProvider();
+            var onlineDB = new OnlineServiceProvider(_eventAggregator);
 
             ImageCacher imageCacher = new ImageCacher(
                 appFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");

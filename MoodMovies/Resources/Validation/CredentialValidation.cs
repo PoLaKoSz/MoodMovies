@@ -69,15 +69,7 @@ namespace MoodMovies.Resources.Validation
             if (apiKey.Length == 0)
                 return false;
 
-            try
-            {
-                tmdbClient.ChangeClient(apiKey);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return tmdbClient.IsValidApiKey(apiKey);
         }
     }
 }

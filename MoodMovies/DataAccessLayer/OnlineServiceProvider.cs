@@ -1,4 +1,6 @@
-﻿using MoodMovies.Resources;
+﻿using Caliburn.Micro;
+using MoodMovies.Messages;
+using MoodMovies.Resources;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,14 +10,42 @@ using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.DataAccessLayer
 {
-    internal class OnlineServiceProvider : IOnlineServiceProvider
+    internal class OnlineServiceProvider : IOnlineServiceProvider, IHandle<LoggedInMessage>
     {
         private EasyClient Client { get; set; }
         private IMovieApi MovieClient;
+        private readonly IEventAggregator EventAgg;
 
-        public void ChangeClient(string Key)
+
+
+        public OnlineServiceProvider(IEventAggregator eventAgg)
         {
-            Client = new EasyClient(Key);
+            EventAgg = eventAgg;
+            EventAgg.Subscribe(this);
+        }
+
+
+
+        /// <summary>
+        /// Change the API Key in the requests
+        /// </summary>
+        private void ChangeClient(string apiKey)
+        {
+            Client = new EasyClient(apiKey);
+        }
+
+
+        public bool IsValidApiKey(string apiKey)
+        {
+            try
+            {
+                ChangeClient(apiKey);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public async Task<List<Movie>> Search(string apiKey, string SearchText, string ActorText, string SelectedBatch, string SelectedMood)
@@ -127,6 +157,11 @@ namespace MoodMovies.DataAccessLayer
             var movieList = new MovieList();
             PropertyCopier<DatedMovieList, MovieList>.Copy(dMovieList, movieList);
             return movieList;
+        }
+
+        public void Handle(LoggedInMessage message)
+        {
+            ChangeClient(message.CurrentUser.ApiKey);
         }
     }
 }

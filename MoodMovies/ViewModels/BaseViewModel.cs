@@ -13,8 +13,8 @@ namespace MoodMovies.ViewModels
         {
             EventAgg = commonParameters.EventAggregator;
             StatusMessage = commonParameters.StatusMessage;
-            OfflineDb = commonParameters.OfflineService;
-            OnlineDb = commonParameters.OnlineService;
+            OfflineDB = commonParameters.OfflineService;
+            OnlineDB = commonParameters.OnlineService;
 
             EventAgg.Subscribe(this);
         }
@@ -23,8 +23,8 @@ namespace MoodMovies.ViewModels
         protected readonly IEventAggregator EventAgg;
         protected readonly SnackbarMessageQueue StatusMessage;
 
-        protected IOfflineServiceProvider OfflineDb { get; private set; }
-        protected IOnlineServiceProvider OnlineDb { get; private set; }
+        protected IOfflineServiceProvider OfflineDB { get; private set; }
+        protected IOnlineServiceProvider OnlineDB { get; private set; }
 
         public User CurrentUser { get; private set; }
 
@@ -32,7 +32,7 @@ namespace MoodMovies.ViewModels
         public void Handle(LoggedInMessage message)
         {
             CurrentUser = message.CurrentUser;
-            OnlineDb.ChangeClient(CurrentUser.ApiKey);
+            OnlineDB.ChangeClient(CurrentUser.ApiKey);
         }
     }
 }

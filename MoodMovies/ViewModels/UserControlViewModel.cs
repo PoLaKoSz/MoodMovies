@@ -41,7 +41,7 @@ namespace MoodMovies.ViewModels
         {
             try
             {
-                var users = await OfflineDb.GetAllUsers();
+                var users = await OfflineDB.GetAllUsers();
 
                 AllUsers = new ObservableCollection<User>(users);
             }
@@ -56,7 +56,7 @@ namespace MoodMovies.ViewModels
             EventAgg.PublishOnUIThread(new StartLoadingMessage("Logging in"));
             try
             {
-                var user = await OfflineDb.GetUserByEmailPassword(Email, Password);
+                var user = await OfflineDB.GetUserByEmailPassword(Email, Password);
 
                 if (user != null)
                 {
@@ -64,11 +64,11 @@ namespace MoodMovies.ViewModels
                     if (KeepLoggedIn)
                     {
                         //change status in db
-                        await OfflineDb.SetCurrentUserFieldToTrue(user);
+                        await OfflineDB.SetCurrentUserFieldToTrue(user);
                     }
                     else if (user.IsCurrentUser && !KeepLoggedIn)
                     {
-                        OfflineDb.SetCurrentUserFieldToFalse(user);
+                        OfflineDB.SetCurrentUserFieldToFalse(user);
                     }
                     //CurrentUser = SelectedUser;
                     EventAgg.PublishOnUIThread(new SwitchedUserMessage(user));

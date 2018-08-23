@@ -13,61 +13,68 @@ using WPFLocalizeExtension.Engine;
 
 namespace MoodMovies.ViewModels
 {
-    internal class MainViewModel : Conductor<Screen>.Collection.OneActive,
+    internal class MainViewModel : BaseViewModel,
         IHandle<ResultsReadyMessage>,
         IHandle<StartLoadingMessage>,
         IHandle<StopLoadingMessage>,
         IHandle<LoggedInMessage>
     {
         public MainViewModel()
+            : base(InitializeCommonParameter(GetAppFolders()))
         {
-            _eventAggregator = new EventAggregator();
-            _eventAggregator.Subscribe(this);
-
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
 
-            string appRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies");
-            var appFolders = new AppFolders(appRootFolder);
-
-            IDb database = new Db(appRootFolder);
-            database.AutoMigrate();
-            database.Connect();
-
-            var offlineDb = new OfflineServiceProvider(database);
-            var onlineDB = new OnlineServiceProvider(_eventAggregator);
+            _database.AutoMigrate();
+            _database.Connect();
 
             ImageCacher imageCacher = new ImageCacher(
-                appFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
+                GetAppFolders().ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
 
-            StatusMessage = new SnackbarMessageQueue();
+            _loginVM = new LoginViewModel(_commonParameters);
+            StartVM = new StartPageViewModel(_commonParameters, _loginVM);
+            UserVM = new UserControlViewModel(_commonParameters, _loginVM);
+            SearchVM = new SearchViewModel(_commonParameters);
+            MovieListVM = new MovieListViewModel(_commonParameters, imageCacher);
+            FavouriteVM = new FavouritesViewModel(_commonParameters, imageCacher);
+            WatchListVM = new WatchListViewModel(_commonParameters, imageCacher);
+        }
 
-            CommonParameters commonParameters = new CommonParameters(
-                _eventAggregator, offlineDb, onlineDB, StatusMessage);
+        private static CommonParameters InitializeCommonParameter(AppFolders appFolders)
+        {
+            _database = new Db(appFolders.AppRootFolder);
 
-            StartVM = new StartPageViewModel(commonParameters);
-            UserVM = new UserControlViewModel(commonParameters);
-            SearchVM = new SearchViewModel(commonParameters);
-            MovieListVM = new MovieListViewModel(commonParameters, imageCacher);
-            FavouriteVM = new FavouritesViewModel(commonParameters, imageCacher);
-            WatchListVM = new WatchListViewModel(commonParameters, imageCacher);
+            var eventAgg = new EventAggregator();
+
+            return _commonParameters = new CommonParameters(
+                eventAgg,
+                new OfflineServiceProvider(_database),
+                new OnlineServiceProvider(eventAgg),
+                new SnackbarMessageQueue());
+        }
+
+        private static AppFolders GetAppFolders()
+        {
+            string appRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MoodMovies");
+
+            return new AppFolders(appRootFolder);
         }
 
         #region Fields
         private string _loadingMessage;
         private bool _isLoading;
         private bool _canNavigate;
-        private readonly IEventAggregator _eventAggregator;
+        private static IDb _database;
+        private static CommonParameters _commonParameters;
         #endregion
 
         #region General Properties
         public string LoadingMessage { get => _loadingMessage; set { _loadingMessage = value; NotifyOfPropertyChange(); } }
         public bool IsLoading { get => _isLoading; set { _isLoading = value; NotifyOfPropertyChange(); } }
         public bool CanNavigate { get => _canNavigate; set { _canNavigate = value; NotifyOfPropertyChange(); } }
-
-        public SnackbarMessageQueue StatusMessage { get; }
         #endregion
 
         #region Child View Models
+        private readonly LoginViewModel _loginVM;
         private StartPageViewModel _startVM;
         public StartPageViewModel StartVM { get => _startVM; set { _startVM = value; NotifyOfPropertyChange(); } }
 
@@ -165,8 +172,10 @@ namespace MoodMovies.ViewModels
             IsLoading = false;
         }
 
-        public void Handle(LoggedInMessage message)
+        public override void Handle(LoggedInMessage message)
         {
+            base.Handle(message);
+
             DisplaySearchVM();
         }
 

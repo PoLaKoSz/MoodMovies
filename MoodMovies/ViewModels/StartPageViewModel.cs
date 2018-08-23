@@ -1,32 +1,22 @@
 ﻿using Caliburn.Micro;
-using MoodMovies.DataAccessLayer;
 using MoodMovies.Messages;
 using MoodMovies.Models;
 using System.Threading.Tasks;
 
 namespace MoodMovies.ViewModels
 {
-    public class StartPageViewModel : Conductor<Screen>.Collection.OneActive, IHandle<RegisteredMessage>
+    public class StartPageViewModel : BaseViewModel, IHandle<RegisteredMessage>
     {
-        public StartPageViewModel(CommonParameters commonParameters)
+        public StartPageViewModel(CommonParameters commonParameters, LoginViewModel loginViewModel)
+            : base(commonParameters)
         {
-            _eventAgg = commonParameters.EventAggregator;
-            _eventAgg.Subscribe(this);
-
-            _offlineDb = commonParameters.OfflineService;
-            var onlineDb = commonParameters.OnlineService;
-            var statusMessage = commonParameters.StatusMessage;
-
-            Items.Add(LoginVM = new LoginViewModel(commonParameters));
+            _loginVM = loginViewModel;
             Items.Add(RegisterVM = new RegisterViewModel(commonParameters));
         }
 
-        private readonly IEventAggregator _eventAgg;
-        private readonly IOfflineServiceProvider _offlineDb;
 
         #region Child View Models
-        private LoginViewModel _loginVM;
-        public LoginViewModel LoginVM { get => _loginVM; set { _loginVM = value; NotifyOfPropertyChange(); } }
+        private readonly LoginViewModel _loginVM;
         private RegisterViewModel _registerVM;
         private bool _canShowLoginPage;
 
@@ -39,11 +29,11 @@ namespace MoodMovies.ViewModels
         {
             ShowLoginPage();
 
-            var lastActiveUser = await _offlineDb.GetCurrentUSer();
+            var lastActiveUser = await OfflineDB.GetCurrentUSer();
 
             if (lastActiveUser != null)
             {
-                _eventAgg.PublishOnUIThread(new LoggedInMessage(lastActiveUser));
+                EventAgg.PublishOnUIThread(new LoggedInMessage(lastActiveUser));
                 CanShowLoginPage = true;
                 return;
             }
@@ -61,7 +51,7 @@ namespace MoodMovies.ViewModels
         public void ShowLoginPage()
         {
             DeactivateItem(ActiveItem, false);
-            ActivateItem(LoginVM);
+            ActivateItem(_loginVM);
         }
 
         public void ShowRegistrationPage()
@@ -79,13 +69,8 @@ namespace MoodMovies.ViewModels
         #region Private Methods
         private async Task<bool> HasExistingUser()
         {
-            var users = await _offlineDb.GetAllUsers();
+            var users = await OfflineDB.GetAllUsers();
             return 0 < users.Count;
-        }
-
-        private void CleanUp()
-        {
-            _eventAgg.Unsubscribe(this);
         }
         #endregion
     }

@@ -7,21 +7,24 @@ using MoodMovies.Models;
 
 namespace MoodMovies.ViewModels
 {
-    public abstract class BaseViewModel : Screen, IHandle<LoggedInMessage>
+    public abstract class BaseViewModel : Conductor<Screen>.Collection.OneActive, IHandle<LoggedInMessage>
     {
         public BaseViewModel(CommonParameters commonParameters)
         {
-            EventAgg = commonParameters.EventAggregator;
+            EventAgg      = commonParameters.EventAggregator;
+
             StatusMessage = commonParameters.StatusMessage;
-            OfflineDB = commonParameters.OfflineService;
-            OnlineDB = commonParameters.OnlineService;
+
+            OfflineDB     = commonParameters.OfflineService;
+            OnlineDB      = commonParameters.OnlineService;
 
             EventAgg.Subscribe(this);
         }
 
 
         protected readonly IEventAggregator EventAgg;
-        protected readonly SnackbarMessageQueue StatusMessage;
+
+        public SnackbarMessageQueue StatusMessage { get; private set; }
 
         protected IOfflineServiceProvider OfflineDB { get; private set; }
         protected IOnlineServiceProvider OnlineDB { get; private set; }
@@ -29,7 +32,7 @@ namespace MoodMovies.ViewModels
         public User CurrentUser { get; private set; }
 
 
-        public void Handle(LoggedInMessage message)
+        public virtual void Handle(LoggedInMessage message)
         {
             CurrentUser = message.CurrentUser;
         }

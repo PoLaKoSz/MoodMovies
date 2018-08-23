@@ -30,5 +30,16 @@ namespace DataModel.DataModel.Entities
 
         [Column("Current_User")]
         public bool IsCurrentUser { get; set; }
+
+
+
+        public User()
+        {
+            Name = "";
+            Surname = "";
+            ApiKey = "";
+            Email = "";
+            Password = "";
+        }
     }
 }

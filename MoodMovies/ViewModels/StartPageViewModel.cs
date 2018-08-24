@@ -28,7 +28,7 @@ namespace MoodMovies.ViewModels
         {
             ShowLoginPage();
 
-            var lastActiveUser = await OfflineDB.GetCurrentUSer();
+            var lastActiveUser = await OfflineDB.GetCurrentUser();
 
             if (lastActiveUser != null)
             {

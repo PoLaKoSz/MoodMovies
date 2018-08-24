@@ -8,173 +8,91 @@ namespace MoodMovies.DataAccessLayer
     {
         #region User Methods
         /// <summary>
-        /// Adds a user to the database
+        /// Adds a <see cref="User"/> to the DB
         /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        Task CreateUser(User user);    
-        
-        /// <summary>
-        /// Gets user in db using id
-        /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        Task<User> GetUser(int id);
+        Task CreateUser(User user);
 
         /// <summary>
-        /// Gets user in db using apikey
+        /// Gets a <see cref="User"/> from the DB using an API Key
         /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
         Task<User> GetUserByApiKey(string apikey);
 
         /// <summary>
-        /// Gets user in db using email
+        /// Gets a <see cref="User"/> from the DB using an Email address and Password
         /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        Task<User> GetUserByEmailPassword(string emailAdress, string password);
+        Task<User> GetUserByEmailPassword(string emailAddress, string password);
 
         /// <summary>
-        /// Gets user in db using email
+        /// Gets a <see cref="User"/> from the DB using an Email address
         /// </summary>
-        /// <param name="emailAddress"></param>
-        /// <returns></returns>
         Task<User> GetUserByEmail(string emailAddress);
 
         /// <summary>
-        /// Gets current user in db. there should only be one
+        /// Gets the current <see cref="User"/> from DB
         /// </summary>
-        /// <returns></returns>
-        Task<User> GetCurrentUSer();
+        Task<User> GetCurrentUser();
 
         /// <summary>
-        /// Gets all users in db
+        /// Gets all users from DB
         /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
         Task<List<User>> GetAllUsers();
 
         /// <summary>
-        /// Set current user field and unset previous user if any
+        /// Enable auto login for the given <see cref="User"/>. Disable for everybody else
         /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        Task SetCurrentUserFieldToTrue(User user);
+        Task SetAsCurrentUser(User user);
 
         /// <summary>
-        /// Unset current user field of current user
+        /// Disable auto login for the given <see cref="User"/>
         /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        void SetCurrentUserFieldToFalse(User user);
+        void DisableAutoLogin(User user);
 
         /// <summary>
-        /// Set/Unset current user field
+        /// CHeck if the API Key exists in the DB
         /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        Task ChangeCurrentUserField(string apikey, bool value);
-
-        /// <summary>
-        /// Delete user from db
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        Task DeleteUser(User user);
+        Task<bool> ApiKeyExists(string apikey);
         #endregion
 
         #region Movie Methods
         /// <summary>
-        /// Adds a movie to the movies table database
+        /// Add the <see cref="Movies"/> to the Movies table
         /// </summary>
-        /// <param name="movie"></param>
         /// <returns></returns>
-        Task CreateMovie(Movies movie);
-
-        /// <summary>
-        /// gets the usermovie link between a user and a movie
-        /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        Task<User_Movies> GetUserMovieLink(User user, Movies movie);
-
-        /// <summary>
-        /// Gets the movie using the id
-        /// </summary>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        Task<Movies> GetMovie(int movieId);
-
-        /// <summary>
-        /// Add a movie to the movie table
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="movie"></param>
-        /// <returns></returns>
-        Task<bool> AddMovie(Movies movie);       
+        Task<bool> AddMovie(User user, Movies movie);
         #endregion
 
         #region WatchList methods
         /// <summary>
-        /// Adds a movie to the watchlist
+        /// Adds the <see cref="Movies"/> to the WatchList
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="movie"></param>
-        /// <returns></returns>
         Task AddToWatchList(User user, Movies movie);
 
         /// <summary>
-        /// Removes a movie from the watchlist
+        /// Removes the <see cref="Movies"/> from the WatchList
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="movie"></param>
-        /// <returns></returns>
         Task RemoveFromWatchList(User user, Movies movie);
 
         /// <summary>
-        /// Returns all movies linked to a specific user as a watchlist item
+        /// Returns all watchlisted <see cref="Movies"/> for the given <see cref="User"/>
         /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
         Task<List<Movies>> GetAllWatchListItems(User user);
         #endregion
 
         #region Favourite methods
         /// <summary>
-        /// Adds a movie to the favourites list
+        /// Adds the <see cref="Movies"/> to the Favourites
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="movie"></param>
-        /// <returns></returns>
         Task AddToFavourites(User user, Movies movie);
 
         /// <summary>
-        /// Removes a movie from the favourites list
+        /// Removes the <see cref="Movies"/> from the Favourites
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="movie"></param>
-        /// <returns></returns>
         Task RemoveFromFavourites(User user, Movies movie);
 
         /// <summary>
-        /// Returns all movies linked to a specific user as a favourites item
+        /// Returns all favourited <see cref="Movies"/> for the given <see cref="User"/>
         /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
         Task<List<Movies>> GetAllFavouriteItems(User user);
         #endregion
-
-        /// <summary>
-        /// See if Api Key exists in db
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        Task<bool> ApiKeyExists(string apikey);
-
-        /// <summary>
-        /// Commit changes to database
-        /// </summary>
-        void SaveChanges();
     }
 }

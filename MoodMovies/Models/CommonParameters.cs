@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.DataAccessLayer;
+using MoodMovies.Logic;
 
 namespace MoodMovies.Models
 {
@@ -10,18 +11,21 @@ namespace MoodMovies.Models
         public IOfflineServiceProvider OfflineService { get; }
         public IOnlineServiceProvider OnlineService { get; }
         public SnackbarMessageQueue StatusMessage { get; }
+        public ImageCacher ImageCacher { get; }
 
 
 
         public CommonParameters(IEventAggregator eventAgg,
             IOfflineServiceProvider offline,
             IOnlineServiceProvider online,
-            SnackbarMessageQueue statusMessage)
+            SnackbarMessageQueue statusMessage,
+            ImageCacher imageCacher)
         {
             EventAggregator = eventAgg;
             OfflineService  = offline;
             OnlineService   = online;
             StatusMessage   = statusMessage;
+            ImageCacher     = imageCacher;
         }
     }
 }

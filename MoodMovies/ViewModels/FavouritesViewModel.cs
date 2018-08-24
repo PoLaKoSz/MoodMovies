@@ -1,55 +1,72 @@
-﻿using DataModel.DataModel.Entities;
-using MoodMovies.Logic;
+﻿using Caliburn.Micro;
+using MoodMovies.Messages;
 using MoodMovies.Models;
-using MoodMovies.Resources;
 using System.Threading.Tasks;
 
 namespace MoodMovies.ViewModels
 {
-    public class FavouritesViewModel: ListBaseViewModel
+    public class FavouritesViewModel: ListBaseViewModel,
+        IHandle<AddToFavouritesMessage>,
+        IHandle<RemoveFromFavouritesMessage>
     {
-        public FavouritesViewModel(IListViewModelParams commonParameters, ImageCacher imageCacher)
+        public FavouritesViewModel(IListViewModelParams commonParameters)
             : base(commonParameters)
         {
-            DisplayName = "Favourites";
-            ImageCacher = imageCacher;
         }
 
-        private readonly ImageCacher ImageCacher;
         
         /// <summary>
         /// Loads up movie cards for the favourite items that are found
         /// </summary>
         /// <returns></returns>
-        public async Task LoadFavouriteItems()
+        public async Task Load()
         {
+            if (Movies.Count != 0)
+                return;
+
             try
             {
                 var movies = await OfflineDB.GetAllFavouriteItems(CurrentUser);
-                //build up the movie card view models
-                Movies.Clear();
-                await Task.Run(() =>
-                {
-                    foreach (Movies movie in movies)
-                    {
-                        if (!string.IsNullOrEmpty(movie.Poster_path))
-                        {
-                            ImageCacher.ScanPoster(movie);
 
-                            var card = new MovieCardViewModel(movie, EventAgg)
-                            {
-                                IsFavourited = true,
-                                Parent = this
-                            };
-                            //force updating the list from a different thread using custom cross thread extension method
-                            Movies.AddOnUIThread(card);
-                        }
-                    }
-                });
+                await base.PushToUI(movies);
             }
             catch
             {
                 StatusMessage.Enqueue("Internal Error");
+            }
+        }
+
+        /// <summary>
+        /// Add the parameter Movie to the Movies collection and add the Movie
+        /// to the favourites inside the DB
+        /// </summary>
+        public async void Handle(AddToFavouritesMessage message)
+        {
+            var movieCard = message.MovieCard;
+
+            if (GetMovieCard(movieCard) == null)
+            {
+                Movies.Add(message.MovieCard);
+
+                await OfflineDB.AddMovie(CurrentUser, movieCard.Movie);
+
+                await OfflineDB.AddToFavourites(CurrentUser, message.MovieCard.Movie);
+            }
+        }
+
+        /// <summary>
+        /// Remove the parameter Movie from the Movies collection and remove the Movie
+        /// from the favourites inside the DB
+        /// </summary>
+        public async void Handle(RemoveFromFavouritesMessage message)
+        {
+            var movieCard = message.MovieCard;
+
+            if (GetMovieCard(movieCard) != null)
+            {
+                Movies.Remove(movieCard);
+
+                await OfflineDB.RemoveFromFavourites(CurrentUser, movieCard.Movie);
             }
         }
     }

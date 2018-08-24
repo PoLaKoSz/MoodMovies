@@ -75,11 +75,11 @@ namespace MoodMovies.ViewModels
         {
             if (KeepLoggedIn)
             {
-                OfflineDB.SetCurrentUserFieldToTrue(loggingUser);
+                OfflineDB.SetAsCurrentUser(loggingUser);
             }
             else if (loggingUser.IsCurrentUser && !KeepLoggedIn)
             {
-                OfflineDB.SetCurrentUserFieldToFalse(loggingUser);
+                OfflineDB.DisableAutoLogin(loggingUser);
             }
         }
     }

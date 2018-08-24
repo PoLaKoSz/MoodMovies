@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
 using MoodMovies.DataAccessLayer;
+using MoodMovies.Logic;
 
 namespace MoodMovies.Models
 {
@@ -9,5 +10,6 @@ namespace MoodMovies.Models
         IEventAggregator EventAggregator { get; }
         IOfflineServiceProvider OfflineService { get; }
         SnackbarMessageQueue StatusMessage { get; }
+        ImageCacher ImageCacher { get; }
     }
 }

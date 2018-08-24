@@ -20,36 +20,37 @@ namespace MoodMovies.ViewModels
         IHandle<LoggedInMessage>
     {
         public MainViewModel()
-            : base(InitializeCommonParameter(GetAppFolders()))
+            : base(InitializeCommonParameters(GetAppFolders()))
         {
             LocalizeDictionary.Instance.Culture = new CultureInfo("en");
 
             _database.AutoMigrate();
-            _database.Connect();
-
-            ImageCacher imageCacher = new ImageCacher(
-                GetAppFolders().ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
+            _database.Connect();            
 
             _loginViewModel = new LoginViewModel(_commonParameters);
             _startViewModel = new StartPageViewModel(_commonParameters, _loginViewModel);
             _userViewModel = new UserControlViewModel(_commonParameters, _loginViewModel);
             _searchViewModel = new SearchViewModel(_commonParameters);
-            _movieListViewModel = new SearchResultsViewModel(_commonParameters, imageCacher);
-            _favouriteViewMdel = new FavouritesViewModel(_commonParameters, imageCacher);
-            _watchListViewModel = new WatchListViewModel(_commonParameters, imageCacher);
+            _searchResultsViewModel = new SearchResultsViewModel(_commonParameters);
+            _favouriteViewMdel = new FavouritesViewModel(_commonParameters);
+            _watchListViewModel = new WatchListViewModel(_commonParameters);
         }
 
-        private static CommonParameters InitializeCommonParameter(AppFolders appFolders)
+        private static CommonParameters InitializeCommonParameters(AppFolders appFolders)
         {
             _database = new Db(appFolders.AppRootFolder);
 
             var eventAgg = new EventAggregator();
 
+            var imageCacher = new ImageCacher(
+                appFolders.ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
+
             return _commonParameters = new CommonParameters(
                 eventAgg,
                 new OfflineServiceProvider(_database),
                 new OnlineServiceProvider(eventAgg),
-                new SnackbarMessageQueue());
+                new SnackbarMessageQueue(),
+                imageCacher);
         }
 
         private static AppFolders GetAppFolders()
@@ -71,7 +72,7 @@ namespace MoodMovies.ViewModels
         private readonly LoginViewModel _loginViewModel;
         private readonly StartPageViewModel _startViewModel;
         private readonly SearchViewModel _searchViewModel;
-        private readonly SearchResultsViewModel _movieListViewModel;
+        private readonly SearchResultsViewModel _searchResultsViewModel;
         private readonly FavouritesViewModel _favouriteViewMdel;
         private readonly WatchListViewModel _watchListViewModel;
         private readonly UserControlViewModel _userViewModel;
@@ -121,19 +122,19 @@ namespace MoodMovies.ViewModels
 
         public void NavigateToSearchResults()
         {
-            DisplayMenu(_movieListViewModel);
+            DisplayMenu(_searchResultsViewModel);
         }
 
         public async Task NavigateToFavouritesMenu()
         {
             DisplayMenu(_favouriteViewMdel);
-            await _favouriteViewMdel.LoadFavouriteItems();
+            await _favouriteViewMdel.Load();
         }
 
         public async Task NavigateToWatchlistMenu()
         {
             DisplayMenu(_watchListViewModel);
-            await _watchListViewModel.LoadWatchListItems();
+            await _watchListViewModel.Load();
         }
 
         private void DisplayMenu(Screen screen)
@@ -179,7 +180,7 @@ namespace MoodMovies.ViewModels
             Items.Add(_startViewModel);
             Items.Add(_userViewModel);
             Items.Add(_searchViewModel);
-            Items.Add(_movieListViewModel);
+            Items.Add(_searchResultsViewModel);
             Items.Add(_favouriteViewMdel);
             Items.Add(_watchListViewModel);
 

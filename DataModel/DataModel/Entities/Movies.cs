@@ -51,5 +51,19 @@ namespace DataModel.DataModel.Entities
 
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string Poster_Cache { get; set; }
+
+
+
+        public Movies()
+        {
+            Title = "";
+            Poster_path = "";
+            Original_language = "";
+            Original_title = "";
+            Backdrop_path = "";
+            Overview = "";
+            Release_date = "";
+            Poster_Cache = "";
+        }
     }    
 }

@@ -26,6 +26,8 @@ namespace MoodMovies.DataAccessLayer
         {
             EventAgg = eventAgg;
             EventAgg.Subscribe(this);
+
+            SearchQuery = new SearchQuery();
         }
 
 

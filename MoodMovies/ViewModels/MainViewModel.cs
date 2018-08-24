@@ -34,7 +34,7 @@ namespace MoodMovies.ViewModels
             _startViewModel = new StartPageViewModel(_commonParameters, _loginViewModel);
             _userViewModel = new UserControlViewModel(_commonParameters, _loginViewModel);
             _searchViewModel = new SearchViewModel(_commonParameters);
-            _movieListViewModel = new MovieListViewModel(_commonParameters, imageCacher);
+            _movieListViewModel = new SearchResultsViewModel(_commonParameters, imageCacher);
             _favouriteViewMdel = new FavouritesViewModel(_commonParameters, imageCacher);
             _watchListViewModel = new WatchListViewModel(_commonParameters, imageCacher);
         }
@@ -71,7 +71,7 @@ namespace MoodMovies.ViewModels
         private readonly LoginViewModel _loginViewModel;
         private readonly StartPageViewModel _startViewModel;
         private readonly SearchViewModel _searchViewModel;
-        private readonly MovieListViewModel _movieListViewModel;
+        private readonly SearchResultsViewModel _movieListViewModel;
         private readonly FavouritesViewModel _favouriteViewMdel;
         private readonly WatchListViewModel _watchListViewModel;
         private readonly UserControlViewModel _userViewModel;
@@ -95,58 +95,57 @@ namespace MoodMovies.ViewModels
             IsLoading = true;
             LoadingMessage = "Loading..";
 
-            DisplayStartVM();
+            NavigateToStartPage();
             await _startViewModel.DisplayInitialPage();
 
             IsLoading = false;
         }
 
         #region Item Activation Methods
-        public void DisplayStartVM()
+        public void NavigateToStartPage()
         {
+            DisplayMenu(_startViewModel);
             CanNavigate = false;
-            DeactivateItem(ActiveItem, true);
-            ActivateItem(_startViewModel);
         }
 
-        public async void DisplayUserVM()
+        public async void NavigateToUsersMenu()
         {
-            DeactivateItem(ActiveItem, true);
-            ActivateItem(_userViewModel);
+            DisplayMenu(_userViewModel);
             await _userViewModel.GetUsers();
         }
 
-        public void DisplaySearchVM()
+        public void NavigateToSearchMenu()
         {
-            CanNavigate = true;
-            DeactivateItem(ActiveItem, true);
-            ActivateItem(_searchViewModel);
+            DisplayMenu(_searchViewModel);
         }
 
-        public void DisplayMovieListVM()
+        public void NavigateToSearchResults()
         {
-            DeactivateItem(ActiveItem, true);
-            ActivateItem(_movieListViewModel);
+            DisplayMenu(_movieListViewModel);
         }
 
-        public async Task DisplayFavouriteVM()
+        public async Task NavigateToFavouritesMenu()
         {
-            DeactivateItem(ActiveItem, true);
-            ActivateItem(_favouriteViewMdel);
+            DisplayMenu(_favouriteViewMdel);
             await _favouriteViewMdel.LoadFavouriteItems();
         }
 
-        public async Task DisplayWatchListVM()
+        public async Task NavigateToWatchlistMenu()
         {
-            DeactivateItem(ActiveItem, true);
-            ActivateItem(_watchListViewModel);
+            DisplayMenu(_watchListViewModel);
             await _watchListViewModel.LoadWatchListItems();
+        }
+
+        private void DisplayMenu(Screen screen)
+        {
+            CanNavigate = true;
+            DeactivateItem(ActiveItem, true);
+            ActivateItem(screen);
         }
 
         public void Handle(ResultsReadyMessage message)
         {
-            DeactivateItem(ActiveItem, true);
-            ActivateItem(_movieListViewModel);
+            NavigateToSearchResults();
             IsLoading = false;
         }
 
@@ -165,12 +164,12 @@ namespace MoodMovies.ViewModels
         {
             base.Handle(message);
 
-            DisplaySearchVM();
+            NavigateToSearchMenu();
         }
 
         public void LogOut()
         {
-            DisplayStartVM();
+            NavigateToStartPage();
         }
         #endregion
 

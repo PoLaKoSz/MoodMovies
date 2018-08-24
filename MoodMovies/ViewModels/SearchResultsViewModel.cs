@@ -10,12 +10,12 @@ using TMdbEasy.TmdbObjects.Movies;
 
 namespace MoodMovies.ViewModels
 {
-    public class MovieListViewModel : ListBaseViewModel,
+    public class SearchResultsViewModel : ListBaseViewModel,
         IHandle<MovieListMessage>,
         IHandle<MovieCardViewModel>,
         IHandle<IMovieCardMessage>
     {
-        public MovieListViewModel(CommonParameters commonParameters, ImageCacher imageCacher)
+        public SearchResultsViewModel(CommonParameters commonParameters, ImageCacher imageCacher)
             : base(commonParameters)
         {
             ImageCacher = imageCacher;

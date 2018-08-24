@@ -30,13 +30,13 @@ namespace MoodMovies.ViewModels
             ImageCacher imageCacher = new ImageCacher(
                 GetAppFolders().ImageCacheFolder, new WebClient(), "https://image.tmdb.org/t/p/w500");
 
-            _loginVM = new LoginViewModel(_commonParameters);
-            StartVM = new StartPageViewModel(_commonParameters, _loginVM);
-            UserVM = new UserControlViewModel(_commonParameters, _loginVM);
-            SearchVM = new SearchViewModel(_commonParameters);
-            MovieListVM = new MovieListViewModel(_commonParameters, imageCacher);
-            FavouriteVM = new FavouritesViewModel(_commonParameters, imageCacher);
-            WatchListVM = new WatchListViewModel(_commonParameters, imageCacher);
+            _loginViewModel = new LoginViewModel(_commonParameters);
+            _startViewModel = new StartPageViewModel(_commonParameters, _loginViewModel);
+            _userViewModel = new UserControlViewModel(_commonParameters, _loginViewModel);
+            _searchViewModel = new SearchViewModel(_commonParameters);
+            _movieListViewModel = new MovieListViewModel(_commonParameters, imageCacher);
+            _favouriteViewMdel = new FavouritesViewModel(_commonParameters, imageCacher);
+            _watchListViewModel = new WatchListViewModel(_commonParameters, imageCacher);
         }
 
         private static CommonParameters InitializeCommonParameter(AppFolders appFolders)
@@ -63,8 +63,18 @@ namespace MoodMovies.ViewModels
         private string _loadingMessage;
         private bool _isLoading;
         private bool _canNavigate;
+
         private static IDb _database;
+
         private static CommonParameters _commonParameters;
+        
+        private readonly LoginViewModel _loginViewModel;
+        private readonly StartPageViewModel _startViewModel;
+        private readonly SearchViewModel _searchViewModel;
+        private readonly MovieListViewModel _movieListViewModel;
+        private readonly FavouritesViewModel _favouriteViewMdel;
+        private readonly WatchListViewModel _watchListViewModel;
+        private readonly UserControlViewModel _userViewModel;
         #endregion
 
         #region General Properties
@@ -73,33 +83,12 @@ namespace MoodMovies.ViewModels
         public bool CanNavigate { get => _canNavigate; set { _canNavigate = value; NotifyOfPropertyChange(); } }
         #endregion
 
-        #region Child View Models
-        private readonly LoginViewModel _loginVM;
-        private StartPageViewModel _startVM;
-        public StartPageViewModel StartVM { get => _startVM; set { _startVM = value; NotifyOfPropertyChange(); } }
 
-        private SearchViewModel _searchVM;
-        public SearchViewModel SearchVM { get => _searchVM; set { _searchVM = value; NotifyOfPropertyChange(); } }
-
-        private MovieListViewModel movieListVM;
-        public MovieListViewModel MovieListVM { get => movieListVM; set { movieListVM = value; NotifyOfPropertyChange(); } }
-
-        private FavouritesViewModel _favouriteVM;
-        public FavouritesViewModel FavouriteVM { get => _favouriteVM; set { _favouriteVM = value; NotifyOfPropertyChange(); } }
-
-        private WatchListViewModel _watchListVM;
-        public WatchListViewModel WatchListVM { get => _watchListVM; set { _watchListVM = value; NotifyOfPropertyChange(); } }
-
-        private UserControlViewModel _userVM;
-        public UserControlViewModel UserVM { get => _userVM; set { _userVM = value; NotifyOfPropertyChange(); } }
-        #endregion
-
-        #region Public Methods
         public void CloseApp()
         {
             TryClose();
         }
-        #endregion
+
 
         private async Task DisplayStartPage()
         {
@@ -107,7 +96,7 @@ namespace MoodMovies.ViewModels
             LoadingMessage = "Loading..";
 
             DisplayStartVM();
-            await _startVM.DisplayInitialPage();
+            await _startViewModel.DisplayInitialPage();
 
             IsLoading = false;
         }
@@ -117,47 +106,47 @@ namespace MoodMovies.ViewModels
         {
             CanNavigate = false;
             DeactivateItem(ActiveItem, true);
-            ActivateItem(StartVM);
+            ActivateItem(_startViewModel);
         }
 
         public async void DisplayUserVM()
         {
             DeactivateItem(ActiveItem, true);
-            ActivateItem(UserVM);
-            await UserVM.GetUsers();
+            ActivateItem(_userViewModel);
+            await _userViewModel.GetUsers();
         }
 
         public void DisplaySearchVM()
         {
             CanNavigate = true;
             DeactivateItem(ActiveItem, true);
-            ActivateItem(SearchVM);
+            ActivateItem(_searchViewModel);
         }
 
         public void DisplayMovieListVM()
         {
             DeactivateItem(ActiveItem, true);
-            ActivateItem(MovieListVM);
+            ActivateItem(_movieListViewModel);
         }
 
         public async Task DisplayFavouriteVM()
         {
             DeactivateItem(ActiveItem, true);
-            ActivateItem(FavouriteVM);
-            await FavouriteVM.LoadFavouriteItems();
+            ActivateItem(_favouriteViewMdel);
+            await _favouriteViewMdel.LoadFavouriteItems();
         }
 
         public async Task DisplayWatchListVM()
         {
             DeactivateItem(ActiveItem, true);
-            ActivateItem(WatchListVM);
-            await WatchListVM.LoadWatchListItems();
+            ActivateItem(_watchListViewModel);
+            await _watchListViewModel.LoadWatchListItems();
         }
 
         public void Handle(ResultsReadyMessage message)
         {
             DeactivateItem(ActiveItem, true);
-            ActivateItem(MovieListVM);
+            ActivateItem(_movieListViewModel);
             IsLoading = false;
         }
 
@@ -188,12 +177,12 @@ namespace MoodMovies.ViewModels
         #region Caliburn Override
         protected async override void OnViewLoaded(object view)
         {
-            Items.Add(StartVM);
-            Items.Add(UserVM);
-            Items.Add(SearchVM);
-            Items.Add(MovieListVM);
-            Items.Add(FavouriteVM);
-            Items.Add(WatchListVM);
+            Items.Add(_startViewModel);
+            Items.Add(_userViewModel);
+            Items.Add(_searchViewModel);
+            Items.Add(_movieListViewModel);
+            Items.Add(_favouriteViewMdel);
+            Items.Add(_watchListViewModel);
 
             await DisplayStartPage();
             base.OnViewLoaded(view);

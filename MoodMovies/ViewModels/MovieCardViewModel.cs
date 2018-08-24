@@ -5,8 +5,7 @@ using MoodMovies.Messages;
 namespace MoodMovies.ViewModels
 {
     public class MovieCardViewModel : Screen
-    {
-        
+    {        
         public MovieCardViewModel(Movies movie, IEventAggregator _event)
         {
             Movie = movie;

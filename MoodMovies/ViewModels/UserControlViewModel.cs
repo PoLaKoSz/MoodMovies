@@ -11,15 +11,17 @@ namespace MoodMovies.ViewModels
             : base(commonParameters)
         {
             AllUsers = new ObservableCollection<User>();
-            _loginVM = loginViewModel;
-            ActivateItem(_loginVM);
+            _loginViewModel = loginViewModel;
+            ActivateItem(_loginViewModel);
         }
 
-        private readonly LoginViewModel _loginVM;
+
+        private readonly LoginViewModel _loginViewModel;
+
 
         #region Properties
         private User _selectedUser;
-        public User SelectedUser { get => _selectedUser; set { _selectedUser = value; NotifyOfPropertyChange(); _loginVM.UserEmail = SelectedUser.Email; } }
+        public User SelectedUser { get => _selectedUser; set { _selectedUser = value; NotifyOfPropertyChange(); _loginViewModel.UserEmail = SelectedUser.Email; } }
 
         private ObservableCollection<User> _allUsers;
         public ObservableCollection<User> AllUsers { get => _allUsers; set { _allUsers = value; NotifyOfPropertyChange(); } }

@@ -10,19 +10,18 @@ namespace MoodMovies.ViewModels
         public StartPageViewModel(CommonParameters commonParameters, LoginViewModel loginViewModel)
             : base(commonParameters)
         {
-            _loginVM = loginViewModel;
-            Items.Add(RegisterVM = new RegisterViewModel(commonParameters));
+            _loginViewModel = loginViewModel;
+            Items.Add(_registerViewModel = new RegisterViewModel(commonParameters));
         }
 
 
-        #region Child View Models
-        private readonly LoginViewModel _loginVM;
-        private RegisterViewModel _registerVM;
+        private readonly LoginViewModel _loginViewModel;
+        private readonly RegisterViewModel _registerViewModel;
         private bool _canShowLoginPage;
 
-        public RegisterViewModel RegisterVM { get => _registerVM; set { _registerVM = value; NotifyOfPropertyChange(); } }
+
         public bool CanShowLoginPage { get => _canShowLoginPage; set { _canShowLoginPage = value; NotifyOfPropertyChange(); } }
-        #endregion
+
 
         #region Public Methods
         public async Task DisplayInitialPage()
@@ -51,13 +50,13 @@ namespace MoodMovies.ViewModels
         public void ShowLoginPage()
         {
             DeactivateItem(ActiveItem, false);
-            ActivateItem(_loginVM);
+            ActivateItem(_loginViewModel);
         }
 
         public void ShowRegistrationPage()
         {
             DeactivateItem(ActiveItem, false);
-            ActivateItem(RegisterVM);
+            ActivateItem(_registerViewModel);
         }
 
         public void Handle(RegisteredMessage message)
@@ -66,12 +65,11 @@ namespace MoodMovies.ViewModels
         }
         #endregion
 
-        #region Private Methods
+
         private async Task<bool> HasExistingUser()
         {
             var users = await OfflineDB.GetAllUsers();
             return 0 < users.Count;
         }
-        #endregion
     }
 }

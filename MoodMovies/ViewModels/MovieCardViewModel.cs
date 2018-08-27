@@ -6,76 +6,65 @@ namespace MoodMovies.ViewModels
 {
     public class MovieCardViewModel : Screen
     {
-        private Movies _movie;
-        public Movies Movie { get => _movie; set { _movie = value; NotifyOfPropertyChange(); } }
-        
-        public MovieCardViewModel(Movies movie, IEventAggregator _event)
+        public MovieCardViewModel(Movies movie, IEventAggregator eventAgg)
         {
             Movie = movie;
-            myEvent = _event;
+            _eventAgg = eventAgg;
         }
         
-        #region Events
-        public IEventAggregator myEvent;
-        #endregion
+        private IEventAggregator _eventAgg;
 
         #region Binding Properties
         private bool _isFavourited;
-        public bool IsFavourited { get => _isFavourited; set { _isFavourited = value; NotifyOfPropertyChange(); } }
+        public bool IsFavourited { get => _isFavourited; set { _isFavourited = value; NotifyOfPropertyChange(); NotifyFavourites(); } }
+
         private bool _isWatchListed;
-        public bool IsWatchListed { get => _isWatchListed; set { _isWatchListed = value; NotifyOfPropertyChange(); } }
+        public bool IsWatchListed { get => _isWatchListed; set { _isWatchListed = value; NotifyOfPropertyChange(); NotifyWatchList(); } }
+
+        private Movies _movie;
+        public Movies Movie { get => _movie; set { _movie = value; NotifyOfPropertyChange(); } }
         #endregion
 
         #region Public Methods
         public void SetSelectedItem()
         {
-            myEvent.PublishOnUIThread(this);
+            _eventAgg.PublishOnUIThread(this);
         }
+
         /// <summary>
-        /// Adds or removes a movie from thewatchlist. Fires an event with a message
+        /// Adds or removes this movie to / from the WatchList
         /// </summary>
-        /// <param name="sender"></param>
-        public void AddToWatchList(object sender)
+        private void NotifyWatchList()
         {
-            var isChecked = (bool)sender;
-            if (isChecked == true)
+            if (IsWatchListed)
             {
-                myEvent.PublishOnUIThread(new AddToWatchListMessage(this));
+                _eventAgg.PublishOnUIThread(new AddToWatchListMessage(this));
             }
             else
             {
-                myEvent.PublishOnUIThread(new RemoveFromWatchListMessage(this));
-                if (Parent is WatchListViewModel p)
-                {
-                    p.Movies.Remove(this);
-                }
+                _eventAgg.PublishOnUIThread(new RemoveFromWatchListMessage(this));
             }
         }
+
         /// <summary>
-        /// Adds or removes a movie from the favourites. Fires an event with a message
+        /// Adds or removes this movie to / from the Favourites
         /// </summary>
-        /// <param name="sender"></param>
-        public void AddToFavourites(object sender)
+        private void NotifyFavourites()
         {
-            var isChecked = (bool)sender;
-            if (isChecked == true)
+            if (IsFavourited)
             {
-                myEvent.PublishOnUIThread(new AddToFavouritesMessage(this));
+                _eventAgg.PublishOnUIThread(new AddToFavouritesMessage(this));
             }
             else
             {
-                myEvent.PublishOnUIThread(new RemoveFromFavouritesMessage(this));
-                if (Parent is FavouritesViewModel p)
-                {
-                    p.Movies.Remove(this);
-                }
+                _eventAgg.PublishOnUIThread(new RemoveFromFavouritesMessage(this));
             }
         }
-        #endregion
         
         public void RequestTrailer()
         {
-            myEvent.PublishOnUIThread(Movie.Movie_Id);
+            _eventAgg.PublishOnUIThread(Movie.Movie_Id);
         }
+        #endregion
     }
 }

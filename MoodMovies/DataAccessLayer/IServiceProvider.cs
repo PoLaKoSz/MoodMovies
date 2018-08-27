@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MoodMovies.Logic
+namespace MoodMovies.DataAccessLayer
 {
     interface IServiceProvider
     {

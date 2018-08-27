@@ -1,23 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Data.Linq.Mapping;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataModel.DataModel.Entities
 {
-    [Table(Name = "User_Movies")]
+    [Table("User_Movies")]
     public class User_Movies
     {
-        [Column(Name = "User_Id")]
         [Key]
+        [Column("User_Id")]
         public int User_Id { get; set; }
 
-        [Column(Name = "UId")]
         [Key]
+        [Column("UId")]
         public int UId { get; set; }
 
-        [Column(Name = "Favourite")]
+        [Column("Favourite")]
         public bool Favourite { get; set; }
 
-        [Column(Name = "Watchlist")]
-        public bool Watchlist {get; set;}
+        [Column("Watchlist")]
+        public bool Watchlist { get; set; }
     }
 }

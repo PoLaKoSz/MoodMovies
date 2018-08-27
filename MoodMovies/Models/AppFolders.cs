@@ -4,6 +4,7 @@ namespace MoodMovies.Models
 {
     public class AppFolders
     {
+        public readonly string AppRootFolder;
         public readonly string ImageCacheFolder;
 
 
@@ -15,7 +16,9 @@ namespace MoodMovies.Models
         /// which is neccessary to run the application</param>
         public AppFolders(string rootDirecory)
         {
-            ImageCacheFolder = Path.Combine(rootDirecory, "ImageCache");
+            AppRootFolder = rootDirecory;
+
+            ImageCacheFolder = Path.Combine(AppRootFolder, "ImageCache");
             
             Directory.CreateDirectory(ImageCacheFolder);
         }

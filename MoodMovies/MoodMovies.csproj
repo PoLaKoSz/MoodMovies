@@ -130,20 +130,24 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Logic\ImageCacher.cs" />
-    <Compile Include="Logic\IOfflineServiceProvider.cs" />
-    <Compile Include="Logic\IOnlineServiceProvider.cs" />
-    <Compile Include="Logic\IServiceProvider.cs" />
-    <Compile Include="Logic\OfflineServiceProvider.cs" />
-    <Compile Include="Logic\OnlineServiceProvider.cs" />
+    <Compile Include="DataAccessLayer\IOfflineServiceProvider.cs" />
+    <Compile Include="DataAccessLayer\IOnlineServiceProvider.cs" />
+    <Compile Include="DataAccessLayer\IServiceProvider.cs" />
+    <Compile Include="DataAccessLayer\OfflineServiceProvider.cs" />
+    <Compile Include="DataAccessLayer\OnlineServiceProvider.cs" />
     <Compile Include="Messages\AccountMessages.cs" />
-    <Compile Include="Messages\ClientChangeMessage.cs" />
     <Compile Include="Messages\MovieCardMessages.cs" />
     <Compile Include="Messages\MovieListMessage.cs" />
+    <Compile Include="Messages\BrowseSearchResultsMessage.cs" />
     <Compile Include="Messages\ResultsReadyMessage.cs" />
     <Compile Include="Messages\TrailerMessage.cs" />
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\AppFolders.cs" />
+    <Compile Include="Models\CommonParameters.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\IListViewModelParams.cs" />
+    <Compile Include="Models\IViewModelParams.cs" />
+    <Compile Include="Models\SearchQuery.cs" />
     <Compile Include="Models\TrailerResult.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -156,13 +160,10 @@
       <DependentUpon>Strings.en.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\CommandImp.cs" />
-    <Compile Include="Resources\Converters\Converters.cs" />
-    <Compile Include="Resources\Enums.cs" />
     <Compile Include="Resources\Extensions.cs" />
     <Compile Include="Resources\PropertyCopier.cs" />
+    <Compile Include="Resources\Validation\CredentialValidation.cs" />
     <Compile Include="Resources\Validation\SearchBoxValidation.cs" />
-    <Compile Include="Services\ISearchService.cs" />
-    <Compile Include="Services\SearchService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ListBaseViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -173,7 +174,7 @@
     <Compile Include="ViewModels\FavouritesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MovieCardViewModel.cs" />
-    <Compile Include="ViewModels\MovieListViewModel.cs" />
+    <Compile Include="ViewModels\SearchResultsViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -199,8 +200,8 @@
     <Compile Include="Views\WatchListView.xaml.cs">
       <DependentUpon>WatchListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MovieListView.xaml.cs">
-      <DependentUpon>MovieListView.xaml</DependentUpon>
+    <Compile Include="Views\SearchResultsView.xaml.cs">
+      <DependentUpon>SearchResultsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -245,7 +246,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MovieListView.xaml">
+    <Page Include="Views\SearchResultsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

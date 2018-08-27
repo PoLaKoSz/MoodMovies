@@ -1,35 +1,40 @@
 ﻿using Caliburn.Micro;
+using DataModel.DataModel.Entities;
 using MaterialDesignThemes.Wpf;
-using MoodMovies.Logic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MoodMovies.DataAccessLayer;
+using MoodMovies.Messages;
+using MoodMovies.Models;
 
 namespace MoodMovies.ViewModels
 {
-    public class BaseViewModel : Screen
+    public abstract class BaseViewModel : Conductor<Screen>.Collection.OneActive, IHandle<LoggedInMessage>
     {
-        public BaseViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage)
+        public BaseViewModel(CommonParameters commonParameters)
         {
-            eventAgg = _event;
-            StatusMessage = statusMessage;
-            offlineDb = offlineService;
-            onlineDb = onlineService;
+            EventAgg      = commonParameters.EventAggregator;
+
+            StatusMessage = commonParameters.StatusMessage;
+
+            OfflineDB     = commonParameters.OfflineService;
+            OnlineDB      = commonParameters.OnlineService;
+
+            EventAgg.Subscribe(this);
         }
 
-        #region Events
-        public IEventAggregator eventAgg;
-        #endregion
 
-        #region Providers
-        protected IOfflineServiceProvider offlineDb;
-        protected IOnlineServiceProvider onlineDb;
-        #endregion
+        protected readonly IEventAggregator EventAgg;
 
-        #region Properties
-        public SnackbarMessageQueue StatusMessage { get; set; }
-        #endregion
+        public SnackbarMessageQueue StatusMessage { get; private set; }
+
+        protected IOfflineServiceProvider OfflineDB { get; private set; }
+        protected IOnlineServiceProvider OnlineDB { get; private set; }
+
+        public User CurrentUser { get; private set; }
+
+
+        public virtual void Handle(LoggedInMessage message)
+        {
+            CurrentUser = message.CurrentUser;
+        }
     }
 }

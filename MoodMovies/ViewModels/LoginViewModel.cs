@@ -1,51 +1,86 @@
 ﻿using Caliburn.Micro;
-using MaterialDesignThemes.Wpf;
-using MoodMovies.Logic;
+using DataModel.DataModel.Entities;
 using MoodMovies.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MoodMovies.Models;
+using MoodMovies.Resources.Validation;
 
 namespace MoodMovies.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public LoginViewModel(IEventAggregator _event, IOfflineServiceProvider offlineService, IOnlineServiceProvider onlineService, SnackbarMessageQueue statusMessage) : base(
-            _event, offlineService, onlineService, statusMessage)
+        public LoginViewModel(CommonParameters commonParameters)
+            : base(commonParameters)
         {
-
+            UserEmail = string.Empty;
+            UserPassword = string.Empty;
         }
+
+        private string _userEmail;
+        private string _userPassword;
 
         #region  public Properties
-        private string _userEmail;
         public string UserEmail { get => _userEmail; set { _userEmail = value; NotifyOfPropertyChange(); } }
 
-        private string _userPassword;
         public string UserPassword { get => _userPassword; set { _userPassword = value; NotifyOfPropertyChange(); } }
 
-        private bool _keepLoggedIn;
-        public bool KeepLoggedIn { get => _keepLoggedIn; set { _keepLoggedIn = value; NotifyOfPropertyChange(); } }
+        public bool KeepLoggedIn { get; set; }
         #endregion
 
-        #region Public Methods
-        public void Login()
+        public async void Login()
         {
-            if (!string.IsNullOrEmpty(UserEmail)
-                && !string.IsNullOrEmpty(UserPassword))
+            if (!IsFieldsValid())
+                return;
+
+            EventAgg.PublishOnUIThread(new StartLoadingMessage("Logging in"));
+
+            var loggingUser = await OfflineDB.GetUserByEmailPassword(UserEmail, UserPassword);
+
+            if (loggingUser == null)
             {
-                eventAgg.PublishOnUIThread(new LoginMessage(UserEmail, UserPassword, KeepLoggedIn));
+                EventAgg.PublishOnUIThread(new StopLoadingMessage());
+
+                StatusMessage.Enqueue("Couldn't find a User with this Email and Password combination!");
+                return;
             }
-            else
+
+            ModifyKeepLoggedIn(loggingUser);
+
+            UserEmail = "";
+            UserPassword = "";
+
+            EventAgg.PublishOnUIThread(new LoggedInMessage(loggingUser));
+            EventAgg.BeginPublishOnUIThread(new StopLoadingMessage());
+        }
+
+        private bool IsFieldsValid()
+        {
+            if (!CredentialValidation.IsValidEmail(UserEmail))
             {
-                StatusMessage.Enqueue("Please complete all fields.");
+                StatusMessage.Enqueue("Email field is not valid!");
+                UserEmail = "";
+                return false;
+            }
+
+            if (!CredentialValidation.IsValidPassword(UserPassword))
+            {
+                StatusMessage.Enqueue("Password field is not valid!");
+                UserPassword = "";
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ModifyKeepLoggedIn(User loggingUser)
+        {
+            if (KeepLoggedIn)
+            {
+                OfflineDB.SetAsCurrentUser(loggingUser);
+            }
+            else if (loggingUser.IsCurrentUser && !KeepLoggedIn)
+            {
+                OfflineDB.DisableAutoLogin(loggingUser);
             }
         }
-        #endregion
-
-        #region Private Methods
-       
-        #endregion
     }
 }

@@ -75,7 +75,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          FontSize="17"
-                         Text="{Binding SearchText}" />
+                         Text="{Binding SearchQuery.SearchText}" />
             </Border>
             <Border CornerRadius="10"
                     BorderBrush="White"
@@ -93,7 +93,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          FontSize="17"
-                         Text="{Binding ActorText}" />
+                         Text="{Binding SearchQuery.ActorName}" />
             </Border>
             <!--removed temporarily until functionailty is ready-->
             <!--<Border CornerRadius="10"
@@ -151,7 +151,7 @@
                           VerticalContentAlignment="Center"
                           FontSize="17"
                           IsEditable="False"
-                          SelectedItem="{Binding Path=SelectedBatch}"
+                          SelectedItem="{Binding Path=SearchQuery.Batch}"
                           HorizontalContentAlignment="Center">
                     <ComboBoxItem Content="{lex:Loc SearchView_Filter_ComboBox_TopRated}"
                                   HorizontalAlignment="Center"
@@ -175,7 +175,7 @@
                                   HorizontalContentAlignment="Center" />
                 </ComboBox>
             </Border>
-           
+
             <Button Height="60"
                     HorizontalAlignment="Center"
                     Width="60"

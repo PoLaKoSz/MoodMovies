@@ -34,8 +34,8 @@ namespace DataModel.Migrations
                 .WithColumn("Release_Date").AsString().NotNullable();
             
             Create.Table("User_Movies")
-                .WithColumn("User_Id").AsInt64().PrimaryKey()
-                .WithColumn("UId").AsInt64().PrimaryKey()
+                .WithColumn("User_Id").AsInt64()
+                .WithColumn("UId").AsInt64()
                 .WithColumn("Favourite").AsBoolean()
                 .WithColumn("Watchlist").AsBoolean();
         }

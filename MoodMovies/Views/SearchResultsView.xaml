@@ -1,13 +1,11 @@
-﻿<UserControl x:Class="MoodMovies.Views.MovieListView"
+﻿<UserControl x:Class="MoodMovies.Views.SearchResultsView"
              x:Name="mlist"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"     
-             xmlns:local="clr-namespace:MoodMovies.Views"
-             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              FontFamily="Segoe UI Light"
              mc:Ignorable="d"
              d:DesignHeight="450"
@@ -21,7 +19,6 @@
                 <Grid Width="800"
                       Height="400"
                       Background="{StaticResource PrimaryHueDarkBrush}">
-
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
             <Grid>
@@ -31,7 +28,7 @@
                     <ColumnDefinition Width="80" />
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
-                        x:Name="PreviousPage"
+                        x:Name="NavigateToPreviousPage"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Background="Transparent"
@@ -62,7 +59,7 @@
                     </ItemsControl>
                 </ScrollViewer>
                 <Button Grid.Column="2"
-                        x:Name="NextPage"
+                        x:Name="NavigateToNextPage"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Background="Transparent"

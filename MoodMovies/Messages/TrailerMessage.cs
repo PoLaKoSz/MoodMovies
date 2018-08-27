@@ -4,10 +4,11 @@ namespace MoodMovies.Messages
 {
     public class TrailerMessage
     {
-        public TrailerMessage(string _trailerUrl)
+        public TrailerMessage(string trailerUrl)
         {
-            TrailerUrl = _trailerUrl;
+            TrailerUrl = trailerUrl;
         }
+
         public string TrailerUrl { get; set; }
     }
 }

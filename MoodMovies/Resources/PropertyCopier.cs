@@ -3,7 +3,7 @@
 namespace MoodMovies.Resources
 {
     public static class PropertyCopier<TParent, TChild> where TParent : class
-                                            where TChild : class
+                                                        where  TChild : class
     {
         public static void Copy(TParent parent, TChild child)
         {

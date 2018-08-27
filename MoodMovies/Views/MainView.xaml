@@ -66,7 +66,7 @@
                                              Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                              CommandParameter="{x:Static Dock.Left}"
                                              Background="{StaticResource PrimaryHueLightBrush}"
-                                             cal:Message.Attach="DisplayUserVM"
+                                             cal:Message.Attach="NavigateToUsersMenu"
                                              IconForeground="Yellow"
                                              Foreground="black"
                                              FontSize="17">
@@ -82,11 +82,10 @@
                                              Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                              CommandParameter="{x:Static Dock.Left}"
                                              Background="{StaticResource PrimaryHueLightBrush}"
-                                             cal:Message.Attach="DisplaySearchVM"
+                                             cal:Message.Attach="NavigateToSearchMenu"
                                              IconForeground="LawnGreen"
                                              Foreground="black"
-                                             FontSize="17"
-                                             >
+                                             FontSize="17">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Magnify" />
                             </materialDesign:Chip.Icon>
@@ -99,11 +98,10 @@
                                              Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                              CommandParameter="{x:Static Dock.Left}"
                                              Background="{StaticResource PrimaryHueLightBrush}"
-                                             cal:Message.Attach="DisplayMovieListVM"
+                                             cal:Message.Attach="NavigateToSearchResults"
                                              FontSize="17"
                                              Foreground="black"
-                                             IconForeground="Aqua"
-                                            >
+                                             IconForeground="Aqua">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Movie" />
                             </materialDesign:Chip.Icon>
@@ -116,12 +114,11 @@
                                              Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                              CommandParameter="{x:Static Dock.Left}"
                                              Background="{StaticResource PrimaryHueLightBrush}"
-                                             cal:Message.Attach="DisplayFavouriteVM"
+                                             cal:Message.Attach="NavigateToFavouritesMenu"
                                              FontSize="17"
                                              Foreground="black"
                                              IconBackground="{StaticResource PrimaryHueMidBrush}"
-                                             IconForeground="#FFE44242"
-                                             >
+                                             IconForeground="#FFE44242">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Heart" />
                             </materialDesign:Chip.Icon>
@@ -134,11 +131,10 @@
                                              Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                              CommandParameter="{x:Static Dock.Left}"
                                              Background="{StaticResource PrimaryHueLightBrush}"
-                                             cal:Message.Attach="DisplayWatchListVM"
+                                             cal:Message.Attach="NavigateToWatchlistMenu"
                                              Foreground="black"
                                              FontSize="17"
-                                             IconForeground="#FFC229C2"
-                                             >
+                                             IconForeground="#FFC229C2">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Watch" />
                             </materialDesign:Chip.Icon>
@@ -179,7 +175,7 @@
                                     HorizontalAlignment="Center"
                                     Width="55"
                                     Style="{StaticResource MaterialDesignFlatButton}"
-                                    x:Name="DisplaySearchVM"
+                                    x:Name="NavigateToSearchMenu"
                                     Background="Transparent"
                                     Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}">
                                 <materialDesign:PackIcon Kind="Magnify"
@@ -276,12 +272,11 @@
                                              HorizontalAlignment="Left"
                                              VerticalAlignment="Center"
                                              Background="Transparent"
-                                             cal:Message.Attach="DisplayMovieListVM"
+                                             cal:Message.Attach="NavigateToSearchResults"
                                              IconBackground="Transparent"
                                              Height="50"
                                              Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
-                                             IconForeground="{StaticResource SecondaryAccentMidBrush}"
-                                             >
+                                             IconForeground="{StaticResource SecondaryAccentMidBrush}">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Movie"
                                                          Height="26"
@@ -293,12 +288,11 @@
                                              HorizontalAlignment="Left"
                                              VerticalAlignment="Center"
                                              Background="Transparent"
-                                             cal:Message.Attach="DisplayFavouriteVM"
+                                             cal:Message.Attach="NavigateToFavouritesMenu"
                                              IconBackground="Transparent"
                                              Height="50"
                                              Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
-                                             IconForeground="#FFE44242"
-                                             >
+                                             IconForeground="#FFE44242">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Heart"
                                                          Height="26"
@@ -310,12 +304,11 @@
                                              HorizontalAlignment="Left"
                                              VerticalAlignment="Center"
                                              Background="Transparent"
-                                             cal:Message.Attach="DisplayWatchListVM"
+                                             cal:Message.Attach="NavigateToWatchlistMenu"
                                              IconBackground="Transparent"
                                              Height="50"
                                              Visibility="{Binding Path=CanNavigate, Converter={StaticResource Converter}}"
-                                             IconForeground="Green"
-                                             >
+                                             IconForeground="Green">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon Kind="Watch"
                                                          Height="26"

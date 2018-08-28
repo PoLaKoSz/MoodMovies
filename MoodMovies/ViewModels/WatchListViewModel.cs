@@ -28,7 +28,7 @@ namespace MoodMovies.ViewModels
             }
             catch
             {
-                StatusMessage.Enqueue("Internal Error");
+                StatusMessage.Enqueue("Error while loading WatchList!");
             }
         }
 
@@ -40,14 +40,22 @@ namespace MoodMovies.ViewModels
         {
             var movieCard = message.MovieCard;
 
-            if (GetMovieCard(movieCard) == null)
+            if (GetMovieCard(movieCard) != null)
+                return;
+
+            try
             {
                 Movies.Add(message.MovieCard);
+
+                await OfflineDB.AddMovie(CurrentUser, movieCard.Movie);
+
+                await OfflineDB.AddToWatchList(CurrentUser, message.MovieCard.Movie);
             }
-
-            await OfflineDB.AddMovie(CurrentUser, movieCard.Movie);
-
-            await OfflineDB.AddToWatchList(CurrentUser, message.MovieCard.Movie);
+            catch
+            {
+                StatusMessage.Enqueue("Error while adding the movie to the WatchList!");
+                Movies.Remove(message.MovieCard);
+            }
         }
 
         /// <summary>
@@ -58,12 +66,20 @@ namespace MoodMovies.ViewModels
         {
             var movieCard = message.MovieCard;
 
-            if (GetMovieCard(movieCard) != null)
+            if (GetMovieCard(movieCard) == null)
+                return;
+
+            try
             {
                 Movies.Remove(movieCard);
-            }
 
-            await OfflineDB.RemoveFromWatchList(CurrentUser, message.MovieCard.Movie);
+                await OfflineDB.RemoveFromWatchList(CurrentUser, movieCard.Movie);
+            }
+            catch
+            {
+                StatusMessage.Enqueue("Error while removing the movie from the WatchList!");
+                Movies.Remove(movieCard);
+            }
         }
     }
 }

@@ -20,33 +20,25 @@ namespace MoodMovies.ViewModels
 
         public async void Register()
         {
-            var isValidFields = await IsFieldsValid();
-
-            if (!isValidFields)
+            if (!await IsFieldsValid())
                 return;
 
-            var isUserWithEmailExists = await OfflineDB.GetUserByEmail(NewUser.Email);
+            if (await IsEmailExists())
+                return;
 
-            if (isUserWithEmailExists != null)
+            if (!await IsValidApiKey())
+                return;
+
+            try
             {
-                StatusMessage.Enqueue("A User already registered with the same Email adddress!");
-                NewUser.Email = "";
-                return;
+                await OfflineDB.CreateUser(NewUser);
             }
-
-            var isValidApiKey = await Task.Run(() => CredentialValidation.IsValidApiKey(NewUser.ApiKey, OnlineDB));
-
-            if (!isValidApiKey)
+            catch
             {
-                StatusMessage.Enqueue("TMDB API Key is not valid!");
-                NewUser.ApiKey = "";
-                return;
+                StatusMessage.Enqueue("Error while saving new User. Please try again!");
             }
 
             EventAgg.PublishOnUIThread(new RegisteredMessage());
-
-            await OfflineDB.CreateUser(NewUser);
-
             StatusMessage.Enqueue("Your account has been successfully created!");
             NewUser = new User();
         }
@@ -67,12 +59,20 @@ namespace MoodMovies.ViewModels
                 return false;
             }
 
-            var isUserWithApiKeyEmailExists = await OfflineDB.GetUserByApiKey(NewUser.ApiKey);
-
-            if (isUserWithApiKeyEmailExists != null)
+            try
             {
-                StatusMessage.Enqueue("A User already registered with the same API Key!");
-                NewUser.ApiKey = "";
+                var isUserWithApiKeyEmailExists = await OfflineDB.GetUserByApiKey(NewUser.ApiKey);
+
+                if (isUserWithApiKeyEmailExists != null)
+                {
+                    StatusMessage.Enqueue("A User already registered with the same API Key!");
+                    NewUser.ApiKey = "";
+                    return false;
+                }
+            }
+            catch
+            {
+                StatusMessage.Enqueue("Error while getting User informations! Please try again!");
                 return false;
             }
 
@@ -91,6 +91,42 @@ namespace MoodMovies.ViewModels
             }
 
             return true;
+        }
+
+        private async Task<bool> IsEmailExists()
+        {
+            try
+            {
+                var isUserWithEmailExists = await OfflineDB.GetUserByEmail(NewUser.Email);
+
+                if (isUserWithEmailExists != null)
+                {
+                    StatusMessage.Enqueue("A User already registered with the same Email adddress!");
+
+                    NewUser.Email = "";
+
+                    return true;
+                }
+            }
+            catch
+            {
+                StatusMessage.Enqueue("Error while getting User informations. Please try again!");
+            }
+
+            return false;
+        }
+
+        private async Task<bool> IsValidApiKey()
+        {
+            var isValidApiKey = await Task.Run(() => CredentialValidation.IsValidApiKey(NewUser.ApiKey, OnlineDB));
+
+            if (!isValidApiKey)
+            {
+                StatusMessage.Enqueue("TMDB API Key is not valid!");
+                NewUser.ApiKey = "";
+            }
+
+            return isValidApiKey;
         }
     }
 }

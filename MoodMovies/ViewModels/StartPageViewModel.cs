@@ -28,23 +28,17 @@ namespace MoodMovies.ViewModels
         {
             ShowLoginPage();
 
-            var lastActiveUser = await OfflineDB.GetCurrentUser();
-
-            if (lastActiveUser != null)
-            {
-                EventAgg.PublishOnUIThread(new LoggedInMessage(lastActiveUser));
-                CanShowLoginPage = true;
+            if (await HasActiveUser())
                 return;
-            }
 
-            var canLogin = await HasExistingUser();
-
-            if (canLogin)
+            if (await HasExistingUser())
             {
                 CanShowLoginPage = true;
             }
             else
+            {
                 ShowRegistrationPage();
+            }
         }
 
         public void ShowLoginPage()
@@ -66,10 +60,40 @@ namespace MoodMovies.ViewModels
         #endregion
 
 
+        private async Task<bool> HasActiveUser()
+        {
+            try
+            {
+                var lastActiveUser = await OfflineDB.GetCurrentUser();
+
+                if (lastActiveUser != null)
+                {
+                    EventAgg.PublishOnUIThread(new LoggedInMessage(lastActiveUser));
+                    CanShowLoginPage = true;
+                    return true;
+                }
+            }
+            catch
+            {
+                StatusMessage.Enqueue("Error while getting User informations.");
+            }
+
+            return false;
+        }
+
         private async Task<bool> HasExistingUser()
         {
-            var users = await OfflineDB.GetAllUsers();
-            return 0 < users.Count;
+            try
+            {
+                var users = await OfflineDB.GetAllUsers();
+                return 0 < users.Count;
+            }
+            catch
+            {
+                StatusMessage.Enqueue("Error while getting User informations.");
+            }
+
+            return false;
         }
     }
 }

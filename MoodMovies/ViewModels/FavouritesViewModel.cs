@@ -32,7 +32,7 @@ namespace MoodMovies.ViewModels
             }
             catch
             {
-                StatusMessage.Enqueue("Internal Error");
+                StatusMessage.Enqueue("Error while loading Favourites!");
             }
         }
 
@@ -44,13 +44,21 @@ namespace MoodMovies.ViewModels
         {
             var movieCard = message.MovieCard;
 
-            if (GetMovieCard(movieCard) == null)
+            if (GetMovieCard(movieCard) != null)
+                return;
+
+            try
             {
                 Movies.Add(message.MovieCard);
 
                 await OfflineDB.AddMovie(CurrentUser, movieCard.Movie);
 
                 await OfflineDB.AddToFavourites(CurrentUser, message.MovieCard.Movie);
+            }
+            catch
+            {
+                StatusMessage.Enqueue("Error while adding the movie to the Favourites!");
+                Movies.Remove(message.MovieCard);
             }
         }
 
@@ -62,11 +70,19 @@ namespace MoodMovies.ViewModels
         {
             var movieCard = message.MovieCard;
 
-            if (GetMovieCard(movieCard) != null)
+            if (GetMovieCard(movieCard) == null)
+                return;
+
+            try
             {
                 Movies.Remove(movieCard);
 
                 await OfflineDB.RemoveFromFavourites(CurrentUser, movieCard.Movie);
+            }
+            catch
+            {
+                StatusMessage.Enqueue("Error while removing the movie from the Favourites!");
+                Movies.Remove(movieCard);
             }
         }
     }

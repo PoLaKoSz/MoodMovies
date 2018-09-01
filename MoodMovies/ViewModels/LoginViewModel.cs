@@ -33,7 +33,17 @@ namespace MoodMovies.ViewModels
 
             EventAgg.PublishOnUIThread(new StartLoadingMessage("Logging in"));
 
-            var loggingUser = await OfflineDB.GetUserByEmailPassword(UserEmail, UserPassword);
+            User loggingUser = null;
+
+            try
+            {
+                loggingUser = await OfflineDB.GetUserByEmailPassword(UserEmail, UserPassword);
+            }
+            catch
+            {
+                StatusMessage.Enqueue("Error while getting User informations. Please try again!");
+                return;
+            }
 
             if (loggingUser == null)
             {
@@ -73,13 +83,20 @@ namespace MoodMovies.ViewModels
 
         private void ModifyKeepLoggedIn(User loggingUser)
         {
-            if (KeepLoggedIn)
+            try
             {
-                OfflineDB.SetAsCurrentUser(loggingUser);
+                if (KeepLoggedIn)
+                {
+                    OfflineDB.SetAsCurrentUser(loggingUser);
+                }
+                else if (loggingUser.IsCurrentUser && !KeepLoggedIn)
+                {
+                    OfflineDB.DisableAutoLogin(loggingUser);
+                }
             }
-            else if (loggingUser.IsCurrentUser && !KeepLoggedIn)
+            catch
             {
-                OfflineDB.DisableAutoLogin(loggingUser);
+                StatusMessage.Enqueue("Error while saving \"Keep logged In\" status. Try to relog to your account!");
             }
         }
     }

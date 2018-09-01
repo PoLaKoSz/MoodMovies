@@ -41,3 +41,9 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE Version 3, 29 June
 * Caliburn Micro for an awesome library that makes MVVM a little easier to manage.
 * NewtonSoft for making Json easier to handle.
 * Fluent Migrator for saving our sqlite lives.
+
+## Attribution
+
+All the movie data gathered using this library is obtained from the TMDB. 
+
+![alt text](https://github.com/tonykaralis/MoodMovies/blob/develop/MoodMovies/Images/408x161-powered-by-rectangle-green-bb4301c10ddc749b4e79463811a68afebeae66ef43d17bcfd8ff0e60ded7ce99.png)

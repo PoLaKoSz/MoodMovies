@@ -80,6 +80,8 @@ namespace MoodMovies.DataAccessLayer
                 DisableAutoLogin(previousCurrentUser);
             }
 
+            user.IsCurrentUser = true;
+
             SaveChanges();
         }
 
